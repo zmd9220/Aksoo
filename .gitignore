@@ -35,7 +35,7 @@ package-lock.json
 ### AI  #################
 /AI/**/*.env
 /AI/.ipynb_checkpoints
-/AI/**/colloectedimages
+/AI/**/colloectedimages/
 
 
 
