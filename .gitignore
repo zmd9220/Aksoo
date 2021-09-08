@@ -1,14 +1,42 @@
-### Front  ###
-/Front/a.txt
+### Root   ##############
+node_modules/
+.metadata/
+yarn.lock
+
+# package.json
+package-lock.json
 
 
-### Back  ###
-/Back/*.txt
+### Front  ##############
+/Front/**/.env
+/Front/node_modules
+/Front/.vscode
+
+
+### Back  ###############
+/Back/**/.env
+
+# IntelliJ IDEA
 /Back/**/.idea
+/Back/**/*.iws
+/Back/**/*.iml
+/Back/**/*.ipr
+
+# STS
+/Back/**/.apt_generated
+/Back/**/.classpath
+/Back/**/.factorypath
+/Back/**/.project
+/Back/**/.settings
+/Back/**/.springBeans
+/Back/**/.sts4-cache
 
 
-### AI  ###
-/AI/a.txt
+### AI  #################
+/AI/**/.env
+
+
+
 
 
 
