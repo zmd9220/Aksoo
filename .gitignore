@@ -5,12 +5,6 @@
 ### Back  ###
 /Back/*.txt
 /Back/**/.idea
-/Back/*.iws
-/Back/*.iml
-/Back/*.ipr
-/Back/out/
-/Back/!**/src/main/**/out/
-/Back/!**/src/test/**/out/
 
 
 ### AI  ###
