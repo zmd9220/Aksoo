@@ -35,7 +35,7 @@ package-lock.json
 ### AI  #################
 /AI/**/*.env
 /AI/.ipynb_checkpoints/
-**/AI/HandDetected_DA/Tensorflow/workspace/images/colloectedimages/
+**/colloectedimages/
 
 
 
