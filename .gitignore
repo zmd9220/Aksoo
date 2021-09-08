@@ -1,19 +1,20 @@
 ### Front  ###
-./Front/a.txt
+/Front/a.txt
 
 
 ### Back  ###
-./Back/*.txt
-./Back/.idea
-./Back/*.iws
-./Back/*.iml
-./Back/*.ipr
-./Back/out/
-./Back/!**/src/main/**/out/
-./Back/!**/src/test/**/out/
+/Back/*.txt
+/Back/**/.idea
+/Back/*.iws
+/Back/*.iml
+/Back/*.ipr
+/Back/out/
+/Back/!**/src/main/**/out/
+/Back/!**/src/test/**/out/
 
 
 ### AI  ###
-./AI/a.txt
+/AI/a.txt
+
 
 
