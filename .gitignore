@@ -8,13 +8,13 @@ package-lock.json
 
 
 ### Front  ##############
-/Front/**/.env
+/Front/**/*.env
 /Front/node_modules
 /Front/.vscode
 
 
 ### Back  ###############
-/Back/**/.env
+/Back/**/*.env
 
 # IntelliJ IDEA
 /Back/**/.idea
@@ -33,7 +33,7 @@ package-lock.json
 
 
 ### AI  #################
-/AI/**/.env
+/AI/**/*.env
 
 
 
