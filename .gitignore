@@ -3,7 +3,7 @@
 
 
 ### Back  ###
-./Back/a.txt
+./Back/*.txt
 ./Back/.idea
 ./Back/*.iws
 ./Back/*.iml
