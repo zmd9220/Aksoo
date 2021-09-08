@@ -1,0 +1,19 @@
+### Front  ###
+./Front/a.txt
+
+
+### Back  ###
+./Back/a.txt
+./Back/.idea
+./Back/*.iws
+./Back/*.iml
+./Back/*.ipr
+./Back/out/
+./Back/!**/src/main/**/out/
+./Back/!**/src/test/**/out/
+
+
+### AI  ###
+./AI/a.txt
+
+
