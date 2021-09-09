@@ -1,43 +1,7 @@
-<template>
-  <div>
-    <title>The Game Formerly Known as Typing</title>
-    <!-- <script src="js/game.js"></script> -->
-    <!-- <link href="css/style.css" rel="stylesheet"> -->
-
-    <div class="container">
-      <div class="header">
-        <button class="btn btn-success pull-right" id="start">
-          <span class="glyphicon glyphicon-play"></span> Start
-        </button>
-        <button class="btn btn-danger pull-right disabled" id="reset">
-          <span class="glyphicon glyphicon-flash"></span> Reset
-        </button>
-        <h3 class="text-muted">The Game Formerly Known as Typing</h3>
-        <hr />
-      </div>
-
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <div id="box">
-            <span id="message" class="hidden" style="display: None">Game Over!</span>
-          </div>
-        </div>
-        <div class="panel-footer">
-          <strong>Score: <span id="score">0</span></strong>
-          <strong>생명 : <span id="hart">5</span></strong>
-        </div>
-      </div>
-
-      <hr />
-    </div>
-  </div>
-</template>
-
-<script>
 var placeLetterInterval = 500;
 var placeLetterTimer, moveLettersTimer;
 var startButton, resetButton;
-var box, message, score, hart;
+var box, message, score;
 
 
 function placeLetter() {
@@ -145,7 +109,7 @@ function resetGame() {
 function keyboardInput() {
     if (event.keyCode === 27) {
         return endGame();
-    }
+    };
 
     var key = String.fromCharCode(event.keyCode).toLowerCase();
     // var boxes = document.getElementsByClassName(key);
@@ -189,7 +153,7 @@ function startGame() {
     startButton.classList.add("disabled");
 }
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function (event) {
     console.log("OH HAI THERE!");
 
     message = document.getElementById('message');
@@ -202,60 +166,5 @@ document.addEventListener("DOMContentLoaded", function () {
     resetButton = document.getElementById('reset')
     resetButton.onclick = resetGame;
 });
-</script>
 
-
-<style scoped>
-#box {
-  margin: auto;
-  height: 400px;
-  background: grey;
-  overflow: hidden;
-  position: relative;
-  font-family: "Georgia";
-  font-size: 50px;
-  color: #fff;
-}
-
-#box > div {
-  display: inline-block;
-  position: absolute;
-  width: 50px;
-  text-align: center;
-  transition-property: right;
-  transition-duration: 100ms;
-  transition-timing-function: linear;
-  transition-delay: 0;
-}
-
-#message {
-  display: block;
-  text-align: center;
-  position: relative;
-  font-size: 125px;
-  top: 50%;
-  z-index: 0;
-  color: rgba(0, 0, 0, 0.6);
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-  text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.1);
-}
-
-.panel {
-  max-width: 1000px;
-  margin: auto;
-}
-
-.panel-body {
-  padding: 0;
-}
-
-.btn {
-  margin-left: 10px;
-}
-
-.container {
-  max-width: 1000px;
-}
-</style>
+export default game
