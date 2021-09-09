@@ -31,7 +31,7 @@ const routes = [
   },
   {
     path: '/acid_rain/acid_rain',
-    name: 'acid_rain',
+    name: 'Acid_rain',
     component: acid_rain,
   },
 ]
