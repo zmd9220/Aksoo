@@ -42,12 +42,15 @@
               <!-- <img src="./background.gif" class="bg" style="object-fit: fill" /> -->
             </div>
           </div>
-          <div class="panel-footer">
-            <strong>Score: <span id="score">0</span></strong>
-            <strong>생명 : <span id="hart">5</span></strong>
-          </div>
         </div>
-
+        <div class="panel-footer">
+          <strong>Score: <span id="score">0 </span></strong>
+          <strong
+            >생명 :
+            <span v-for="idx in hart" :key="idx">
+              <img src="./heart.gif" style="width: 20px" /> </span
+          ></strong>
+        </div>
         <hr />
       </div>
     </div>
@@ -63,14 +66,16 @@
 var placeLetterInterval = 500;
 var placeLetterTimer, moveLettersTimer;
 // var startButton, resetButton;
-var box, score, hart;
+var box,
+  score,
+  hart = 5;
 
 export default {
   name: "Acid_rain",
   data: function () {
     return {
       score: "",
-      hart: "",
+      hart: "5",
     };
   },
   mounted() {
@@ -78,9 +83,7 @@ export default {
     // message = document.getElementById("message");
     box = document.getElementById("box");
     score = document.getElementById("score");
-    hart = document.getElementById("hart");
-    // restart = document.getElementById("restart");
-    // menu = document.getElementById("menu");
+    hart = this.hart;
   },
   methods: {
     placeLetter: function () {
@@ -122,7 +125,7 @@ export default {
 
       // newLetter.style.right = Math.random() * 300 + "px";
       // newLetter.style.top = 1000 - (Math.random() * 500) + "px";
-      newLetter.style.left = 50 + Math.random() * 800 + "px";
+      newLetter.style.left = 100 + Math.random() * 700 + "px";
       newLetter.style.bottom = 400 + Math.random() * 500 + "px";
 
       box.appendChild(newLetter);
@@ -134,9 +137,9 @@ export default {
         boxes[i].style.bottom = parseInt(boxes[i].style.bottom) - 10 + "px";
         if (parseInt(boxes[i].style.bottom) <= -10) {
           boxes[i].remove();
-          hart.innerHTML = parseInt(hart.innerHTML) - 1;
+          this.hart = parseInt(this.hart) - 1;
           this.decreaseLetterSpeed(hart);
-          if (hart.innerHTML == 0) {
+          if (this.hart == 0) {
             this.toggleText();
             this.endGame();
           }
@@ -192,7 +195,7 @@ export default {
       // message.classList.add("hidden"); // add
       // resetButton.classList.add("disabled");
       score.innerHTML = 0;
-      hart.innerHTML = 5;
+      this.hart = 5;
 
       var boxes = document.querySelectorAll("#quiz");
       for (var i = 0; i < boxes.length; i++) {
@@ -321,6 +324,8 @@ export default {
       console.log("start");
       this.togglestart();
       // this.resetText();
+      this.hart = 5;
+
       placeLetterTimer = setInterval(this.placeLetter, placeLetterInterval);
       moveLettersTimer = setInterval(this.moveLetters, 100);
       document.addEventListener("keydown", this.keyboardInput);
