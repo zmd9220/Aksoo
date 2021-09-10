@@ -6,10 +6,19 @@
 
     <div class="container">
       <div class="header">
-        <button class="btn btn-success pull-right" id="start">
+        <button
+          class="btn btn-success pull-right"
+          id="start"
+          v-on:click="startGame"
+        >
           <span class="glyphicon glyphicon-play"></span> Start
         </button>
-        <button class="btn btn-danger pull-right disabled" id="reset">
+        <!-- disabled -->
+        <button
+          class="btn btn-danger pull-right"
+          id="reset"
+          v-on:click="resetGame"
+        >
           <span class="glyphicon glyphicon-flash"></span> Reset
         </button>
         <h3 class="text-muted">The Game Formerly Known as Typing</h3>
@@ -19,11 +28,14 @@
       <div class="panel panel-default">
         <div class="panel-body">
           <div id="box">
-            <span id="message" class="hidden">Game Over!</span>
+            <span id="message" class="hidden" style="display: none"
+              >Game Over!</span
+            >
           </div>
         </div>
         <div class="panel-footer">
           <strong>Score: <span id="score">0</span></strong>
+          <strong>생명 : <span id="hart">5</span></strong>
         </div>
       </div>
 
@@ -36,49 +48,85 @@
 var placeLetterInterval = 500;
 var placeLetterTimer, moveLettersTimer;
 var startButton, resetButton;
-var box, message, score;
+var box, message, score, hart;
 
 export default {
-  name: "acid_rain",
+  name: "Acid_rain",
   data: function () {
     return {
-      placeLetterInterval: 500,
-      placeLetterTimer: null,
-      moveLettersTimer: null,
-      startButton: null,
-      resetButton: null,
-      box: null,
-      message: null,
-      score: null,
+      score: "",
+      hart: "",
     };
   },
+  mounted() {
+    document.addEventListener("DOMContentLoaded", this.doTest);
+  },
   methods: {
-    placeLetter() {
-      var letter = String.fromCharCode(97 + Math.floor(Math.random() * 26));
+    placeLetter: function () {
+      // 12593 ~ 12643
+      var Con = 12593 + Math.floor(Math.random() * 50);
+      var consonant = [
+        12595, 12597, 12598, 12602, 12603, 12604, 12605, 12606, 12607, 12608,
+        12612,
+      ];
+      for (var i = 0; i < consonant.length; i++) {
+        if (Con == consonant[i]) {
+          return;
+        }
+      }
+      var letter = String.fromCharCode(Con); // ㄾ ㅘ ㅢ
+      // console.log(letter + " " + test);
+
+      /*
+ㄳ 12595
+ㄵ 12597
+ㄶ 12598
+ㄺ 12602
+ㄻ 12603
+ㄼ 12604
+ㄽ 12605
+ㄾ 12606
+ㄿ 12607
+ㅀ 12608
+ㅄ 12612
+    */
+      // 한글
+      // var letter = String.fromCharCode(12593 + Math.floor(Math.random() * 50)); // ㄾ ㅘ ㅢ
+      // 영어
+      // var letter = String.fromCharCode(97 + Math.floor(Math.random() * 26));
       var newLetter = document.createElement("div");
+      newLetter.id = "quiz";
       newLetter.innerHTML = letter;
       newLetter.className = letter;
 
-      newLetter.style.top = Math.random() * 300 + "px";
-      newLetter.style.right = 1000 - Math.random() * 500 + "px";
+      // newLetter.style.right = Math.random() * 300 + "px";
+      // newLetter.style.top = 1000 - (Math.random() * 500) + "px";
+      newLetter.style.left = 50 + Math.random() * 800 + "px";
+      newLetter.style.bottom = 400 + Math.random() * 500 + "px";
 
       box.appendChild(newLetter);
     },
 
-    moveLetters() {
+    moveLetters: function () {
       var boxes = document.querySelectorAll("#box > div");
       for (var i = 0; i < boxes.length; i++) {
-        boxes[i].style.right = parseInt(boxes[i].style.right) - 10 + "px";
-        if (parseInt(boxes[i].style.right) <= -10) {
-          endGame();
+        boxes[i].style.bottom = parseInt(boxes[i].style.bottom) - 10 + "px";
+        if (parseInt(boxes[i].style.bottom) <= -10) {
+          boxes[i].remove();
+          hart.innerHTML = parseInt(hart.innerHTML) - 1;
+          this.decreaseLetterSpeed(hart);
+          if (hart.innerHTML == 0) {
+            this.endGame();
+          }
         }
       }
     },
 
-    endGame() {
+    endGame: function () {
+      this.toggleText();
       clearInterval(moveLettersTimer);
       clearInterval(placeLetterTimer);
-      document.removeEventListener("keydown", keyboardInput);
+      document.removeEventListener("keydown", this.keyboardInput);
       message.classList.remove("hidden");
       resetButton.classList.remove("disabled");
     },
@@ -87,45 +135,163 @@ export default {
       if (parseInt(score.innerHTML) % 20 === 0) {
         clearInterval(placeLetterTimer);
         placeLetterInterval = placeLetterInterval * 1.1;
-        placeLetterTimer = setInterval(placeLetter, placeLetterInterval);
+        placeLetterTimer = setInterval(this.placeLetter, placeLetterInterval);
       }
     },
 
-    resetGame() {
-      message.classList.add("hidden");
-      resetButton.classList.add("disabled");
+    toggleText: function () {
+      var text = document.getElementById("message");
+      if (text.style.display === "none") {
+        text.style.display = "block";
+      } else {
+        text.style.display = "none";
+      }
+    },
+    resetText: function () {
+      var text = document.getElementById("message");
+      text.style.display = "none";
+    },
+
+    resetGame: function () {
+      this.resetText();
+      message.classList.add("hidden"); // add
+      // resetButton.classList.add("disabled");
       score.innerHTML = 0;
+      hart.innerHTML = 5;
 
       var boxes = document.querySelectorAll("#box > div");
       for (var i = 0; i < boxes.length; i++) {
         boxes[i].remove();
       }
-
-      startGame();
+      this.endGame();
+      // startGame();
     },
 
-    keyboardInput() {
+    keyboardInput: function () {
       if (event.keyCode === 27) {
-        return endGame();
+        return this.endGame();
       }
 
       var key = String.fromCharCode(event.keyCode).toLowerCase();
-      var boxes = document.getElementsByClassName(key);
+      // var boxes = document.getElementsByClassName(key);
+      console.log(key);
+      var chosung_index = [
+        "ㄱ",
+        "ㄲ",
+        "ㄴ",
+        "ㄷ",
+        "ㄸ",
+        "ㄹ",
+        "ㅁ",
+        "ㅂ",
+        "ㅃ",
+        "ㅅ",
+        "ㅆ",
+        "ㅇ",
+        "ㅈ",
+        "ㅉ",
+        "ㅊ",
+        "ㅋ",
+        "ㅌ",
+        "ㅍ",
+        "ㅎ",
+        "ㅏ",
+        "ㅐ",
+        "ㅑ",
+        "ㅒ",
+        "ㅓ",
+        "ㅔ",
+        "ㅕ",
+        "ㅖ",
+        "ㅗ",
+        "ㅘ",
+        "ㅙ",
+        "ㅚ",
+        "ㅛ",
+        "ㅜ",
+        "ㅝ",
+        "ㅞ",
+        "ㅟ",
+        "ㅠ",
+        "ㅡ",
+        "ㅢ",
+        "ㅣ",
+      ]; //19개 + 21개
+      var eng_keyboard = [
+        "r",
+        "R",
+        "s",
+        "e",
+        "E",
+        "f",
+        "a",
+        "q",
+        "Q",
+        "t",
+        "T",
+        "d",
+        "w",
+        "W",
+        "c",
+        "z",
+        "x",
+        "v",
+        "g",
+        "k",
+        "o",
+        "i",
+        "O",
+        "j",
+        "p",
+        "u",
+        "P",
+        "h",
+        "1",
+        "2",
+        "3",
+        "y",
+        "n",
+        "4",
+        "5",
+        "6",
+        "b",
+        "m",
+        "7",
+        "l",
+      ];
+      var test;
+
+      for (var i = 0; i < chosung_index.length; i++) {
+        // console.log(decodeURI(chosung_index[i]));
+        if (key == eng_keyboard[i]) {
+          test = chosung_index[i];
+        }
+      }
+      console.log(test);
+      var boxes = document.getElementsByClassName(test);
 
       if (boxes[0]) {
         boxes[0].remove();
         score.innerHTML = parseInt(score.innerHTML) + 1;
-        decreaseLetterSpeed(score);
+        this.decreaseLetterSpeed(score);
       } else {
         score.innerHTML = parseInt(score.innerHTML) - 1;
       }
     },
 
-    startGame() {
-      placeLetterTimer = setInterval(placeLetter, placeLetterInterval);
-      moveLettersTimer = setInterval(moveLetters, 100);
-      document.addEventListener("keydown", keyboardInput);
+    startGame: function () {
+      console.log("start");
+      this.resetText();
+      placeLetterTimer = setInterval(this.placeLetter, placeLetterInterval);
+      moveLettersTimer = setInterval(this.moveLetters, 100);
+      document.addEventListener("keydown", this.keyboardInput);
       startButton.classList.add("disabled");
+    },
+    doTest() {
+      message = document.getElementById("message");
+      box = document.getElementById("box");
+      score = document.getElementById("score");
+      hart = document.getElementById("hart");
     },
 
     // document.addEventListener("DOMContentLoaded", function(event) {
@@ -142,25 +308,15 @@ export default {
     //     resetButton.onclick = resetGame;
     // })
   },
-  created() {
-    message = document.getElementById("message");
-    box = document.getElementById("box");
-    score = document.getElementById("score");
-
-    startButton = document.getElementById("start");
-    startButton.onclick = startGame;
-
-    resetButton = document.getElementById("reset");
-    resetButton.onclick = resetGame;
-  },
+  created() {},
 };
 </script>
 
 
-<style scoped>
+<style>
 #box {
   margin: auto;
-  height: 400px;
+  height: 600px;
   background: grey;
   overflow: hidden;
   position: relative;
@@ -169,12 +325,13 @@ export default {
   color: #fff;
 }
 
-#box > div {
+#quiz {
   display: inline-block;
   position: absolute;
+  height: 50px;
   width: 50px;
   text-align: center;
-  transition-property: right;
+  transition-property: bottom;
   transition-duration: 100ms;
   transition-timing-function: linear;
   transition-delay: 0;

@@ -4,7 +4,7 @@ import TodoList from '@/views/todos/TodoList'
 import CreateTodo from '@/views/todos/CreateTodo'
 import Signup from '@/views/accounts/Signup'
 import Login from '@/views/accounts/Login'
-import acid_rain from '@/views/acid_rain/acid_rain'
+import Acid_rain from '@/views/acid_rain/acid_rain'
 
 Vue.use(VueRouter)
 
@@ -32,7 +32,7 @@ const routes = [
   {
     path: '/acid_rain/acid_rain',
     name: 'Acid_rain',
-    component: acid_rain,
+    component: Acid_rain,
   },
 ]
 
