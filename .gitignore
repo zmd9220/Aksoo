@@ -65,7 +65,8 @@ test/
 
 ### AI  #################
 /AI/**/*.env
-
+/AI/.ipynb_checkpoints/
+**/colloectedimages/
 
 
 

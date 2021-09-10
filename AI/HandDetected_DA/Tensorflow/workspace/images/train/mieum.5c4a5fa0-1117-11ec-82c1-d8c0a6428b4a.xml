@@ -1,0 +1,26 @@
+<annotation>
+	<folder>jaeum</folder>
+	<filename>mieum.5c4a5fa0-1117-11ec-82c1-d8c0a6428b4a.JPG</filename>
+	<path>C:\Users\anaconda\Desktop\새 폴더\S05P21B306\AI\HandDetected_DA\Tensorflow\workspace\images\collectedimages\jaeum\mieum.5c4a5fa0-1117-11ec-82c1-d8c0a6428b4a.JPG</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>687</width>
+		<height>574</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>미음</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>427</xmin>
+			<ymin>116</ymin>
+			<xmax>607</xmax>
+			<ymax>368</ymax>
+		</bndbox>
+	</object>
+</annotation>

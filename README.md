@@ -1,3 +1,4 @@
+
 </br>
 
 ## 🏛 Service Architecture
@@ -58,3 +59,4 @@
 
 ## 📚WIKI
 👉[B306팀의 협업방법 보러가기](https://lab.ssafy.com/s05-ai-image/S05P21B306/-/wikis/home)👈
+>>>>>>> README.md
