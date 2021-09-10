@@ -35,11 +35,12 @@
           </div>
         </div>
         <div class="panel-footer">
-          <strong>Score: <span id="score">0</span></strong>
-          <strong>생명 : <span id="hart">5</span></strong>
+          <strong>Score: <span id="score">0 </span></strong>
+          <strong>생명 : <span v-for="idx in hart" :key="idx">
+            <img src="./heart.gif" style="width:20px">
+          </span></strong>
         </div>
       </div>
-
       <hr />
     </div>
   </div>
@@ -49,18 +50,23 @@
 var placeLetterInterval = 500;
 var placeLetterTimer, moveLettersTimer;
 var startButton, resetButton;
-var box, message, score, hart;
+var box, message, score;
+var hart = 5;
 
 export default {
   name: "Acid_rain",
   data: function () {
     return {
       score: "",
-      hart: "",
+      hart: "5",
     };
   },
   mounted() {
-    document.addEventListener("DOMContentLoaded", this.doTest);
+    // document.addEventListener("DOMContentLoaded", this.doTest);
+    message = document.getElementById("message");
+    box = document.getElementById("box");
+    score = document.getElementById("score");
+    hart = this.hart;
   },
   methods: {
     placeLetter: function () {
@@ -102,7 +108,7 @@ export default {
 
       // newLetter.style.right = Math.random() * 300 + "px";
       // newLetter.style.top = 1000 - (Math.random() * 500) + "px";
-      newLetter.style.left = 50 + Math.random() * 800 + "px";
+      newLetter.style.left = 100 + Math.random() * 700 + "px";
       newLetter.style.bottom = 400 + Math.random() * 500 + "px";
 
       box.appendChild(newLetter);
@@ -114,9 +120,9 @@ export default {
         boxes[i].style.bottom = parseInt(boxes[i].style.bottom) - 10 + "px";
         if (parseInt(boxes[i].style.bottom) <= -10) {
           boxes[i].remove();
-          hart.innerHTML = parseInt(hart.innerHTML) - 1;
+          this.hart = parseInt(this.hart) - 1;
           this.decreaseLetterSpeed(hart);
-          if (hart.innerHTML == 0) {
+          if (this.hart == 0) {
             this.endGame();
           }
         }
@@ -158,7 +164,7 @@ export default {
       message.classList.add("hidden"); // add
       // resetButton.classList.add("disabled");
       score.innerHTML = 0;
-      hart.innerHTML = 5;
+      this.hart = 5;
 
       var boxes = document.querySelectorAll("#box > div");
       for (var i = 0; i < boxes.length; i++) {
@@ -282,18 +288,19 @@ export default {
 
     startGame: function () {
       console.log("start");
+      this.hart = 5;
       this.resetText();
       placeLetterTimer = setInterval(this.placeLetter, placeLetterInterval);
       moveLettersTimer = setInterval(this.moveLetters, 100);
       document.addEventListener("keydown", this.keyboardInput);
       startButton.classList.add("disabled");
     },
-    doTest() {
-      message = document.getElementById("message");
-      box = document.getElementById("box");
-      score = document.getElementById("score");
-      hart = document.getElementById("hart");
-    },
+    // doTest() {
+    //   message = document.getElementById("message");
+    //   box = document.getElementById("box");
+    //   score = document.getElementById("score");
+    //   hart = document.getElementById("hart");
+    // },
 
     // document.addEventListener("DOMContentLoaded", function(event) {
     //     console.log("OH HAI THERE!");
@@ -318,7 +325,8 @@ export default {
 #box {
   margin: auto;
   height: 600px;
-  background: grey;
+  /* width: 1000px; */
+  /* background: grey; */
   overflow: hidden;
   position: relative;
   font-family: "Georgia";
@@ -328,7 +336,7 @@ export default {
 }
 
 #bg {
-  width: 100%;
+  width: 1000px;
 }
 
 #quiz {
