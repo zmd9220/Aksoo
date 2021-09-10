@@ -31,6 +31,9 @@ package-lock.json
 /Back/**/.springBeans
 /Back/**/.sts4-cache
 
+# Django
+/Back/**/venv
+
 
 ### AI  #################
 /AI/**/*.env
