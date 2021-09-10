@@ -1,37 +1,43 @@
 <template>
-  <div>
-    <title>The Game Formerly Known as Typing</title>
-    <!-- <script src="js/game.js"></script> -->
-    <!-- <link href="css/style.css" rel="stylesheet"> -->
+  <div class="acid">
+    <div class="acid_left">
+      <title>The Game Formerly Known as Typing</title>
+      <!-- <script src="js/game.js"></script> -->
+      <!-- <link href="css/style.css" rel="stylesheet"> -->
 
-    <div class="container">
-      <div class="header">
-        <button
-          class="btn btn-success pull-right"
-          id="start"
-          v-on:click="startGame"
-        >
-          <span class="glyphicon glyphicon-play"></span> Start
-        </button>
-        <!-- disabled -->
-        <button
-          class="btn btn-danger pull-right"
-          id="reset"
-          v-on:click="resetGame"
-        >
-          <span class="glyphicon glyphicon-flash"></span> Reset
-        </button>
-        <h3 class="text-muted">The Game Formerly Known as Typing</h3>
-        <hr />
-      </div>
+      <div class="container">
+        <div class="header">
+          <button
+            class="btn btn-success pull-right"
+            id="start"
+            v-on:click="startGame"
+          >
+            <span class="glyphicon glyphicon-play"></span> Start
+          </button>
+          <!-- disabled -->
+          <button
+            class="btn btn-danger pull-right"
+            id="reset"
+            v-on:click="resetGame"
+          >
+            <span class="glyphicon glyphicon-flash"></span> Reset
+          </button>
+          <h3 class="text-muted">산 성 비</h3>
+          <hr />
+        </div>
 
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <div id="box">
-            <img src="./background.gif" class="bg" style="object-fit:fill">
-            <span id="message" class="hidden" style="display: none"
-              >Game Over!</span
-            >
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div id="box">
+              <span id="message" class="hidden" style="display: none"
+                >Game Over!</span
+              >
+              <!-- <img src="./background.gif" class="bg" style="object-fit: fill" /> -->
+            </div>
+          </div>
+          <div class="panel-footer">
+            <strong>Score: <span id="score">0</span></strong>
+            <strong>생명 : <span id="hart">5</span></strong>
           </div>
         </div>
         <div class="panel-footer">
@@ -40,8 +46,13 @@
             <img src="./heart.gif" style="width:20px">
           </span></strong>
         </div>
+        <hr />
       </div>
+    </div>
+    <div class="acid_right">
+      <div class="a">a</div>
       <hr />
+      <div class="b">b</div>
     </div>
   </div>
 </template>
@@ -300,6 +311,8 @@ export default {
     //   box = document.getElementById("box");
     //   score = document.getElementById("score");
     //   hart = document.getElementById("hart");
+    //   // startButton = document.getElementsById("start");
+    //   // startButton.onclick = this.startGame;
     // },
 
     // document.addEventListener("DOMContentLoaded", function(event) {
@@ -325,18 +338,20 @@ export default {
 #box {
   margin: auto;
   height: 600px;
-  /* width: 1000px; */
   /* background: grey; */
+  background: url("./background.gif");
   overflow: hidden;
   position: relative;
   font-family: "Georgia";
   font-size: 55px;
   font-weight: bold;
-  color: purple ;
+  color: purple;
 }
 
-#bg {
-  width: 1000px;
+.bg {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
 }
 
 #quiz {
@@ -357,17 +372,17 @@ export default {
   position: relative;
   font-size: 125px;
   top: 50%;
-  z-index: 0;
+  z-index: 10;
   color: rgba(0, 0, 0, 0.6);
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
-  text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.1);
+  text-shadow: 2px 2px 3px purple;
 }
 
 .panel {
-  max-width: 1000px;
-  margin: auto;
+  max-width: 100%;
+  /* margin: auto; */
 }
 
 .panel-body {
@@ -379,6 +394,28 @@ export default {
 }
 
 .container {
-  max-width: 1000px;
+  width: 70%;
+}
+
+.acid {
+  width: 100%;
+  height: 100%;
+}
+.acid_left {
+  float: left;
+  width: 70%;
+}
+.acid_right {
+  float: right;
+  width: 30%;
+  height: 100%;
+}
+.a {
+  height: 300px;
+  margin: auto;
+}
+.b {
+  margin: auto;
+  height: 200px;
 }
 </style>
