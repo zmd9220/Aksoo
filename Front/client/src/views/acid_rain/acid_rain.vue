@@ -28,6 +28,7 @@
       <div class="panel panel-default">
         <div class="panel-body">
           <div id="box">
+            <img src="./background.gif" class="bg" style="object-fit:fill">
             <span id="message" class="hidden" style="display: none"
               >Game Over!</span
             >
@@ -321,8 +322,13 @@ export default {
   overflow: hidden;
   position: relative;
   font-family: "Georgia";
-  font-size: 50px;
-  color: #fff;
+  font-size: 55px;
+  font-weight: bold;
+  color: purple ;
+}
+
+#bg {
+  width: 100%;
 }
 
 #quiz {
