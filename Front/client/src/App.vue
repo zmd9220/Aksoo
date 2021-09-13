@@ -1,4 +1,4 @@
-<template>   
+<template>
   <div id="app">
     <Header />
     <div id="nav">
@@ -54,6 +54,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background: url("/@/assets/mainpage.png");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #nav {
