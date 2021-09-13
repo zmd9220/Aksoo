@@ -1,18 +1,23 @@
-<template>
+<template>   
   <div id="app">
     <div id="nav">
-      <span v-if="isLogin">
-        <router-link :to="{ name: 'TodoList' }">Todo List</router-link> |
-        <router-link :to="{ name: 'CreateTodo' }">Create Todo</router-link> |
-        <router-link @click.native="logout" to="#">Logout</router-link>
-      </span>
-      <span v-else>
-        <router-link :to="{ name: 'Signup' }">Signup</router-link> |
-        <router-link :to="{ name: 'Login' }">Login</router-link> |
-        <router-link :to="{ name: 'Acid_rain' }">Acid_rain</router-link>
-      </span>
+      <b-navbar type="dark" variant="transparent">
+        <b-navbar-nav>
+          <span v-if="isLogin">
+            <router-link :to="{ name: 'TodoList' }">Todo List</router-link> |
+            <router-link :to="{ name: 'CreateTodo' }">Create Todo</router-link> |
+            <router-link @click.native="logout" to="#">Logout</router-link>
+          </span>
+          <span v-else>
+            <router-link :to="{ name: 'Signup' }">Signup</router-link> |
+            <router-link :to="{ name: 'Login' }">Login</router-link> |
+            <router-link :to="{ name: 'Acid_rain' }">Acid_rain</router-link> |
+            <router-link :to="{ name: 'MainPage' }">MainPage</router-link>
+          </span>
+          <router-view @login="isLogin = true" />
+        </b-navbar-nav>
+      </b-navbar>
     </div>
-    <router-view @login="isLogin = true" />
   </div>
 </template>
 

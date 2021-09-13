@@ -36,15 +36,11 @@
             </div>
           </div>
           <div class="panel-footer">
-            <strong>Score: <span id="score">0</span></strong>
-            <strong>생명 : <span id="hart">5</span></strong>
+            <strong>Score: <span id="score">0 </span></strong>
+            <strong>생명 : <span v-for="idx in hart" :key="idx">
+              <img src="./heart.gif" style="width:20px">
+            </span></strong>
           </div>
-        </div>
-        <div class="panel-footer">
-          <strong>Score: <span id="score">0 </span></strong>
-          <strong>생명 : <span v-for="idx in hart" :key="idx">
-            <img src="./heart.gif" style="width:20px">
-          </span></strong>
         </div>
         <hr />
       </div>
@@ -298,8 +294,8 @@ export default {
     },
 
     startGame: function () {
-      console.log("start");
       this.hart = 5;
+      console.log("start");
       this.resetText();
       placeLetterTimer = setInterval(this.placeLetter, placeLetterInterval);
       moveLettersTimer = setInterval(this.moveLetters, 100);
