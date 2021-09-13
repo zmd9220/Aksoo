@@ -1,5 +1,6 @@
-<template>
+<template>   
   <div id="app">
+    <Header />
     <div id="nav">
       <span v-if="isLogin">
         <router-link :to="{ name: 'TodoList' }">Todo List</router-link> |
@@ -9,16 +10,22 @@
       <span v-else>
         <router-link :to="{ name: 'Signup' }">Signup</router-link> |
         <router-link :to="{ name: 'Login' }">Login</router-link> |
-        <router-link :to="{ name: 'Acid_rain' }">Acid_rain</router-link>
+        <router-link :to="{ name: 'Acid_rain' }">Acid_rain</router-link> |
+        <router-link :to="{ name: 'MainPage' }">MainPage</router-link>
       </span>
+      <router-view @login="isLogin = true" />
     </div>
-    <router-view @login="isLogin = true" />
   </div>
 </template>
 
 <script>
+import Header from "./views/MainPage/Header.vue";
+
 export default {
   name: "App",
+  components: {
+    Header,
+  },
   data: function () {
     return {
       isLogin: false,
@@ -40,7 +47,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

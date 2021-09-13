@@ -42,14 +42,12 @@
               <!-- <img src="./background.gif" class="bg" style="object-fit: fill" /> -->
             </div>
           </div>
-        </div>
-        <div class="panel-footer">
-          <strong>Score: <span id="score">0 </span></strong>
-          <strong
-            >생명 :
-            <span v-for="idx in hart" :key="idx">
-              <img src="./heart.gif" style="width: 20px" /> </span
-          ></strong>
+          <div class="panel-footer">
+            <strong>Score: <span id="score">0 </span></strong>
+            <strong>생명 : <span v-for="idx in hart" :key="idx">
+              <img src="./heart.gif" style="width:20px">
+            </span></strong>
+          </div>
         </div>
         <hr />
       </div>

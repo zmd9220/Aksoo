@@ -5,6 +5,8 @@ import CreateTodo from '@/views/todos/CreateTodo'
 import Signup from '@/views/accounts/Signup'
 import Login from '@/views/accounts/Login'
 import Acid_rain from '@/views/acid_rain/acid_rain'
+import Header from '@/views/MainPage/Header'
+import Mainpage from '@/views/MainPage/Mainpage'
 
 Vue.use(VueRouter)
 
@@ -33,6 +35,16 @@ const routes = [
     path: '/acid_rain/acid_rain',
     name: 'Acid_rain',
     component: Acid_rain,
+  },
+  {
+    path: '/MainPage/Header',
+    name: 'Header',
+    component: Header,
+  },
+  {
+    path: '/MainPage/Mainpage',
+    name: 'Mainpage',
+    component: Mainpage,
   },
 ]
 
