@@ -6,32 +6,39 @@
       <!-- <link href="css/style.css" rel="stylesheet"> -->
 
       <div class="container">
-        <div class="header">
-          <button
-            class="btn btn-success pull-right"
-            id="start"
-            v-on:click="startGame"
-          >
-            <span class="glyphicon glyphicon-play"></span> Start
-          </button>
-          <!-- disabled -->
-          <button
-            class="btn btn-danger pull-right"
-            id="reset"
-            v-on:click="resetGame"
-          >
-            <span class="glyphicon glyphicon-flash"></span> Reset
-          </button>
-          <h3 class="text-muted">산 성 비</h3>
-          <hr />
-        </div>
-
+        <h3 class="text-muted">산 성 비</h3>
+        <hr />
         <div class="panel panel-default">
           <div class="panel-body">
             <div id="box">
-              <span id="message" class="hidden" style="display: none"
+              <div id="message" class="hidden" style="display: none">
+                Game Over!
+                <br />
+                <button
+                  class="btn btn-danger pull-right"
+                  id="reset"
+                  v-on:click="resetGame"
+                >
+                  <span class="glyphicon glyphicon-flash" id="reset"></span>
+                  ReStart
+                </button>
+              </div>
+              <!-- <span id="message" class="hidden" style="display: none"
                 >Game Over!</span
-              >
+              > -->
+              <span id="menu" class="menu">
+                <button
+                  class="btn btn-success pull-right"
+                  id="start"
+                  v-on:click="startGame"
+                  style="display: block"
+                >
+                  <span class="glyphicon glyphicon-play" id="start"></span>
+                  Start
+                </button>
+                <!-- disabled -->
+              </span>
+
               <!-- <img src="./background.gif" class="bg" style="object-fit: fill" /> -->
             </div>
           </div>
@@ -56,9 +63,10 @@
 <script>
 var placeLetterInterval = 500;
 var placeLetterTimer, moveLettersTimer;
-var startButton, resetButton;
-var box, message, score;
-var hart = 5;
+// var startButton, resetButton;
+var box,
+  score,
+  hart = 5;
 
 export default {
   name: "Acid_rain",
@@ -70,7 +78,7 @@ export default {
   },
   mounted() {
     // document.addEventListener("DOMContentLoaded", this.doTest);
-    message = document.getElementById("message");
+    // message = document.getElementById("message");
     box = document.getElementById("box");
     score = document.getElementById("score");
     hart = this.hart;
@@ -130,6 +138,7 @@ export default {
           this.hart = parseInt(this.hart) - 1;
           this.decreaseLetterSpeed(hart);
           if (this.hart == 0) {
+            this.toggleText();
             this.endGame();
           }
         }
@@ -137,12 +146,12 @@ export default {
     },
 
     endGame: function () {
-      this.toggleText();
+      // this.togglerestart();
       clearInterval(moveLettersTimer);
       clearInterval(placeLetterTimer);
       document.removeEventListener("keydown", this.keyboardInput);
-      message.classList.remove("hidden");
-      resetButton.classList.remove("disabled");
+      // message.classList.remove("hidden");
+      // resetButton.classList.remove("disabled");
     },
 
     decreaseLetterSpeed: function (score) {
@@ -165,20 +174,36 @@ export default {
       var text = document.getElementById("message");
       text.style.display = "none";
     },
+    togglestart: function () {
+      var text = document.getElementById("start");
+      text.style.display = "none";
+    },
+    togglerestart: function () {
+      var text = document.getElementById("restart");
+      if (text.style.display === "none") {
+        text.style.display = "block";
+      } else {
+        text.style.display = "none";
+      }
+    },
 
     resetGame: function () {
+      // this.togglerestart();
       this.resetText();
-      message.classList.add("hidden"); // add
+      // message.classList.add("hidden"); // add
       // resetButton.classList.add("disabled");
       score.innerHTML = 0;
       this.hart = 5;
 
-      var boxes = document.querySelectorAll("#box > div");
+      var boxes = document.querySelectorAll("#quiz");
       for (var i = 0; i < boxes.length; i++) {
         boxes[i].remove();
       }
+      console.log(1);
       this.endGame();
-      // startGame();
+      console.log(2);
+      this.startGame();
+      console.log(3);
     },
 
     keyboardInput: function () {
@@ -294,13 +319,15 @@ export default {
     },
 
     startGame: function () {
-      this.hart = 5;
       console.log("start");
-      this.resetText();
+      this.togglestart();
+      // this.resetText();
+      this.hart = 5;
+
       placeLetterTimer = setInterval(this.placeLetter, placeLetterInterval);
       moveLettersTimer = setInterval(this.moveLetters, 100);
       document.addEventListener("keydown", this.keyboardInput);
-      startButton.classList.add("disabled");
+      // startButton.classList.add("disabled");
     },
     // doTest() {
     //   message = document.getElementById("message");
@@ -332,10 +359,19 @@ export default {
 
 <style>
 #box {
-  margin: auto;
+  /* margin: 10px 10%; */
+  /* background-position: center; */
+  /* background-size: 100%; */
   height: 600px;
+  width: 100%;
+  /* background-size: contain; */
+  /* height: 100%; */
+  /* height: 100vh;
+  width: 100%; */
+  /* width: 100vh; */
   /* background: grey; */
   background: url("./background.gif");
+  background-size: 100% 100%;
   overflow: hidden;
   position: relative;
   font-family: "Georgia";
@@ -366,8 +402,8 @@ export default {
   display: block;
   text-align: center;
   position: relative;
-  font-size: 125px;
-  top: 50%;
+  font-size: 100px;
+  top: 40%;
   z-index: 10;
   color: rgba(0, 0, 0, 0.6);
   -webkit-transform: translateY(-50%);
@@ -377,11 +413,15 @@ export default {
 }
 
 .panel {
+  width: 100%;
+  height: 100%;
   max-width: 100%;
   /* margin: auto; */
 }
 
 .panel-body {
+  width: 100%;
+  height: 100%;
   padding: 0;
 }
 
@@ -391,6 +431,7 @@ export default {
 
 .container {
   width: 70%;
+  height: 100%;
 }
 
 .acid {
@@ -400,6 +441,7 @@ export default {
 .acid_left {
   float: left;
   width: 70%;
+  height: 100%;
 }
 .acid_right {
   float: right;
@@ -414,4 +456,26 @@ export default {
   margin: auto;
   height: 200px;
 }
+.menu {
+  float: center;
+  width: 100%;
+  height: 100%;
+}
+#start {
+  left: 45%;
+  float: center;
+  display: block;
+  text-align: center;
+  position: relative;
+  top: 50%;
+  z-index: 80;
+}
+/* #restart {
+  float: center;
+  display: block;
+  text-align: center;
+  position: relative;
+  top: 50%;
+  z-index: 100;
+} */
 </style>
