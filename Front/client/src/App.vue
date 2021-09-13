@@ -1,29 +1,31 @@
 <template>   
   <div id="app">
+    <Header />
     <div id="nav">
-      <b-navbar type="dark" variant="transparent">
-        <b-navbar-nav>
-          <span v-if="isLogin">
-            <router-link :to="{ name: 'TodoList' }">Todo List</router-link> |
-            <router-link :to="{ name: 'CreateTodo' }">Create Todo</router-link> |
-            <router-link @click.native="logout" to="#">Logout</router-link>
-          </span>
-          <span v-else>
-            <router-link :to="{ name: 'Signup' }">Signup</router-link> |
-            <router-link :to="{ name: 'Login' }">Login</router-link> |
-            <router-link :to="{ name: 'Acid_rain' }">Acid_rain</router-link> |
-            <router-link :to="{ name: 'MainPage' }">MainPage</router-link>
-          </span>
-          <router-view @login="isLogin = true" />
-        </b-navbar-nav>
-      </b-navbar>
+      <span v-if="isLogin">
+        <router-link :to="{ name: 'TodoList' }">Todo List</router-link> |
+        <router-link :to="{ name: 'CreateTodo' }">Create Todo</router-link> |
+        <router-link @click.native="logout" to="#">Logout</router-link>
+      </span>
+      <span v-else>
+        <router-link :to="{ name: 'Signup' }">Signup</router-link> |
+        <router-link :to="{ name: 'Login' }">Login</router-link> |
+        <router-link :to="{ name: 'Acid_rain' }">Acid_rain</router-link> |
+        <router-link :to="{ name: 'MainPage' }">MainPage</router-link>
+      </span>
+      <router-view @login="isLogin = true" />
     </div>
   </div>
 </template>
 
 <script>
+import Header from "./views/MainPage/Header.vue";
+
 export default {
   name: "App",
+  components: {
+    Header,
+  },
   data: function () {
     return {
       isLogin: false,
@@ -45,7 +47,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
