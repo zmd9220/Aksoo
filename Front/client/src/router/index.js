@@ -7,10 +7,16 @@ import Login from '@/views/accounts/Login'
 import Acid_rain from '@/views/acid_rain/acid_rain'
 import Header from '@/views/MainPage/Header'
 import MainPage from '@/views/MainPage/MainPage'
+import LearnStartPage from '@/views/Learn/Start'
 
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path: '/',
+    name: 'MainPage',
+    component: MainPage,
+  },
   {
     path: '/todos',
     name: 'TodoList',
@@ -42,9 +48,9 @@ const routes = [
     component: Header,
   },
   {
-    path: '/MainPage/MainPage',
-    name: 'MainPage',
-    component: MainPage,
+    path: '/views/Learn/Start',
+    name: 'LeanStartPage',
+    component: LearnStartPage,
   },
 ]
 
