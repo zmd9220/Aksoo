@@ -17,4 +17,4 @@ RUN pip install gunicorn #python과 nginx를 연결해주는 interface
 #현재 디렉토리를 /code에 복사해서 넣겠다
 ADD . /code 
 RUN ["chmod", "+x", "start.sh"] # bash script 권한 설정
-ENTRYPOINT ["sh","./start.sh"] # bash script 실행, 이 스크립트는 다음 챕터에서 만들겠다
+ENTRYPOINT ["sh","start.sh"] # bash script 실행, 이 스크립트는 다음 챕터에서 만들겠다
