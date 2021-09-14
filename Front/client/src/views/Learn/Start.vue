@@ -16,6 +16,15 @@
 
 
 <script>
+export default {
+  name: "learnStart",
+  data: function () {},
+  methods: {
+    handSelect: function () {
+      this.$router.push("/Learn/Select");
+    },
+  },
+};
 </script>
 
 
@@ -30,7 +39,7 @@
   float: center;
 }
 .contents {
-  margin: 10% 15%;
+  margin: 5% 15%;
   text-align: center;
 }
 .gonext {
@@ -38,7 +47,7 @@
   text-align: center;
   font-weight: bold;
   color: white;
-  border-radius: 10%;
+  border-radius: 5%;
   width: 40%;
   height: 50px;
   border: white;
