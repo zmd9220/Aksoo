@@ -1,27 +1,24 @@
 <template>
   <div>
-    <b-navbar type="dark" variant="success">
-      <b-navbar-nav>
-        <b-navbar-brand href="/">Home</b-navbar-brand>
-
-        <b-nav-item href="#" disabled>지문자연습</b-nav-item>
-        <b-nav-item href="/Acid_rain/Acid_rain/">산성비게임</b-nav-item>
-        <b-nav-item href="#" disabled>행맨게임</b-nav-item>
-        <b-nav-item href="#" disabled>카드뒤집기게임</b-nav-item>
-        <b-nav-item href="#" disabled>랭킹보기</b-nav-item>
+    <b-navbar variant="transparent" >
+      <b-navbar-nav text-black font-weight="bold">
+        <b-navbar-brand>
+          <img src="https://pbs.twimg.com/media/DClMpmzXoAESvbt.jpg" alt="Kitten" width="100px">
+        </b-navbar-brand>
+        <b-nav-item href="/">Home</b-nav-item>
+        <b-nav-item href="#" >둘러보기</b-nav-item>
+        <b-nav-item href="#">학습하기</b-nav-item>
+        <b-nav-item href="#">게임하기</b-nav-item>
+        <b-nav-item href="#" disabled>마이페이지</b-nav-item>
 
         <!-- Navbar dropdowns -->
         <div class="login">
           <span v-if="isLogin">
-            <b-nav-item-dropdown text="👩‍💻" right>
-              <b-dropdown-item href="#">Account</b-dropdown-item>
-              <b-dropdown-item href="#">Settings</b-dropdown-item>
-              <b-dropdown-item href="#">logout</b-dropdown-item>
-            </b-nav-item-dropdown>
+            <b-button class="logout-btn" href="">로그아웃</b-button>
           </span>
 
           <span v-else>
-            <b-nav-item href="/accounts/Login/"><b-button>로그인</b-button></b-nav-item>
+            <b-button class="login-btn" href="/accounts/login/">로그인</b-button>
           </span>
         </div>
 
@@ -52,14 +49,24 @@ export default {
 }
 
 .nav-item {
-  margin-right: 0.5em;
+  margin-right: 1em;
   align-self: center;
+  font-weight: bold;
 }
 
 .login {
   position: absolute;
-  top: 0;
   right: 2em;
+  align-self: center;
+}
+
+.login-btn {
+  background-color: blueviolet;
+}
+
+.logout-btn {
+  border: 0.1em;
+  border-color:blueviolet;
 }
 
 </style>
