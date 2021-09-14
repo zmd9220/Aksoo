@@ -8,6 +8,7 @@ import Acid_rain from '@/views/acid_rain/acid_rain'
 import Header from '@/views/MainPage/Header'
 import MainPage from '@/views/MainPage/MainPage'
 import LearnStartPage from '@/views/Learn/Start'
+import Learning from '@/views/Learn/Learning'
 
 Vue.use(VueRouter)
 
@@ -51,6 +52,11 @@ const routes = [
     path: '/views/Learn/Start',
     name: 'LeanStartPage',
     component: LearnStartPage,
+  },
+  {
+    path: '/views/Learn/Learning',
+    name: 'Learning',
+    component: Learning,
   },
 ]
 
