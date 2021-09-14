@@ -131,7 +131,7 @@
                     />
                   </div>
                 </div>
-                <div class="group-field">
+                <!-- <div class="group-field">
                   <div class="input-group-label">
                     <label for="">성별</label>
                   </div>
@@ -173,7 +173,7 @@
                       value=""
                     />
                   </div>
-                </div>
+                </div> -->
                 <div class="group-field">
                   <div class="input-group checks">
                     <input id="checkOver14" type="checkbox" /><label

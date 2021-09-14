@@ -7,6 +7,7 @@ import Login from '@/views/accounts/Login'
 import Acid_rain from '@/views/acid_rain/acid_rain'
 import Header from '@/views/MainPage/Header'
 import MainPage from '@/views/MainPage/MainPage'
+import LearnStartPage from '@/views/Learn/Start'
 
 Vue.use(VueRouter)
 
@@ -45,6 +46,11 @@ const routes = [
     path: '/MainPage/Header',
     name: 'Header',
     component: Header,
+  },
+  {
+    path: '/views/Learn/Start',
+    name: 'LeanStartPage',
+    component: LearnStartPage,
   },
 ]
 

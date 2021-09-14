@@ -11,7 +11,8 @@
         <router-link :to="{ name: 'Signup' }">Signup</router-link> |
         <router-link :to="{ name: 'Login' }">Login</router-link> |
         <router-link :to="{ name: 'Acid_rain' }">Acid_rain</router-link> |
-        <router-link :to="{ name: 'MainPage' }">MainPage</router-link>
+        <router-link :to="{ name: 'MainPage' }">MainPage</router-link> |
+        <router-link :to="{ name: 'LeanStartPage' }">LeanStartPage</router-link>
       </span>
       <router-view @login="isLogin = true" />
     </div>

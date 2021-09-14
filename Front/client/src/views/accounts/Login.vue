@@ -120,8 +120,8 @@
                     </div>
                     <div class="group-field">
                       <div class="input-group hr-line" style="display: block">
-                        <a class="gray-link p-left">비밀번호 찾기</a
-                        ><a class="primary-link p-right" @click="Singup"
+                        <!-- <a class="gray-link p-left">비밀번호 찾기</a> -->
+                        <a class="primary-link p-right" @click="Singup"
                           >회원가입</a
                         >
                       </div>
