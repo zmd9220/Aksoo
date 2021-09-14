@@ -10,6 +10,7 @@ import MainPage from '@/views/MainPage/MainPage'
 import LearnStartPage from '@/views/Learn/Start'
 import LearnSelectPage from '@/views/Learn/Select'
 import LearnWordPage from '@/views/Learn/WordSelect'
+import Learning from '@/views/Learn/Learning'
 
 Vue.use(VueRouter)
 
@@ -63,6 +64,11 @@ const routes = [
     path: '/Learn/WordSelect',
     name: 'LearnWordPage',
     component: LearnWordPage,
+  },
+  {
+    path: '/views/Learn/Learning',
+    name: 'Learning',
+    component: Learning,
   },
 ]
 

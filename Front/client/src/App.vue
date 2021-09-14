@@ -23,6 +23,7 @@
         |
         <router-link :to="{ name: 'LearnWordPage' }">LeanWordPage</router-link>
         |
+        <router-link :to="{ name: 'Learning' }">Learning</router-link>
       </span>
       <router-view @login="isLogin = true" />
     </div>
