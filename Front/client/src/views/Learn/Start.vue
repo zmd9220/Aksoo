@@ -17,11 +17,11 @@
 
 <script>
 export default {
-  name: "learnStart",
+  name: "LearnStartPage",
   data: function () {},
   methods: {
     handSelect: function () {
-      this.$router.push("/Learn/Select");
+      this.$router.push("/Select");
     },
   },
 };

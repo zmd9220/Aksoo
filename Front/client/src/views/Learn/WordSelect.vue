@@ -3,11 +3,11 @@
     <div class="main">
       <div class="bt">
         <div>
-          <button class="gonext">자음</button>
+          <button class="gonext" @click="level()">자음</button>
           <button class="gonext">모음</button>
-          <button class="gonext" @click="level">단어</button>
+          <button class="gonext">단어</button>
           <button class="gonext">즐겨찾기</button>
-          <button class="goback" @click="handSelect">뒤로 가기</button>
+          <button class="goback" @click="handSelect()">뒤로 가기</button>
         </div>
       </div>
     </div>
@@ -20,10 +20,10 @@ export default {
   data: function () {},
   methods: {
     level: function () {
-      this.$router.push("/Learn/level");
+      this.$router.push("/Learn/Learning");
     },
     handSelect: function () {
-      this.$router.push("/Learn/Select");
+      this.$router.push("/Select");
     },
   },
 };

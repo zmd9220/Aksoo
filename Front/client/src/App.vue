@@ -16,7 +16,6 @@
           >LearnStartPage</router-link
         >
         |
-
         <router-link :to="{ name: 'LearnSelectPage' }"
           >LeanSelectPage</router-link
         >

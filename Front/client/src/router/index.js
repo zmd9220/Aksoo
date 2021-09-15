@@ -51,22 +51,22 @@ const routes = [
     component: Header,
   },
   {
-    path: '/Learn/Start',
+    path: '/Start',
     name: 'LearnStartPage',
     component: LearnStartPage,
   },
   {
-    path: '/Learn/Select',
+    path: '/Select',
     name: 'LearnSelectPage',
     component: LearnSelectPage,
   },
   {
-    path: '/Learn/WordSelect',
+    path: '/WordSelect',
     name: 'LearnWordPage',
     component: LearnWordPage,
   },
   {
-    path: '/views/Learn/Learning',
+    path: '/Learn/Learning',
     name: 'Learning',
     component: Learning,
   },
