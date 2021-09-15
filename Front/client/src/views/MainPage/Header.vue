@@ -7,7 +7,7 @@
         </b-navbar-brand>
         <b-nav-item href="/">Home</b-nav-item>
         <b-nav-item href="#" >둘러보기</b-nav-item>
-        <b-nav-item href="#">학습하기</b-nav-item>
+        <b-nav-item href="/Learn/Start/">학습하기</b-nav-item>
         <b-nav-item href="#">게임하기</b-nav-item>
         <b-nav-item href="#" disabled>마이페이지</b-nav-item>
 
