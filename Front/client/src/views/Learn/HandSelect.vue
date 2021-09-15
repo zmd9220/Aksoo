@@ -9,11 +9,11 @@
       </div>
       <div class="bt">
         <div>
-          <button class="gonext" @click="wordSelect">Left</button>
-          <button class="gonext" @click="wordSelect">Right</button>
+          <button class="gonext" @click="wordSelect()">Left</button>
+          <button class="gonext" @click="wordSelect()">Right</button>
         </div>
         <div>
-          <button class="goback" @click="startSelect">뒤로 가기</button>
+          <button class="goback" @click="startSelect()">뒤로 가기</button>
         </div>
       </div>
     </div>
@@ -23,13 +23,12 @@
 <script>
 export default {
   name: "handSelect",
-  data: function () {},
   methods: {
     wordSelect: function () {
-      this.$router.push("/Learn/wordSelect");
+      this.$router.push("/wordSelect").catch(() => {});
     },
     startSelect: function () {
-      this.$router.push("/Learn/Start");
+      this.$router.push("/Start").catch(() => {});
     },
   },
 };

@@ -11,12 +11,12 @@
         <router-link :to="{ name: 'Signup' }">Signup</router-link> |
         <router-link :to="{ name: 'Login' }">Login</router-link> |
         <router-link :to="{ name: 'Acid_rain' }">Acid_rain</router-link> |
+        <router-link :to="{ name: 'HangMan' }">HangMan</router-link> |
         <router-link :to="{ name: 'MainPage' }">MainPage</router-link> |
         <router-link :to="{ name: 'LearnStartPage' }"
           >LearnStartPage</router-link
         >
         |
-
         <router-link :to="{ name: 'LearnSelectPage' }"
           >LeanSelectPage</router-link
         >

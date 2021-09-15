@@ -7,12 +7,14 @@ import Login from '@/views/accounts/Login'
 import Acid_rain from '@/views/acid_rain/acid_rain'
 import Header from '@/views/MainPage/Header'
 import MainPage from '@/views/MainPage/MainPage'
-import LearnStartPage from '@/views/Learn/Start'
-import LearnSelectPage from '@/views/Learn/Select'
+import LearnStartPage from '@/views/Learn/LearnStart'
+import LearnSelectPage from '@/views/Learn/HandSelect'
 import LearnWordPage from '@/views/Learn/WordSelect'
 import Learning_cons from '@/views/Learn/Learning_cons'
 import Learning_vows from '@/views/Learn/Learning_vows'
 import Learning_words from '@/views/Learn/Learning_words'
+
+import HangMan from '@/views/HangMan/HangMan'
 
 Vue.use(VueRouter)
 
@@ -53,17 +55,17 @@ const routes = [
     component: Header,
   },
   {
-    path: '/Learn/Start',
+    path: '/Start',
     name: 'LearnStartPage',
     component: LearnStartPage,
   },
   {
-    path: '/Learn/Select',
+    path: '/Select',
     name: 'LearnSelectPage',
     component: LearnSelectPage,
   },
   {
-    path: '/Learn/WordSelect',
+    path: '/WordSelect',
     name: 'LearnWordPage',
     component: LearnWordPage,
   },
@@ -81,6 +83,11 @@ const routes = [
     path: '/Learn/Learning_words',
     name: 'Learning_words',
     component: Learning_words,
+  },
+  {
+    path: '/HangMan/HangMan',
+    name: 'HangMan',
+    component: HangMan,
   },
 ]
 
