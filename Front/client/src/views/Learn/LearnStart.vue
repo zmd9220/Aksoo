@@ -18,10 +18,9 @@
 <script>
 export default {
   name: "LearnStartPage",
-  data: function () {},
   methods: {
     handSelect: function () {
-      this.$router.push("/Select");
+      this.$router.push("/Select").catch(() => {});
     },
   },
 };

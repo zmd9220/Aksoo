@@ -7,10 +7,12 @@ import Login from '@/views/accounts/Login'
 import Acid_rain from '@/views/acid_rain/acid_rain'
 import Header from '@/views/MainPage/Header'
 import MainPage from '@/views/MainPage/MainPage'
-import LearnStartPage from '@/views/Learn/Start'
-import LearnSelectPage from '@/views/Learn/Select'
+import LearnStartPage from '@/views/Learn/LearnStart'
+import LearnSelectPage from '@/views/Learn/HandSelect'
 import LearnWordPage from '@/views/Learn/WordSelect'
 import Learning from '@/views/Learn/Learning'
+
+import HangMan from '@/views/HangMan/HangMan'
 
 Vue.use(VueRouter)
 
@@ -69,6 +71,11 @@ const routes = [
     path: '/Learn/Learning',
     name: 'Learning',
     component: Learning,
+  },
+  {
+    path: '/HangMan/HangMan',
+    name: 'HangMan',
+    component: HangMan,
   },
 ]
 

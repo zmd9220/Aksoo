@@ -4,7 +4,7 @@
       <b-button size="sm" class="mb-2">
         <b-icon icon="arrow90deg-left" aria-hidden="true"></b-icon>
       </b-button>
-    </div>  
+    </div>
     <p class="letters">
       <span onclick=""> ㄱ</span>
       <span> ㄴ</span>
@@ -38,5 +38,4 @@
   font-weight: bold;
   font-size: 1.5em;
 }
-
 </style>

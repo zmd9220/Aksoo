@@ -23,13 +23,12 @@
 <script>
 export default {
   name: "handSelect",
-  data: function () {},
   methods: {
     wordSelect: function () {
-      this.$router.push("/wordSelect");
+      this.$router.push("/wordSelect").catch(() => {});
     },
     startSelect: function () {
-      this.$router.push("/Start");
+      this.$router.push("/Start").catch(() => {});
     },
   },
 };

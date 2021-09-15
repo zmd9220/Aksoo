@@ -17,13 +17,12 @@
 <script>
 export default {
   name: "handSelect",
-  data: function () {},
   methods: {
     level: function () {
-      this.$router.push("/Learn/Learning");
+      this.$router.push("/Learn/Learning").catch(() => {});
     },
     handSelect: function () {
-      this.$router.push("/Select");
+      this.$router.push("/Select").catch(() => {});
     },
   },
 };
