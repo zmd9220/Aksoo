@@ -11,6 +11,7 @@
     </div>
 
     <web-cam
+      class="web-cam"
       ref="webcam"
       :height="height"
       :width="width"
@@ -235,7 +236,7 @@ export default {
   width: calc(640px * 0.6);
   height: calc(480px * 0.6);
 
-  filter: sepia(100%) hue-rotate(190deg) saturate(500%);
+  /* filter: sepia(100%) hue-rotate(190deg) saturate(500%); */
   /* filter: brightness(10%); */
 }
 
@@ -253,7 +254,7 @@ export default {
     display: flex;
     justify-content: space-between;
 
-    background-color: rgba(0, 0, 0, 0.25)
+    background-color: rgba(255, 255, 255, 0.25)
 }
 p {
     color: white;
@@ -266,5 +267,9 @@ video {
   bottom: 0;
   right: 0;
   z-index: 10;
+}
+
+.web-cam {
+  filter: brightness(25%);
 }
 </style>
