@@ -14,7 +14,6 @@ import Learning_cons from '@/views/Learn/Learning_cons'
 import Learning_vows from '@/views/Learn/Learning_vows'
 import Learning_words from '@/views/Learn/Learning_words'
 
-import HangMan from '@/views/HangMan/HangMan'
 import HangMan_vue from '@/views/HangMan_vue/HangMan_vue'
 
 Vue.use(VueRouter)
@@ -84,11 +83,6 @@ const routes = [
     path: '/Learn/Learning_words',
     name: 'Learning_words',
     component: Learning_words,
-  },
-  {
-    path: '/HangMan/HangMan',
-    name: 'HangMan',
-    component: HangMan,
   },
   {
     path: '/HangMan_vue/HangMan_vue',
