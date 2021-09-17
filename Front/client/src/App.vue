@@ -15,12 +15,10 @@
         <router-link :to="{ name: 'MainPage' }">MainPage</router-link> |
         <router-link :to="{ name: 'LearnStartPage' }"
           >LearnStartPage</router-link
-        >
-        |
+        > |
         <router-link :to="{ name: 'LearnSelectPage' }"
           >LeanSelectPage</router-link
-        >
-        |
+        > |
         <router-link :to="{ name: 'LearnWordPage' }">LeanWordPage</router-link>
         |
         <router-link :to="{ name: 'Learning_cons' }">Learning_cons</router-link> |
