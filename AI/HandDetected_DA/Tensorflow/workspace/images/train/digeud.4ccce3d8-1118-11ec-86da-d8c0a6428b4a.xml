@@ -1,0 +1,26 @@
+<annotation>
+	<folder>jaeum</folder>
+	<filename>digeud.4ccce3d8-1118-11ec-86da-d8c0a6428b4a.JPG</filename>
+	<path>C:\Users\anaconda\Desktop\새 폴더\S05P21B306\AI\HandDetected_DA\Tensorflow\workspace\images\collectedimages\jaeum\digeud.4ccce3d8-1118-11ec-86da-d8c0a6428b4a.JPG</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>722</width>
+		<height>573</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>디귿</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>357</xmin>
+			<ymin>126</ymin>
+			<xmax>654</xmax>
+			<ymax>352</ymax>
+		</bndbox>
+	</object>
+</annotation>
