@@ -84,7 +84,6 @@ const routes = [
     name: 'Learning_words',
     component: Learning_words,
   },
-
   {
     path: '/HangMan_vue/HangMan_vue',
     name: 'HangMan_vue',
