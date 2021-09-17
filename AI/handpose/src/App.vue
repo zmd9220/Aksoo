@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    
     <template v-if="!modelLoaded">
       <loading message="👋 Loading hand detection model..." />
     </template>

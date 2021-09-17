@@ -82,39 +82,39 @@ export default {
         case CustomGestures.DigeudGesture.name:
           name = "디귿"; 
           break;
-        case CustomGestures.LieulGesture.name:
-          name = "리을"; 
-          break;
-        case CustomGestures.MieumGesture.name: 
-          name = "미음"; 
-          break;
-        case CustomGestures.BieubGesture.name: 
-          name = "비읍"; 
-          break;
-        case CustomGestures.SiosGesture.name: 
-          name = "시옷"; 
-          break;
-        case CustomGestures.IeungGesture.name: 
-          name = "이응"; 
-          break;
-        case CustomGestures.JieujGesture.name: 
-          name = "지읒"; 
-          break;
-        case CustomGestures.ChieuchGesture.name: 
-          name = "치읓"; 
-          break;
-        case CustomGestures.KieukGesture.name: 
-          name = "키읔"; 
-          break;
-        case CustomGestures.TieutGesture.name: 
-          name = "티읕"; 
-          break;
-        case CustomGestures.PieupGesture.name: 
-          name = "피읖"; 
-          break;
-        case Gestures.ThumbsUpGesture.name:
-          name = "히읗";
-          break;
+        // case CustomGestures.LieulGesture.name:
+        //   name = "리을"; 
+        //   break;
+        // case CustomGestures.MieumGesture.name: 
+        //   name = "미음"; 
+        //   break;
+        // case CustomGestures.BieubGesture.name: 
+        //   name = "비읍"; 
+        //   break;
+        // case CustomGestures.SiosGesture.name: 
+        //   name = "시옷"; 
+        //   break;
+        // case CustomGestures.IeungGesture.name: 
+        //   name = "이응"; 
+        //   break;
+        // case CustomGestures.JieujGesture.name: 
+        //   name = "지읒"; 
+        //   break;
+        // case CustomGestures.ChieuchGesture.name: 
+        //   name = "치읓"; 
+        //   break;
+        // case CustomGestures.KieukGesture.name: 
+        //   name = "키읔"; 
+        //   break;
+        // case CustomGestures.TieutGesture.name: 
+        //   name = "티읕"; 
+        //   break;
+        // case CustomGestures.PieupGesture.name: 
+        //   name = "피읖"; 
+        //   break;
+        // case Gestures.ThumbsUpGesture.name:
+        //   name = "히읗";
+        //   break;
 
         // 모음
         case CustomGestures.AhGesture.name:
