@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <Header />
     <div id="nav">
       <span v-if="isLogin">
         <router-link :to="{ name: 'TodoList' }">Todo List</router-link> |
@@ -9,16 +10,37 @@
       <span v-else>
         <router-link :to="{ name: 'Signup' }">Signup</router-link> |
         <router-link :to="{ name: 'Login' }">Login</router-link> |
-        <router-link :to="{ name: 'Acid_rain' }">Acid_rain</router-link>
+        <router-link :to="{ name: 'Acid_rain' }">Acid_rain</router-link> |
+        <router-link :to="{ name: 'HangMan' }">HangMan</router-link> |
+        <router-link :to="{ name: 'MainPage' }">MainPage</router-link> |
+        <router-link :to="{ name: 'LearnStartPage' }"
+          >LearnStartPage</router-link
+        >
+        |
+        <router-link :to="{ name: 'LearnSelectPage' }"
+          >LeanSelectPage</router-link
+        >
+        |
+        <router-link :to="{ name: 'LearnWordPage' }">LeanWordPage</router-link>
+        |
+        <router-link :to="{ name: 'Learning_cons' }">Learning_cons</router-link> |
+        <router-link :to="{ name: 'Learning_vows' }">Learning_vows</router-link> |
+        <router-link :to="{ name: 'Learning_words' }">Learning_words</router-link> |
+        <router-link :to="{ name: 'HangMan_vue' }">HangMan_vue</router-link> |
       </span>
+      <router-view @login="isLogin = true" />
     </div>
-    <router-view @login="isLogin = true" />
   </div>
 </template>
 
 <script>
+import Header from "./views/MainPage/Header.vue";
+
 export default {
   name: "App",
+  components: {
+    Header,
+  },
   data: function () {
     return {
       isLogin: false,
@@ -40,13 +62,16 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background: url("/@/assets/mainpage.png");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #nav {
