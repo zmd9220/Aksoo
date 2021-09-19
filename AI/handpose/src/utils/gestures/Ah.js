@@ -15,6 +15,7 @@ ah.addDirection(Finger.Index, FingerDirection.DiagonalUpRight, 0.5);
 
 // Remaining fingers
 ah.addCurl(Finger.Thumb, FingerCurl.FullCurl, 1.0);
+ah.addDirection(Finger.Thumb, FingerDirection.HorizontalLeft, 1.0);
 ah.addCurl(Finger.Middle, FingerCurl.FullCurl, 1.0);
 ah.addCurl(Finger.Ring, FingerCurl.FullCurl, 1.0);
 ah.addCurl(Finger.Pinky, FingerCurl.FullCurl, 1.0);

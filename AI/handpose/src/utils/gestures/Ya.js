@@ -8,7 +8,7 @@ import {
 const ya = new GestureDescription("ya");
 
 // Index
-ya.addCurl(Finger.Index, FingerCurl.NoCurl, 1.0);
+ya.addCurl(Finger.Index, FingerCurl.NoCurl, 0.5);
 ya.addDirection(Finger.Index, FingerDirection.VerticalUp, 1.0);
 ya.addDirection(Finger.Index, FingerDirection.DiagonalUpLeft, 0.5);
 ya.addDirection(Finger.Index, FingerDirection.DiagonalUpRight, 0.5);
