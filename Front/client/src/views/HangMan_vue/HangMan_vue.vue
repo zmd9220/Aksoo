@@ -47,6 +47,30 @@
       </template>
     </b-modal>
 
+    <div
+      id="message"
+      class="hidden"
+      style="display: none; background-color: grey; opacity: 85%"
+    >
+      Game Over!
+      <hr />
+
+      <div class="game-result">
+        <p>Score: {{ score }}</p>
+        <p>Your Highest Score:</p>
+        <p>Ranking:</p>
+      </div>
+
+      <button
+        class="btn btn-danger pull-right"
+        id="reset"
+        v-on:click="resetGame"
+      >
+        <span class="glyphicon glyphicon-flash" id="reset"></span>
+        ReStart
+      </button>
+    </div>
+
     <div class="game-container">
       <svg height="250" width="200" class="figure-container">
         <!-- Rod -->
@@ -157,26 +181,18 @@
 
       <p>hart:</p>
       <div>{{ 6 - countError }},</div>
+
+      <p>score:</p>
+      <div>{{ score }}</div>
     </div>
 
-    <div class="topic-difficulty">
+    <div class="topic-difficulty" id="options" style="display: none">
       <!-- <p v-show="`${difficulty}` === '하'"> {{ difficulty }}</p> -->
       <p>Difficulty : {{ difficulty }}, Topic : {{ topic }}</p>
     </div>
-
-    <!-- <div id="message" class="hidden" style="display: none"> -->
-    <div id="message" class="hidden">
-      <button
-        class="btn btn-danger pull-right"
-        id="reset"
-        v-on:click="resetGame"
-      >
-        <span class="glyphicon glyphicon-flash" id="reset"></span>
-        ReStart
-      </button>
-    </div>
   </div>
 </template>
+
 <script>
 export default {
   data() {
@@ -262,6 +278,7 @@ export default {
         "ㅢ",
       ],
       usedLetters: [],
+      score: 0,
     };
   },
   methods: {
@@ -436,6 +453,22 @@ export default {
       this.online = true;
       //Select word
       this.selected = this.words[Math.floor(Math.random() * this.words.length)];
+      this.correct = [];
+      this.wrongs = [];
+      this.score = 0;
+
+      var option = document.getElementById("options");
+      if (option.style.display === "none") {
+        option.style.display = "block";
+      }
+    },
+    toggleText: function () {
+      var text = document.getElementById("message");
+      if (text.style.display === "none") {
+        text.style.display = "block";
+      } else {
+        text.style.display = "none";
+      }
     },
     keyboardClick(letter) {
       if (this.usedLetters.includes(letter)) {
@@ -454,6 +487,8 @@ export default {
       this.countError = 0;
       this.correct = [];
       this.wrongs = [];
+      this.toggleText();
+      this.score = 0;
       // var boxes = document.querySelectorAll("#quiz");
       // for (var i = 0; i < boxes.length; i++) {
       //   boxes[i].remove();
@@ -467,7 +502,9 @@ export default {
     updateWrongs() {
       this.countError++;
       if (this.countError === 6) {
-        alert("You lost :( ");
+        this.toggleText();
+        // alert("You lost :( ");
+        // this.resetGame();
         document.removeEventListener("keydown", this.listener);
       }
     },
@@ -501,8 +538,24 @@ export default {
       // console.log(this.countCorrect);
       console.log(this.countCorrect);
       if (this.countCorrect === this.selected.length) {
-        alert("You won :) ");
-        document.removeEventListener("keydown", this.listener);
+        this.score += 10;
+        // alert("You won :) ");
+        // this.online = true;
+        //Select word
+        this.selected =
+          this.words[Math.floor(Math.random() * this.words.length)];
+        // message.classList.add("hidden"); // add
+        // resetButton.classList.add("disabled");
+
+        this.countError = 0;
+        this.correct = [];
+        this.wrongs = [];
+        // this.aux = 0
+        this.countCorrect = 0;
+        this.answer = [];
+
+        // this.startGame()
+        // document.removeEventListener("keydown", this.listener);
       }
     },
   },
@@ -526,6 +579,19 @@ export default {
   margin: auto;
   height: 300px;
   width: 450px;
+}
+#message {
+  display: block;
+  text-align: center;
+  position: relative;
+  font-size: 50px;
+  top: 40%;
+  z-index: 10;
+  color: rgba(0, 0, 0, 0.6);
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  text-shadow: 2px 2px 3px purple;
 }
 .figure-container {
   fill: transparent;

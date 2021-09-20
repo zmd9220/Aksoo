@@ -359,7 +359,7 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
 #box {
   /* margin: 10px 10%; */
   /* background-position: center; */
