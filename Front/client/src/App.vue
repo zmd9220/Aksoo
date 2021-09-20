@@ -14,16 +14,22 @@
         <router-link :to="{ name: 'MainPage' }">MainPage</router-link> |
         <router-link :to="{ name: 'LearnStartPage' }"
           >LearnStartPage</router-link
-        > |
+        >
+        |
         <router-link :to="{ name: 'LearnSelectPage' }"
           >LeanSelectPage</router-link
-        > |
+        >
+        |
         <router-link :to="{ name: 'LearnWordPage' }">LeanWordPage</router-link>
         |
-        <router-link :to="{ name: 'Learning_cons' }">Learning_cons</router-link> |
-        <router-link :to="{ name: 'Learning_vows' }">Learning_vows</router-link> |
-        <router-link :to="{ name: 'Learning_words' }">Learning_words</router-link> |
-        <router-link :to="{ name: 'HangMan_vue' }">HangMan_vue</router-link> |
+        <router-link :to="{ name: 'Learning_cons' }">Learning_cons</router-link>
+        |
+        <router-link :to="{ name: 'Learning_vows' }">Learning_vows</router-link>
+        |
+        <router-link :to="{ name: 'Learning_words' }"
+          >Learning_words</router-link
+        >
+        | <router-link :to="{ name: 'HangMan_vue' }">HangMan_vue</router-link> |
       </span>
       <router-view @login="isLogin = true" />
     </div>

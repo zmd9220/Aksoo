@@ -64,70 +64,231 @@
         <line x1="20" y1="230" x2="100" y2="230" />
 
         <!-- Head -->
-        <circle cx="140" cy="70" r="20" class="figure-part" v-if="this.countError>0" />
+        <circle
+          cx="140"
+          cy="70"
+          r="20"
+          class="figure-part"
+          v-if="this.countError > 0"
+        />
         <!-- Body -->
-        <line x1="140" y1="90" x2="140" y2="150" class="figure-part" v-if="this.countError>1" />
+        <line
+          x1="140"
+          y1="90"
+          x2="140"
+          y2="150"
+          class="figure-part"
+          v-if="this.countError > 1"
+        />
         <!-- Arms -->
-        <line x1="140" y1="120" x2="120" y2="100" class="figure-part" v-if="this.countError>2" />
-        <line x1="140" y1="120" x2="160" y2="100" class="figure-part" v-if="this.countError>3" />
+        <line
+          x1="140"
+          y1="120"
+          x2="120"
+          y2="100"
+          class="figure-part"
+          v-if="this.countError > 2"
+        />
+        <line
+          x1="140"
+          y1="120"
+          x2="160"
+          y2="100"
+          class="figure-part"
+          v-if="this.countError > 3"
+        />
         <!-- Legs -->
-        <line x1="140" y1="150" x2="120" y2="180" class="figure-part" v-if="this.countError>4" />
-        <line x1="140" y1="150" x2="160" y2="180" class="figure-part" v-if="this.countError>5" />
-      </svg>   
-         
+        <line
+          x1="140"
+          y1="150"
+          x2="120"
+          y2="180"
+          class="figure-part"
+          v-if="this.countError > 4"
+        />
+        <line
+          x1="140"
+          y1="150"
+          x2="160"
+          y2="180"
+          class="figure-part"
+          v-if="this.countError > 5"
+        />
+      </svg>
     </div>
 
     <div class="word-letters-container">
       <div v-for="(letter, index) in selected" :key="index">
-        
         <span class="letter">
           <div v-if="correct.includes(letter)">
-            {{letter}}
+            {{ letter }}
           </div>
         </span>
-
       </div>
     </div>
 
     <div class="wrong-letters-container">
-      <p>Wrongs: </p>
-        <div id="wrong-letters" v-for="(wrong,index) in wrongs" :key="index" >
-            {{wrong}}, 
-        </div>
+      <p>Wrongs:</p>
+      <div id="wrong-letters" v-for="(wrong, index) in wrongs" :key="index">
+        {{ wrong }},
+      </div>
+
+      <p>hart:</p>
+      <div>{{ 5 - countError }},</div>
     </div>
-    
-
-  
-
-</div>    
+  </div>
 </template>
 <script>
 export default {
-    data(){
-        return{
-            wrongs:[],
-            words:['beer','example','github','programming','party'],
-            correct:[],
-            selected:'',
-            online:false,
-            oportunities:6,
-            countError:0,
-            countCorrect:0,
-            enter:'',
-            show: false,
-            variants: ['primary', 'secondary', 'success', 'warning', 'danger', 'info', 'light', 'dark'],
-            headerBgVariant: 'info',
-            headerTextVariant: 'dark',
-            bodyBgVariant: 'light',
-            bodyTextVariant: 'dark',
-            footerBgVariant: 'light',
-            footerTextVariant: 'dark',
-            difficulty: ['하', '중', '상'],
-            topic: ['음식', '동물', '스포츠']
+  data() {
+    return {
+      wrongs: [],
+      words: [
+        "ㅂㅏㄴㅏㄴㅏ",
+        "ㅇㅏㄴㅂㅕㅇㅈㅣㄴ",
+        "ㅇㅠㄱㅅㅡㅇㅈㅜㄴ",
+        "ㅎㅏㅌㅐㄹㅣㄴ",
+      ],
+      correct: [],
+      selected: "",
+      online: false,
+      oportunities: 6,
+      countError: 0,
+      countCorrect: 0,
+      enter: "",
+      answer: [],
+      show: false,
+      variants: ['primary', 'secondary', 'success', 'warning', 'danger', 'info', 'light', 'dark'],
+      headerBgVariant: 'info',
+      headerTextVariant: 'dark',
+      bodyBgVariant: 'light',
+      bodyTextVariant: 'dark',
+      footerBgVariant: 'light',
+      footerTextVariant: 'dark',
+      difficulty: ['하', '중', '상'],
+      topic: ['음식', '동물', '스포츠']
+    };
+  },
+  methods: {
+    listener() {
+      if (!this.online) {
+        this.startGame();
+      }
+
+      var key = String.fromCharCode(event.keyCode).toLowerCase();
+      // var boxes = document.getElementsByClassName(key);
+      console.log(key);
+      var chosung_index = [
+        "ㄱ",
+        "ㄲ",
+        "ㄴ",
+        "ㄷ",
+        "ㄸ",
+        "ㄹ",
+        "ㅁ",
+        "ㅂ",
+        "ㅃ",
+        "ㅅ",
+        "ㅆ",
+        "ㅇ",
+        "ㅈ",
+        "ㅉ",
+        "ㅊ",
+        "ㅋ",
+        "ㅌ",
+        "ㅍ",
+        "ㅎ",
+        "ㅏ",
+        "ㅐ",
+        "ㅑ",
+        "ㅒ",
+        "ㅓ",
+        "ㅔ",
+        "ㅕ",
+        "ㅖ",
+        "ㅗ",
+        "ㅘ",
+        "ㅙ",
+        "ㅚ",
+        "ㅛ",
+        "ㅜ",
+        "ㅝ",
+        "ㅞ",
+        "ㅟ",
+        "ㅠ",
+        "ㅡ",
+        "ㅢ",
+        "ㅣ",
+      ]; //19개 + 21개
+      var eng_keyboard = [
+        "r",
+        "R",
+        "s",
+        "e",
+        "E",
+        "f",
+        "a",
+        "q",
+        "Q",
+        "t",
+        "T",
+        "d",
+        "w",
+        "W",
+        "c",
+        "z",
+        "x",
+        "v",
+        "g",
+        "k",
+        "o",
+        "i",
+        "O",
+        "j",
+        "p",
+        "u",
+        "P",
+        "h",
+        "1",
+        "2",
+        "3",
+        "y",
+        "n",
+        "4",
+        "5",
+        "6",
+        "b",
+        "m",
+        "7",
+        "l",
+      ];
+      var letter;
+
+      for (var i = 0; i < chosung_index.length; i++) {
+        // console.log(decodeURI(chosung_index[i]));
+        if (key == eng_keyboard[i]) {
+          letter = chosung_index[i];
         }
+      }
+
+      // const letter = evt.key.toLowerCase().trim();
+
+      // this.enter = letter;
+
+      //Include letter
+      if (this.selected.includes(letter)) {
+        this.correct.push(letter);
+        this.updateCorrect(letter);
+      } else {
+        if (!this.wrongs.includes(letter)) {
+          this.wrongs.push(letter);
+          this.updateWrongs();
+        } else {
+          alert("You have already entered that letter");
+        }
+      }
     },
-    methods:{
-        checkFormValidity() {
+    checkFormValidity() {
           const valid = this.$refs.form.checkValidity()
           this.nameState = valid
           return valid
@@ -154,73 +315,60 @@ export default {
             this.$bvModal.hide('modal-prevent-closing')
           })
         },
-        
-        listener(evt){
-          if(!this.online){          
-            this.startGame()
-          }
-          const letter = evt.key.toLowerCase().trim();
-            
-            this.enter=letter;
-          
-          //Include letter
-          if(this.selected.includes(letter)){
-            this.correct.push(letter)
-            this.updateCorrect(letter);            
-            
-          }
-          else{
-            if(!this.wrongs.includes(letter)){
-              this.wrongs.push(letter)
-              this.updateWrongs()
-            }
-            else{
-              alert('You have already entered that letter')
-            }
-              
-            
-          }
-            
-            
-        },
-        startGame(){
-          //Initial game
-          this.online=true
-          //Select word          
-          this.selected=this.words[Math.floor(Math.random() * this.words.length)];
-          
-        },
-        updateWrongs(){
-          
-            this.countError++;
-          if(this.countError===6){
-            alert('You lost :( ')
-          }
-        },
-        updateCorrect(letter){
-          let aux=0;
-            //count letter in array
-            for(let i=0; i<this.selected.length; i++){
-                if(this.selected[i]===letter){                  
-                  aux++;
-                }
-            }
-            this.countCorrect+=aux;
-            
-            if(this.countCorrect === this.selected.length){
-              alert('You won :) ')
-            }
-        }
+    startGame() {
+      //Initial game
+      this.online = true;
+      //Select word
+      this.selected = this.words[Math.floor(Math.random() * this.words.length)];
     },
-    created() {
-    document.onkeydown = evt => {
+    updateWrongs() {
+      this.countError++;
+      if (this.countError === 6) {
+        alert("You lost :( ");
+      }
+    },
+    updateCorrect(letter) {
+      let aux = 0;
+
+      //count letter in array
+      for (let i = 0; i < this.selected.length; i++) {
+        if (this.selected[i] === letter) {
+          var flag = false;
+          for (let j = 0; j < this.answer.length; j++) {
+            console.log(this.answer[j]);
+            if (this.answer[j] === letter) {
+              flag = true;
+              break;
+            }
+          }
+          if (flag == false) {
+            // console.log(aux);
+            aux++;
+            // flag = true;
+          }
+        }
+      }
+
+      if (flag == false) {
+        this.answer.push(letter);
+      }
+      // console.log(aux);
+      this.countCorrect += aux;
+      // console.log(this.countCorrect);
+      console.log(this.countCorrect);
+      if (this.countCorrect === this.selected.length) {
+        alert("You won :) ");
+      }
+    },
+  },
+  created() {
+    document.onkeydown = (evt) => {
       evt = evt || window.event;
-      
-        this.listener(evt);
-      
-    }
-  }
-}
+
+      this.listener(evt);
+    };
+  },
+};
 </script>
 
 <style scoped>
@@ -270,7 +418,6 @@ export default {
   display: flex;
   flex-direction: row;
   text-align: right;
-  
 }
 .word-letters-container p {
   margin: 0 0 5px;
