@@ -129,9 +129,12 @@ export default {
         case CustomGestures.YaeGesture.name:
           name = "ㅒ";
           break;
-        // case CustomGestures.oGesture.name:
-        //   name = "오";
-        //   break;
+        case CustomGestures.OGesture.name:
+          name = "ㅗ";
+          break;
+        case CustomGestures.YoGesture.name:
+          name = "ㅛ";
+          break;
         case CustomGestures.IGesture.name:
           name = "ㅣ";
           break;
@@ -153,9 +156,9 @@ export default {
         case CustomGestures.EGesture.name:
           name = "ㅔ";
           break;
-        case CustomGestures.YeGesture.name:
-          name = "ㅖ";
-          break;
+        // case CustomGestures.YeGesture.name:
+        //   name = "ㅖ";
+        //   break;
 
         
         default:

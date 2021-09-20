@@ -5,20 +5,20 @@ import {
   GestureDescription,
 } from "fingerpose";
 
-const ah = new GestureDescription("ah");
+const Ah = new GestureDescription("Ah");
 
 // Index
-ah.addCurl(Finger.Index, FingerCurl.NoCurl, 1.0);
-ah.addDirection(Finger.Index, FingerDirection.VerticalUp, 1.0);
-ah.addDirection(Finger.Index, FingerDirection.DiagonalUpLeft, 0.5);
-ah.addDirection(Finger.Index, FingerDirection.DiagonalUpRight, 0.5);
+Ah.addCurl(Finger.Index, FingerCurl.NoCurl, 1.0);
+Ah.addDirection(Finger.Index, FingerDirection.VerticalUp, 1.0);
+Ah.addDirection(Finger.Index, FingerDirection.DiagonalUpLeft, 0.5);
+Ah.addDirection(Finger.Index, FingerDirection.DiagonalUpRight, 0.5);
 
 // Remaining fingers
-ah.addCurl(Finger.Thumb, FingerCurl.FullCurl, 1.0);
-ah.addDirection(Finger.Thumb, FingerDirection.HorizontalLeft, 1.0);
-ah.addCurl(Finger.Middle, FingerCurl.FullCurl, 1.0);
-ah.addCurl(Finger.Ring, FingerCurl.FullCurl, 1.0);
-ah.addCurl(Finger.Pinky, FingerCurl.FullCurl, 1.0);
+Ah.addCurl(Finger.Thumb, FingerCurl.HalfCurl, 1.0);
+Ah.addDirection(Finger.Thumb, FingerDirection.DiagonalUpLeft, 0.7);
+Ah.addCurl(Finger.Middle, FingerCurl.FullCurl, 1.0);
+Ah.addCurl(Finger.Ring, FingerCurl.FullCurl, 1.0);
+Ah.addCurl(Finger.Pinky, FingerCurl.FullCurl, 1.0);
 
 
-export default ah;
+export default Ah;
