@@ -1,7 +1,60 @@
 <template>
 <div>
+
     <h1>Hangman game</h1>
     <p>Find the hidden word - Enter a letter</p>
+  <b-button @click="show=true" variant="primary">게임 시작하기</b-button>
+
+  <b-modal
+    v-model="show"
+    title="주제와 난이도를 선택해주세요"
+    :header-bg-variant="headerBgVariant"
+    :header-text-variant="headerTextVariant"
+    :body-bg-variant="bodyBgVariant"
+    :body-text-variant="bodyTextVariant"
+    :footer-bg-variant="footerBgVariant"
+    :footer-text-variant="footerTextVariant"
+    :difficulty="Difficulty"
+    :topic="Topic"
+  >
+    <b-container fluid>
+
+      <b-row>
+        <b-col cols="3">주제</b-col>
+        <b-col cols="6">
+          <b-form-select
+            v-model="Topic"
+            :options="topic"
+          ></b-form-select>
+        </b-col>
+      </b-row>
+
+      <b-row>
+        <b-col cols="3">난이도</b-col>
+        <b-col>
+          <b-form-select
+            v-model="Difficulty"
+            :options="difficulty"
+          >
+          </b-form-select>
+        </b-col>
+      </b-row>
+    </b-container>
+
+    <template #modal-footer>
+      <div class="w-100">
+        <b-button
+          variant="primary"
+          size="sm"
+          class="float-right"
+          @click="show=false"
+        >
+          GO!
+        </b-button>
+      </div>
+    </template>
+  </b-modal>
+  
     <div class="game-container" >
      <svg height="250" width="200" class="figure-container">
         <!-- Rod -->
@@ -61,9 +114,47 @@ export default {
             countError:0,
             countCorrect:0,
             enter:'',
+            show: false,
+            variants: ['primary', 'secondary', 'success', 'warning', 'danger', 'info', 'light', 'dark'],
+            headerBgVariant: 'info',
+            headerTextVariant: 'dark',
+            bodyBgVariant: 'light',
+            bodyTextVariant: 'dark',
+            footerBgVariant: 'light',
+            footerTextVariant: 'dark',
+            difficulty: ['하', '중', '상'],
+            topic: ['음식', '동물', '스포츠']
         }
     },
     methods:{
+        checkFormValidity() {
+          const valid = this.$refs.form.checkValidity()
+          this.nameState = valid
+          return valid
+        },
+        resetModal() {
+          this.name = ''
+          this.nameState = null
+        },
+        handleOk(bvModalEvt) {
+          // Prevent modal from closing
+          bvModalEvt.preventDefault()
+          // Trigger submit handler
+          this.handleSubmit()
+        },
+        handleSubmit() {
+          // Exit when the form isn't valid
+          if (!this.checkFormValidity()) {
+            return
+          }
+          // Push the name to submitted names
+          this.submittedNames.push(this.name)
+          // Hide the modal manually
+          this.$nextTick(() => {
+            this.$bvModal.hide('modal-prevent-closing')
+          })
+        },
+        
         listener(evt){
           if(!this.online){          
             this.startGame()
@@ -127,7 +218,7 @@ export default {
       
         this.listener(evt);
       
-    };
+    }
   }
 }
 </script>
