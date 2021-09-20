@@ -416,7 +416,7 @@ export default {
           this.updateWrongs();
         } else {
           alert("You have already entered that letter");
-          document.removeEventListener("keydown", this.listener);
+          // document.removeEventListener("keydown", this.listener);
         }
       }
     },
@@ -448,6 +448,7 @@ export default {
       });
     },
     startGame() {
+      // this.resetKeyboard();
       document.addEventListener("keydown", this.listener);
       //Initial game
       this.online = true;
@@ -456,6 +457,7 @@ export default {
       this.correct = [];
       this.wrongs = [];
       this.score = 0;
+      this.usedLetters = [];
 
       var option = document.getElementById("options");
       if (option.style.display === "none") {
@@ -471,12 +473,16 @@ export default {
       }
     },
     keyboardClick(letter) {
+      // console.log(letter);
       if (this.usedLetters.includes(letter)) {
-        console.log(1);
-        return "pressed";
+        // console.log(1);
+        return {
+          pressed: true,
+        };
       }
     },
     resetGame: function () {
+      // document.querySelector("keyword").classList.remove("pressed");
       // this.togglerestart();
       this.online = true;
       //Select word
@@ -489,6 +495,7 @@ export default {
       this.wrongs = [];
       this.toggleText();
       this.score = 0;
+
       // var boxes = document.querySelectorAll("#quiz");
       // for (var i = 0; i < boxes.length; i++) {
       //   boxes[i].remove();
@@ -503,6 +510,7 @@ export default {
       this.countError++;
       if (this.countError === 6) {
         this.toggleText();
+        this.usedLetters = [];
         // alert("You lost :( ");
         // this.resetGame();
         document.removeEventListener("keydown", this.listener);
@@ -553,11 +561,25 @@ export default {
         // this.aux = 0
         this.countCorrect = 0;
         this.answer = [];
+        this.usedLetters = [];
 
         // this.startGame()
         // document.removeEventListener("keydown", this.listener);
       }
     },
+    // resetKeyboard() {
+    //   console.log(1);
+    //   for (let i = 0; i < this.words1.length; i++) {
+    //     console.log(this.words1[i]);
+    //     // if (this.usedLetters.includes(this.words1[i])) {
+    //     console.log(5);
+    //     return {
+    //       pressed: false,
+    //     };
+    //     // }
+    //   }
+    //   console.log(3);
+    // },
   },
   created() {
     // document.onkeydown = (evt) => {
