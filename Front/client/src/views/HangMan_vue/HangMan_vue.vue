@@ -47,27 +47,12 @@
       </template>
     </b-modal>
 
-    <template #modal-footer>
-      <div class="w-100">
-        <b-button
-          variant="primary"
-          size="sm"
-          class="float-right"
-          @click="show=false"
-          v-on:click="startGame"
-        >
-          GO!
-        </b-button>
-      </div>
-    </template>
-  </b-modal>
-
     <div id="message" class="hidden" style="display: none ; background-color: grey ; opacity: 85% ;" >
       Game Over!
       <hr>
       
       <div class="game-result">
-        <p>Score: </p>
+        <p>Score: {{ score }}</p>
         <p>Your Highest Score: </p>
         <p>Ranking: </p>
       </div>
@@ -162,6 +147,10 @@
 
       <p>hart:</p>
       <div>{{ 6 - countError }},</div>
+
+      <p>score:</p>
+      <div>{{ score }}</div>
+      
     </div>
 
     <div class="topic-difficulty" id="options" style="display: none">
@@ -169,19 +158,9 @@
       <p>Difficulty : {{ difficulty }}, Topic : {{ topic }}</p>
     </div>
 
-    <!-- <div id="message" class="hidden" style="display: none"> -->
-    <div id="message" class="hidden">
-      <button
-        class="btn btn-danger pull-right"
-        id="reset"
-        v-on:click="resetGame"
-      >
-        <span class="glyphicon glyphicon-flash" id="reset"></span>
-        ReStart
-      </button>
-    </div>
   </div>
 </template>
+
 <script>
 export default {
   data() {
@@ -220,6 +199,7 @@ export default {
       footerTextVariant: "dark",
       difficulty: ["하", "중", "상"],
       topic: ["음식", "동물", "스포츠"],
+      score: 0,
     };
   },
   methods: {
@@ -375,6 +355,10 @@ export default {
       this.online = true;
       //Select word
       this.selected = this.words[Math.floor(Math.random() * this.words.length)];
+      this.correct = []
+      this.wrongs = []
+      this.score=0
+
       var option = document.getElementById("options");
       if (option.style.display === "none") {
         option.style.display = "block";
@@ -400,6 +384,7 @@ export default {
       this.correct = []
       this.wrongs = []
       this.toggleText();
+      this.score = 0
       // var boxes = document.querySelectorAll("#quiz");
       // for (var i = 0; i < boxes.length; i++) {
       //   boxes[i].remove();
@@ -449,8 +434,23 @@ export default {
       // console.log(this.countCorrect);
       console.log(this.countCorrect);
       if (this.countCorrect === this.selected.length) {
-        alert("You won :) ");
-        document.removeEventListener("keydown", this.listener);
+        this.score += 10;
+        // alert("You won :) ");
+        // this.online = true;
+        //Select word
+        this.selected = this.words[Math.floor(Math.random() * this.words.length)];
+        // message.classList.add("hidden"); // add
+        // resetButton.classList.add("disabled");
+
+        this.countError = 0
+        this.correct = []
+        this.wrongs = []
+        // this.aux = 0
+        this.countCorrect = 0
+        this.answer = []
+
+        // this.startGame()
+        // document.removeEventListener("keydown", this.listener);
       }
     },
   },
