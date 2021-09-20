@@ -48,13 +48,34 @@
           size="sm"
           class="float-right"
           @click="show=false"
+          v-on:click="startGame"
         >
           GO!
         </b-button>
       </div>
     </template>
   </b-modal>
-  
+
+    <div id="message" class="hidden" style="display: none ; background-color: grey ; opacity: 85% ;" >
+      Game Over!
+      <hr>
+      
+      <div class="game-result">
+        <p>Score: </p>
+        <p>Your Highest Score: </p>
+        <p>Ranking: </p>
+      </div>
+      
+      <button
+        class="btn btn-danger pull-right"
+        id="reset"
+        v-on:click="resetGame"
+      >
+        <span class="glyphicon glyphicon-flash" id="reset"></span>
+        ReStart
+      </button>
+    </div>
+
     <div class="game-container" >
      <svg height="250" width="200" class="figure-container">
         <!-- Rod -->
@@ -116,7 +137,7 @@
         />
       </svg>
     </div>
-
+    
     <div class="word-letters-container">
       <div v-for="(letter, index) in selected" :key="index">
         <span class="letter">
@@ -137,22 +158,12 @@
       <div>{{ 5 - countError }},</div>
     </div>
 
-    <div class="topic-difficulty">
+    <div class="topic-difficulty" id="options" style="display: none">
       <!-- <p v-show="`${difficulty}` === '하'"> {{ difficulty }}</p> -->
       <p>Difficulty : {{ difficulty }}, Topic : {{ topic }}</p>
     </div>
 
-    <!-- <div id="message" class="hidden" style="display: none"> -->
-    <div id="message" class="hidden">
-      <button
-        class="btn btn-danger pull-right"
-        id="reset"
-        v-on:click="resetGame"
-      >
-        <span class="glyphicon glyphicon-flash" id="reset"></span>
-        ReStart
-      </button>
-    </div>
+    
 
   </div>
 </template>
@@ -338,6 +349,18 @@ export default {
       this.online = true;
       //Select word
       this.selected = this.words[Math.floor(Math.random() * this.words.length)];
+      var option = document.getElementById("options");
+      if (option.style.display === "none") {
+        option.style.display = "block";
+      } 
+    },
+    toggleText: function () {
+      var text = document.getElementById("message");
+      if (text.style.display === "none") {
+        text.style.display = "block";
+      } else {
+        text.style.display = "none";
+      }
     },
     resetGame: function () {
       // this.togglerestart();
@@ -350,6 +373,7 @@ export default {
       this.countError = 0
       this.correct = []
       this.wrongs = []
+      this.toggleText();
       // var boxes = document.querySelectorAll("#quiz");
       // for (var i = 0; i < boxes.length; i++) {
       //   boxes[i].remove();
@@ -363,7 +387,9 @@ export default {
     updateWrongs() {
       this.countError++;
       if (this.countError === 6) {
-        alert("You lost :( ");
+        this.toggleText();
+        // alert("You lost :( ");
+        // this.resetGame();
       }
     },
     updateCorrect(letter) {
@@ -417,6 +443,19 @@ export default {
   margin: auto;
   height: 350px;
   width: 450px;
+}
+#message {
+  display: block;
+  text-align: center;
+  position: relative;
+  font-size: 50px;
+  top: 40%;
+  z-index: 10;
+  color: rgba(0, 0, 0, 0.6);
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  text-shadow: 2px 2px 3px purple;
 }
 .figure-container {
   fill: transparent;
