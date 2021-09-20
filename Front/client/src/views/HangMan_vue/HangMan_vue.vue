@@ -119,6 +119,36 @@
       </div>
     </div>
 
+    <!-- 키보드 -->
+    <div class="keyboard">
+      <button
+        class="keyword"
+        v-for="letter in words1"
+        v-bind:key="letter"
+        :class="keyboardClick(letter)"
+      >
+        {{ letter }}
+      </button>
+      <br />
+      <button
+        class="keyword"
+        v-for="letter in words2"
+        v-bind:key="letter"
+        :class="keyboardClick(letter)"
+      >
+        {{ letter }}
+      </button>
+      <br />
+      <button
+        class="keyword"
+        v-for="letter in words3"
+        v-bind:key="letter"
+        :class="keyboardClick(letter)"
+      >
+        {{ letter }}
+      </button>
+    </div>
+
     <div class="wrong-letters-container">
       <p>Wrongs:</p>
       <div id="wrong-letters" v-for="(wrong, index) in wrongs" :key="index">
@@ -185,6 +215,53 @@ export default {
       footerTextVariant: "dark",
       difficulty: ["하", "중", "상"],
       topic: ["음식", "동물", "스포츠"],
+      words1: [
+        "ㄱ",
+        "ㄴ",
+        "ㄷ",
+        "ㄹ",
+        "ㅁ",
+        "ㅂ",
+        "ㅏ",
+        "ㅑ",
+        "ㅓ",
+        "ㅕ",
+        "ㅗ",
+        "ㅛ",
+        "ㅜ",
+        "ㅠ",
+      ],
+      words2: [
+        "ㅅ",
+        "ㅇ",
+        "ㅈ",
+        "ㅊ",
+        "ㅋ",
+        "ㅌ",
+        "ㅍ",
+        "ㅣ",
+        "ㅐ",
+        "ㅒ",
+        "ㅔ",
+        "ㅖ",
+        "ㅚ",
+        "ㅟ",
+      ],
+      words3: [
+        "ㅎ",
+        "ㄲ",
+        "ㄸ",
+        "ㅃ",
+        "ㅆ",
+        "ㅉ",
+        "ㅡ",
+        "ㅚ",
+        "ㅙ",
+        "ㅝ",
+        "ㅞ",
+        "ㅢ",
+      ],
+      usedLetters: [],
     };
   },
   methods: {
@@ -195,7 +272,7 @@ export default {
 
       var key = String.fromCharCode(event.keyCode).toLowerCase();
       // var boxes = document.getElementsByClassName(key);
-      console.log(key);
+      // console.log(key);
       var chosung_index = [
         "ㄱ",
         "ㄲ",
@@ -289,6 +366,25 @@ export default {
         }
       }
 
+      // this.usedLetters.includes(letter);
+      this.usedLetters.push(letter);
+
+      // console.log(letter);
+      // document.getElemnetById("ㄱ").color = black;
+      // var keybutton = document.getElemnetById("ㄱ");
+      // keybutton.classList.add("pressed");
+
+      // window.addEventListener("keydonw", (e) => {
+      //   console.log(1);
+      //   var keybutton = document.getElemnetById(e.keybutton);
+      //   if (keybutton) keybutton.classList.add("pressed");
+      // });
+      // let button = document.createElement("button");
+      // if (letter == button.id) {
+      //   console.log("A");
+      //   // button.style.color = black;
+      // }
+
       // const letter = evt.key.toLowerCase().trim();
 
       // this.enter = letter;
@@ -340,6 +436,12 @@ export default {
       this.online = true;
       //Select word
       this.selected = this.words[Math.floor(Math.random() * this.words.length)];
+    },
+    keyboardClick(letter) {
+      if (this.usedLetters.includes(letter)) {
+        console.log(1);
+        return "pressed";
+      }
     },
     resetGame: function () {
       // this.togglerestart();
@@ -422,7 +524,7 @@ export default {
   padding: 20px 30px;
   position: relative;
   margin: auto;
-  height: 350px;
+  height: 300px;
   width: 450px;
 }
 .figure-container {
@@ -480,5 +582,21 @@ export default {
   margin: 0 3px;
   height: 50px;
   width: 20px;
+}
+.keyword {
+  width: 40px;
+  margin: 3px;
+  color: white;
+  background: gray;
+  border-radius: 20%;
+}
+.pressed {
+  width: 40px;
+  margin: 3px;
+  color: white;
+  /* background: gray; */
+  border-radius: 20%;
+  background: red;
+  /* transform: scale(1, 2); */
 }
 </style>
