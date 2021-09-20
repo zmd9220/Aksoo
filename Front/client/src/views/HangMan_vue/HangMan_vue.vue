@@ -136,6 +136,24 @@
       <p>hart:</p>
       <div>{{ 5 - countError }},</div>
     </div>
+
+    <div class="topic-difficulty">
+      <!-- <p v-show="`${difficulty}` === '하'"> {{ difficulty }}</p> -->
+      <p>Difficulty : {{ difficulty }}, Topic : {{ topic }}</p>
+    </div>
+
+    <!-- <div id="message" class="hidden" style="display: none"> -->
+    <div id="message" class="hidden">
+      <button
+        class="btn btn-danger pull-right"
+        id="reset"
+        v-on:click="resetGame"
+      >
+        <span class="glyphicon glyphicon-flash" id="reset"></span>
+        ReStart
+      </button>
+    </div>
+
   </div>
 </template>
 <script>
@@ -320,6 +338,27 @@ export default {
       this.online = true;
       //Select word
       this.selected = this.words[Math.floor(Math.random() * this.words.length)];
+    },
+    resetGame: function () {
+      // this.togglerestart();
+      this.online = true;
+      //Select word
+      this.selected = this.words[Math.floor(Math.random() * this.words.length)];
+      // message.classList.add("hidden"); // add
+      // resetButton.classList.add("disabled");
+
+      this.countError = 0
+      this.correct = []
+      this.wrongs = []
+      // var boxes = document.querySelectorAll("#quiz");
+      // for (var i = 0; i < boxes.length; i++) {
+      //   boxes[i].remove();
+      // }
+      // console.log(1);
+      // this.endGame();
+      // console.log(2);
+      // this.startGame();
+      // console.log(3);
     },
     updateWrongs() {
       this.countError++;
