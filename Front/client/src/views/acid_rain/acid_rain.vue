@@ -44,9 +44,11 @@
           </div>
           <div class="panel-footer">
             <strong>Score: <span id="score">0 </span></strong>
-            <strong>생명 : <span v-for="idx in hart" :key="idx">
-              <img src="./heart.gif" style="width:20px">
-            </span></strong>
+            <strong
+              >생명 :
+              <span v-for="idx in hart" :key="idx">
+                <img src="./heart.gif" style="width: 20px" /> </span
+            ></strong>
           </div>
         </div>
         <hr />
@@ -199,11 +201,11 @@ export default {
       for (var i = 0; i < boxes.length; i++) {
         boxes[i].remove();
       }
-      console.log(1);
+      // console.log(1);
       this.endGame();
-      console.log(2);
+      // console.log(2);
       this.startGame();
-      console.log(3);
+      // console.log(3);
     },
 
     keyboardInput: function () {
@@ -213,7 +215,7 @@ export default {
 
       var key = String.fromCharCode(event.keyCode).toLowerCase();
       // var boxes = document.getElementsByClassName(key);
-      console.log(key);
+      // console.log(key);
       var chosung_index = [
         "ㄱ",
         "ㄲ",
@@ -306,7 +308,7 @@ export default {
           test = chosung_index[i];
         }
       }
-      console.log(test);
+      // console.log(test);
       var boxes = document.getElementsByClassName(test);
 
       if (boxes[0]) {
@@ -319,7 +321,7 @@ export default {
     },
 
     startGame: function () {
-      console.log("start");
+      // console.log("start");
       this.togglestart();
       // this.resetText();
       this.hart = 5;

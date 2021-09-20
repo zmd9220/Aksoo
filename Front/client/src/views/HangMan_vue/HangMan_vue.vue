@@ -1,62 +1,54 @@
 <template>
-<div>
-
+  <div>
     <h1>Hangman game</h1>
     <p>Find the hidden word - Enter a letter</p>
-  <b-button @click="show=true" variant="primary">게임 시작하기</b-button>
+    <b-button @click="show = true" variant="primary">게임 시작하기</b-button>
 
-  <b-modal
-    v-model="show"
-    title="주제와 난이도를 선택해주세요"
-    :header-bg-variant="headerBgVariant"
-    :header-text-variant="headerTextVariant"
-    :body-bg-variant="bodyBgVariant"
-    :body-text-variant="bodyTextVariant"
-    :footer-bg-variant="footerBgVariant"
-    :footer-text-variant="footerTextVariant"
-    :difficulty="Difficulty"
-    :topic="Topic"
-  >
-    <b-container fluid>
+    <b-modal
+      v-model="show"
+      title="주제와 난이도를 선택해주세요"
+      :header-bg-variant="headerBgVariant"
+      :header-text-variant="headerTextVariant"
+      :body-bg-variant="bodyBgVariant"
+      :body-text-variant="bodyTextVariant"
+      :footer-bg-variant="footerBgVariant"
+      :footer-text-variant="footerTextVariant"
+      :difficulty="Difficulty"
+      :topic="Topic"
+    >
+      <b-container fluid>
+        <b-row>
+          <b-col cols="3">주제</b-col>
+          <b-col cols="6">
+            <b-form-select v-model="Topic" :options="topic"></b-form-select>
+          </b-col>
+        </b-row>
 
-      <b-row>
-        <b-col cols="3">주제</b-col>
-        <b-col cols="6">
-          <b-form-select
-            v-model="Topic"
-            :options="topic"
-          ></b-form-select>
-        </b-col>
-      </b-row>
+        <b-row>
+          <b-col cols="3">난이도</b-col>
+          <b-col>
+            <b-form-select v-model="Difficulty" :options="difficulty">
+            </b-form-select>
+          </b-col>
+        </b-row>
+      </b-container>
 
-      <b-row>
-        <b-col cols="3">난이도</b-col>
-        <b-col>
-          <b-form-select
-            v-model="Difficulty"
-            :options="difficulty"
+      <template #modal-footer>
+        <div class="w-100">
+          <b-button
+            variant="primary"
+            size="sm"
+            class="float-right"
+            @click="[(show = false), startGame()]"
           >
-          </b-form-select>
-        </b-col>
-      </b-row>
-    </b-container>
+            GO!
+          </b-button>
+        </div>
+      </template>
+    </b-modal>
 
-    <template #modal-footer>
-      <div class="w-100">
-        <b-button
-          variant="primary"
-          size="sm"
-          class="float-right"
-          @click="show=false"
-        >
-          GO!
-        </b-button>
-      </div>
-    </template>
-  </b-modal>
-  
-    <div class="game-container" >
-     <svg height="250" width="200" class="figure-container">
+    <div class="game-container">
+      <svg height="250" width="200" class="figure-container">
         <!-- Rod -->
         <line x1="60" y1="20" x2="140" y2="20" />
         <line x1="140" y1="20" x2="140" y2="50" />
@@ -134,7 +126,7 @@
       </div>
 
       <p>hart:</p>
-      <div>{{ 5 - countError }},</div>
+      <div>{{ 6 - countError }},</div>
     </div>
 
     <div class="topic-difficulty">
@@ -153,7 +145,6 @@
         ReStart
       </button>
     </div>
-
   </div>
 </template>
 <script>
@@ -176,15 +167,24 @@ export default {
       enter: "",
       answer: [],
       show: false,
-      variants: ['primary', 'secondary', 'success', 'warning', 'danger', 'info', 'light', 'dark'],
-      headerBgVariant: 'info',
-      headerTextVariant: 'dark',
-      bodyBgVariant: 'light',
-      bodyTextVariant: 'dark',
-      footerBgVariant: 'light',
-      footerTextVariant: 'dark',
-      difficulty: ['하', '중', '상'],
-      topic: ['음식', '동물', '스포츠']
+      variants: [
+        "primary",
+        "secondary",
+        "success",
+        "warning",
+        "danger",
+        "info",
+        "light",
+        "dark",
+      ],
+      headerBgVariant: "info",
+      headerTextVariant: "dark",
+      bodyBgVariant: "light",
+      bodyTextVariant: "dark",
+      footerBgVariant: "light",
+      footerTextVariant: "dark",
+      difficulty: ["하", "중", "상"],
+      topic: ["음식", "동물", "스포츠"],
     };
   },
   methods: {
@@ -303,37 +303,39 @@ export default {
           this.updateWrongs();
         } else {
           alert("You have already entered that letter");
+          document.removeEventListener("keydown", this.listener);
         }
       }
     },
     checkFormValidity() {
-          const valid = this.$refs.form.checkValidity()
-          this.nameState = valid
-          return valid
-        },
-        resetModal() {
-          this.name = ''
-          this.nameState = null
-        },
-        handleOk(bvModalEvt) {
-          // Prevent modal from closing
-          bvModalEvt.preventDefault()
-          // Trigger submit handler
-          this.handleSubmit()
-        },
-        handleSubmit() {
-          // Exit when the form isn't valid
-          if (!this.checkFormValidity()) {
-            return
-          }
-          // Push the name to submitted names
-          this.submittedNames.push(this.name)
-          // Hide the modal manually
-          this.$nextTick(() => {
-            this.$bvModal.hide('modal-prevent-closing')
-          })
-        },
+      const valid = this.$refs.form.checkValidity();
+      this.nameState = valid;
+      return valid;
+    },
+    resetModal() {
+      this.name = "";
+      this.nameState = null;
+    },
+    handleOk(bvModalEvt) {
+      // Prevent modal from closing
+      bvModalEvt.preventDefault();
+      // Trigger submit handler
+      this.handleSubmit();
+    },
+    handleSubmit() {
+      // Exit when the form isn't valid
+      if (!this.checkFormValidity()) {
+        return;
+      }
+      // Push the name to submitted names
+      this.submittedNames.push(this.name);
+      // Hide the modal manually
+      this.$nextTick(() => {
+        this.$bvModal.hide("modal-prevent-closing");
+      });
+    },
     startGame() {
+      document.addEventListener("keydown", this.listener);
       //Initial game
       this.online = true;
       //Select word
@@ -347,9 +349,9 @@ export default {
       // message.classList.add("hidden"); // add
       // resetButton.classList.add("disabled");
 
-      this.countError = 0
-      this.correct = []
-      this.wrongs = []
+      this.countError = 0;
+      this.correct = [];
+      this.wrongs = [];
       // var boxes = document.querySelectorAll("#quiz");
       // for (var i = 0; i < boxes.length; i++) {
       //   boxes[i].remove();
@@ -364,6 +366,7 @@ export default {
       this.countError++;
       if (this.countError === 6) {
         alert("You lost :( ");
+        document.removeEventListener("keydown", this.listener);
       }
     },
     updateCorrect(letter) {
@@ -397,15 +400,19 @@ export default {
       console.log(this.countCorrect);
       if (this.countCorrect === this.selected.length) {
         alert("You won :) ");
+        document.removeEventListener("keydown", this.listener);
       }
     },
   },
   created() {
-    document.onkeydown = (evt) => {
-      evt = evt || window.event;
-
-      this.listener(evt);
-    };
+    // document.onkeydown = (evt) => {
+    //   evt = evt || window.event;
+    //   this.listener(evt);
+    // };
+  },
+  destroyed() {
+    console.log(1);
+    document.removeEventListener("keydown", this.listener);
   },
 };
 </script>
