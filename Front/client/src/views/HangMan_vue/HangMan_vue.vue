@@ -141,6 +141,18 @@
           </div>
         </span>
       </div>
+      <button
+        id="nextstage"
+        style="padding: 0; border: none; background: none; display: none"
+        v-on:click="nextWord"
+        v-
+      >
+        <b-icon
+          icon="arrow-right-short"
+          animation="cylon"
+          font-scale="3"
+        ></b-icon>
+      </button>
     </div>
 
     <!-- 키보드 -->
@@ -471,6 +483,12 @@ export default {
       } else {
         text.style.display = "none";
       }
+      // var textwin = document.getElementById("messagewin");
+      // if (textwin.style.display === "none") {
+      //   textwin.style.display = "block";
+      // } else {
+      //   textwin.style.display = "none";
+      // }
     },
     keyboardClick(letter) {
       if (this.wrongs.includes(letter)) {
@@ -577,24 +595,42 @@ export default {
       console.log(this.countCorrect);
       if (this.countCorrect === this.selected.length) {
         this.score += 10;
-        // alert("You won :) ");
+        alert("정답입니다 :) ");
         // this.online = true;
+        var nextstage = document.getElementById("nextstage");
+        if (nextstage.style.display === "none") {
+          nextstage.style.display = "block";
+        }
         //Select word
-        this.selected =
-          this.words[Math.floor(Math.random() * this.words.length)];
-        // message.classList.add("hidden"); // add
-        // resetButton.classList.add("disabled");
+        // this.selected =
+        //   this.words[Math.floor(Math.random() * this.words.length)];
 
-        this.countError = 0;
-        this.correct = [];
-        this.wrongs = [];
-        // this.aux = 0
-        this.countCorrect = 0;
-        this.answer = [];
-        this.usedLetters = [];
+        // this.countError = 0;
+        // this.correct = [];
+        // this.wrongs = [];
+        // this.countCorrect = 0;
+        // this.answer = [];
+        // this.usedLetters = [];
 
         // this.startGame()
         // document.removeEventListener("keydown", this.listener);
+      }
+    },
+    nextWord() {
+      this.selected = this.words[Math.floor(Math.random() * this.words.length)];
+      // message.classList.add("hidden"); // add
+      // resetButton.classList.add("disabled");
+
+      this.countError = 0;
+      this.correct = [];
+      this.wrongs = [];
+      // this.aux = 0
+      this.countCorrect = 0;
+      this.answer = [];
+      this.usedLetters = [];
+      var nextstage = document.getElementById("nextstage");
+      if (nextstage.style.display === "block") {
+        nextstage.style.display = "none";
       }
     },
     // resetKeyboard() {
@@ -633,6 +669,19 @@ export default {
   width: 450px;
 }
 #message {
+  display: block;
+  text-align: center;
+  position: relative;
+  font-size: 50px;
+  top: 40%;
+  z-index: 10;
+  color: rgba(0, 0, 0, 0.6);
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  text-shadow: 2px 2px 3px purple;
+}
+#messagewin {
   display: block;
   text-align: center;
   position: relative;
