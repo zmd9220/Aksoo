@@ -473,13 +473,43 @@ export default {
       }
     },
     keyboardClick(letter) {
-      // console.log(letter);
-      if (this.usedLetters.includes(letter)) {
-        // console.log(1);
+      if (this.wrongs.includes(letter)) {
         return {
-          pressed: true,
+          // answer: true,
+          wrongAnswer: true,
+        };
+      } else if (this.usedLetters.includes(letter)) {
+        return {
+          answer: true,
         };
       }
+
+      // let flag = false;
+      // for (let i = 0; i < this.wrongs.size; i++) {
+      //   if (letter === this.wrongs[i]) {
+      //     flag = true;
+      //     break;
+      //   }
+      // }
+      // if (this.usedLetters.includes(letter) && !flag) {
+      //   return {
+      //     // answer: true,
+      //     wrongAnswer: true,
+      //   };
+      // } else if (this.usedLetters.includes(letter) && flag) {
+      //   return {
+      //     answer: true,
+      //   };
+      // }
+
+      //wrongs
+      // console.log(letter);
+      // if (this.usedLetters.includes(letter)) {
+      //   // console.log(1);
+      //   return {
+      //     pressed: true,
+      //   };
+      // }
     },
     resetGame: function () {
       // document.querySelector("keyword").classList.remove("pressed");
@@ -679,6 +709,24 @@ export default {
   border-radius: 20%;
 }
 .pressed {
+  width: 40px;
+  margin: 3px;
+  color: white;
+  /* background: gray; */
+  border-radius: 20%;
+  background: red;
+  /* transform: scale(1, 2); */
+}
+.answer {
+  width: 40px;
+  margin: 3px;
+  color: white;
+  /* background: gray; */
+  border-radius: 20%;
+  background: blue;
+  /* transform: scale(1, 2); */
+}
+.wrongAnswer {
   width: 40px;
   margin: 3px;
   color: white;
