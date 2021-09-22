@@ -31,4 +31,4 @@ Yeo.addDirection(finger, FingerDirection.HorizontalRight, 1.0);
 // Yeo.setWeight(Finger.Index, 2.0);
 
 export default Yeo;
-          
+              

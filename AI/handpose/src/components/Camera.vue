@@ -59,6 +59,8 @@ export default {
       detection: {
         name: "",
         confidence: 0,
+        hand: 0, // 손등 or 손바닥
+        hand2: 0, // 정면 or 손날
       },
     };
   },
@@ -66,11 +68,14 @@ export default {
   mounted() {
     this.ctx = this.$refs.canvas.getContext("2d");
   },
+  // updated() {
+  //   console.log('1')
+  // },
 
   computed: {
     mostRecent() {
       let name = "";
-
+      // let hand = this.landmarks.hand;
       switch (this.detection.name) {
         // 자음
         // case CustomGestures.GiyeogGesture.name:
@@ -118,10 +123,18 @@ export default {
 
         // 모음
         case CustomGestures.AhGesture.name:
-          name = "ㅏ";
+          if (this.detection.hand === 0){
+            name = "ㅏ";
+          } else {
+            name = "ㅗ";
+          }
           break;
         case CustomGestures.YaGesture.name:
-          name = "ㅑ";
+          if (this.detection.hand === 0){
+            name = "ㅑ";
+          } else {
+            name = "ㅛ";
+          }
           break;
         case CustomGestures.AeGesture.name:
           name = "ㅐ";
@@ -129,8 +142,11 @@ export default {
         case CustomGestures.YaeGesture.name:
           name = "ㅒ";
           break;
-        // case CustomGestures.oGesture.name:
-        //   name = "오";
+        // case CustomGestures.OGesture.name:
+        //   name = "ㅗ";
+        //   break;
+        // case CustomGestures.YoGesture.name:
+        //   name = "ㅛ";
         //   break;
         case CustomGestures.IGesture.name:
           name = "ㅣ";
@@ -145,27 +161,63 @@ export default {
           name = "ㅠ";
           break;
         case CustomGestures.EoGesture.name:
-          name = "ㅓ";
+          // name = "ㅓ";
+          if (this.detection.hand2 === 1){
+            name = "ㅓ";
+          }
           break;
         case CustomGestures.YeoGesture.name:
+          // name = "ㅕ";
+          if (this.detection.hand2 === 1){
           name = "ㅕ";
+          }
           break;
         case CustomGestures.EGesture.name:
+          // name = "ㅔ";
+          if (this.detection.hand2 === 1){
           name = "ㅔ";
+          }
           break;
-        case CustomGestures.YeGesture.name:
-          name = "ㅖ";
-          break;
+        // case CustomGestures.YeGesture.name:
+        //   name = "ㅖ";
+        //   // if (this.detection.hand2 === 1){
+        //   // name = "ㅖ";
+        //   // }
+        //   break;
 
         
         default:
           break;
       }
 
+      // if (this.detection.hand2 === 1){
+      //   switch (this.detection.name) {
+      //     case CustomGestures.EuGesture.name:
+      //       name = "ㅡ";
+      //       break;
+      //     case CustomGestures.EoGesture.name:
+      //       name = "ㅓ";
+      //       break;
+      //     case CustomGestures.YeoGesture.name:
+      //       name = "ㅕ";
+      //       break;
+      //     case CustomGestures.EGesture.name:
+      //       name = "ㅔ";
+      //       break;
+      //     case CustomGestures.YeGesture.name:
+      //       name = "ㅖ";
+      //       break;
+      //     default:
+      //       break;
+      //   }
+      // }
+
       return {
         name,
+        // hand,
         confidence: `${Math.floor((this.detection.confidence ?? 0) * 10)}%`,
       };
+
     },
   },
 
@@ -219,6 +271,25 @@ export default {
         this.ctx.clearRect(0, 0, this.width, this.height);
         drawHandMesh(hand, this.ctx);
 
+        const a = hand[0] // hand landmark를 가져오기 위한 전체 dict
+        if (a !== undefined){
+          const x_diff = Math.abs(a.landmarks[5][0]-a.landmarks[9][0])+ Math.abs(a.landmarks[9][0]-a.landmarks[13][0])+Math.abs(a.landmarks[13][0]-a.landmarks[17][0])
+          const y_diff = Math.abs(a.landmarks[5][1]-a.landmarks[9][1])+ Math.abs(a.landmarks[9][1]-a.landmarks[13][1])+Math.abs(a.landmarks[13][1]-a.landmarks[17][1])
+          // console.log(a.landmarks)
+          if ( a.landmarks[1][0] > a.landmarks[0][0]){
+            // console.log('앞')
+            this.detection.hand = 0
+          } else {
+            // console.log('뒤')
+            this.detection.hand = 1
+          }
+          if (x_diff > y_diff) {
+            this.detection.hand2 = 0
+          } else {
+            this.detection.hand2 = 1
+          }
+        }
+
         // Continue detection loop
         requestAnimationFrame(() => this.detect(model));
       }
@@ -264,8 +335,6 @@ export default {
   width: calc(640px * 0.6);
   height: calc(480px * 0.6);
 
-  /* filter: sepia(100%) hue-rotate(190deg) saturate(500%); */
-  /* filter: brightness(10%); */
 }
 
 .camera__most-recent {

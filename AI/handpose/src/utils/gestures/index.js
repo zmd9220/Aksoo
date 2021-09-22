@@ -13,7 +13,7 @@
 // import PieupGesture from "./Pieup";
 import AhGesture from "./Ah";
 import YaGesture from "./Ya";
-// import oGesture from "./o";
+// import OGesture from "./O";
 import AeGesture from "./Ae";
 import YaeGesture from "./Yae";
 import IGesture from "./I";
@@ -23,7 +23,8 @@ import YuGesture from "./Yu";
 import EoGesture from "./Eo";
 import YeoGesture from "./Yeo";
 import EGesture from "./E";
-import YeGesture from "./Ye";
+// import YeGesture from "./Ye";
+// import YoGesture from "./Yo";
 
 import { Gestures, GestureEstimator } from "fingerpose";
 
@@ -49,7 +50,7 @@ const GE = new GestureEstimator([
   AhGesture,
   YaGesture,
   Gestures.VictoryGesture, // 야
-  // oGesture, // ㅗ
+  // OGesture, // ㅗ
   AeGesture, // ㅐ
   YaeGesture, // ㅒ
   IGesture, // ㅣ
@@ -59,8 +60,8 @@ const GE = new GestureEstimator([
   EoGesture, // ㅓ
   YeoGesture, // ㅕ
   EGesture, // ㅔ
-  YeGesture, // ㅖ
-
+  // YeGesture, // ㅖ
+  // YoGesture, // ㅛ
 ])
 
 
@@ -83,7 +84,7 @@ const CustomGestures = {
   //모음
   AhGesture,
   YaGesture,
-  // oGesture,
+  // OGesture,
   AeGesture,
   YaeGesture, 
   IGesture,
@@ -93,7 +94,8 @@ const CustomGestures = {
   EoGesture,
   YeoGesture,
   EGesture,
-  YeGesture,
+  // YeGesture,
+  // YoGesture,
 };
 
 export { CustomGestures, GE };

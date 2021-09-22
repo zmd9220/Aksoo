@@ -41,6 +41,7 @@ export default {
       minimizeCamera: false,
     };
   },
+  
 };
 </script>
 
