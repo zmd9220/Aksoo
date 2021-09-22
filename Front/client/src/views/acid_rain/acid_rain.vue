@@ -119,9 +119,22 @@
       </div>
     </div>
     <div class="acid_right">
-      <div class="a">a</div>
-      <hr />
-      <div class="b">b</div>
+      <div class="a">닉네임 넣을 칸</div>
+      <!-- <hr /> -->
+      <div class="b">
+        <strong
+          >생명 :
+          <span v-for="idx in hart" :key="idx">
+            <img src="./heart.gif" style="width: 20px" /> </span
+        ></strong>
+        <br />
+        <strong>Score: {{ score }}</strong>
+        <br />
+        <strong>Best Score:</strong>
+      </div>
+      <div class="c">{{ consonant }}</div>
+      <div class="d">정확도</div>
+      <div class="e">카메라</div>
     </div>
   </div>
 </template>
@@ -534,6 +547,8 @@ export default {
 .acid {
   width: 100%;
   height: 100%;
+  overflow: hidden;
+  /* display: flex; */
 }
 .acid_left {
   float: left;
@@ -541,17 +556,69 @@ export default {
   height: 100%;
 }
 .acid_right {
+  /* box-sizing: inherit; */
   float: right;
   width: 30%;
   height: 100%;
+  font-weight: bold;
 }
 .a {
-  height: 300px;
-  margin: auto;
+  width: 80%;
+  height: 7%;
+  box-shadow: 2px 2px gray;
+  border-radius: 30px;
+  border-width: 2px;
+  /* padding: 10% 0; */
+  margin: 2%;
+  text-align: center;
+  background: #fff9e2;
+  /* display: table-cell; */
+  /* vertical-align: middle; */
 }
 .b {
-  margin: auto;
-  height: 200px;
+  width: 80%;
+  height: 18%;
+  box-shadow: 2px 2px gray;
+  border-radius: 30px;
+  border-width: 2px;
+  padding: 5% 0;
+  margin: 2%;
+  text-align: left;
+  background: #fff9e2;
+  /* float: left; */
+}
+.c {
+  width: 80%;
+  height: 7%;
+  box-shadow: 2px 2px gray;
+  border-radius: 30px;
+  border-width: 2px;
+  /* padding: 10% 0; */
+  margin: 2%;
+  text-align: center;
+  background: #fff9e2;
+}
+.d {
+  width: 80%;
+  height: 7%;
+  box-shadow: 2px 2px gray;
+  border-radius: 30px;
+  border-width: 2px;
+  /* padding: 10% 0; */
+  margin: 2%;
+  text-align: center;
+  background: #fff9e2;
+}
+.e {
+  width: 80%;
+  height: 40%;
+  box-shadow: 2px 2px gray;
+  border-radius: 30px;
+  border-width: 2px;
+  /* padding: 10% 0; */
+  margin: 2%;
+  text-align: center;
+  background: #fff9e2;
 }
 .menu {
   float: center;
