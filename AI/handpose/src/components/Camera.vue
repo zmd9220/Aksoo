@@ -1,6 +1,7 @@
 <template>
   <div>
   <button @click="modeChange">모드변경</button>
+  <button @click="handChange">오른손왼손</button>
     <div class="camera card">
       <div class="camera__most-recent" v-show="mostRecent.name.length > 0">
         <p class="cam-subtitle">
@@ -60,7 +61,10 @@ export default {
       devices: [],
 
       minConfidence: 8,
-      mode: 1, // 0:모음, 1:자음
+      mode: 0, // 0:모음, 1:자음
+      use_left_hand: 0, // 0:오른손, 1:왼손
+      last: '*',
+      count: 0,
       detection: {
         name: "",
         confidence: 0,
@@ -81,16 +85,32 @@ export default {
         switch (this.detection.name) {
           case CustomGestures_vowel.AhGesture.name:
             if (this.detection.hand === 0){
-              name = "ㅏ";
+              if (this.use_left_hand === 0){
+                name = "ㅏ";
+              } else {
+                name = "ㅗ";
+              }
             } else {
-              name = "ㅗ";
+              if (this.use_left_hand === 0){
+                name = "ㅗ";
+              } else {
+                name = "ㅏ";
+              }
             }
             break;
           case CustomGestures_vowel.YaGesture.name:
             if (this.detection.hand === 0){
-              name = "ㅑ";
+              if (this.use_left_hand === 0){
+                name = "ㅑ";
+              } else {
+                name = "ㅛ";
+              }
             } else {
-              name = "ㅛ";
+              if (this.use_left_hand === 0){
+                name = "ㅛ";
+              } else {
+                name = "ㅑ";
+              }
             }
             break;
           case CustomGestures_vowel.AeGesture.name:
@@ -270,8 +290,20 @@ export default {
             this.detection.hand2 = 1
           }
         }
-
-
+        if (this.last !== this.mostRecent.name){
+          console.log('단어변화');
+          this.last = this.mostRecent.name;
+          this.count = 0;
+        } else {
+          console.log(this.count);
+          this.count++;
+          if (this.count > 150){
+            console.log('단어입력');
+            console.log(this.last);
+            this.last = '*';
+            this.count = 0;
+          }
+        }
         // Continue detection loop
         requestAnimationFrame(() => this.detect(model));
       }
@@ -304,7 +336,10 @@ export default {
     },
     modeChange() {
       this.mode = 1 - this.mode;
-    }
+    },
+    handChange() {
+      this.use_left_hand = 1 - this.use_left_hand;
+    },
   },
 };
 </script>
