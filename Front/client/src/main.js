@@ -13,6 +13,8 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.config.productionTip = false
 
+export const GestureEventBus = new Vue();
+
 new Vue({
   router,
   render: h => h(App)

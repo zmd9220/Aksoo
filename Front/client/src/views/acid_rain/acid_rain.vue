@@ -1,5 +1,9 @@
 <template>
   <div class="acid">
+    <template v-if="!modelLoaded">
+      <loading message="👋 Loading hand detection model..." />
+    </template>
+
     <b-modal v-model="show" :consonant="Consonant" hide-footer>
       <b-container fluid>
         <div style="width: 45%; float: left">a</div>
@@ -134,14 +138,28 @@
       </div>
       <div class="c">{{ consonant }}</div>
       <div class="d">정확도</div>
-      <div class="e">카메라</div>
+      <div class="e">
+        카메라
+        <camera
+          v-show="modelLoaded && !minimizeCamera"
+          @on-loaded="modelLoaded = true"
+          @on-minimize="minimizeCamera = true"
+          :test="test"
+          @word="testEmit"
+        />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-var placeLetterInterval = 500;
+import Camera from "@/components/Camera.vue";
+import Loading from "@/components/Loading.vue";
+
+var placeLetterInterval = 2000;
 var placeLetterTimer, moveLettersTimer;
+
+var aiLetterTimer;
 // var startButton, resetButton;
 var box,
   score,
@@ -149,12 +167,20 @@ var box,
 
 export default {
   name: "Acid_rain",
+  components: {
+    // Camera,
+    Camera,
+    Loading,
+  },
   data: function () {
     return {
       score: 0,
       hart: "5",
       show: true,
       consonant: "",
+      modelLoaded: false,
+      minimizeCamera: false,
+      test: "",
     };
   },
   mounted() {
@@ -226,7 +252,7 @@ export default {
     moveLetters: function () {
       var boxes = document.querySelectorAll("#box > div");
       for (var i = 0; i < boxes.length; i++) {
-        boxes[i].style.bottom = parseInt(boxes[i].style.bottom) - 50 + "px";
+        boxes[i].style.bottom = parseInt(boxes[i].style.bottom) - 8 + "px";
         if (parseInt(boxes[i].style.bottom) <= -10) {
           boxes[i].remove();
           this.hart = parseInt(this.hart) - 1;
@@ -243,8 +269,11 @@ export default {
       // this.togglerestart();
       clearInterval(moveLettersTimer);
       clearInterval(placeLetterTimer);
-      document.removeEventListener("keydown", this.keyboardInput);
+      clearInterval(aiLetterTimer);
+
+      // document.removeEventListener("keydown", this.keyboardInput);
       // message.classList.remove("hidden");
+
       // resetButton.classList.remove("disabled");
     },
 
@@ -303,109 +332,20 @@ export default {
       this.startGame();
       // console.log(3);
     },
+    testEmit(test) {
+      this.test = test;
+    },
+    aiLetter: function () {
+      // console.log(31);
 
-    keyboardInput: function () {
-      if (event.keyCode === 27) {
-        return this.endGame();
-      }
+      // console.log(Camera.data.detection.name);
+      // var test = Camera.detection.name;
+      // this.test = test;
+      // console.log(test);
+      // console.log(1);
 
-      var key = String.fromCharCode(event.keyCode).toLowerCase();
-      // var boxes = document.getElementsByClassName(key);
-      console.log(key);
-      var chosung_index = [
-        "ㄱ",
-        "ㄲ",
-        "ㄴ",
-        "ㄷ",
-        "ㄸ",
-        "ㄹ",
-        "ㅁ",
-        "ㅂ",
-        "ㅃ",
-        "ㅅ",
-        "ㅆ",
-        "ㅇ",
-        "ㅈ",
-        "ㅉ",
-        "ㅊ",
-        "ㅋ",
-        "ㅌ",
-        "ㅍ",
-        "ㅎ",
-        "ㅏ",
-        "ㅐ",
-        "ㅑ",
-        "ㅒ",
-        "ㅓ",
-        "ㅔ",
-        "ㅕ",
-        "ㅖ",
-        "ㅗ",
-        "ㅘ",
-        "ㅙ",
-        "ㅚ",
-        "ㅛ",
-        "ㅜ",
-        "ㅝ",
-        "ㅞ",
-        "ㅟ",
-        "ㅠ",
-        "ㅡ",
-        "ㅢ",
-        "ㅣ",
-      ]; //19개 + 21개
-      var eng_keyboard = [
-        "r",
-        "R",
-        "s",
-        "e",
-        "E",
-        "f",
-        "a",
-        "q",
-        "Q",
-        "t",
-        "T",
-        "d",
-        "w",
-        "W",
-        "c",
-        "z",
-        "x",
-        "v",
-        "g",
-        "k",
-        "o",
-        "i",
-        "O",
-        "j",
-        "p",
-        "u",
-        "P",
-        "h",
-        "1",
-        "2",
-        "3",
-        "y",
-        "n",
-        "4",
-        "5",
-        "6",
-        "b",
-        "m",
-        "7",
-        "l",
-      ];
-      var test;
-
-      for (var i = 0; i < chosung_index.length; i++) {
-        // console.log(decodeURI(chosung_index[i]));
-        if (key == eng_keyboard[i]) {
-          test = chosung_index[i];
-        }
-      }
-      console.log(test);
-      var boxes = document.getElementsByClassName(test);
+      var boxes = document.getElementsByClassName(this.test);
+      console.log(this.test);
 
       if (boxes[0]) {
         boxes[0].remove();
@@ -426,7 +366,11 @@ export default {
 
       placeLetterTimer = setInterval(this.placeLetter, placeLetterInterval);
       moveLettersTimer = setInterval(this.moveLetters, 100);
-      document.addEventListener("keydown", this.keyboardInput);
+      aiLetterTimer = setInterval(this.aiLetter, 50);
+
+      // document.addEventListener("keydown", this.keyboardInput);
+      // this.keyboardInput();
+
       // startButton.classList.add("disabled");
     },
     // doTest() {
@@ -654,5 +598,8 @@ export default {
   width: 90%;
   height: 90%;
   border-radius: 12px;
+}
+.camera {
+  z-index: 999;
 }
 </style>
