@@ -30,11 +30,14 @@
           >Learning_words</router-link
         >
         | <router-link :to="{ name: 'HangMan_vue' }">HangMan_vue</router-link> |
+        <router-link :to="{ name: 'cardflip' }">cardflip</router-link> |
+        <router-link :to="{ name: 'card' }">card</router-link> |
       </span>
       <router-view @login="isLogin = true" />
     </div>
   </div>
 </template>
+
 
 <script>
 import Header from "./views/MainPage/Header.vue";
@@ -65,7 +68,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 /* html,
 body {
   margin: 0;
@@ -73,7 +76,7 @@ body {
   height: 100%;
 } */
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Avenir, Helvetica, Arial, sans-serif, BinggraeSamanco-Bold;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -81,6 +84,13 @@ body {
   background: url("/@/assets/mainpage.png");
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+@font-face {
+    font-family: 'BinggraeSamanco-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/BinggraeSamanco-Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
 
 #nav {

@@ -47,11 +47,7 @@
       </template>
     </b-modal>
 
-    <div
-      id="message"
-      class="hidden"
-      style="display: none; background-color: grey; opacity: 85%"
-    >
+    <div id="message" class="hidden" style="display: none; background-color: grey; opacity: 90%;">
       Game Over!
       <hr />
 
@@ -69,7 +65,34 @@
         <span class="glyphicon glyphicon-flash" id="reset"></span>
         ReStart
       </button>
+      <button
+        class="btn btn-success pull-right"
+        id="reset"
+      >
+        <span class="glyphicon glyphicon-flash" id="reset"></span>
+        명예의 전당
+      </button>
     </div>
+
+    <!-- <b-modal id="gameovermodal" ref="gameovermodal">
+      Game Over!
+      <hr />
+
+      <div class="game-result">
+        <p>Score: {{ score }}</p>
+        <p>Your Highest Score:</p>
+        <p>Ranking:</p>
+      </div>
+
+      <button
+        class="btn btn-danger pull-right"
+        id="reset"
+        v-on:click="resetGame"
+      >
+        <span class="glyphicon glyphicon-flash" id="reset"></span>
+        ReStart
+      </button>
+    </b-modal> -->
 
     <div class="game-container">
       <svg height="250" width="200" class="figure-container">
@@ -291,6 +314,7 @@ export default {
       ],
       usedLetters: [],
       score: 0,
+      gameover: false,
     };
   },
   methods: {
@@ -532,7 +556,7 @@ export default {
     resetGame: function () {
       // document.querySelector("keyword").classList.remove("pressed");
       // this.togglerestart();
-      this.online = true;
+      // this.online = true;
       //Select word
       this.selected = this.words[Math.floor(Math.random() * this.words.length)];
       // message.classList.add("hidden"); // add
@@ -558,6 +582,12 @@ export default {
       this.countError++;
       if (this.countError === 6) {
         this.toggleText();
+        // this.online = false;
+        // var modal = document.getElementById("gameovermodal");
+        // if (this.gameover === false) {
+        //   this.gameover = true;
+        // }
+        // this.showModal;
         this.usedLetters = [];
         // alert("You lost :( ");
         // this.resetGame();
@@ -596,6 +626,8 @@ export default {
       if (this.countCorrect === this.selected.length) {
         this.score += 10;
         alert("정답입니다 :) ");
+        // setTimeout(function(){ alert("Hello").close }, 3000);
+ 
         // this.online = true;
         var nextstage = document.getElementById("nextstage");
         if (nextstage.style.display === "none") {
@@ -617,22 +649,27 @@ export default {
       }
     },
     nextWord() {
-      this.selected = this.words[Math.floor(Math.random() * this.words.length)];
-      // message.classList.add("hidden"); // add
-      // resetButton.classList.add("disabled");
+        this.selected =
+          this.words[Math.floor(Math.random() * this.words.length)];
+        // message.classList.add("hidden"); // add
+        // resetButton.classList.add("disabled");
 
-      this.countError = 0;
-      this.correct = [];
-      this.wrongs = [];
-      // this.aux = 0
-      this.countCorrect = 0;
-      this.answer = [];
-      this.usedLetters = [];
-      var nextstage = document.getElementById("nextstage");
-      if (nextstage.style.display === "block") {
-        nextstage.style.display = "none";
-      }
+        this.countError = 0;
+        this.correct = [];
+        this.wrongs = [];
+        // this.aux = 0
+        this.countCorrect = 0;
+        this.answer = [];
+        this.usedLetters = [];
+        var nextstage = document.getElementById("nextstage");
+        if (nextstage.style.display === "block") {
+          nextstage.style.display = "none";
+        }
     },
+    showModal() {
+    let element = this.$refs.gameovermodal.$el
+    element.modal('show')
+    }
     // resetKeyboard() {
     //   console.log(1);
     //   for (let i = 0; i < this.words1.length; i++) {
