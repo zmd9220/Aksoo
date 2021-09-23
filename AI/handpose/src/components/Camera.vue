@@ -1,29 +1,32 @@
 <template>
-  <div class="camera card">
-    <div class="camera__most-recent" v-show="mostRecent.name.length > 0">
-      <p class="cam-subtitle">
-        {{ mostRecent.name }}
-      </p>
+  <div>
+  <button @click="modeChange">모드변경</button>
+    <div class="camera card">
+      <div class="camera__most-recent" v-show="mostRecent.name.length > 0">
+        <p class="cam-subtitle">
+          {{ mostRecent.name }}
+        </p>
 
-      <p class="cam-subtitle">
-        {{ mostRecent.confidence }}
-      </p>
+        <p class="cam-subtitle">
+          {{ mostRecent.confidence }}
+        </p>
+      </div>
+
+      <web-cam
+        class="web-cam"
+        ref="webcam"
+        :height="height"
+        :width="width"
+        :device-id="deviceId"
+        @started="loadHandpose"
+        @error="onError"
+        @notsupported="onNotsupported"
+        @cameras="onCameras"
+        @camera-change="onCameraChange"
+      />
+      <canvas ref="canvas" :height="height" :width="width" />
+
     </div>
-
-    <web-cam
-      class="web-cam"
-      ref="webcam"
-      :height="height"
-      :width="width"
-      :device-id="deviceId"
-      @started="loadHandpose"
-      @error="onError"
-      @notsupported="onNotsupported"
-      @cameras="onCameras"
-      @camera-change="onCameraChange"
-    />
-    <canvas ref="canvas" :height="height" :width="width" />
-
   </div>
 </template>
 
@@ -34,8 +37,9 @@ import { GestureEventBus } from "../main";
 
 import "@tensorflow/tfjs-backend-webgl";
 import * as handpose from "@tensorflow-models/handpose";
-// import { Gestures } from "fingerpose";
-import { CustomGestures, GE } from "../utils/gestures";
+import { Gestures } from "fingerpose";
+import { CustomGestures_vowel, GE_vowel } from "../utils/gestures_vowel";
+import { CustomGestures_cons, GE_cons } from "../utils/gestures_cons";
 import { drawHandMesh } from "../utils/handmesh";
 
 export default {
@@ -56,11 +60,12 @@ export default {
       devices: [],
 
       minConfidence: 8,
+      mode: 1, // 0:모음, 1:자음
       detection: {
         name: "",
         confidence: 0,
-        hand: 0, // 손등 or 손바닥
-        hand2: 0, // 정면 or 손날
+        hand: 0, // 0:손등, 1:손바닥
+        hand2: 0, // 0:정면, 1:손날
       },
     };
   },
@@ -68,153 +73,124 @@ export default {
   mounted() {
     this.ctx = this.$refs.canvas.getContext("2d");
   },
-  // updated() {
-  //   console.log('1')
-  // },
 
   computed: {
     mostRecent() {
       let name = "";
-      // let hand = this.landmarks.hand;
-      switch (this.detection.name) {
-        // 자음
-        // case CustomGestures.GiyeogGesture.name:
-        //   name = "기역"
-        //   break;
-        // case CustomGestures.NieunGesture.name:
-        //   name = "니은"; 
-        //   break;
-        // case CustomGestures.DigeudGesture.name:
-        //   name = "디귿"; 
-        //   break;
-        // case CustomGestures.LieulGesture.name:
-        //   name = "리을"; 
-        //   break;
-        // case CustomGestures.MieumGesture.name: 
-        //   name = "미음"; 
-        //   break;
-        // case CustomGestures.BieubGesture.name: 
-        //   name = "비읍"; 
-        //   break;
-        // case CustomGestures.SiosGesture.name: 
-        //   name = "시옷"; 
-        //   break;
-        // case CustomGestures.IeungGesture.name: 
-        //   name = "이응"; 
-        //   break;
-        // case CustomGestures.JieujGesture.name: 
-        //   name = "지읒"; 
-        //   break;
-        // case CustomGestures.ChieuchGesture.name: 
-        //   name = "치읓"; 
-        //   break;
-        // case CustomGestures.KieukGesture.name: 
-        //   name = "키읔"; 
-        //   break;
-        // case CustomGestures.TieutGesture.name: 
-        //   name = "티읕"; 
-        //   break;
-        // case CustomGestures.PieupGesture.name: 
-        //   name = "피읖"; 
-        //   break;
-        // case Gestures.ThumbsUpGesture.name:
-        //   name = "히읗";
-        //   break;
+      if(this.mode === 0){ // 모음
+        switch (this.detection.name) {
+          case CustomGestures_vowel.AhGesture.name:
+            if (this.detection.hand === 0){
+              name = "ㅏ";
+            } else {
+              name = "ㅗ";
+            }
+            break;
+          case CustomGestures_vowel.YaGesture.name:
+            if (this.detection.hand === 0){
+              name = "ㅑ";
+            } else {
+              name = "ㅛ";
+            }
+            break;
+          case CustomGestures_vowel.AeGesture.name:
+            name = "ㅐ";
+            break;
+          case CustomGestures_vowel.YaeGesture.name:
+            name = "ㅒ";
+            break;
+          case CustomGestures_vowel.IGesture.name:
+            name = "ㅣ";
+            break;
+          case CustomGestures_vowel.EuGesture.name:
+            name = "ㅡ";
+            break;
+          case CustomGestures_vowel.UGesture.name:
+            name = "ㅜ";
+            break;
+          case CustomGestures_vowel.YuGesture.name:
+            name = "ㅠ";
+            break;
+          case CustomGestures_vowel.EoGesture.name:
+            // name = "ㅓ";
+            if (this.detection.hand2 === 1){
+              name = "ㅓ";
+            }
+            break;
+          case CustomGestures_vowel.YeoGesture.name:
+            // name = "ㅕ";
+            if (this.detection.hand2 === 1){
+            name = "ㅕ";
+            }
+            break;
+          case CustomGestures_vowel.EGesture.name:
+            // name = "ㅔ";
+            if (this.detection.hand2 === 1){
+            name = "ㅔ";
+            }
+            break;
+          // case CustomGestures_vowel.YeGesture.name:
+          //   name = "ㅖ";
+          //   // if (this.detection.hand2 === 1){
+          //   // name = "ㅖ";
+          //   // }
+          //   break;
+         
+          default:
+            break;
+        }
+      } else { // 자음
+        switch (this.detection.name) {
+          case CustomGestures_cons.GiyeogGesture.name:
+            name = "기역"
+            break;
+          case CustomGestures_cons.NieunGesture.name:
+            name = "니은"; 
+            break;
+          case CustomGestures_cons.DigeudGesture.name:
+            name = "디귿"; 
+            break;
+          case CustomGestures_cons.LieulGesture.name:
+            name = "리을"; 
+            break;
+          case CustomGestures_cons.MieumGesture.name: 
+            name = "미음"; 
+            break;
+          case CustomGestures_cons.BieubGesture.name: 
+            name = "비읍"; 
+            break;
+          case CustomGestures_cons.SiosGesture.name: 
+            name = "시옷"; 
+            break;
+          case CustomGestures_cons.IeungGesture.name: 
+            name = "이응"; 
+            break;
+          case CustomGestures_cons.JieujGesture.name: 
+            name = "지읒"; 
+            break;
+          case CustomGestures_cons.ChieuchGesture.name: 
+            name = "치읓"; 
+            break;
+          case CustomGestures_cons.KieukGesture.name: 
+            name = "키읔"; 
+            break;
+          case CustomGestures_cons.TieutGesture.name: 
+            name = "티읕"; 
+            break;
+          case CustomGestures_cons.PieupGesture.name: 
+            name = "피읖"; 
+            break;
+          case Gestures.ThumbsUpGesture.name:
+            name = "히읗";
+            break;
 
-        // 모음
-        case CustomGestures.AhGesture.name:
-          if (this.detection.hand === 0){
-            name = "ㅏ";
-          } else {
-            name = "ㅗ";
-          }
-          break;
-        case CustomGestures.YaGesture.name:
-          if (this.detection.hand === 0){
-            name = "ㅑ";
-          } else {
-            name = "ㅛ";
-          }
-          break;
-        case CustomGestures.AeGesture.name:
-          name = "ㅐ";
-          break;
-        case CustomGestures.YaeGesture.name:
-          name = "ㅒ";
-          break;
-        // case CustomGestures.OGesture.name:
-        //   name = "ㅗ";
-        //   break;
-        // case CustomGestures.YoGesture.name:
-        //   name = "ㅛ";
-        //   break;
-        case CustomGestures.IGesture.name:
-          name = "ㅣ";
-          break;
-        case CustomGestures.EuGesture.name:
-          name = "ㅡ";
-          break;
-        case CustomGestures.UGesture.name:
-          name = "ㅜ";
-          break;
-        case CustomGestures.YuGesture.name:
-          name = "ㅠ";
-          break;
-        case CustomGestures.EoGesture.name:
-          // name = "ㅓ";
-          if (this.detection.hand2 === 1){
-            name = "ㅓ";
-          }
-          break;
-        case CustomGestures.YeoGesture.name:
-          // name = "ㅕ";
-          if (this.detection.hand2 === 1){
-          name = "ㅕ";
-          }
-          break;
-        case CustomGestures.EGesture.name:
-          // name = "ㅔ";
-          if (this.detection.hand2 === 1){
-          name = "ㅔ";
-          }
-          break;
-        // case CustomGestures.YeGesture.name:
-        //   name = "ㅖ";
-        //   // if (this.detection.hand2 === 1){
-        //   // name = "ㅖ";
-        //   // }
-        //   break;
-
-        
-        default:
-          break;
+          default:
+            break;
+        }
       }
-
-      // if (this.detection.hand2 === 1){
-      //   switch (this.detection.name) {
-      //     case CustomGestures.EuGesture.name:
-      //       name = "ㅡ";
-      //       break;
-      //     case CustomGestures.EoGesture.name:
-      //       name = "ㅓ";
-      //       break;
-      //     case CustomGestures.YeoGesture.name:
-      //       name = "ㅕ";
-      //       break;
-      //     case CustomGestures.EGesture.name:
-      //       name = "ㅔ";
-      //       break;
-      //     case CustomGestures.YeGesture.name:
-      //       name = "ㅖ";
-      //       break;
-      //     default:
-      //       break;
-      //   }
-      // }
 
       return {
         name,
-        // hand,
         confidence: `${Math.floor((this.detection.confidence ?? 0) * 10)}%`,
       };
 
@@ -254,7 +230,12 @@ export default {
         const hand = await model.estimateHands(videoEl);
 
         if (hand.length > 0) {
-          const estimation = GE.estimate(hand[0].landmarks, this.minConfidence);
+          let estimation = ""
+          if (this.mode === 0) {
+            estimation = GE_vowel.estimate(hand[0].landmarks, this.minConfidence);
+          } else {
+            estimation = GE_cons.estimate(hand[0].landmarks, this.minConfidence);
+          }
 
           if (estimation.gestures.length > 0) {
             // Get the gesture with the largest confidence & emit it in an event
@@ -290,6 +271,7 @@ export default {
           }
         }
 
+
         // Continue detection loop
         requestAnimationFrame(() => this.detect(model));
       }
@@ -320,6 +302,9 @@ export default {
       this.deviceId = deviceId;
       this.camera = deviceId;
     },
+    modeChange() {
+      this.mode = 1 - this.mode;
+    }
   },
 };
 </script>
