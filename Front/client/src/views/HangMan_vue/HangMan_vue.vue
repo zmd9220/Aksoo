@@ -164,10 +164,17 @@
           </div>
         </span>
       </div>
-      <button id="nextstage" style="padding: 0; border: none; background: none; display: none;"
+      <button
+        id="nextstage"
+        style="padding: 0; border: none; background: none; display: none"
         v-on:click="nextWord"
-        v->
-        <b-icon icon="arrow-right-short" animation="cylon" font-scale="3" ></b-icon>
+        v-
+      >
+        <b-icon
+          icon="arrow-right-short"
+          animation="cylon"
+          font-scale="3"
+        ></b-icon>
       </button>
     </div>
 
@@ -213,7 +220,7 @@
       <p>score:</p>
       <div>{{ score }}</div>
     </div>
-    
+
     <div class="topic-difficulty" id="options" style="display: none">
       <!-- <p v-show="`${difficulty}` === '하'"> {{ difficulty }}</p> -->
       <p>Difficulty : {{ difficulty }}, Topic : {{ topic }}</p>

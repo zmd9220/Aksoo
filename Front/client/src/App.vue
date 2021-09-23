@@ -66,6 +66,12 @@ export default {
 </script>
 
 <style scoped>
+/* html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+} */
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -79,6 +85,7 @@ export default {
 
 #nav {
   padding: 30px;
+  height: 867px;
 }
 
 #nav a {
