@@ -30,6 +30,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['0.0.0.0', "website",
     'j5b306.p.ssafy.io',
+    '127.0.0.1',
 ]
 
 import os
@@ -44,7 +45,7 @@ INSTALLED_APPS = [
     'learn',
     
     # 3rd party 라이브러리
-    # 'corsheaders',
+    'corsheaders',
     'rest_framework',
 
     # django 기본
@@ -60,7 +61,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     # corsheaders 추가했음
-    # 'corsheaders.middleware.CorsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -127,11 +128,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+CORS_ORIGIN_ALLOW_ALL = True
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ko-kr'
 
 TIME_ZONE = 'UTC'
 
