@@ -2,10 +2,10 @@
   <div>
     <div class="main">
       <div class="title">
-        <h2 style="font-weight: bold">Are you left or right handed?</h2>
+        <h2 style="font-weight: bold">오른손잡이인가요, 왼손잡이인가요?</h2>
       </div>
       <div class="contents">
-        내애애애애애애애애애애애애애애애애애애애애애애애요요요요오요오오요오요옹오오오오오옹요오오오오오오오용
+        지문자 학습에 사용할 손을 골라주세요.
       </div>
       <div class="bt">
         <div>
