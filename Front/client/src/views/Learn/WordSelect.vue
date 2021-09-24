@@ -12,7 +12,7 @@
           <button class="gonext" @click="setlevel('con')">자음</button>
           <button class="gonext" @click="setlevel('vow')">모음</button>
           <button class="gonext" @click="setlevel('word')">단어</button>
-          <button class="gonext">즐겨찾기</button>
+          <button class="gonext" @click="setlevel('bookmark')" >즐겨찾기</button>
           <button class="goback" @click="handSelect()">&lt;- 이전</button>
           <button class="gonext" @click="goNextLevel()">다음 -></button>
         </div>

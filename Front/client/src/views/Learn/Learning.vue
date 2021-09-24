@@ -5,21 +5,19 @@
         <b-icon icon="arrow90deg-left" aria-hidden="true"></b-icon>
       </b-button>
     </div>
-    <ul>
-      <li v-for="word in words[0].word" :key="word">
+    <p class="letters" v-if="select==='word'">
+      <button v-for="(word, index) in words[0].word" :key="word" @click="[no=index%2, setAlphabet(word)]">
         {{ word }}
-      </li>
-    </ul>
-    <p class="letters">
-      
-      <button v-on:click="no=0"> ㅂ</button>
-      <button v-on:click="no=1"> ㅏ</button>
-      <button v-on:click="no=0"> ㄴ</button>
-      <button v-on:click="no=1"> ㅏ</button>
-      <button v-on:click="no=0"> ㄴ</button>
-      <button v-on:click="no=1"> ㅏ</button>
+      </button>
     </p>
+    <p class="letters" v-else>
+      <button v-for="(word, index) in words" :key="word" @click="[no=index%2, setAlphabet(word.mean)]">
+        {{ word.mean }}
+      </button>
+    </p>
+    <b-button>즐겨찾기 추가 {{ selectAlphabet }}</b-button>
     <img v-bind:src="require(`${imgSrclist[no]}`)" width="500rem">
+    <span>카메라 구역</span>
   </div>
 </template>
 
@@ -31,6 +29,7 @@ export default {
       imgSrclist: ['./fingerspelling_kor_cons.jpg', './fingerspelling_kor_vowels_1.jpg'],
       no: 0,
       select: this.$route.params.select,
+      selectAlphabet: String,
       words: Object,
     }
   },
@@ -41,6 +40,22 @@ export default {
     goWordSelect() {
       this.$router.push("/wordSelect").catch(() => {});
     },
+    setAlphabet (alphabet) {
+      this.selectAlphabet = alphabet
+    },
+    setBookmark (alphabet) {
+      axios({
+        method: 'POST',
+        url: "http://127.0.0.1:8000/learn/setBookmark/",
+        data: {
+          alphabet: alphabet,
+        },
+      }).then ((res) => {
+        console.log(res)
+      }).catch ((error => {
+        console.log(error)
+      }))
+    }
   },
   mounted: function () {
     axios({
@@ -50,6 +65,11 @@ export default {
       console.log(res)
       console.log(res.data)
       this.words = res.data
+      if (this.select === 'word') {
+        this.setAlphabet(this.words[0].word[0])
+      } else {
+        this.setAlphabet(this.words.mean[0])
+      }
     }).catch((error) => {
       console.log(error)
     })
