@@ -1,9 +1,8 @@
 <template>
   <div>
-
-    <b-navbar variant="transparent" >
+    <b-navbar variant="transparent" class="navbar-aksoo">
       <b-navbar-nav text-black font-weight="bold">
-        <b-navbar-brand>
+        <b-navbar-brand class="logo">
           <router-link to="/">
             <img src="@/assets/logo-pic.png" alt="logo" class="logo-pic">
             <img src="@/assets/logo-kor.png" alt="logo-kor" class="logo-kor">
@@ -28,7 +27,7 @@
       </b-navbar-nav>
     </b-navbar>
     <!-- <img src="@/assets/layer-2.png"
-     class="Layer-2">
+    class="Layer-2">
     <img src="@/assets/shape-2.png"
     class="Shape-2"> -->
   </div>
@@ -41,21 +40,30 @@ export default {
 </script>
 
 <style scoped>
+.logo {
+  position: absolute;
+  left: 6%;
+  top: 1rem;
+}
+
 .logo-pic {
   height: 40px;
-  margin: 0.63rem 0.25rem 0.125rem 6rem;
+  margin: 0.125rem 0.25rem 0.25rem 0rem;
   object-fit: contain;
 }
 
 .logo-kor {
   height: 37px;
-  margin: 0.63rem 22.188rem 0.25rem 0.25rem;
+  margin: 0.188rem 22.188rem 0.375rem 0.25rem;
   object-fit: contain;
 }
 
 .home {
+  position: absolute;
+  left: 32%;
+  top: 1.688rem; 
   height: 16px;
-  margin: 0.63rem 6.313rem 0.313rem 0;
+  margin: 0.125rem 6.313rem 0.313rem 0;
   object-fit: contain;
   font-family: BinggraeSamanco-Bold;
   font-size: 1.594rem;
@@ -69,8 +77,11 @@ export default {
 }
 
 .learn {
+  position: absolute;
+  left: 41%;
+  top: 1.688rem; 
   height: 23px;
-  margin: 0.63rem 4.938rem 0 2.5rem;
+  margin: 0.125rem 6.313rem 0.313rem 0;
   object-fit: contain;
   font-family: BinggraeSamanco-Bold;
   font-size: 1.594rem;
@@ -84,8 +95,11 @@ export default {
 }
 
 .play {
+  position: absolute;
+  left: 50%;
+  top: 1.688rem; 
   height: 19px;
-  margin: 0.63rem 5rem 0.125rem 2.5rem;
+  margin: 0.125rem 6.313rem 0.313rem 0;
   object-fit: contain;
   font-family: BinggraeSamanco-Bold;
   font-size: 1.594rem;
@@ -99,8 +113,11 @@ export default {
 }
 
 .halloffame {
+  position: absolute;
+  left: 59%;
+  top: 1.688rem; 
   height: 20px;
-  margin: 0.63rem 0 0.063rem 2.5rem;
+  margin: 0.125rem 6.313rem 0.313rem 0;
   object-fit: contain;
   font-family: BinggraeSamanco-Bold;
   font-size: 1.594rem;
@@ -113,15 +130,15 @@ export default {
   color: #000;
 }
 
-.b-navbar {
-  display: flex;
+.navbar-aksoo {
+  /* display: flex; */
   position: relative;
   align-items: center;
   justify-content: center;
-  width: 120rem;
+  width: 100%;
   height: 70px;
-  margin: 0 0 54.188rem;
-  padding: 0.813rem 11.938rem 0.813rem 13.063rem;
+  /* margin: 0 0 54.188rem; */
+  /* padding: 0.813rem 11.938rem 0.813rem 13.063rem; */
   object-fit: contain;
   background-color: #fff;
 }
@@ -140,9 +157,13 @@ export default {
 
 
 .login-btn {
+  position: absolute;
+  left: 80%;
+  top: 1.688rem; 
   height: 43px;
-  margin: 0.8rem 0 0 18rem;
-  padding: 0.563rem 3.438rem 0.938rem 3.375rem;
+  width: 140px;
+  /* margin: 0.8rem 0 0 18rem; */
+  /* padding: 0.563rem 3.438rem 0.938rem 3.375rem; */
   object-fit: contain;
   background-color: #ffe7dd;
   color: #f5785d;
