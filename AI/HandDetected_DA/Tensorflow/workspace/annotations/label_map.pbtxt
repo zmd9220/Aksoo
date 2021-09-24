@@ -1,0 +1,20 @@
+item { 
+	name:'기역'
+	id:1
+}
+item { 
+	name:'니은'
+	id:2
+}
+item { 
+	name:'디귿'
+	id:3
+}
+item { 
+	name:'리을'
+	id:4
+}
+item { 
+	name:'미음'
+	id:5
+}
