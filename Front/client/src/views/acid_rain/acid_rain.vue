@@ -4,9 +4,17 @@
       <loading message="👋 Loading hand detection model..." />
     </template>
 
-    <b-modal v-model="show" :consonant="Consonant" hide-footer>
+    <b-modal
+      v-model="show"
+      :consonant="Consonant"
+      hide-footer
+      hide-header
+      class="modalBox"
+    >
       <b-container fluid>
-        <div style="width: 45%; float: left">a</div>
+        <div style="width: 45%; float: left">
+          <img class="startImg" src="@/assets/acidStart.png" />
+        </div>
         <div style="width: 45%; float: right">
           <div cols="3">자음 모음을 선택해 주세요</div>
           <div cols="3">
@@ -37,8 +45,6 @@
           </b-col>
         </b-row> -->
       </b-container>
-
-      <template #modal-footer> </template>
     </b-modal>
     <div class="acid_left">
       <title>The Game Formerly Known as Typing</title>
@@ -157,7 +163,7 @@
 import Camera from "@/components/Camera.vue";
 import Loading from "@/components/Loading.vue";
 
-var placeLetterInterval = 2000;
+var placeLetterInterval = 1000;
 var placeLetterTimer, moveLettersTimer;
 
 var aiLetterTimer;
@@ -214,9 +220,13 @@ export default {
       } else {
         Con = 12623 + Math.floor(Math.random() * 20);
       }
+      // for (let i = 12593; i < 12644; i++) {
+      //   console.log(i + " : " + consonant[i]);
+      // }
       var consonant = [
         12595, 12597, 12598, 12602, 12603, 12604, 12605, 12606, 12607, 12608,
-        12612,
+        12612, 12594, 12600, 12611, 12614, 12617, 12632, 12633, 12634, 12637,
+        12638, 12639, 12642, 12624, 12626, 12628, 12630,
       ];
       for (var i = 0; i < consonant.length; i++) {
         if (Con == consonant[i]) {
@@ -224,9 +234,26 @@ export default {
         }
       }
       var letter = String.fromCharCode(Con); // ㄾ ㅘ ㅢ
-      // console.log(letter + " " + test);
+      console.log(letter + " " + Con);
 
       /*
+ㅘ 12632
+ㅙ 12633
+ㅚ 12634
+ㅝ 12637
+ㅞ 12638
+ㅟ 12639
+ㅢ 12642
+ㅐ 12624
+ㅒ 12626
+ㅔ 12628
+ㅖ 12630
+
+ㄲ 12594
+ㄸ 12600
+ㅃ 12611
+ㅆ 12614
+ㅉ 12617
 ㄳ 12595
 ㄵ 12597
 ㄶ 12598
@@ -401,6 +428,14 @@ export default {
 
 
 <style>
+.startImg {
+  /* width: 39.813rem;
+  height: 26rem;
+  margin: 0 6rem 0 0; */
+  height: 80%;
+  width: 100%;
+  object-fit: cover;
+}
 #box {
   /* margin: 10px 10%; */
   /* background-position: center; */
@@ -440,12 +475,40 @@ export default {
   transition-timing-function: linear;
   transition-delay: 0;
 }
-
-.modal-dialog {
-  position: absolute;
-  vertical-align: middle;
-  top: 40%;
+.modal-content {
+  /* height: 100% !important; */
+  border: 0px !important;
 }
+.modal-body {
+  background-color: #f4f1eb;
+}
+.modal-dialog {
+  max-width: 1000px !important;
+  /* position: absolute;
+  vertical-align: middle;
+  top: 40%; */
+  width: 75% !important;
+  height: 45%;
+  top: 25%;
+  /* margin: 25% 22%; */
+  padding: 1% 2% 1.3% 1%;
+  /* object-fit: contain; */
+  border-radius: 1.31rem;
+  box-shadow: 0rem 0.5rem 1rem 0.06rem rgba(0, 0, 0, 0.43);
+  border: solid 0.06rem #a4a4a3;
+  background-color: #f4f1eb;
+
+  font-family: SDSamliphopangcheTTFBasic;
+  font-size: 30px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 0.71;
+  letter-spacing: normal;
+  text-align: center;
+  color: #b59e7a;
+}
+
 #message {
   position: absolute;
   vertical-align: middle;
@@ -593,10 +656,25 @@ export default {
   font-size: 30px;
 }
 #modalBtn {
-  margin: 2%;
-  width: 90%;
-  height: 90%;
-  border-radius: 12px;
+  width: 400px;
+  height: 50px;
+  margin: 4% 0 3%;
+  padding: 0.3% 35% 0.3%;
+  /* padding: 1.438rem 10.813rem 1.188rem; */
+  /* object-fit: contain; */
+  border-radius: 2.56rem;
+  box-shadow: 0rem 0.31rem 0.25rem 0rem rgba(0, 0, 0, 0.3);
+  border: solid 0.19rem #957252;
+  background-color: #e5d2bd;
+
+  font-size: 30px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 0.83;
+  letter-spacing: normal;
+  text-align: center;
+  color: #937356;
 }
 .camera {
   z-index: 999;
