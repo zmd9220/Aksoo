@@ -33,7 +33,7 @@ bieub.addDirection(Finger.Pinky, FingerDirection.DiagonalUpRight, 0.5);
 
 
 // Remaining fingers
-bieub.addCurl(Finger.Thumb, FingerCurl.FullCurl, 1.0);
+bieub.addCurl(Finger.Thumb, FingerCurl.HalfCurl, 1.0);
 
 
 export default bieub;

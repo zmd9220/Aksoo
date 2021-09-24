@@ -11,17 +11,12 @@ import ChieuchGesture from "./Chieuch";
 import KieukGesture from "./Kieuk";
 import TieutGesture from "./Tieut";
 import PieupGesture from "./Pieup";
-// import AhGesture from "./Ah";
-// import YaGesture from "./Ya";
-// import oGesture from "./o";
-// import AeGesture from "./Ae";
-// import YaeGesture from "./Yae";
-// import IGesture from "./I";
+
 
 import { Gestures, GestureEstimator } from "fingerpose";
 
 // Initialise the estimator
-const GE = new GestureEstimator([
+const GE_cons = new GestureEstimator([
   // 자음
   Gestures.ThumbsUpGesture, // 히읗
   GiyeogGesture, 
@@ -38,17 +33,9 @@ const GE = new GestureEstimator([
   TieutGesture,
   PieupGesture,
 
-  // 모음
-  // AhGesture,
-  // YaGesture,
-  // Gestures.VictoryGesture, // 야
-  // oGesture, // ㅗ
-  // AeGesture, // ㅐ
-  // YaeGesture, // ㅒ
-  // IGesture, // ㅣ
 ]);
 
-const CustomGestures = {
+const CustomGestures_cons = {
   // 자음
   GiyeogGesture,
   NieunGesture,
@@ -64,14 +51,6 @@ const CustomGestures = {
   TieutGesture,
   PieupGesture,
 
-  //모음
-  // AhGesture,
-  // YaGesture,
-  // oGesture,
-  // AeGesture,
-  // YaeGesture, 
-  // IGesture,
-
 };
 
-export { CustomGestures, GE };
+export { CustomGestures_cons, GE_cons };

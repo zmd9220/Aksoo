@@ -146,6 +146,7 @@
           @on-minimize="minimizeCamera = true"
           :test="test"
           @word="testEmit"
+          :mode="mode"
         />
       </div>
     </div>
@@ -167,6 +168,7 @@ var box,
 
 export default {
   name: "Acid_rain",
+
   components: {
     // Camera,
     Camera,
@@ -181,6 +183,7 @@ export default {
       modelLoaded: false,
       minimizeCamera: false,
       test: "",
+      mode: 0,
     };
   },
   mounted() {
@@ -192,10 +195,14 @@ export default {
   },
   methods: {
     con() {
-      this.consonant = "자음";
+      this.consonant = "자음"; // mode 1
+      // Camera.data.mode = 1;
+      this.mode = 1;
     },
     col() {
-      this.consonant = "모음";
+      this.consonant = "모음"; // mode 0
+      // Camera.data.mode = 0;
+      this.mode = 0;
     },
     placeLetter: function () {
       // 12593 ~ 12643
@@ -345,7 +352,7 @@ export default {
       // console.log(1);
 
       var boxes = document.getElementsByClassName(this.test);
-      console.log(this.test);
+      // console.log(this.test);
 
       if (boxes[0]) {
         boxes[0].remove();
@@ -366,21 +373,13 @@ export default {
 
       placeLetterTimer = setInterval(this.placeLetter, placeLetterInterval);
       moveLettersTimer = setInterval(this.moveLetters, 100);
-      aiLetterTimer = setInterval(this.aiLetter, 50);
+      aiLetterTimer = setInterval(this.aiLetter, 10);
 
       // document.addEventListener("keydown", this.keyboardInput);
       // this.keyboardInput();
 
       // startButton.classList.add("disabled");
     },
-    // doTest() {
-    //   message = document.getElementById("message");
-    //   box = document.getElementById("box");
-    //   score = document.getElementById("score");
-    //   hart = document.getElementById("hart");
-    //   // startButton = document.getElementsById("start");
-    //   // startButton.onclick = this.startGame;
-    // },
 
     // document.addEventListener("DOMContentLoaded", function(event) {
     //     console.log("OH HAI THERE!");

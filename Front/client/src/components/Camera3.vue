@@ -1,0 +1,375 @@
+<template>
+  <div class="camera card">
+    <div class="camera__most-recent" v-show="mostRecent.name.length > 0">
+      <p class="cam-subtitle">
+        {{ mostRecent.name }}
+      </p>
+
+      <p class="cam-subtitle">
+        {{ mostRecent.confidence }}
+      </p>
+    </div>
+
+    <web-cam
+      class="web-cam"
+      ref="webcam"
+      :height="height"
+      :width="width"
+      :device-id="deviceId"
+      @started="loadHandpose"
+      @error="onError"
+      @notsupported="onNotsupported"
+      @cameras="onCameras"
+      @camera-change="onCameraChange"
+    />
+    <canvas ref="canvas" :height="height" :width="width" />
+  </div>
+</template>
+
+<script>
+import { WebCam } from "vue-web-cam";
+
+import { GestureEventBus } from "../main";
+
+import "@tensorflow/tfjs-backend-webgl";
+import * as handpose from "@tensorflow-models/handpose";
+// import { Gestures } from "fingerpose";
+import { CustomGestures, GE } from "../utils/gestures";
+import { drawHandMesh } from "../utils/handmesh";
+
+export default {
+  name: "Camera",
+  components: {
+    WebCam,
+  },
+  data() {
+    return {
+      ctx: null,
+      height: 480,
+      width: 640,
+
+      camera: null,
+      deviceId: null,
+      devices: [],
+      minConfidence: 8,
+      test: "",
+      detection: {
+        name: "",
+        confidence: 0,
+        hand: 0, // 손등 or 손바닥
+        hand2: 0, // 정면 or 손날
+      },
+    };
+  },
+
+  mounted() {
+    this.ctx = this.$refs.canvas.getContext("2d");
+  },
+  // updated() {
+  //   console.log('1')
+  // },
+
+  computed: {
+    mostRecent() {
+      let name = "";
+      // let hand = this.landmarks.hand;
+      switch (this.detection.name) {
+        // 자음
+        // case CustomGestures.GiyeogGesture.name:
+        //   name = "기역"
+        //   break;
+        // case CustomGestures.NieunGesture.name:
+        //   name = "니은";
+        //   break;
+        // case CustomGestures.DigeudGesture.name:
+        //   name = "디귿";
+        //   break;
+        // case CustomGestures.LieulGesture.name:
+        //   name = "리을";
+        //   break;
+        // case CustomGestures.MieumGesture.name:
+        //   name = "미음";
+        //   break;
+        // case CustomGestures.BieubGesture.name:
+        //   name = "비읍";
+        //   break;
+        // case CustomGestures.SiosGesture.name:
+        //   name = "시옷";
+        //   break;
+        // case CustomGestures.IeungGesture.name:
+        //   name = "이응";
+        //   break;
+        // case CustomGestures.JieujGesture.name:
+        //   name = "지읒";
+        //   break;
+        // case CustomGestures.ChieuchGesture.name:
+        //   name = "치읓";
+        //   break;
+        // case CustomGestures.KieukGesture.name:
+        //   name = "키읔";
+        //   break;
+        // case CustomGestures.TieutGesture.name:
+        //   name = "티읕";
+        //   break;
+        // case CustomGestures.PieupGesture.name:
+        //   name = "피읖";
+        //   break;
+        // case Gestures.ThumbsUpGesture.name:
+        //   name = "히읗";
+        //   break;
+
+        // 모음
+        case CustomGestures.AhGesture.name:
+          if (this.detection.hand === 0) {
+            name = "ㅏ";
+          } else {
+            name = "ㅗ";
+          }
+          break;
+        case CustomGestures.YaGesture.name:
+          if (this.detection.hand === 0) {
+            name = "ㅑ";
+          } else {
+            name = "ㅛ";
+          }
+          break;
+        case CustomGestures.AeGesture.name:
+          name = "ㅐ";
+          break;
+        case CustomGestures.YaeGesture.name:
+          name = "ㅒ";
+          break;
+        // case CustomGestures.OGesture.name:
+        //   name = "ㅗ";
+        //   break;
+        // case CustomGestures.YoGesture.name:
+        //   name = "ㅛ";
+        //   break;
+        case CustomGestures.IGesture.name:
+          name = "ㅣ";
+          break;
+        case CustomGestures.EuGesture.name:
+          name = "ㅡ";
+          break;
+        case CustomGestures.UGesture.name:
+          name = "ㅜ";
+          break;
+        case CustomGestures.YuGesture.name:
+          name = "ㅠ";
+          break;
+        case CustomGestures.EoGesture.name:
+          // name = "ㅓ";
+          if (this.detection.hand2 === 1) {
+            name = "ㅓ";
+          }
+          break;
+        case CustomGestures.YeoGesture.name:
+          // name = "ㅕ";
+          if (this.detection.hand2 === 1) {
+            name = "ㅕ";
+          }
+          break;
+        case CustomGestures.EGesture.name:
+          // name = "ㅔ";
+          if (this.detection.hand2 === 1) {
+            name = "ㅔ";
+          }
+          break;
+        // case CustomGestures.YeGesture.name:
+        //   name = "ㅖ";
+        //   // if (this.detection.hand2 === 1){
+        //   // name = "ㅖ";
+        //   // }
+        //   break;
+
+        default:
+          break;
+      }
+
+      // if (this.detection.hand2 === 1){
+      //   switch (this.detection.name) {
+      //     case CustomGestures.EuGesture.name:
+      //       name = "ㅡ";
+      //       break;
+      //     case CustomGestures.EoGesture.name:
+      //       name = "ㅓ";
+      //       break;
+      //     case CustomGestures.YeoGesture.name:
+      //       name = "ㅕ";
+      //       break;
+      //     case CustomGestures.EGesture.name:
+      //       name = "ㅔ";
+      //       break;
+      //     case CustomGestures.YeGesture.name:
+      //       name = "ㅖ";
+      //       break;
+      //     default:
+      //       break;
+      //   }
+      // }
+      // this.testEmit();
+      return {
+        name,
+        // hand,
+        confidence: `${Math.floor((this.detection.confidence ?? 0) * 10)}%`,
+      };
+    },
+  },
+
+  watch: {
+    camera(id) {
+      this.deviceId = id;
+    },
+
+    devices() {
+      // Once we have a list of devices, select the first one
+      const first = this.devices[0];
+
+      if (first) {
+        this.camera = first.deviceId;
+        this.deviceId = first.deviceId;
+      }
+    },
+  },
+
+  methods: {
+    async loadHandpose() {
+      // Load the Handpose model
+      const model = await handpose.load();
+      await this.detect(model);
+
+      this.$emit("on-loaded");
+    },
+
+    async detect(model) {
+      const videoEl = this.$refs.webcam?.$el;
+
+      if (videoEl && videoEl.readyState === 4) {
+        // Make detections from the webcam
+        const hand = await model.estimateHands(videoEl);
+
+        if (hand.length > 0) {
+          const estimation = GE.estimate(hand[0].landmarks, this.minConfidence);
+
+          if (estimation.gestures.length > 0) {
+            // Get the gesture with the largest confidence & emit it in an event
+            const confidences = estimation.gestures.map((g) => g.confidence);
+            const largest = confidences.indexOf(Math.max(...confidences));
+
+            this.detection = estimation.gestures[largest];
+
+            GestureEventBus.$emit("on-detection", estimation.gestures[largest]);
+          }
+        }
+
+        // Draw hand mesh
+        this.ctx.clearRect(0, 0, this.width, this.height);
+        drawHandMesh(hand, this.ctx);
+
+        const a = hand[0]; // hand landmark를 가져오기 위한 전체 dict
+        if (a !== undefined) {
+          const x_diff =
+            Math.abs(a.landmarks[5][0] - a.landmarks[9][0]) +
+            Math.abs(a.landmarks[9][0] - a.landmarks[13][0]) +
+            Math.abs(a.landmarks[13][0] - a.landmarks[17][0]);
+          const y_diff =
+            Math.abs(a.landmarks[5][1] - a.landmarks[9][1]) +
+            Math.abs(a.landmarks[9][1] - a.landmarks[13][1]) +
+            Math.abs(a.landmarks[13][1] - a.landmarks[17][1]);
+          // console.log(a.landmarks)
+          if (a.landmarks[1][0] > a.landmarks[0][0]) {
+            // console.log('앞')
+            this.detection.hand = 0;
+          } else {
+            // console.log('뒤')
+            this.detection.hand = 1;
+          }
+          if (x_diff > y_diff) {
+            this.detection.hand2 = 0;
+          } else {
+            this.detection.hand2 = 1;
+          }
+        }
+        this.$emit("word", this.mostRecent.name);
+        // Continue detection loop
+        requestAnimationFrame(() => this.detect(model));
+      }
+    },
+
+    onError() {
+      this.$emit("on-loaded");
+
+      this.showErrorDialog({
+        message: "Sorry, but we are not able to access your webcam.",
+      });
+    },
+
+    onNotsupported() {
+      this.$emit("on-loaded");
+
+      this.showErrorDialog({
+        message: "Sorry, but your browser does not appear to be supported.",
+        onConfirm: () => this.$router.go(-1),
+      });
+    },
+
+    onCameras(cameras) {
+      this.devices = cameras;
+    },
+
+    onCameraChange(deviceId) {
+      this.deviceId = deviceId;
+      this.camera = deviceId;
+    },
+    // testEmit() {
+    //   this.$emit("word", this.mostRecent.name);
+    // },
+  },
+};
+</script>
+
+<style scoped>
+.camera {
+  transform: scale(-1, 1);
+
+  /* position: fixed; */
+  bottom: 0;
+  right: 0;
+
+  width: calc(640px * 0.6);
+  height: calc(480px * 0.6);
+}
+
+.camera__most-recent {
+  transform: scale(-1, 1);
+
+  position: relative;
+  top: 0;
+  left: 0;
+
+  text-align: left;
+  padding: 0.5rem 0.85rem;
+  z-index: 11;
+
+  display: flex;
+  justify-content: space-between;
+
+  background-color: rgba(255, 255, 255, 0.25);
+}
+p {
+  color: white;
+}
+canvas,
+video {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.web-cam {
+  filter: brightness(25%);
+}
+</style>
