@@ -9,10 +9,10 @@
             <img src="@/assets/logo-kor.png" alt="logo-kor" class="logo-kor">
           </router-link>
         </b-navbar-brand>
-        <b-nav-item href="/"><img src="@/assets/home.png" alt="Home" class="home"></b-nav-item>
-        <b-nav-item href="/Start/"><img src="@/assets/learn.png" alt="learn" class="learn"></b-nav-item>
-        <b-nav-item href="#"><img src="@/assets/play.png" alt="play" class="play"></b-nav-item>
-        <b-nav-item href="#"><img src="@/assets/halloffame.png" alt="halloffame" class="halloffame"></b-nav-item>
+        <b-nav-item href="/"><span class="home">Home</span></b-nav-item>
+        <b-nav-item href="/Start/"><span class="learn">학습하기</span></b-nav-item>
+        <b-nav-item href="/GamePage/"><span class="play">게임하기</span></b-nav-item>
+        <b-nav-item href="#"><span class="halloffame">명예의전당</span></b-nav-item>
 
         <!-- Navbar dropdowns -->
         <div class="login">
@@ -57,7 +57,7 @@ export default {
   height: 16px;
   margin: 0.63rem 6.313rem 0.313rem 0;
   object-fit: contain;
-  font-family: BinggraeSamanco;
+  font-family: BinggraeSamanco-Bold;
   font-size: 1.594rem;
   font-weight: normal;
   font-stretch: normal;
@@ -72,7 +72,7 @@ export default {
   height: 23px;
   margin: 0.63rem 4.938rem 0 2.5rem;
   object-fit: contain;
-  font-family: BinggraeSamanco;
+  font-family: BinggraeSamanco-Bold;
   font-size: 1.594rem;
   font-weight: normal;
   font-stretch: normal;
@@ -87,7 +87,7 @@ export default {
   height: 19px;
   margin: 0.63rem 5rem 0.125rem 2.5rem;
   object-fit: contain;
-  font-family: BinggraeSamanco;
+  font-family: BinggraeSamanco-Bold;
   font-size: 1.594rem;
   font-weight: normal;
   font-stretch: normal;
@@ -102,7 +102,7 @@ export default {
   height: 20px;
   margin: 0.63rem 0 0.063rem 2.5rem;
   object-fit: contain;
-  font-family: BinggraeSamanco;
+  font-family: BinggraeSamanco-Bold;
   font-size: 1.594rem;
   font-weight: normal;
   font-stretch: normal;

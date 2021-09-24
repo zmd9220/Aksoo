@@ -12,6 +12,7 @@
         <router-link :to="{ name: 'Login' }">Login</router-link> |
         <router-link :to="{ name: 'Acid_rain' }">Acid_rain</router-link> |
         <router-link :to="{ name: 'MainPage' }">MainPage</router-link> |
+        <router-link :to="{ name: 'GamePage' }">GamePage</router-link> |
         <router-link :to="{ name: 'LearnStartPage' }"
           >LearnStartPage</router-link
         >
@@ -31,7 +32,6 @@
         >
         | <router-link :to="{ name: 'HangMan_vue' }">HangMan_vue</router-link> |
         <router-link :to="{ name: 'cardflip' }">cardflip</router-link> |
-        <router-link :to="{ name: 'card' }">card</router-link> |
       </span>
       <router-view @login="isLogin = true" />
     </div>
@@ -89,6 +89,27 @@ body {
 @font-face {
     font-family: 'BinggraeSamanco-Bold';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/BinggraeSamanco-Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'BinggraeSamanco';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/BinggraeSamanco.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GowunDodum-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunDodum-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SDSamliphopangche_Basic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Basic.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }

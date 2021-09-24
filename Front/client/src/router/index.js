@@ -7,6 +7,7 @@ import Login from '@/views/accounts/Login'
 import Acid_rain from '@/views/acid_rain/acid_rain'
 import Header from '@/views/MainPage/Header'
 import MainPage from '@/views/MainPage/MainPage'
+import GamePage from '@/views/MainPage/GamePage'
 import LearnStartPage from '@/views/Learn/LearnStart'
 import LearnSelectPage from '@/views/Learn/HandSelect'
 import LearnWordPage from '@/views/Learn/WordSelect'
@@ -24,6 +25,11 @@ const routes = [
     path: '/',
     name: 'MainPage',
     component: MainPage,
+  },
+  {
+    path: '/GamePage/',
+    name: 'GamePage',
+    component: GamePage,
   },
   {
     path: '/todos',
