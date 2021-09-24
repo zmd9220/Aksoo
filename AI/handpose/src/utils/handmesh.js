@@ -27,6 +27,15 @@ export const drawHandMesh = (predictions, ctx) => {
       const landmarks = prediction.landmarks;
       const fingers = Object.keys(fingerJoints);
 
+      // if ( landmarks[1][0] > landmarks[0][0]){
+      //   console.log('앞')
+      // }
+      // else {
+      //   console.log('뒤')
+      // }
+      // console.log(landmarks)
+      // console.log(landmarks[0][0])
+
       // Loop through fingers
       for (let i = 0; i < fingers.length; i++) {
         const finger = fingers[i];
