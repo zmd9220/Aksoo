@@ -7,11 +7,13 @@ import Login from '@/views/accounts/Login'
 import Acid_rain from '@/views/acid_rain/acid_rain'
 import Header from '@/views/MainPage/Header'
 import MainPage from '@/views/MainPage/MainPage'
+import GamePage from '@/views/MainPage/GamePage'
 import LearnStartPage from '@/views/Learn/LearnStart'
 import LearnSelectPage from '@/views/Learn/HandSelect'
 import LearnWordPage from '@/views/Learn/WordSelect'
 import Learning from '@/views/Learn/Learning'
 import HangMan_vue from '@/views/HangMan_vue/HangMan_vue'
+import cardflip from '@/views/Cardflip/cardflip'
 
 Vue.use(VueRouter)
 
@@ -20,6 +22,11 @@ const routes = [
     path: '/',
     name: 'MainPage',
     component: MainPage,
+  },
+  {
+    path: '/GamePage/',
+    name: 'GamePage',
+    component: GamePage,
   },
   {
     path: '/todos',
@@ -76,6 +83,11 @@ const routes = [
     path: '/HangMan_vue/HangMan_vue',
     name: 'HangMan_vue',
     component: HangMan_vue,
+  },
+  {
+    path: '/Cardflip/cardflip',
+    name: 'cardflip',
+    component: cardflip,
   },
 ]
 

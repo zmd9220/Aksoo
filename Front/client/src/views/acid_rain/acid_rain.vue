@@ -1,5 +1,45 @@
 <template>
   <div class="acid">
+    <template v-if="!modelLoaded">
+      <loading message="👋 Loading hand detection model..." />
+    </template>
+
+    <b-modal v-model="show" :consonant="Consonant" hide-footer>
+      <b-container fluid>
+        <div style="width: 45%; float: left">a</div>
+        <div style="width: 45%; float: right">
+          <div cols="3">자음 모음을 선택해 주세요</div>
+          <div cols="3">
+            <b-button id="modalBtn" v-on:click="con">자음</b-button>
+          </div>
+          <div cols="3">
+            <b-button id="modalBtn" v-on:click="col">모음</b-button>
+          </div>
+          <div cols="3">
+            <div class="w-100">
+              <b-button
+                id="modalBtn"
+                variant="primary"
+                size="sm"
+                class="float-right"
+                @click="[(show = false), startGame()]"
+              >
+                GO!
+              </b-button>
+            </div>
+          </div>
+        </div>
+        <!-- <b-row>
+          <b-col cols="3">자-모음</b-col>
+          <b-col cols="6">
+            <b-form-select v-model="Consonant" :options="consonant">
+            </b-form-select>
+          </b-col>
+        </b-row> -->
+      </b-container>
+
+      <template #modal-footer> </template>
+    </b-modal>
     <div class="acid_left">
       <title>The Game Formerly Known as Typing</title>
       <!-- <script src="js/game.js"></script> -->
@@ -11,7 +51,7 @@
         <div class="panel panel-default">
           <div class="panel-body">
             <div id="box">
-              <div id="message" class="hidden" style="display: none">
+              <!-- <div id="message" class="hidden" style="display: none">
                 Game Over!
                 <br />
                 <button
@@ -22,12 +62,12 @@
                   <span class="glyphicon glyphicon-flash" id="reset"></span>
                   ReStart
                 </button>
-              </div>
+              </div> -->
               <!-- <span id="message" class="hidden" style="display: none"
                 >Game Over!</span
               > -->
               <span id="menu" class="menu">
-                <button
+                <!-- <button
                   class="btn btn-success pull-right"
                   id="start"
                   v-on:click="startGame"
@@ -35,7 +75,35 @@
                 >
                   <span class="glyphicon glyphicon-play" id="start"></span>
                   Start
-                </button>
+                </button> -->
+                <!-- <b-button id="start" @click="show = true" variant="primary"
+                  >게임 시작하기</b-button
+                > -->
+
+                <div
+                  id="message"
+                  class="hidden"
+                  style="display: none; background-color: grey; opacity: 85%"
+                >
+                  Game Over!
+                  <hr />
+
+                  <div class="game-result">
+                    <p>Score: {{ score }}</p>
+                    <p>Your Highest Score:</p>
+                    <p>Ranking:</p>
+                  </div>
+
+                  <button
+                    class="btn btn-danger pull-right"
+                    id="reset"
+                    v-on:click="resetGame"
+                  >
+                    <span class="glyphicon glyphicon-flash" id="reset"></span>
+                    ReStart
+                  </button>
+                </div>
+
                 <!-- disabled -->
               </span>
 
@@ -43,26 +111,56 @@
             </div>
           </div>
           <div class="panel-footer">
-            <strong>Score: <span id="score">0 </span></strong>
-            <strong>생명 : <span v-for="idx in hart" :key="idx">
-              <img src="./heart.gif" style="width:20px">
-            </span></strong>
+            <strong>Score: {{ score }}</strong>
+            <strong
+              >생명 :
+              <span v-for="idx in hart" :key="idx">
+                <img src="./heart.gif" style="width: 20px" /> </span
+            ></strong>
           </div>
         </div>
         <hr />
       </div>
     </div>
     <div class="acid_right">
-      <div class="a">a</div>
-      <hr />
-      <div class="b">b</div>
+      <div class="a">닉네임 넣을 칸</div>
+      <!-- <hr /> -->
+      <div class="b">
+        <strong
+          >생명 :
+          <span v-for="idx in hart" :key="idx">
+            <img src="./heart.gif" style="width: 20px" /> </span
+        ></strong>
+        <br />
+        <strong>Score: {{ score }}</strong>
+        <br />
+        <strong>Best Score:</strong>
+      </div>
+      <div class="c">{{ consonant }}</div>
+      <div class="d">정확도</div>
+      <div class="e">
+        카메라
+        <camera
+          v-show="modelLoaded && !minimizeCamera"
+          @on-loaded="modelLoaded = true"
+          @on-minimize="minimizeCamera = true"
+          :test="test"
+          @word="testEmit"
+          :mode="mode"
+        />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-var placeLetterInterval = 500;
+import Camera from "@/components/Camera.vue";
+import Loading from "@/components/Loading.vue";
+
+var placeLetterInterval = 2000;
 var placeLetterTimer, moveLettersTimer;
+
+var aiLetterTimer;
 // var startButton, resetButton;
 var box,
   score,
@@ -70,10 +168,22 @@ var box,
 
 export default {
   name: "Acid_rain",
+
+  components: {
+    // Camera,
+    Camera,
+    Loading,
+  },
   data: function () {
     return {
-      score: "",
+      score: 0,
       hart: "5",
+      show: true,
+      consonant: "",
+      modelLoaded: false,
+      minimizeCamera: false,
+      test: "",
+      mode: 0,
     };
   },
   mounted() {
@@ -84,9 +194,26 @@ export default {
     hart = this.hart;
   },
   methods: {
+    con() {
+      this.consonant = "자음"; // mode 1
+      // Camera.data.mode = 1;
+      this.mode = 1;
+    },
+    col() {
+      this.consonant = "모음"; // mode 0
+      // Camera.data.mode = 0;
+      this.mode = 0;
+    },
     placeLetter: function () {
       // 12593 ~ 12643
-      var Con = 12593 + Math.floor(Math.random() * 50);
+      // var Con = 12593 + Math.floor(Math.random() * 50);
+      var Con;
+      if (this.consonant === "자음") {
+        // console.log(1);
+        Con = 12593 + Math.floor(Math.random() * 29);
+      } else {
+        Con = 12623 + Math.floor(Math.random() * 20);
+      }
       var consonant = [
         12595, 12597, 12598, 12602, 12603, 12604, 12605, 12606, 12607, 12608,
         12612,
@@ -132,7 +259,7 @@ export default {
     moveLetters: function () {
       var boxes = document.querySelectorAll("#box > div");
       for (var i = 0; i < boxes.length; i++) {
-        boxes[i].style.bottom = parseInt(boxes[i].style.bottom) - 10 + "px";
+        boxes[i].style.bottom = parseInt(boxes[i].style.bottom) - 8 + "px";
         if (parseInt(boxes[i].style.bottom) <= -10) {
           boxes[i].remove();
           this.hart = parseInt(this.hart) - 1;
@@ -149,8 +276,11 @@ export default {
       // this.togglerestart();
       clearInterval(moveLettersTimer);
       clearInterval(placeLetterTimer);
-      document.removeEventListener("keydown", this.keyboardInput);
+      clearInterval(aiLetterTimer);
+
+      // document.removeEventListener("keydown", this.keyboardInput);
       // message.classList.remove("hidden");
+
       // resetButton.classList.remove("disabled");
     },
 
@@ -175,8 +305,8 @@ export default {
       text.style.display = "none";
     },
     togglestart: function () {
-      var text = document.getElementById("start");
-      text.style.display = "none";
+      // var text = document.getElementById("start");
+      // text.style.display = "none";
     },
     togglerestart: function () {
       var text = document.getElementById("restart");
@@ -189,133 +319,50 @@ export default {
 
     resetGame: function () {
       // this.togglerestart();
+
       this.resetText();
+
       // message.classList.add("hidden"); // add
       // resetButton.classList.add("disabled");
-      score.innerHTML = 0;
+      // score.innerHTML = 0;
+      this.score = 0;
       this.hart = 5;
-
+      console.log(1);
       var boxes = document.querySelectorAll("#quiz");
       for (var i = 0; i < boxes.length; i++) {
         boxes[i].remove();
       }
-      console.log(1);
-      this.endGame();
       console.log(2);
-      this.startGame();
+      // console.log(1);
+      this.endGame();
       console.log(3);
+      this.startGame();
+      // console.log(3);
     },
+    testEmit(test) {
+      this.test = test;
+    },
+    aiLetter: function () {
+      // console.log(31);
 
-    keyboardInput: function () {
-      if (event.keyCode === 27) {
-        return this.endGame();
-      }
+      // console.log(Camera.data.detection.name);
+      // var test = Camera.detection.name;
+      // this.test = test;
+      // console.log(test);
+      // console.log(1);
 
-      var key = String.fromCharCode(event.keyCode).toLowerCase();
-      // var boxes = document.getElementsByClassName(key);
-      console.log(key);
-      var chosung_index = [
-        "ㄱ",
-        "ㄲ",
-        "ㄴ",
-        "ㄷ",
-        "ㄸ",
-        "ㄹ",
-        "ㅁ",
-        "ㅂ",
-        "ㅃ",
-        "ㅅ",
-        "ㅆ",
-        "ㅇ",
-        "ㅈ",
-        "ㅉ",
-        "ㅊ",
-        "ㅋ",
-        "ㅌ",
-        "ㅍ",
-        "ㅎ",
-        "ㅏ",
-        "ㅐ",
-        "ㅑ",
-        "ㅒ",
-        "ㅓ",
-        "ㅔ",
-        "ㅕ",
-        "ㅖ",
-        "ㅗ",
-        "ㅘ",
-        "ㅙ",
-        "ㅚ",
-        "ㅛ",
-        "ㅜ",
-        "ㅝ",
-        "ㅞ",
-        "ㅟ",
-        "ㅠ",
-        "ㅡ",
-        "ㅢ",
-        "ㅣ",
-      ]; //19개 + 21개
-      var eng_keyboard = [
-        "r",
-        "R",
-        "s",
-        "e",
-        "E",
-        "f",
-        "a",
-        "q",
-        "Q",
-        "t",
-        "T",
-        "d",
-        "w",
-        "W",
-        "c",
-        "z",
-        "x",
-        "v",
-        "g",
-        "k",
-        "o",
-        "i",
-        "O",
-        "j",
-        "p",
-        "u",
-        "P",
-        "h",
-        "1",
-        "2",
-        "3",
-        "y",
-        "n",
-        "4",
-        "5",
-        "6",
-        "b",
-        "m",
-        "7",
-        "l",
-      ];
-      var test;
-
-      for (var i = 0; i < chosung_index.length; i++) {
-        // console.log(decodeURI(chosung_index[i]));
-        if (key == eng_keyboard[i]) {
-          test = chosung_index[i];
-        }
-      }
-      console.log(test);
-      var boxes = document.getElementsByClassName(test);
+      var boxes = document.getElementsByClassName(this.test);
+      // console.log(this.test);
 
       if (boxes[0]) {
         boxes[0].remove();
-        score.innerHTML = parseInt(score.innerHTML) + 1;
+        // score.innerHTML = parseInt(score.innerHTML) + 1;
+        this.score += 1;
         this.decreaseLetterSpeed(score);
-      } else {
-        score.innerHTML = parseInt(score.innerHTML) - 1;
       }
+      // else {
+      //   score.innerHTML = parseInt(score.innerHTML) - 1;
+      // }
     },
 
     startGame: function () {
@@ -326,17 +373,13 @@ export default {
 
       placeLetterTimer = setInterval(this.placeLetter, placeLetterInterval);
       moveLettersTimer = setInterval(this.moveLetters, 100);
-      document.addEventListener("keydown", this.keyboardInput);
+      aiLetterTimer = setInterval(this.aiLetter, 10);
+
+      // document.addEventListener("keydown", this.keyboardInput);
+      // this.keyboardInput();
+
       // startButton.classList.add("disabled");
     },
-    // doTest() {
-    //   message = document.getElementById("message");
-    //   box = document.getElementById("box");
-    //   score = document.getElementById("score");
-    //   hart = document.getElementById("hart");
-    //   // startButton = document.getElementsById("start");
-    //   // startButton.onclick = this.startGame;
-    // },
 
     // document.addEventListener("DOMContentLoaded", function(event) {
     //     console.log("OH HAI THERE!");
@@ -398,11 +441,21 @@ export default {
   transition-delay: 0;
 }
 
+.modal-dialog {
+  position: absolute;
+  vertical-align: middle;
+  top: 40%;
+}
 #message {
+  position: absolute;
+  vertical-align: middle;
+  height: 100%;
+  box-sizing: border-box;
+  font-size: 100px;
   display: block;
   text-align: center;
   position: relative;
-  font-size: 100px;
+  /* font-size: 100px; */
   top: 40%;
   z-index: 10;
   color: rgba(0, 0, 0, 0.6);
@@ -437,6 +490,8 @@ export default {
 .acid {
   width: 100%;
   height: 100%;
+  overflow: hidden;
+  /* display: flex; */
 }
 .acid_left {
   float: left;
@@ -444,17 +499,69 @@ export default {
   height: 100%;
 }
 .acid_right {
+  /* box-sizing: inherit; */
   float: right;
   width: 30%;
   height: 100%;
+  font-weight: bold;
 }
 .a {
-  height: 300px;
-  margin: auto;
+  width: 80%;
+  height: 7%;
+  box-shadow: 2px 2px gray;
+  border-radius: 30px;
+  border-width: 2px;
+  /* padding: 10% 0; */
+  margin: 2%;
+  text-align: center;
+  background: #fff9e2;
+  /* display: table-cell; */
+  /* vertical-align: middle; */
 }
 .b {
-  margin: auto;
-  height: 200px;
+  width: 80%;
+  height: 18%;
+  box-shadow: 2px 2px gray;
+  border-radius: 30px;
+  border-width: 2px;
+  padding: 5% 0;
+  margin: 2%;
+  text-align: left;
+  background: #fff9e2;
+  /* float: left; */
+}
+.c {
+  width: 80%;
+  height: 7%;
+  box-shadow: 2px 2px gray;
+  border-radius: 30px;
+  border-width: 2px;
+  /* padding: 10% 0; */
+  margin: 2%;
+  text-align: center;
+  background: #fff9e2;
+}
+.d {
+  width: 80%;
+  height: 7%;
+  box-shadow: 2px 2px gray;
+  border-radius: 30px;
+  border-width: 2px;
+  /* padding: 10% 0; */
+  margin: 2%;
+  text-align: center;
+  background: #fff9e2;
+}
+.e {
+  width: 80%;
+  height: 40%;
+  box-shadow: 2px 2px gray;
+  border-radius: 30px;
+  border-width: 2px;
+  /* padding: 10% 0; */
+  margin: 2%;
+  text-align: center;
+  background: #fff9e2;
 }
 .menu {
   float: center;
@@ -478,4 +585,20 @@ export default {
   top: 50%;
   z-index: 100;
 } */
+.game-result {
+  height: 200px;
+  margin-top: 5%;
+}
+.game-result > p {
+  font-size: 30px;
+}
+#modalBtn {
+  margin: 2%;
+  width: 90%;
+  height: 90%;
+  border-radius: 12px;
+}
+.camera {
+  z-index: 999;
+}
 </style>
