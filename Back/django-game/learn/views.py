@@ -30,3 +30,6 @@ def get_words(request, select):
         serializer = WordSerializer(response_word, many=True)
     return Response(serializer.data)    
     
+@api_view(['GET', 'POST'])
+def bookmark(request):
+    pass
