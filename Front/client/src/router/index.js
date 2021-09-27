@@ -14,8 +14,9 @@ import LearnWordPage from '@/views/Learn/WordSelect'
 import Learning_cons from '@/views/Learn/Learning_cons'
 import Learning_vows from '@/views/Learn/Learning_vows'
 import Learning_words from '@/views/Learn/Learning_words'
-
-import HangMan_vue from '@/views/HangMan_vue/HangMan_vue'
+import HangManMain from '@/views/HangMan_vue/HangManMain'
+import HangManGame from '@/views/HangMan_vue/HangManGame'
+import HangManPage from '@/views/HangMan_vue/HangManPage'
 import cardflip from '@/views/Cardflip/cardflip'
 
 Vue.use(VueRouter)
@@ -92,9 +93,19 @@ const routes = [
     component: Learning_words,
   },
   {
-    path: '/HangMan_vue/HangMan_vue',
-    name: 'HangMan_vue',
-    component: HangMan_vue,
+    path: '/HangMan_vue/HangManMain',
+    name: 'HangManMain',
+    component: HangManMain,
+  },
+  {
+    path: '/HangMan_vue/HangManGame',
+    name: 'HangManGame',
+    component: HangManGame,
+  },
+  {
+    path: '/HangMan_vue/HangManPage',
+    name: 'HangManPage',
+    component: HangManPage,
   },
   {
     path: '/Cardflip/cardflip',

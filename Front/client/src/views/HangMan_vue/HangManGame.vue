@@ -1,10 +1,9 @@
 <template>
   <div>
-    <h1>Hangman game</h1>
-    <p>Find the hidden word - Enter a letter</p>
-    <b-button @click="show = true" variant="primary">게임 시작하기</b-button>
+    <!-- <b-button @click="show = true" variant="primary">게임 시작하기</b-button> -->
+    
 
-    <b-modal
+    <!-- <b-modal
       v-model="show"
       title="주제와 난이도를 선택해주세요"
       :header-bg-variant="headerBgVariant"
@@ -31,9 +30,9 @@
             </b-form-select>
           </b-col>
         </b-row>
-      </b-container>
+      </b-container> -->
 
-      <template #modal-footer>
+      <!-- <template #modal-footer>
         <div class="w-100">
           <b-button
             variant="primary"
@@ -45,7 +44,7 @@
           </b-button>
         </div>
       </template>
-    </b-modal>
+    </b-modal> -->
 
     <div id="message" class="hidden" style="display: none; background-color: grey; opacity: 90%;">
       Game Over!
@@ -74,53 +73,41 @@
       </button>
     </div>
 
-    <!-- <b-modal id="gameovermodal" ref="gameovermodal">
-      Game Over!
-      <hr />
-
-      <div class="game-result">
-        <p>Score: {{ score }}</p>
-        <p>Your Highest Score:</p>
-        <p>Ranking:</p>
-      </div>
-
-      <button
-        class="btn btn-danger pull-right"
-        id="reset"
-        v-on:click="resetGame"
-      >
-        <span class="glyphicon glyphicon-flash" id="reset"></span>
-        ReStart
-      </button>
-    </b-modal> -->
-
     <div class="game-container">
-      <svg height="250" width="200" class="figure-container">
+      <div class="topic-difficulty" id="options">
+        <div class="topic">
+          {{ this.$route.params.topic }}
+        </div>  
+        <div class="difficulty">
+          {{ this.$route.params.diff }}
+        </div>
+      </div>
+      <!-- <svg height="250" width="200" class="figure-container"> -->
         <!-- Rod -->
-        <line x1="60" y1="20" x2="140" y2="20" />
+        <!-- <line x1="60" y1="20" x2="140" y2="20" />
         <line x1="140" y1="20" x2="140" y2="50" />
         <line x1="60" y1="20" x2="60" y2="230" />
-        <line x1="20" y1="230" x2="100" y2="230" />
+        <line x1="20" y1="230" x2="100" y2="230" /> -->
 
         <!-- Head -->
-        <circle
+        <!-- <circle
           cx="140"
           cy="70"
           r="20"
           class="figure-part"
           v-if="this.countError > 0"
-        />
+        /> -->
         <!-- Body -->
-        <line
+        <!-- <line
           x1="140"
           y1="90"
           x2="140"
           y2="150"
           class="figure-part"
           v-if="this.countError > 1"
-        />
+        /> -->
         <!-- Arms -->
-        <line
+        <!-- <line
           x1="140"
           y1="120"
           x2="120"
@@ -135,9 +122,9 @@
           y2="100"
           class="figure-part"
           v-if="this.countError > 3"
-        />
+        /> -->
         <!-- Legs -->
-        <line
+        <!-- <line
           x1="140"
           y1="150"
           x2="120"
@@ -153,17 +140,26 @@
           class="figure-part"
           v-if="this.countError > 5"
         />
-      </svg>
+      </svg> -->
     </div>
 
-    <div class="word-letters-container">
+    <div class="letter-container">
       <div v-for="(letter, index) in selected" :key="index">
-        <span class="letter">
+        <!-- <div class="letter">
           <div v-if="correct.includes(letter)">
             {{ letter }}
-          </div>
-        </span>
+          </div>  
+        </div> -->
+        <div class="letter" v-if="correct.includes(letter)">
+          {{ letter }}
+        </div>
+        <div class="letter-blank" v-else>
+        </div>
       </div>
+    </div>
+    <br/>
+    <!-- <br/> -->
+    <div class="word-letters-container">
       <button
         id="nextstage"
         style="padding: 0; border: none; background: none; display: none"
@@ -177,67 +173,67 @@
         ></b-icon>
       </button>
     </div>
-
     <!-- 키보드 -->
     <div class="keyboard">
-      <button
-        class="keyword"
-        v-for="letter in words1"
-        v-bind:key="letter"
-        :class="keyboardClick(letter)"
-      >
-        {{ letter }}
-      </button>
+      <div class="keyboard-line">
+        <div
+          class="keyword"
+          v-for="letter in words1"
+          v-bind:key="letter"
+          :class="keyboardClick(letter)"
+        >
+          {{ letter }}
+        </div>
+      </div>
       <br />
-      <button
-        class="keyword"
-        v-for="letter in words2"
-        v-bind:key="letter"
-        :class="keyboardClick(letter)"
-      >
-        {{ letter }}
-      </button>
+      <div class="keyboard-line">
+        <div
+          class="keyword"
+          v-for="letter in words2"
+          v-bind:key="letter"
+          :class="keyboardClick(letter)"
+        >
+          {{ letter }}
+        </div>
+      </div>
       <br />
-      <button
-        class="keyword"
-        v-for="letter in words3"
-        v-bind:key="letter"
-        :class="keyboardClick(letter)"
-      >
-        {{ letter }}
-      </button>
+      <div class="keyboard-line">
+        <div
+          class="keyword"
+          v-for="letter in words3"
+          v-bind:key="letter"
+          :class="keyboardClick(letter)"
+        >
+          {{ letter }}
+        </div>
+      </div>
     </div>
 
     <div class="wrong-letters-container">
-      <p>Wrongs:</p>
-      <div id="wrong-letters" v-for="(wrong, index) in wrongs" :key="index">
-        {{ wrong }},
-      </div>
 
-      <p>hart:</p>
-      <div>{{ 6 - countError }},</div>
+      <!-- <p>hart:</p>
+      <div>{{ 6 - countError }},</div> -->
 
-      <p>score:</p>
-      <div>{{ score }}</div>
+      <!-- <p>score:</p>
+      <div>{{ score }}</div> -->
     </div>
 
-    <div class="topic-difficulty" id="options" style="display: none">
-      <!-- <p v-show="`${difficulty}` === '하'"> {{ difficulty }}</p> -->
-      <p>Difficulty : {{ difficulty }}, Topic : {{ topic }}</p>
-    </div>
+
   </div>
 </template>
 
 <script>
 export default {
+  name: "HangManGame",
   data() {
     return {
       wrongs: [],
       words: [
-        "ㅂㅏㄴㅏㄴㅏ",
-        "ㅇㅏㄴㅂㅕㅇㅈㅣㄴ",
-        "ㅇㅠㄱㅅㅡㅇㅈㅜㄴ",
-        "ㅎㅏㅌㅐㄹㅣㄴ",
+        "ㅇㅏ",
+        "ㅎㅏ",
+        // "ㅇㅏㄴㅂㅕㅇㅈㅣㄴ",
+        // "ㅇㅠㄱㅅㅡㅇㅈㅜㄴ",
+        // "ㅎㅏㅌㅐㄹㅣㄴ",
       ],
       correct: [],
       selected: "",
@@ -264,53 +260,16 @@ export default {
       bodyTextVariant: "dark",
       footerBgVariant: "light",
       footerTextVariant: "dark",
-      difficulty: ["하", "중", "상"],
-      topic: ["음식", "동물", "스포츠"],
+      difficulty: ["EASY", "MIDDLE", "HARD"],
+      topic: ["FOOD", "ANIMAL", "SPORT"],
       words1: [
-        "ㄱ",
-        "ㄴ",
-        "ㄷ",
-        "ㄹ",
-        "ㅁ",
-        "ㅂ",
-        "ㅏ",
-        "ㅑ",
-        "ㅓ",
-        "ㅕ",
-        "ㅗ",
-        "ㅛ",
-        "ㅜ",
-        "ㅠ",
+        "ㄱ", "ㄴ", "ㄷ", "ㄹ", "ㅁ", "ㅂ", "ㅅ", "ㅇ",
       ],
       words2: [
-        "ㅅ",
-        "ㅇ",
-        "ㅈ",
-        "ㅊ",
-        "ㅋ",
-        "ㅌ",
-        "ㅍ",
-        "ㅣ",
-        "ㅐ",
-        "ㅒ",
-        "ㅔ",
-        "ㅖ",
-        "ㅚ",
-        "ㅟ",
+        "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ", "ㅏ", "ㅑ", 
       ],
       words3: [
-        "ㅎ",
-        "ㄲ",
-        "ㄸ",
-        "ㅃ",
-        "ㅆ",
-        "ㅉ",
-        "ㅡ",
-        "ㅚ",
-        "ㅙ",
-        "ㅝ",
-        "ㅞ",
-        "ㅢ",
+        "ㅓ", "ㅕ", "ㅗ", "ㅛ", "ㅜ", "ㅠ", "ㅣ", "ㅡ",
       ],
       usedLetters: [],
       score: 0,
@@ -318,141 +277,22 @@ export default {
     };
   },
   methods: {
-    listener() {
-      if (!this.online) {
-        this.startGame();
-      }
-
-      var key = String.fromCharCode(event.keyCode).toLowerCase();
-      // var boxes = document.getElementsByClassName(key);
-      // console.log(key);
-      var chosung_index = [
-        "ㄱ",
-        "ㄲ",
-        "ㄴ",
-        "ㄷ",
-        "ㄸ",
-        "ㄹ",
-        "ㅁ",
-        "ㅂ",
-        "ㅃ",
-        "ㅅ",
-        "ㅆ",
-        "ㅇ",
-        "ㅈ",
-        "ㅉ",
-        "ㅊ",
-        "ㅋ",
-        "ㅌ",
-        "ㅍ",
-        "ㅎ",
-        "ㅏ",
-        "ㅐ",
-        "ㅑ",
-        "ㅒ",
-        "ㅓ",
-        "ㅔ",
-        "ㅕ",
-        "ㅖ",
-        "ㅗ",
-        "ㅘ",
-        "ㅙ",
-        "ㅚ",
-        "ㅛ",
-        "ㅜ",
-        "ㅝ",
-        "ㅞ",
-        "ㅟ",
-        "ㅠ",
-        "ㅡ",
-        "ㅢ",
-        "ㅣ",
-      ]; //19개 + 21개
-      var eng_keyboard = [
-        "r",
-        "R",
-        "s",
-        "e",
-        "E",
-        "f",
-        "a",
-        "q",
-        "Q",
-        "t",
-        "T",
-        "d",
-        "w",
-        "W",
-        "c",
-        "z",
-        "x",
-        "v",
-        "g",
-        "k",
-        "o",
-        "i",
-        "O",
-        "j",
-        "p",
-        "u",
-        "P",
-        "h",
-        "1",
-        "2",
-        "3",
-        "y",
-        "n",
-        "4",
-        "5",
-        "6",
-        "b",
-        "m",
-        "7",
-        "l",
-      ];
-      var letter;
-
-      for (var i = 0; i < chosung_index.length; i++) {
-        // console.log(decodeURI(chosung_index[i]));
-        if (key == eng_keyboard[i]) {
-          letter = chosung_index[i];
-        }
-      }
-
-      // this.usedLetters.includes(letter);
-      this.usedLetters.push(letter);
-
-      // console.log(letter);
-      // document.getElemnetById("ㄱ").color = black;
-      // var keybutton = document.getElemnetById("ㄱ");
-      // keybutton.classList.add("pressed");
-
-      // window.addEventListener("keydonw", (e) => {
-      //   console.log(1);
-      //   var keybutton = document.getElemnetById(e.keybutton);
-      //   if (keybutton) keybutton.classList.add("pressed");
-      // });
-      // let button = document.createElement("button");
-      // if (letter == button.id) {
-      //   console.log("A");
-      //   // button.style.color = black;
+    listener(letter) {
+      // if (!this.online) {
+      //   this.startGame();
       // }
-
-      // const letter = evt.key.toLowerCase().trim();
-
-      // this.enter = letter;
-
-      //Include letter
-      if (this.selected.includes(letter)) {
-        this.correct.push(letter);
-        this.updateCorrect(letter);
-      } else {
-        if (!this.wrongs.includes(letter)) {
+      // this.usedLetters.includes(letter);
+      if (this.online) {
+          this.usedLetters.push(letter);
+        //Include letter
+        if (this.selected.includes(letter)) {
+          this.correct.push(letter);
+          this.updateCorrect(letter);
+        } else {
+          if (!this.wrongs.includes(letter)) {
           this.wrongs.push(letter);
           this.updateWrongs();
-        } else {
-          alert("You have already entered that letter");
-          // document.removeEventListener("keydown", this.listener);
+          }
         }
       }
     },
@@ -485,7 +325,7 @@ export default {
     },
     startGame() {
       // this.resetKeyboard();
-      document.addEventListener("keydown", this.listener);
+      // document.addEventListener("keydown", this.listener);
       //Initial game
       this.online = true;
       //Select word
@@ -579,7 +419,9 @@ export default {
       // console.log(3);
     },
     updateWrongs() {
+
       this.countError++;
+      this.$emit('lifeLoss')
       if (this.countError === 6) {
         this.toggleText();
         // this.online = false;
@@ -591,7 +433,7 @@ export default {
         this.usedLetters = [];
         // alert("You lost :( ");
         // this.resetGame();
-        document.removeEventListener("keydown", this.listener);
+        // document.removeEventListener("keydown", this.listener);
       }
     },
     updateCorrect(letter) {
@@ -602,7 +444,7 @@ export default {
         if (this.selected[i] === letter) {
           var flag = false;
           for (let j = 0; j < this.answer.length; j++) {
-            console.log(this.answer[j]);
+            // console.log(this.answer[j]);
             if (this.answer[j] === letter) {
               flag = true;
               break;
@@ -622,13 +464,14 @@ export default {
       // console.log(aux);
       this.countCorrect += aux;
       // console.log(this.countCorrect);
-      console.log(this.countCorrect);
+      // console.log(this.countCorrect);
       if (this.countCorrect === this.selected.length) {
         this.score += 10;
+        this.$emit("scoreChange", 10);
         alert("정답입니다 :) ");
         // setTimeout(function(){ alert("Hello").close }, 3000);
  
-        // this.online = true;
+        this.online = false;
         var nextstage = document.getElementById("nextstage");
         if (nextstage.style.display === "none") {
           nextstage.style.display = "block";
@@ -657,6 +500,7 @@ export default {
         this.countError = 0;
         this.correct = [];
         this.wrongs = [];
+        this.online = true;
         // this.aux = 0
         this.countCorrect = 0;
         this.answer = [];
@@ -689,10 +533,11 @@ export default {
     //   evt = evt || window.event;
     //   this.listener(evt);
     // };
+    this.startGame();
   },
   destroyed() {
-    console.log(1);
-    document.removeEventListener("keydown", this.listener);
+    // console.log(1);
+    // document.removeEventListener("keydown", this.listener);
   },
 };
 </script>
@@ -740,6 +585,21 @@ export default {
 .figure-part {
   display: block;
 }
+.topic-difficulty {
+  display: column;
+}
+.topic-difficulty .topic {
+  font-size: 3rem;
+  font-family: 'SDSamliphopangche_Basic';
+  color: #eec28d;
+  text-shadow: 0px 3px 2.9px rgba(0, 0, 0, 0.21);
+}
+.topic-difficulty .difficulty {
+  font-size: 1.5rem;
+  font-family: 'SDSamliphopangche_Basic';
+  color: #eec28d;
+  text-shadow: 0px 3px 2.9px rgba(0, 0, 0, 0.21);
+}
 .wrong-letters-container {
   position: absolute;
   top: 40%;
@@ -777,22 +637,60 @@ export default {
 .word-letters-container span {
   font-size: 24px;
 }
+.letter-container {
+  display: flex;
+  justify-content: center;
+}
 .letter {
-  border-bottom: 3px solid #2980b9;
+  width: 2.75rem;
+  height: 2.625rem;
+  background: #957457;
   display: inline-flex;
-  font-size: 30px;
   align-items: center;
   justify-content: center;
-  margin: 0 3px;
-  height: 50px;
-  width: 20px;
+  color: white;
+  border-radius: 6px;
+  font-family: 'SDSamliphopangche_Basic';
+  font-size: 2rem;
+  border: solid 2px #1cb959;
+  margin: 3px;
 }
+.letter-blank {
+  width: 2.75rem;
+  height: 2.625rem;
+  background: #e5d2bd;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border-radius: 6px;
+  font-family: 'SDSamliphopangche_Basic';
+  font-size: 2rem;
+  border: solid 2px #a38468;
+  margin: 3px;
+}
+.keyboard {
+  display: column;
+}
+
+.keyboard-line {
+  display: flex;
+  /* margin: auto; */
+  justify-content: center;
+}
+
 .keyword {
-  width: 40px;
+  width: 2.75rem;
+  height: 2.625rem;
   margin: 3px;
   color: white;
-  background: gray;
-  border-radius: 20%;
+  background: #957457;
+  border-radius: 6px;
+  font-family: 'SDSamliphopangche_Basic';
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
 }
 .pressed {
   width: 40px;
@@ -800,7 +698,7 @@ export default {
   color: white;
   /* background: gray; */
   border-radius: 20%;
-  background: red;
+  background: #e5d2bd;
   /* transform: scale(1, 2); */
 }
 .answer {
@@ -809,7 +707,7 @@ export default {
   color: white;
   /* background: gray; */
   border-radius: 20%;
-  background: blue;
+  background: #e5d2bd;
   /* transform: scale(1, 2); */
 }
 .wrongAnswer {
@@ -818,7 +716,7 @@ export default {
   color: white;
   /* background: gray; */
   border-radius: 20%;
-  background: red;
+  background: #e5d2bd;
   /* transform: scale(1, 2); */
 }
 </style>
