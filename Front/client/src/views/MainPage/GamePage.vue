@@ -1,5 +1,9 @@
 <template>
   <div class="main">
+    <p class="title">
+      <span class="title-text">게임하기 </span>
+      <span class="title-script">어쩌구 저쩌구 게임을 경험해 보세요!</span>
+    </p>
     <div data-v-3adcea5a="" class="section-game">
       <div
         data-v-3adcea5a=""
@@ -97,6 +101,8 @@
         </div>
       </div>
     </div>
+    <img src="@/assets/grass.png" alt="grass" class="grass">
+    <img src="@/assets/gosm.png" alt="gosm" class="gosm">
   </div>
 </template>
 
@@ -104,6 +110,26 @@
 </script>
 
 <style scoped>
+
+.title {
+  position: absolute;
+  left: 10%;
+  top: 15%;
+}
+
+.title-text {
+  font-family: BinggraeSamanco-Bold;
+  font-size: 3.75vw;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+}
+
+.title-script {
+  font-family: GowunDodum-Regular;
+  font-size: 1vw;
+}
+
 .mgi_thum img[data-v-3adcea5a] {
   /* position: absolute; */
   top: 0;
@@ -145,5 +171,21 @@
   -webkit-box-flex: 1;
   -ms-flex: 1 0 1%;
   flex: 1 0 1%;
+}
+
+.grass {
+  position: absolute;
+  left: 0%;
+  top: 87.5%;
+  width: 100%;
+  z-index: -1;
+}
+
+.gosm {
+  position: absolute;
+  left: 70%;
+  top: 85%;
+  width: 10%;
+  z-index: -1;
 }
 </style>

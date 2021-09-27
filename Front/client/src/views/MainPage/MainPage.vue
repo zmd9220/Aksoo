@@ -2,10 +2,22 @@
   <div>
     <div class="background-img">
       <img src="@/assets/shape-1.png" alt="yellowcloud1" class="shape-1">
+      <img src="@/assets/shape-2-main.png" alt="yellowcloud2" class="shape-2">
+
       <img src="@/assets/dot-bl.png" alt="bluedot" class="bluedot">
       <img src="@/assets/dot-gr.png" alt="greendot" class="greendot">
       <img src="@/assets/dot-rd.png" alt="reddot" class="reddot">
       <img src="@/assets/dot-yl.png" alt="yellowdot" class="yellowdot">
+
+      <div class="letters">
+        <img src="@/assets/eung-yl.png" alt="eung" class="eung">
+        <img src="@/assets/chieut-bl.png" alt="chieut" class="chieut">
+        <img src="@/assets/hieuh-rd.png" alt="hieuh" class="hieuh">
+        <img src="@/assets/lieul-yl.png" alt="lieul" class="lieul">
+        <img src="@/assets/pieup-gr.png" alt="pieup" class="pieup">
+      </div>
+
+      <img src="@/assets/croc.png" alt="croc" class="croc">
     </div>
     
     <div class="welcomewords">
@@ -51,11 +63,24 @@ export default {
   z-index: -1;
 }
 
+.shape-2 {
+  position: absolute;
+  top: 40%;
+  left: 65%;
+  width: 30%;
+  /* margin: 2.313rem 80.688rem 15rem 0; */
+  /* padding: 28.875rem 29.938rem 6.375rem 8rem; */
+  object-fit: fill;
+  background-color: #fff3d9;
+  z-index: -1;
+}
+
 .bluedot {
   position: absolute;
   top: 37.5%;
   left: 8%;
   z-index: 2;
+  width: 1.5%;
 }
 
 .greendot {
@@ -63,20 +88,119 @@ export default {
   top: 87.5%;
   left: 30%;
   z-index: 2;
+  width: 1.5%;
 }
 
 .reddot {
   position: absolute;
-  top: 20%;
+  top: 27.5%;
   left: 50%;
   z-index: 2;
+  width: 2.5%;
 }
 
 .yellowdot {
   position: absolute;
   top: 90%;
+  left: 75%;
+  z-index: 2;
+  width: 2%;
+}
+
+.eung {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  z-index: 2;
+  width: 5%;
+  overflow: hidden;
+  transition-duration: 10s;
+  transition-property: transform;
+}
+
+.chieut {
+  position: absolute;
+  top: 30%;
+  left: 57.5%;
+  z-index: 2;
+  width: 6%;
+  overflow: hidden;
+  transition-duration: 10s;
+  transition-property: transform;
+}
+
+.hieuh {
+  position: absolute;
+  top: 45%;
+  left: 67.5%;
+  z-index: 2;
+  width: 7%;
+  overflow: hidden;
+  transition-duration: 10s;
+  transition-property: transform;
+}
+
+.lieul {
+  position: absolute;
+  top: 25%;
   left: 85%;
   z-index: 2;
+  width: 6%;
+  overflow: hidden;
+  transition-duration: 10s;
+  transition-property: transform;
+}
+
+.pieup {
+  position: absolute;
+  top: 80%;
+  left: 85%;
+  z-index: 2;
+  width: 5%;
+  overflow: hidden;
+  transition-duration: 7s;
+  transition-property: transform;
+}
+
+.chieut:hover {
+  transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+}
+
+.eung:hover {
+  transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+}
+
+.lieul:hover {
+  transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+}
+
+.hieuh:hover {
+  transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+}
+
+.pieup:hover {
+  transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+}
+
+.croc {
+  position: absolute;
+  top: 42.5%;
+  left: 57.5%;
+  z-index: 1;
+  width: 30%;
+  overflow: hidden;
+  transition-duration: 10s;
+  transition-property: transform;
+}
+
+.croc:hover {
+  transform: rotate(360deg);
+  -webkit-transform: rotate(360deg);
 }
 
 .welcomewords {
@@ -116,16 +240,17 @@ export default {
 }
 
 .start {
-  position: relative;
+  position: absolute;
   width: 12.563rem;
   height: 4.063rem;
-  margin: 0.125% 16.75% 5.313% 12.25%;
+  left: 12.5%;
+  top: 80%;
   object-fit: contain;
   background-color: #f5785d;
   border-style: none;
   border-radius: 30px;
   font-family: BinggraeSamanco;
-  font-size: 1.75rem;
+  font-size: 4vh;
   z-index: 2;
 }
 

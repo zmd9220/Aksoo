@@ -17,6 +17,7 @@ import Learning_words from '@/views/Learn/Learning_words'
 
 import HangMan_vue from '@/views/HangMan_vue/HangMan_vue'
 import cardflip from '@/views/Cardflip/cardflip'
+import Halloffame from '@/views/Halloffame/Halloffame'
 
 Vue.use(VueRouter)
 
@@ -100,6 +101,11 @@ const routes = [
     path: '/Cardflip/cardflip',
     name: 'cardflip',
     component: cardflip,
+  },
+  {
+    path: '/Halloffame/Halloffame',
+    name: 'Halloffame',
+    component: Halloffame,
   },
 ]
 
