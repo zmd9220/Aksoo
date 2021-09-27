@@ -112,17 +112,15 @@
                       </div>
                     </div>
                     <div class="group-field">
-                      <div class="input-group checks">
-                        <input id="save" type="checkbox" /><label for="save"
-                          ><small>로그인 유지</small></label
-                        >
-                      </div>
-                    </div>
-                    <div class="group-field">
                       <div class="input-group hr-line" style="display: block">
-                        <!-- <a class="gray-link p-left">비밀번호 찾기</a> -->
-                        <a class="primary-link p-right" @click="Singup"
+                        <a
+                          class="primary-link p-right"
+                          @click="Singup"
+                          style="color: skyblue"
                           >회원가입</a
+                        >
+                        <a class="p-right" style="color: gray"
+                          >계정이 없으신가요? &nbsp;</a
                         >
                       </div>
                     </div>

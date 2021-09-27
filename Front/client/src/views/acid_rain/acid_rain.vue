@@ -4,9 +4,17 @@
       <loading message="👋 Loading hand detection model..." />
     </template>
 
-    <b-modal v-model="show" :consonant="Consonant" hide-footer>
+    <b-modal
+      v-model="show"
+      :consonant="Consonant"
+      hide-footer
+      hide-header
+      class="modalBox"
+    >
       <b-container fluid>
-        <div style="width: 45%; float: left">a</div>
+        <div style="width: 45%; float: left">
+          <img class="startImg" src="@/assets/acidStart.png" />
+        </div>
         <div style="width: 45%; float: right">
           <div cols="3">자음 모음을 선택해 주세요</div>
           <div cols="3">
@@ -37,8 +45,6 @@
           </b-col>
         </b-row> -->
       </b-container>
-
-      <template #modal-footer> </template>
     </b-modal>
     <div class="acid_left">
       <title>The Game Formerly Known as Typing</title>
@@ -46,11 +52,12 @@
       <!-- <link href="css/style.css" rel="stylesheet"> -->
 
       <div class="container">
-        <h3 class="text-muted">산 성 비</h3>
-        <hr />
         <div class="panel panel-default">
           <div class="panel-body">
             <div id="box">
+              <img class="ground" src="@/assets/ground.png" />
+              <img class="gosm" src="@/assets/right.gif" />
+              <img class="lgosm" src="@/assets/left.gif" />
               <!-- <div id="message" class="hidden" style="display: none">
                 Game Over!
                 <br />
@@ -113,7 +120,7 @@
           <div class="panel-footer">
             <strong>Score: {{ score }}</strong>
             <strong
-              >생명 :
+              >Life :
               <span v-for="idx in hart" :key="idx">
                 <img src="./heart.gif" style="width: 20px" /> </span
             ></strong>
@@ -123,41 +130,55 @@
       </div>
     </div>
     <div class="acid_right">
-      <div class="a">닉네임 넣을 칸</div>
+      <div class="a">하태린 님</div>
       <!-- <hr /> -->
       <div class="b">
         <strong
-          >생명 :
+          >Life :
           <span v-for="idx in hart" :key="idx">
-            <img src="./heart.gif" style="width: 20px" /> </span
+            <img
+              src="@/assets/hart.png"
+              style="width: 30px; float: right; margin: 0 8px"
+            /> </span
         ></strong>
         <br />
-        <strong>Score: {{ score }}</strong>
         <br />
-        <strong>Best Score:</strong>
+        <strong
+          >Score:
+          <div style="float: right; margin: 0 12px">{{ score }}</div></strong
+        >
+        <br />
+        <br />
+        <strong
+          >Best Score:
+          <div style="float: right; margin: 0 12px">0</div></strong
+        >
       </div>
       <div class="c">{{ consonant }}</div>
-      <div class="d">정확도</div>
-      <div class="e">
-        카메라
-        <camera
-          v-show="modelLoaded && !minimizeCamera"
-          @on-loaded="modelLoaded = true"
-          @on-minimize="minimizeCamera = true"
-          :test="test"
-          @word="testEmit"
-          :mode="mode"
-        />
+      <div class="d">
+        {{ test }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ per }}
       </div>
+      <!-- <div class="e"> -->
+      <camera
+        v-show="modelLoaded && !minimizeCamera"
+        @on-loaded="modelLoaded = true"
+        @on-minimize="minimizeCamera = true"
+        :test="test"
+        @word="testEmit"
+        :mode="mode"
+        @per="testPer"
+      />
+      <!-- </div> -->
     </div>
   </div>
 </template>
+
 
 <script>
 import Camera from "@/components/Camera.vue";
 import Loading from "@/components/Loading.vue";
 
-var placeLetterInterval = 2000;
+var placeLetterInterval = 1000;
 var placeLetterTimer, moveLettersTimer;
 
 var aiLetterTimer;
@@ -174,6 +195,7 @@ export default {
     Camera,
     Loading,
   },
+
   data: function () {
     return {
       score: 0,
@@ -184,8 +206,10 @@ export default {
       minimizeCamera: false,
       test: "",
       mode: 0,
+      per: 0,
     };
   },
+
   mounted() {
     // document.addEventListener("DOMContentLoaded", this.doTest);
     // message = document.getElementById("message");
@@ -214,9 +238,13 @@ export default {
       } else {
         Con = 12623 + Math.floor(Math.random() * 20);
       }
+      // for (let i = 12593; i < 12644; i++) {
+      //   console.log(i + " : " + consonant[i]);
+      // }
       var consonant = [
         12595, 12597, 12598, 12602, 12603, 12604, 12605, 12606, 12607, 12608,
-        12612,
+        12612, 12594, 12600, 12611, 12614, 12617, 12632, 12633, 12634, 12637,
+        12638, 12639, 12642, 12624, 12626, 12628, 12630,
       ];
       for (var i = 0; i < consonant.length; i++) {
         if (Con == consonant[i]) {
@@ -224,9 +252,26 @@ export default {
         }
       }
       var letter = String.fromCharCode(Con); // ㄾ ㅘ ㅢ
-      // console.log(letter + " " + test);
+      console.log(letter + " " + Con);
 
       /*
+ㅘ 12632
+ㅙ 12633
+ㅚ 12634
+ㅝ 12637
+ㅞ 12638
+ㅟ 12639
+ㅢ 12642
+ㅐ 12624
+ㅒ 12626
+ㅔ 12628
+ㅖ 12630
+
+ㄲ 12594
+ㄸ 12600
+ㅃ 12611
+ㅆ 12614
+ㅉ 12617
 ㄳ 12595
 ㄵ 12597
 ㄶ 12598
@@ -342,6 +387,9 @@ export default {
     testEmit(test) {
       this.test = test;
     },
+    testPer(per) {
+      this.per = per;
+    },
     aiLetter: function () {
       // console.log(31);
 
@@ -401,26 +449,134 @@ export default {
 
 
 <style>
-#box {
-  /* margin: 10px 10%; */
-  /* background-position: center; */
-  /* background-size: 100%; */
-  height: 600px;
+.startImg {
+  /* width: 39.813rem;
+  height: 26rem;
+  margin: 0 6rem 0 0; */
+  height: 80%;
   width: 100%;
-  /* background-size: contain; */
-  /* height: 100%; */
-  /* height: 100vh;
-  width: 100%; */
-  /* width: 100vh; */
-  /* background: grey; */
-  background: url("./background.gif");
-  background-size: 100% 100%;
+  object-fit: cover;
+}
+#box {
+  height: 700px;
+  width: 100%;
+  /* background: url("./background.gif"); */
+  /* background-size: 100% 100%; */
+  background-image: linear-gradient(to top, #dfe9f3, #fff);
+  border-radius: 3rem;
+  box-shadow: 0.31rem 0.38rem 0.44rem 0rem rgba(0, 0, 0, 0.43);
+
   overflow: hidden;
   position: relative;
   font-family: "Georgia";
   font-size: 55px;
   font-weight: bold;
   color: purple;
+  position: relative;
+}
+
+#box > .ground {
+  /* background: url("@/assets/ground.png"); */
+  /* top: 100%; */
+  z-index: 2;
+  object-fit: contain;
+  width: 100%;
+  /* height: 37%; */
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+
+  /* margin: 44% 0 0 0; */
+}
+
+#box > .gosm {
+  /* background: url("@/assets/ground.png"); */
+  /* top: 100%; */
+  z-index: 3;
+  object-fit: contain;
+  /* width: 100%; */
+  height: 12%;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+
+  animation-name: gosm;
+  animation-duration: 6s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  /* animation-direction: alternate; */
+  animation-fill-mode: backwards;
+  /* animation-delay: 3s; */
+
+  /* margin: 44% 0 0 0; */
+}
+@keyframes gosm {
+  0% {
+    left: 5%;
+    bottom: 5%;
+    opacity: 1;
+    /* transform: scaleX(-1); */
+  }
+  50% {
+    left: 80%;
+    bottom: 5%;
+    opacity: 1;
+    /* transform: scaleX(-1); */
+  }
+  50.1% {
+    opacity: 0;
+  }
+  100% {
+    left: 160%;
+    bottom: 5%;
+    opacity: 0;
+    /* transform: scaleX(-1); */
+  }
+}
+
+#box > .lgosm {
+  /* background: url("@/assets/ground.png"); */
+  /* top: 100%; */
+  z-index: 3;
+  object-fit: contain;
+  /* width: 100%; */
+  height: 12%;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+
+  animation-name: lgosm;
+  animation-duration: 6s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  /* animation-direction: alternate; */
+  animation-fill-mode: backwards;
+  /* animation-delay: 3s; */
+
+  /* margin: 44% 0 0 0; */
+}
+@keyframes lgosm {
+  100% {
+    left: 5%;
+    bottom: 5%;
+    opacity: 1;
+    /* transform: scaleX(-1); */
+  }
+  50% {
+    left: 80%;
+    bottom: 5%;
+    opacity: 1;
+    /* transform: scaleX(-1); */
+  }
+  49.9% {
+    opacity: 0;
+  }
+  0% {
+    left: 160%;
+    bottom: 5%;
+    opacity: 0;
+    /* transform: scaleX(-1); */
+  }
 }
 
 .bg {
@@ -439,13 +595,42 @@ export default {
   transition-duration: 100ms;
   transition-timing-function: linear;
   transition-delay: 0;
+  z-index: 200;
+}
+.modal-content {
+  /* height: 100% !important; */
+  border: 0px !important;
+}
+.modal-body {
+  background-color: #f4f1eb;
+}
+.modal-dialog {
+  max-width: 1000px !important;
+  /* position: absolute;
+  vertical-align: middle;
+  top: 40%; */
+  width: 75% !important;
+  height: 45%;
+  top: 25%;
+  /* margin: 25% 22%; */
+  padding: 1% 2% 1.3% 1%;
+  /* object-fit: contain; */
+  border-radius: 1.31rem;
+  box-shadow: 0rem 0.5rem 1rem 0.06rem rgba(0, 0, 0, 0.43);
+  border: solid 0.06rem #a4a4a3;
+  background-color: #f4f1eb;
+
+  font-family: SDSamliphopangcheTTFBasic;
+  font-size: 30px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 0.71;
+  letter-spacing: normal;
+  text-align: center;
+  color: #b59e7a;
 }
 
-.modal-dialog {
-  position: absolute;
-  vertical-align: middle;
-  top: 40%;
-}
 #message {
   position: absolute;
   vertical-align: middle;
@@ -509,50 +694,82 @@ export default {
   width: 80%;
   height: 7%;
   box-shadow: 2px 2px gray;
-  border-radius: 30px;
+  border-radius: 2.56rem;
   border-width: 2px;
   /* padding: 10% 0; */
   margin: 2%;
   text-align: center;
-  background: #fff9e2;
+  background-color: #f4f1eb;
+  padding: 5%;
+  font-family: SDSamliphopangche_Basic;
+  font-size: 130%;
+  color: #917052;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.14;
+  letter-spacing: normal;
   /* display: table-cell; */
   /* vertical-align: middle; */
 }
 .b {
   width: 80%;
-  height: 18%;
+  height: 20%;
   box-shadow: 2px 2px gray;
-  border-radius: 30px;
+  border-radius: 2.56rem;
   border-width: 2px;
   padding: 5% 0;
   margin: 2%;
   text-align: left;
-  background: #fff9e2;
+  background-color: #f4f1eb;
+
   /* float: left; */
 }
-.c {
-  width: 80%;
-  height: 7%;
-  box-shadow: 2px 2px gray;
-  border-radius: 30px;
-  border-width: 2px;
-  /* padding: 10% 0; */
-  margin: 2%;
-  text-align: center;
-  background: #fff9e2;
+.b > strong {
+  padding: 5%;
+  margin: 2% 5%;
+  font-family: SDSamliphopangche_Basic;
+  font-size: 130%;
+  color: #b59e7a;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.14;
+  letter-spacing: normal;
 }
+.b > strong > div {
+  color: #917052;
+  padding: 0 15%;
+  border-radius: 1.06rem;
+  float: center;
+  text-align: center;
+  box-shadow: 0.19rem 0.19rem 0.13rem 0rem rgba(0, 0, 0, 0.3);
+  border: solid 0.19rem #af9b76;
+  background-color: #e5d2bd;
+}
+.c,
 .d {
   width: 80%;
   height: 7%;
   box-shadow: 2px 2px gray;
-  border-radius: 30px;
+  border-radius: 2.56rem;
   border-width: 2px;
   /* padding: 10% 0; */
   margin: 2%;
   text-align: center;
-  background: #fff9e2;
+  background-color: #f4f1eb;
+  padding: 4%;
+  font-family: SDSamliphopangche_Basic;
+  font-size: 120%;
+  color: #917052;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.14;
+  letter-spacing: normal;
 }
-.e {
+
+.camera {
   width: 80%;
   height: 40%;
   box-shadow: 2px 2px gray;
@@ -560,8 +777,14 @@ export default {
   border-width: 2px;
   /* padding: 10% 0; */
   margin: 2%;
+  padding: 3% 2%;
   text-align: center;
-  background: #fff9e2;
+  background: #f4f1eb;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.14;
+  letter-spacing: normal;
 }
 .menu {
   float: center;
@@ -593,10 +816,25 @@ export default {
   font-size: 30px;
 }
 #modalBtn {
-  margin: 2%;
-  width: 90%;
-  height: 90%;
-  border-radius: 12px;
+  width: 400px;
+  height: 50px;
+  margin: 4% 0 3%;
+  padding: 0.3% 35% 0.3%;
+  /* padding: 1.438rem 10.813rem 1.188rem; */
+  /* object-fit: contain; */
+  border-radius: 2.56rem;
+  box-shadow: 0rem 0.31rem 0.25rem 0rem rgba(0, 0, 0, 0.3);
+  border: solid 0.19rem #957252;
+  background-color: #e5d2bd;
+  font-family: SDSamliphopangcheTTFBasic;
+  font-size: 30px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 0.83;
+  letter-spacing: normal;
+  text-align: center;
+  color: #937356;
 }
 .camera {
   z-index: 999;

@@ -1,9 +1,9 @@
 <template>
   <div>
-    <button @click="modeChange">모드변경</button>
+    <!-- <button @click="modeChange">모드변경</button> -->
     <!-- <button @click="handChange">오른손왼손</button> -->
     <div class="camera card">
-      <div class="camera__most-recent" v-show="mostRecent.name.length > 0">
+      <!-- <div class="camera__most-recent" v-show="mostRecent.name.length > 0">
         <p class="cam-subtitle">
           {{ mostRecent.name }}
         </p>
@@ -11,7 +11,7 @@
         <p class="cam-subtitle">
           {{ mostRecent.confidence }}
         </p>
-      </div>
+      </div> -->
 
       <web-cam
         class="web-cam"
@@ -168,46 +168,46 @@ export default {
         // 자음
         switch (this.detection.name) {
           case CustomGestures_cons.GiyeogGesture.name:
-            name = "기역";
+            name = "ㄱ";
             break;
           case CustomGestures_cons.NieunGesture.name:
-            name = "니은";
+            name = "ㄴ";
             break;
           case CustomGestures_cons.DigeudGesture.name:
-            name = "디귿";
+            name = "ㄷ";
             break;
           case CustomGestures_cons.LieulGesture.name:
-            name = "리을";
+            name = "ㄹ";
             break;
           case CustomGestures_cons.MieumGesture.name:
-            name = "미음";
+            name = "ㅁ";
             break;
           case CustomGestures_cons.BieubGesture.name:
-            name = "비읍";
+            name = "ㅂ";
             break;
           case CustomGestures_cons.SiosGesture.name:
-            name = "시옷";
+            name = "ㅅ";
             break;
           case CustomGestures_cons.IeungGesture.name:
-            name = "이응";
+            name = "ㅇ";
             break;
           case CustomGestures_cons.JieujGesture.name:
-            name = "지읒";
+            name = "ㅈ";
             break;
           case CustomGestures_cons.ChieuchGesture.name:
-            name = "치읓";
+            name = "ㅊ";
             break;
           case CustomGestures_cons.KieukGesture.name:
-            name = "키읔";
+            name = "ㅋ";
             break;
           case CustomGestures_cons.TieutGesture.name:
-            name = "티읕";
+            name = "ㅌ";
             break;
           case CustomGestures_cons.PieupGesture.name:
-            name = "피읖";
+            name = "ㅍ";
             break;
           case Gestures.ThumbsUpGesture.name:
-            name = "히읗";
+            name = "ㅎ";
             break;
 
           default:
@@ -312,16 +312,17 @@ export default {
           this.last = this.mostRecent.name;
           this.count = 0;
         } else {
-          console.log(this.count);
+          // console.log(this.count);
           this.count++;
           if (this.count > 150) {
             console.log("단어입력");
-            console.log(this.last);
+            // console.log(this.last);
             this.last = "*";
             this.count = 0;
           }
         }
         this.$emit("word", this.mostRecent.name);
+        this.$emit("per", this.mostRecent.confidence);
         // Continue detection loop
         requestAnimationFrame(() => this.detect(model));
       }
@@ -364,6 +365,7 @@ export default {
 
 <style scoped>
 .camera {
+  border-radius: 30px;
   transform: scale(-1, 1);
 
   /* position: fixed; */
@@ -405,5 +407,6 @@ video {
 
 .web-cam {
   filter: brightness(25%);
+  border-radius: 30px;
 }
 </style>
