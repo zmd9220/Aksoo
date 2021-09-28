@@ -68,7 +68,7 @@ export default {
       if (this.select === 'word') {
         this.setAlphabet(this.words[0].word[0])
       } else {
-        this.setAlphabet(this.words.mean[0])
+        this.setAlphabet(this.words[0].mean)
       }
     }).catch((error) => {
       console.log(error)
