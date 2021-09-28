@@ -1,22 +1,39 @@
 <template>
   <div id="app">
     <div class="info-panel">
-      <div>Moves: {{totalMoves}}</div>
-      <div>Matches: {{totalMatches}}</div>
-      <div>Game Time: {{minutes}}:{{seconds}}</div>
+      <div>Game Time: {{seconds}}</div>
+      <dir>Score: {{score}}</dir>
     </div>
-    <div class="play-again" v-if="gameIsOver">
-      <button class="btn" @click="resetGame">Play Again?</button>
+
+    <!-- gameover 모달 -->
+    <div v-if="gameIsOver" >
+      <b-modal v-model="show" id="bv-modal-example" hide-footer no-close-on-backdrop>
+        <p>game over</p>
+        <p>Score: {{score}}</p>
+        <b-button class="mt-3" block @click="resetGame">다시하기</b-button>
+        <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-example')">닫기</b-button>
+      </b-modal>
     </div>
     <div class="game-board">
-      <div v-for="(card, index) in gameCards" :key="`card-${index}`" :card="card" @click="clickCard(card)">
+      <div v-for="(card, index) in gameCards" 
+      :key="`card-${index}`" 
+      :card="card" 
+      class="flip-container"
+      @click="clickCard(card)"
+      >
         <div class="card matched" v-if="card.isMatched"></div>
-        <div class="card flipped" v-else-if="card.isFlipped">
+        <div class="card flipped front" v-else-if="card.isFlipped">
+            <!-- <div class="letter" v-if="card.image">
+              <img width="100" :src="require(`@/assets/images/${card.image}`)"/>
+            </div>
+            <div class="letter" v-else>
+              {{card.letter}}
+            </div> -->
             <div class="letter">
-                {{card.letter}}
+              {{card.letter}}
             </div>
         </div>
-        <div class="card" v-else></div>
+        <div class="card back" v-else></div>
       </div>
     </div>
   </div>
@@ -29,30 +46,28 @@ export default {
   name: 'App',
   data() {
     return {
-        cards: [
-          { letter: 'A', isFlipped: false, isMatched: false },
-          { letter: 'B', isFlipped: false, isMatched: false },
-          { letter: 'C', isFlipped: false, isMatched: false },
-          { letter: 'D', isFlipped: false, isMatched: false },
-          { letter: 'E', isFlipped: false, isMatched: false },
-          { letter: 'F', isFlipped: false, isMatched: false },
-          { letter: 'G', isFlipped: false, isMatched: false },
-          { letter: 'H', isFlipped: false, isMatched: false },
-          { letter: 'I', isFlipped: false, isMatched: false },
-          { letter: 'J', isFlipped: false, isMatched: false },
-          { letter: 'K', isFlipped: false, isMatched: false },
-          { letter: 'L', isFlipped: false, isMatched: false },
-        ],
-        gameCards: [],
-        flippedCards: [],
-        totalMoves: 0,
-        totalMatches: 0,
-        totalTime: {
-          minutes: 0,
-          seconds: 0
-        },
-        timer: null,
-        gameIsOver: false
+      show: true,
+      score: 0,
+      cards1: [
+        { letter: 'ㄱ', isFlipped: false, isMatched: false },
+        { letter: 'ㄴ', isFlipped: false, isMatched: false },
+        { letter: 'ㄷ', isFlipped: false, isMatched: false },
+        { letter: 'ㄹ', isFlipped: false, isMatched: false },
+      ],
+      cards2: [
+        { letter: 'ㄱ', isFlipped: false, isMatched: false, image: 'a.jpg'},
+        { letter: 'ㄴ', isFlipped: false, isMatched: false, image: 'b.jpg'},
+        { letter: 'ㄷ', isFlipped: false, isMatched: false, image: 'c.jpg'},
+        { letter: 'ㄹ', isFlipped: false, isMatched: false, image: 'd.jpg'},
+      ],      
+      gameCards: [],
+      flippedCards: [],
+      totalMatches: 0,
+      totalTime: {
+        seconds: 99
+      },
+      timer: null,
+      gameIsOver: false
     }
   },
   created() {
@@ -68,32 +83,28 @@ export default {
     resetGame(){
       // when reset button is clicked, reset variables and reshuffle the cards
       this.totalTime = {
-          minutes: 0,
-          seconds: 0
+          seconds: 99
         }
-      this.totalMoves = 0
       this.totalMatches = 0
+      this.score = 0
       this.gameIsOver = false
       this.timer = null
       this.shuffleCards()
     },
     clockTick(){
-      // Until we reach 59 seconds, increment seconds and exit
-      if(this.totalTime.seconds !== 59){
-            this.totalTime.seconds++;
-            return
+      this.totalTime.seconds--;
+      if(this.totalTime.seconds === 0){
+        clearInterval(this.timer)
+        this.gameIsOver = true;
+        return
           }
-      
-      // Once we're at 59 seconds, increase minutes and reset seconds to 0
-      this.totalTime.minutes++;
-      this.totalTime.seconds = 0;
     },
     shuffleCards() {
       // Clear game deck
       this.gameCards = []
       // Create 2 sets of each of the 12 unique cards
-      let cards1 = _.cloneDeep(this.cards)
-      let cards2 = _.cloneDeep(this.cards)
+      let cards1 = _.cloneDeep(this.cards1)
+      let cards2 = _.cloneDeep(this.cards2)
       // Load the game deck with both sets of cards and randomize them
       this.gameCards = _.shuffle(this.gameCards.concat(cards1, cards2))
     },
@@ -102,11 +113,11 @@ export default {
       if(!this.timer){
         this.startGame()
       }
+      if (card.isMatched || card.isFlipped || this.flippedCards.length === 2)
+        return
       // If the current card is not flipped then flip it
       if(!card.isFlipped) {
         card.isFlipped = true
-        // Increment move count
-        this.totalMoves++
         // If there are less than 2 flipped cards, add this card
         if(this.flippedCards.length < 2) {
           this.flippedCards.push(card)
@@ -125,6 +136,18 @@ export default {
           setTimeout(()=> {
             this.flippedCards.forEach(card => card.isMatched = true)
             this.flippedCards = []
+            if (this.gameCards.every((card) => card.isMatched === true)) {
+              clearInterval(this.timer)
+              this.gameIsOver = true
+              }
+                        
+            // 점수 산성
+            if(this.gameIsOver === true){
+            this.score += this.seconds * 100
+              }
+              else{
+                this.score = this.totalMatches * 100
+              }  
           }, 400)
         }
         // If not a match, set the cards to not flipped and reset the flipped cards
@@ -136,7 +159,7 @@ export default {
           }, 800)
         }
         // If we have 12 matches, end the game
-        if(this.totalMatches === 12){
+        if(this.totalTime.seconds === 10){
           clearInterval(this.timer)
           this.gameIsOver = true
         }
@@ -150,23 +173,16 @@ export default {
         }
         return this.totalTime.seconds;
     },
-    minutes(){
-        // If single digit, display leading 0
-        if(this.totalTime.minutes < 10){
-            return `0${this.totalTime.minutes}`
-        }
-        return this.totalTime.minutes;
-    }
-  }
+  },
 }
 </script>
 
-<style lang="scss">
+<style >
 body {
   font-size: 24px;
 }
 
-.info-panel, .play-again {
+.info-panel{
   width: 1000px;
   margin: 20px auto 10px;
       text-align: center;
@@ -177,13 +193,6 @@ body {
   grid-template-columns: 1fr 1fr 1fr;
 }
 
-.btn {
-  background-color: blue;
-  border: 1px solid navy;
-  color: white;
-  padding: 10px 20px;
-  cursor: pointer;
-}
 
 .game-board {
   margin: 10px auto;
@@ -194,29 +203,59 @@ body {
   grid-template-rows: 1fr 1fr 1fr 1fr;
   column-gap: 20px;
   row-gap: 20px;
+}
 
-  .card {
-    background-color: blue;
-    width: 146px;
-    height: 146px;
-    border: 2px solid;
-    cursor: pointer;
+.card {
+  width: 146px;
+  height: 146px;
+  border: 2px solid;
+  cursor: pointer;
+}
 
-      &.flipped, &.matched {
-          background-color: white;
-          cursor: default;
-      }
+.card .flipped .matched {
+    background-color: #fabf67;
+    cursor: default;
+}
 
-      &.matched {
-          border-color: white;
-      }
 
-      .letter {
-          text-align: center;
-          font-size: 120px;
-          margin: auto;
-      }
-  }
+.card .letter {
+    text-align: center;
+    font-size: 120px;
+    margin: auto;
+}
+
+
+.flip-container {
+  perspective: 1000;
+}
+
+.front {
+  backface-visibility: hidden;
+  transition: 0.6s;
+  transform-style: preserve-3d;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+/* .back {
+  backface-visibility: hidden;
+  transition: 0.6s;
+  transform-style: preserve-3d;
+  top: 0;
+  left: 0;
+  width: 100%;
+} */
+.back {
+  transform: rotateY(-180deg);
+  position: absolute;
+}
+
+.flip-container.flipped .back {
+  transform: rotateY(0deg);
+}
+.flip-container.flipped .front {
+  transform: rotateY(180deg);
 }
 
 </style>

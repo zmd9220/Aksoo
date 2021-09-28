@@ -11,9 +11,13 @@ import GamePage from '@/views/MainPage/GamePage'
 import LearnStartPage from '@/views/Learn/LearnStart'
 import LearnSelectPage from '@/views/Learn/HandSelect'
 import LearnWordPage from '@/views/Learn/WordSelect'
+import HangManMain from '@/views/HangMan_vue/HangManMain'
+import HangManGame from '@/views/HangMan_vue/HangManGame'
+import HangManPage from '@/views/HangMan_vue/HangManPage'
 import Learning from '@/views/Learn/Learning'
-import HangMan_vue from '@/views/HangMan_vue/HangMan_vue'
+// import HangMan_vue from '@/views/HangMan_vue/HangMan_vue'
 import cardflip from '@/views/Cardflip/cardflip'
+import Halloffame from '@/views/Halloffame/Halloffame'
 
 Vue.use(VueRouter)
 
@@ -80,14 +84,29 @@ const routes = [
     props: true,
   },
   {
-    path: '/HangMan_vue/HangMan_vue',
-    name: 'HangMan_vue',
-    component: HangMan_vue,
+    path: '/HangMan_vue/HangManMain',
+    name: 'HangManMain',
+    component: HangManMain,
+  },
+  {
+    path: '/HangMan_vue/HangManGame',
+    name: 'HangManGame',
+    component: HangManGame,
+  },
+  {
+    path: '/HangMan_vue/HangManPage',
+    name: 'HangManPage',
+    component: HangManPage,
   },
   {
     path: '/Cardflip/cardflip',
     name: 'cardflip',
     component: cardflip,
+  },
+  {
+    path: '/Halloffame/Halloffame',
+    name: 'Halloffame',
+    component: Halloffame,
   },
 ]
 
