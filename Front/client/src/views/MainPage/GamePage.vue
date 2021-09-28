@@ -136,6 +136,7 @@
   left: 0;
   width: 100%;
 }
+
 .home-game-group[data-v-3adcea5a] {
   display: -webkit-box;
   display: -ms-flexbox;
