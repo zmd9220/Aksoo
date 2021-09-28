@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <button @click="modeChange">모드변경</button>
-    <button @click="handChange">오른손왼손</button>
+  <div class="camera-wrapper">
+    <!-- <button @click="modeChange">모드변경</button> -->
+    <!-- <button @click="handChange">오른손왼손</button> -->
     <div class="camera card">
-      <div class="camera__most-recent" v-show="mostRecent.name.length > 0">
+      <!-- <div class="camera__most-recent" v-show="mostRecent.name.length > 0">
         <p class="cam-subtitle">
           {{ mostRecent.name }}
         </p>
@@ -11,7 +11,7 @@
         <p class="cam-subtitle">
           {{ mostRecent.confidence }}
         </p>
-      </div>
+      </div> -->
 
       <web-cam
         class="web-cam"
@@ -49,6 +49,7 @@ export default {
     WebCam,
   },
 
+
   data() {
     return {
       ctx: null,
@@ -59,9 +60,10 @@ export default {
       deviceId: null,
       devices: [],
 
+      test: "",
+
       minConfidence: 8,
       mode: 0, // 0:모음, 1:자음
-      use_left_hand: 0, // 0:오른손, 1:왼손
       last: "*",
       count: 0,
       detection: {
@@ -85,40 +87,24 @@ export default {
         switch (this.detection.name) {
           case CustomGestures_vowel.AhGesture.name:
             if (this.detection.hand === 0) {
-              if (this.use_left_hand === 0) {
-                name = "ㅏ";
-              } else {
-                name = "ㅗ";
-              }
+              name = "ㅏ";
             } else {
-              if (this.use_left_hand === 0) {
-                name = "ㅗ";
-              } else {
-                name = "ㅏ";
-              }
+              name = "ㅗ";
             }
             break;
           case CustomGestures_vowel.YaGesture.name:
             if (this.detection.hand === 0) {
-              if (this.use_left_hand === 0) {
-                name = "ㅑ";
-              } else {
-                name = "ㅛ";
-              }
+              name = "ㅑ";
             } else {
-              if (this.use_left_hand === 0) {
-                name = "ㅛ";
-              } else {
-                name = "ㅑ";
-              }
+              name = "ㅛ";
             }
             break;
-          case CustomGestures_vowel.AeGesture.name:
-            name = "ㅐ";
-            break;
-          case CustomGestures_vowel.YaeGesture.name:
-            name = "ㅒ";
-            break;
+          // case CustomGestures_vowel.AeGesture.name:
+          //   name = "ㅐ";
+          //   break;
+          // case CustomGestures_vowel.YaeGesture.name:
+          //   name = "ㅒ";
+          //   break;
           case CustomGestures_vowel.IGesture.name:
             name = "ㅣ";
             break;
@@ -143,12 +129,12 @@ export default {
               name = "ㅕ";
             }
             break;
-          case CustomGestures_vowel.EGesture.name:
-            // name = "ㅔ";
-            if (this.detection.hand2 === 1) {
-              name = "ㅔ";
-            }
-            break;
+          // case CustomGestures_vowel.EGesture.name:
+          //   // name = "ㅔ";
+          //   if (this.detection.hand2 === 1) {
+          //     name = "ㅔ";
+          //   }
+          //   break;
           // case CustomGestures_vowel.YeGesture.name:
           //   name = "ㅖ";
           //   // if (this.detection.hand2 === 1){
@@ -163,46 +149,46 @@ export default {
         // 자음
         switch (this.detection.name) {
           case CustomGestures_cons.GiyeogGesture.name:
-            name = "기역";
+            name = "ㄱ";
             break;
           case CustomGestures_cons.NieunGesture.name:
-            name = "니은";
+            name = "ㄴ";
             break;
           case CustomGestures_cons.DigeudGesture.name:
-            name = "디귿";
+            name = "ㄷ";
             break;
           case CustomGestures_cons.LieulGesture.name:
-            name = "리을";
+            name = "ㄹ";
             break;
           case CustomGestures_cons.MieumGesture.name:
-            name = "미음";
+            name = "ㅁ";
             break;
           case CustomGestures_cons.BieubGesture.name:
-            name = "비읍";
+            name = "ㅂ";
             break;
           case CustomGestures_cons.SiosGesture.name:
-            name = "시옷";
+            name = "ㅅ";
             break;
           case CustomGestures_cons.IeungGesture.name:
-            name = "이응";
+            name = "ㅇ";
             break;
           case CustomGestures_cons.JieujGesture.name:
-            name = "지읒";
+            name = "ㅈ";
             break;
           case CustomGestures_cons.ChieuchGesture.name:
-            name = "치읓";
+            name = "ㅊ";
             break;
           case CustomGestures_cons.KieukGesture.name:
-            name = "키읔";
+            name = "ㅋ";
             break;
           case CustomGestures_cons.TieutGesture.name:
-            name = "티읕";
+            name = "ㅌ";
             break;
           case CustomGestures_cons.PieupGesture.name:
-            name = "피읖";
+            name = "ㅍ";
             break;
           case Gestures.ThumbsUpGesture.name:
-            name = "히읗";
+            name = "ㅎ";
             break;
 
           default:
@@ -303,19 +289,21 @@ export default {
           }
         }
         if (this.last !== this.mostRecent.name) {
-          console.log("단어변화");
+          // console.log("단어변화");
           this.last = this.mostRecent.name;
           this.count = 0;
         } else {
-          console.log(this.count);
+          // console.log(this.count);
           this.count++;
           if (this.count > 150) {
-            console.log("단어입력");
-            console.log(this.last);
+            // console.log("단어입력");
+            this.$emit('input', this.last)
+            // console.log(this.last);
             this.last = "*";
             this.count = 0;
           }
         }
+        this.$emit("word", this.mostRecent.name, this.mostRecent.confidence);
         // Continue detection loop
         requestAnimationFrame(() => this.detect(model));
       }
@@ -346,11 +334,10 @@ export default {
       this.deviceId = deviceId;
       this.camera = deviceId;
     },
+
     modeChange() {
       this.mode = 1 - this.mode;
-    },
-    handChange() {
-      this.use_left_hand = 1 - this.use_left_hand;
+      // this.$emit("modeChange");
     },
   },
 };
@@ -359,13 +346,15 @@ export default {
 <style scoped>
 .camera {
   transform: scale(-1, 1);
-
-  position: fixed;
-  bottom: 0;
-  right: 0;
-
-  width: calc(640px * 0.6);
-  height: calc(480px * 0.6);
+  /* position: fixed; */
+  /* bottom: 0;
+  right: 0; */
+  /* left: 50%; */
+  /* transform: translateX(-50%); */
+  width: calc(640px * 0.70);
+  height: calc(480px * 0.70);
+  /* height: 100%; */
+  
 }
 
 .camera__most-recent {

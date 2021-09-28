@@ -1,7 +1,7 @@
 <template>
   <div>
     <button @click="modeChange">모드변경</button>
-    <button @click="handChange">오른손왼손</button>
+    <!-- <button @click="handChange">오른손왼손</button> -->
     <div class="camera card">
       <div class="camera__most-recent" v-show="mostRecent.name.length > 0">
         <p class="cam-subtitle">
@@ -49,6 +49,8 @@ export default {
     WebCam,
   },
 
+  props: ["mode"],
+
   data() {
     return {
       ctx: null,
@@ -59,8 +61,11 @@ export default {
       deviceId: null,
       devices: [],
 
+      test: "",
+
       minConfidence: 8,
-      mode: 0, // 0:모음, 1:자음
+      // mode: 0, // 0:모음, 1:자음
+      // mode: this.mode,
       use_left_hand: 0, // 0:오른손, 1:왼손
       last: "*",
       count: 0,
@@ -316,6 +321,7 @@ export default {
             this.count = 0;
           }
         }
+        this.$emit("word", this.mostRecent.name);
         // Continue detection loop
         requestAnimationFrame(() => this.detect(model));
       }
@@ -360,7 +366,7 @@ export default {
 .camera {
   transform: scale(-1, 1);
 
-  position: fixed;
+  /* position: fixed; */
   bottom: 0;
   right: 0;
 
