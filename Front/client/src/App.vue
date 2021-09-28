@@ -117,7 +117,7 @@ body {
 
 #nav {
   padding: 30px;
-  height: 867px;
+  /* height: 867px; */
 }
 
 #nav a {
