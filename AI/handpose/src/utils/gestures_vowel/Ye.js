@@ -1,8 +1,8 @@
 import {
-Finger,
-FingerCurl,
-FingerDirection,
-GestureDescription,
+  Finger,
+  FingerCurl,
+  FingerDirection,
+  GestureDescription,
 } from "fingerpose";
 
 const Ye = new GestureDescription("Ye");
@@ -25,15 +25,17 @@ Ye.addCurl(Finger.Middle, FingerCurl.NoCurl, 1.0);
 
 
 // Remaining fingers
-Ye.addCurl(Finger.Ring, FingerCurl.FullCurl, 1.0);
+Ye.addCurl(Finger.Ring, FingerCurl.HalfCurl, 1.0);
+Ye.addDirection(Finger.Ring, FingerDirection.HorizontalLeft, 1.0);
+Ye.addDirection(Finger.Ring, FingerDirection.HorizontalRight, 1.0);
 
 Ye.addCurl(Finger.Pinky, FingerCurl.NoCurl, 1.0);
 // Ye.addDirection(Finger.Pinky, FingerDirection.DiagonalDownRight, 1.0);
 
 
 // // Assign additional weight to the index finger
-Ye.setWeight(Finger.Ring, 2.0);
-Ye.setWeight(Finger.Pinky, 2.0);
+// Ye.setWeight(Finger.Ring, 2.0);
+// Ye.setWeight(Finger.Pinky, 2.0);
 
 export default Ye;
-              
+

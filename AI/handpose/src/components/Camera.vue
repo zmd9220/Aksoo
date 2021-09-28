@@ -1,7 +1,6 @@
 <template>
   <div>
     <button @click="modeChange">모드변경</button>
-    <button @click="handChange">오른손왼손</button>
     <div class="camera card">
       <div class="camera__most-recent" v-show="mostRecent.name.length > 0">
         <p class="cam-subtitle">
@@ -61,7 +60,6 @@ export default {
 
       minConfidence: 8,
       mode: 0, // 0:모음, 1:자음
-      use_left_hand: 0, // 0:오른손, 1:왼손
       last: "*",
       count: 0,
       detection: {
@@ -85,36 +83,30 @@ export default {
         switch (this.detection.name) {
           case CustomGestures_vowel.AhGesture.name:
             if (this.detection.hand === 0) {
-              if (this.use_left_hand === 0) {
-                name = "ㅏ";
-              } else {
-                name = "ㅗ";
-              }
+              name = "ㅏ";
             } else {
-              if (this.use_left_hand === 0) {
-                name = "ㅗ";
-              } else {
-                name = "ㅏ";
-              }
+              name = "ㅗ";
             }
             break;
           case CustomGestures_vowel.YaGesture.name:
             if (this.detection.hand === 0) {
-              if (this.use_left_hand === 0) {
-                name = "ㅑ";
-              } else {
-                name = "ㅛ";
-              }
+              name = "ㅑ";
             } else {
-              if (this.use_left_hand === 0) {
-                name = "ㅛ";
-              } else {
-                name = "ㅑ";
-              }
+              name = "ㅛ";
             }
             break;
           case CustomGestures_vowel.AeGesture.name:
-            name = "ㅐ";
+            if (this.detection.hand === 0) {
+              name = "ㅐ";
+            } else {
+              name = "ㅚ";
+            }
+            break;
+          case CustomGestures_vowel.UiGesture.name:
+            name = "ㅢ";
+            break;
+          case CustomGestures_vowel.WiGesture.name:
+            name = "ㅟ";
             break;
           case CustomGestures_vowel.YaeGesture.name:
             name = "ㅒ";
@@ -149,12 +141,12 @@ export default {
               name = "ㅔ";
             }
             break;
-          // case CustomGestures_vowel.YeGesture.name:
-          //   name = "ㅖ";
-          //   // if (this.detection.hand2 === 1){
-          //   // name = "ㅖ";
-          //   // }
-          //   break;
+          case CustomGestures_vowel.YeGesture.name:
+            // name = "ㅖ";
+            if (this.detection.hand2 === 1) {
+              name = "ㅖ";
+            }
+            break;
 
           default:
             break;
@@ -163,46 +155,46 @@ export default {
         // 자음
         switch (this.detection.name) {
           case CustomGestures_cons.GiyeogGesture.name:
-            name = "기역";
+            name = "ㄱ";
             break;
           case CustomGestures_cons.NieunGesture.name:
-            name = "니은";
+            name = "ㄴ";
             break;
           case CustomGestures_cons.DigeudGesture.name:
-            name = "디귿";
+            name = "ㄷ";
             break;
           case CustomGestures_cons.LieulGesture.name:
-            name = "리을";
+            name = "ㄹ";
             break;
           case CustomGestures_cons.MieumGesture.name:
-            name = "미음";
+            name = "ㅁ";
             break;
           case CustomGestures_cons.BieubGesture.name:
-            name = "비읍";
+            name = "ㅂ";
             break;
           case CustomGestures_cons.SiosGesture.name:
-            name = "시옷";
+            name = "ㅅ";
             break;
           case CustomGestures_cons.IeungGesture.name:
-            name = "이응";
+            name = "ㅇ";
             break;
           case CustomGestures_cons.JieujGesture.name:
-            name = "지읒";
+            name = "ㅈ";
             break;
           case CustomGestures_cons.ChieuchGesture.name:
-            name = "치읓";
+            name = "ㅊ";
             break;
           case CustomGestures_cons.KieukGesture.name:
-            name = "키읔";
+            name = "ㅋ";
             break;
           case CustomGestures_cons.TieutGesture.name:
-            name = "티읕";
+            name = "ㅌ";
             break;
           case CustomGestures_cons.PieupGesture.name:
-            name = "피읖";
+            name = "ㅍ";
             break;
           case Gestures.ThumbsUpGesture.name:
-            name = "히읗";
+            name = "ㅎ";
             break;
 
           default:
@@ -348,9 +340,6 @@ export default {
     },
     modeChange() {
       this.mode = 1 - this.mode;
-    },
-    handChange() {
-      this.use_left_hand = 1 - this.use_left_hand;
     },
   },
 };

@@ -1,13 +1,20 @@
 <template>
   <div>
     <div class="main">
+      <div class="title">
+        <h2 style="font-weight: bold">무엇을 배우고 싶으세요?</h2>
+      </div>
+      <div class="contents">
+        학습하실 단계를 선택해주세요.
+      </div>
       <div class="bt">
         <div>
-          <button class="gonext" @click="level()">자음</button>
-          <button class="gonext">모음</button>
-          <button class="gonext">단어</button>
-          <button class="gonext">즐겨찾기</button>
-          <button class="goback" @click="handSelect()">뒤로 가기</button>
+          <button class="gonext" @click="setlevel('con')">자음</button>
+          <button class="gonext" @click="setlevel('vow')">모음</button>
+          <button class="gonext" @click="setlevel('word')">단어</button>
+          <button class="gonext" @click="setlevel('bookmark')" >즐겨찾기</button>
+          <button class="goback" @click="handSelect()">&lt;- 이전</button>
+          <button class="gonext" @click="goNextLevel()">다음 -></button>
         </div>
       </div>
     </div>
@@ -17,13 +24,26 @@
 <script>
 export default {
   name: "handSelect",
+  data: function () {
+    return {
+      level: '',
+    }
+  },
   methods: {
-    level: function () {
-      this.$router.push("/Learn/Learning").catch(() => {});
+    setlevel: function (word) {
+      this.level = word
     },
     handSelect: function () {
       this.$router.push("/Select").catch(() => {});
     },
+    goNextLevel: function () {
+      if (this.level === '') {
+        alert('단계를 선택해주세요')
+      } else {
+        // this.$router.push("/Learn/Learning" + '_' + this.level).catch(() => {});
+        this.$router.push({name: 'Learning', params: {select: this.level}}).catch(() => {})
+      }
+    }
   },
 };
 </script>

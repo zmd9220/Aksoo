@@ -61,6 +61,7 @@ test/
 
 # Django
 /Back/**/venv
+/Back/**/__pycache__
 
 
 ### AI  #################
