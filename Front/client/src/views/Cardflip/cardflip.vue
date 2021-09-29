@@ -1,10 +1,5 @@
 <template>
-  <div id="app">
-    <div class="info-panel">
-      <div>Game Time: {{seconds}}</div>
-      <dir>Score: {{score}}</dir>
-    </div>
-
+  <div id="app" class="cardFlip">
     <!-- gameover 모달 -->
     <div v-if="gameIsOver" >
       <b-modal v-model="show" id="bv-modal-example" hide-footer no-close-on-backdrop>
@@ -21,20 +16,24 @@
       class="flip-container"
       @click="clickCard(card)"
       >
-        <div class="card matched" v-if="card.isMatched"></div>
+        <div v-if="card.isMatched"></div>
         <div class="card flipped front" v-else-if="card.isFlipped">
-            <!-- <div class="letter" v-if="card.image">
-              <img width="100" :src="require(`@/assets/images/${card.image}`)"/>
+            <div class="card" v-if="card.image">
+              <img class="cardImage" :src="require(`@/assets/cardflip/${card.image}`)"/>
             </div>
             <div class="letter" v-else>
               {{card.letter}}
-            </div> -->
-            <div class="letter">
-              {{card.letter}}
             </div>
+            <!-- <div class="letter">
+              {{card.letter}}
+            </div> -->
         </div>
-        <div class="card back" v-else></div>
+        <div class="card back" v-else><img class="cardImage"  src="@/assets/cardflip/back.png" /></div>
       </div>
+    </div>
+    <div class="info-panel">
+      <dir class="score">Score: {{score}}</dir>
+      <div class="time">{{seconds}}</div>
     </div>
   </div>
 </template>
@@ -49,16 +48,59 @@ export default {
       show: true,
       score: 0,
       cards1: [
+        //자음
         { letter: 'ㄱ', isFlipped: false, isMatched: false },
         { letter: 'ㄴ', isFlipped: false, isMatched: false },
         { letter: 'ㄷ', isFlipped: false, isMatched: false },
         { letter: 'ㄹ', isFlipped: false, isMatched: false },
+        { letter: 'ㅁ', isFlipped: false, isMatched: false },
+        { letter: 'ㅂ', isFlipped: false, isMatched: false },
+        { letter: 'ㅅ', isFlipped: false, isMatched: false },
+        { letter: 'ㅇ', isFlipped: false, isMatched: false },
+        { letter: 'ㅈ', isFlipped: false, isMatched: false },
+        { letter: 'ㅊ', isFlipped: false, isMatched: false },
+        { letter: 'ㅋ', isFlipped: false, isMatched: false },
+        { letter: 'ㅌ', isFlipped: false, isMatched: false },
+        { letter: 'ㅍ', isFlipped: false, isMatched: false },
+        { letter: 'ㅎ', isFlipped: false, isMatched: false },
+        // 모음
+        // { letter: 'ㅏ', isFlipped: false, isMatched: false },
+        // { letter: 'ㅑ', isFlipped: false, isMatched: false },
+        // { letter: 'ㅓ', isFlipped: false, isMatched: false },
+        // { letter: 'ㅕ', isFlipped: false, isMatched: false },
+        // { letter: 'ㅗ', isFlipped: false, isMatched: false },
+        // { letter: 'ㅛ', isFlipped: false, isMatched: false },
+        // { letter: 'ㅜ', isFlipped: false, isMatched: false },
+        // { letter: 'ㅠ', isFlipped: false, isMatched: false },
+        // { letter: 'ㅡ', isFlipped: false, isMatched: false },
+        // { letter: 'ㅣ', isFlipped: false, isMatched: false },
       ],
       cards2: [
-        { letter: 'ㄱ', isFlipped: false, isMatched: false, image: 'a.jpg'},
-        { letter: 'ㄴ', isFlipped: false, isMatched: false, image: 'b.jpg'},
-        { letter: 'ㄷ', isFlipped: false, isMatched: false, image: 'c.jpg'},
-        { letter: 'ㄹ', isFlipped: false, isMatched: false, image: 'd.jpg'},
+        { letter: 'ㄱ', isFlipped: false, isMatched: false, image: 'ㄱ.png'},
+        { letter: 'ㄴ', isFlipped: false, isMatched: false, image: 'ㄴ.png'},
+        { letter: 'ㄷ', isFlipped: false, isMatched: false, image: 'ㄷ.png'},
+        { letter: 'ㄹ', isFlipped: false, isMatched: false, image: 'ㄹ.png'},
+        { letter: 'ㅁ', isFlipped: false, isMatched: false, image: 'ㅁ.png' },
+        { letter: 'ㅂ', isFlipped: false, isMatched: false, image: 'ㅂ.png' },
+        { letter: 'ㅅ', isFlipped: false, isMatched: false, image: 'ㅅ.png' },
+        { letter: 'ㅇ', isFlipped: false, isMatched: false, image: 'ㅇ.png' },
+        { letter: 'ㅈ', isFlipped: false, isMatched: false, image: 'ㅈ.png' },
+        { letter: 'ㅊ', isFlipped: false, isMatched: false, image: 'ㅊ.png' },
+        { letter: 'ㅋ', isFlipped: false, isMatched: false, image: 'ㅋ.png' },
+        { letter: 'ㅌ', isFlipped: false, isMatched: false, image: 'ㅌ.png' },
+        { letter: 'ㅍ', isFlipped: false, isMatched: false, image: 'ㅍ.png' },
+        { letter: 'ㅎ', isFlipped: false, isMatched: false, image: 'ㅎ.png' },
+        // 모음
+        // { letter: 'ㅏ', isFlipped: false, isMatched: false, image: 'ㅏ.png' },
+        // { letter: 'ㅑ', isFlipped: false, isMatched: false, image: 'ㅑ.png' },
+        // { letter: 'ㅓ', isFlipped: false, isMatched: false, image: 'ㅓ.png' },
+        // { letter: 'ㅕ', isFlipped: false, isMatched: false, image: 'ㅕ.png' },
+        // { letter: 'ㅗ', isFlipped: false, isMatched: false, image: 'ㅗ.png' },
+        // { letter: 'ㅛ', isFlipped: false, isMatched: false, image: 'ㅛ.png' },
+        // { letter: 'ㅜ', isFlipped: false, isMatched: false, image: 'ㅜ.png' },
+        // { letter: 'ㅠ', isFlipped: false, isMatched: false, image: 'ㅠ.png' },
+        // { letter: 'ㅡ', isFlipped: false, isMatched: false, image: 'ㅡ.png' },
+        // { letter: 'ㅣ', isFlipped: false, isMatched: false, image: 'ㅣ.png' },
       ],      
       gameCards: [],
       flippedCards: [],
@@ -177,51 +219,80 @@ export default {
 }
 </script>
 
-<style >
-body {
-  font-size: 24px;
+<style scoped>
+.cardFlip{
+  display: flex;
+  width: 100%;
+  height: 90vh;
+  margin: 5vh;
 }
 
-.info-panel{
-  width: 1000px;
-  margin: 20px auto 10px;
-      text-align: center;
+.cardFlip .info-panel{
+  flex:15%;
+  border-radius: 20px;
+  margin: 2vh;
 }
 
-.info-panel {
-  display: grid;  
-  grid-template-columns: 1fr 1fr 1fr;
+.cardFlip .info-panel .score{
+  width: 100%;
+  height: 10%;
+  background-color: #f4f1eb;
+  margin-bottom: 1.5vh;
+  border-radius: 30px;
+  border: solid 4px #a4a4a3;
+  box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.733);
+  color: #917052;
+  font-family: 'SDSamliphopangche_Basic';
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cardFlip .info-panel .time{
+  width: 100%;
+  height: 25%;
+  background-color: #f4f1eb;
+  margin-bottom: 1.5vh;
+  border-radius: 40px;
+  box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.733);
+  font-family: 'SDSamliphopangche_Basic';
+  font-size: 10rem;
 }
 
 
-.game-board {
-  margin: 10px auto;
-  padding: 20px;
-  width: 1000px;
+.cardFlip .game-board {
+  background-color: #f4f1eb;
+  flex:85%;
+  border-radius: 20px;
+  margin: 2vh;
+  box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.733);
+
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
-  column-gap: 20px;
-  row-gap: 20px;
+  /*  카드 개수 조정 */
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;  
+  grid-template-rows: 1fr 1fr 1fr 1fr ;
+  column-gap: 1vh;
+  row-gap: 1vh;
 }
 
 .card {
-  width: 146px;
-  height: 146px;
-  border: 2px solid;
+  width: 200px;
+  height: 170px;
   cursor: pointer;
+  
 }
 
-.card .flipped .matched {
-    background-color: #fabf67;
-    cursor: default;
+.cardImage {
+  width: 100%; 
+  height: 100%;
 }
 
 
 .card .letter {
-    text-align: center;
-    font-size: 120px;
-    margin: auto;
+  text-align: center;
+  font-size: 120px;
+  margin: auto;
 }
 
 
@@ -238,15 +309,8 @@ body {
   width: 100%;
 }
 
-/* .back {
-  backface-visibility: hidden;
-  transition: 0.6s;
-  transform-style: preserve-3d;
-  top: 0;
-  left: 0;
-  width: 100%;
-} */
 .back {
+  border: 0px;
   transform: rotateY(-180deg);
   position: absolute;
 }
