@@ -1,7 +1,6 @@
 <template>
   <div>
     <!-- <b-button @click="show = true" variant="primary">게임 시작하기</b-button> -->
-    
 
     <!-- <b-modal
       v-model="show"
@@ -32,7 +31,7 @@
         </b-row>
       </b-container> -->
 
-      <!-- <template #modal-footer>
+    <!-- <template #modal-footer>
         <div class="w-100">
           <b-button
             variant="primary"
@@ -46,7 +45,11 @@
       </template>
     </b-modal> -->
 
-    <div id="message" class="hidden" style="display: none; background-color: grey; opacity: 90%;">
+    <div
+      id="message"
+      class="hidden"
+      style="display: none; background-color: grey; opacity: 90%"
+    >
       Game Over!
       <hr />
 
@@ -56,18 +59,11 @@
         <p>Ranking:</p>
       </div>
 
-      <button
-        class="btn btn-danger pull-right"
-        id="reset"
-        v-on:click="goMain"
-      >
+      <button class="btn btn-danger pull-right" id="reset" v-on:click="goMain">
         <span class="glyphicon glyphicon-flash" id="reset"></span>
         ReStart
       </button>
-      <button
-        class="btn btn-success pull-right"
-        id="reset"
-      >
+      <button class="btn btn-success pull-right" id="reset">
         <span class="glyphicon glyphicon-flash" id="reset"></span>
         명예의 전당
       </button>
@@ -77,12 +73,11 @@
       <div class="topic-difficulty" id="options">
         <div class="topic">
           {{ this.$route.params.topic.text }}
-        </div>  
+        </div>
         <div class="difficulty">
           {{ this.$route.params.diff.text }}
         </div>
       </div>
-  
     </div>
 
     <div class="letter-container">
@@ -95,11 +90,10 @@
         <div class="letter" v-if="correct.includes(letter)">
           {{ letter }}
         </div>
-        <div class="letter-blank" v-else>
-        </div>
+        <div class="letter-blank" v-else></div>
       </div>
     </div>
-    <br/>
+    <br />
     <!-- <br/> -->
     <div class="word-letters-container">
       <button
@@ -151,15 +145,12 @@
       </div> -->
     </div>
 
-    <div class="wrong-letters-container">
-    </div>
-
-
+    <div class="wrong-letters-container"></div>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 export default {
   name: "HangManGame",
@@ -171,7 +162,7 @@ export default {
       selected: "",
       online: false,
       countError: 0,
-      life:3,
+      life: 3,
       countCorrect: 0,
       enter: "",
       answer: [],
@@ -193,14 +184,23 @@ export default {
       footerBgVariant: "light",
       footerTextVariant: "dark",
       words1: [
-        "ㄱ", "ㄴ", "ㄷ", "ㄹ", "ㅁ", "ㅂ", "ㅅ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ",
+        "ㄱ",
+        "ㄴ",
+        "ㄷ",
+        "ㄹ",
+        "ㅁ",
+        "ㅂ",
+        "ㅅ",
+        "ㅇ",
+        "ㅈ",
+        "ㅊ",
+        "ㅋ",
+        "ㅌ",
+        "ㅍ",
+        "ㅎ",
       ],
-      words2: [
-        "ㅏ", "ㅑ", "ㅓ", "ㅕ", "ㅗ", "ㅛ", "ㅜ", "ㅠ", "ㅣ", "ㅡ",
-      ],
-      words3: [
-        
-      ],
+      words2: ["ㅏ", "ㅑ", "ㅓ", "ㅕ", "ㅗ", "ㅛ", "ㅜ", "ㅠ", "ㅣ", "ㅡ"],
+      words3: [],
       usedLetters: [],
       score: 0,
       gameover: false,
@@ -217,15 +217,15 @@ export default {
       // }
       // this.usedLetters.includes(letter);
       if (this.online) {
-          this.usedLetters.push(letter);
+        this.usedLetters.push(letter);
         //Include letter
         if (this.selected.includes(letter)) {
           this.correct.push(letter);
           this.updateCorrect(letter);
         } else {
           if (!this.wrongs.includes(letter)) {
-          this.wrongs.push(letter);
-          this.updateWrongs();
+            this.wrongs.push(letter);
+            this.updateWrongs();
           }
         }
       }
@@ -236,7 +236,7 @@ export default {
       return valid;
     },
     goMain() {
-      this.$router.push({ name: 'HangManMain'})
+      this.$router.push({ name: "HangManMain" });
     },
     resetModal() {
       this.name = "";
@@ -356,9 +356,8 @@ export default {
       // console.log(3);
     },
     updateWrongs() {
-
       this.countError++;
-      this.$emit('lifeLoss')
+      this.$emit("lifeLoss");
       if (this.countError === this.life) {
         this.toggleText();
         // this.online = false;
@@ -405,9 +404,9 @@ export default {
       if (this.countCorrect === this.selected.length) {
         this.score += 10;
         this.$emit("scoreChange", 10);
-        alert("정답입니다 :) ");
+        // alert("정답입니다 :) ");
         // setTimeout(function(){ alert("Hello").close }, 3000);
- 
+
         this.online = false;
         var nextstage = document.getElementById("nextstage");
         if (nextstage.style.display === "none") {
@@ -429,27 +428,26 @@ export default {
       }
     },
     nextWord() {
-        this.selected =
-          this.words[Math.floor(Math.random() * this.words.length)];
-        // message.classList.add("hidden"); // add
-        // resetButton.classList.add("disabled");
+      this.selected = this.words[Math.floor(Math.random() * this.words.length)];
+      // message.classList.add("hidden"); // add
+      // resetButton.classList.add("disabled");
 
-        this.countError = 0;
-        this.correct = [];
-        this.wrongs = [];
-        this.online = true;
-        // this.aux = 0
-        this.countCorrect = 0;
-        this.answer = [];
-        this.usedLetters = [];
-        var nextstage = document.getElementById("nextstage");
-        if (nextstage.style.display === "block") {
-          nextstage.style.display = "none";
-        }
+      this.countError = 0;
+      this.correct = [];
+      this.wrongs = [];
+      this.online = true;
+      // this.aux = 0
+      this.countCorrect = 0;
+      this.answer = [];
+      this.usedLetters = [];
+      var nextstage = document.getElementById("nextstage");
+      if (nextstage.style.display === "block") {
+        nextstage.style.display = "none";
+      }
     },
     showModal() {
-    let element = this.$refs.gameovermodal.$el
-    element.modal('show')
+      let element = this.$refs.gameovermodal.$el;
+      element.modal("show");
     },
     // resetKeyboard() {
     //   console.log(1);
@@ -464,16 +462,17 @@ export default {
     //   }
     //   console.log(3);
     // },
-  getWords: function () {
-    // 상품정보를 받아오는 axios
-    const localURL = "http://127.0.0.1:8000/games/hangman/"+ this.topic.value ;
-    axios
-        .get(localURL) 
+    getWords: function () {
+      // 상품정보를 받아오는 axios
+      const localURL =
+        "http://127.0.0.1:8000/games/hangman/" + this.topic.value;
+      axios
+        .get(localURL)
         .then((res) => {
           // for (var key1 in res.data){
           //   console.log(key1);
           // }
-          res.data.forEach(element => {
+          res.data.forEach((element) => {
             this.words.push(element.word);
           });
         })
@@ -482,22 +481,19 @@ export default {
           this.startGame();
         })
         .catch(() => {
-        // console.log(err)
+          // console.log(err)
         });
     },
   },
   created() {
-
     // document.onkeydown = (evt) => {
     //   evt = evt || window.event;
     //   this.listener(evt);
     // };
     this.life = this.diff.value;
     this.getWords();
-
   },
-  mounted() {
-  },
+  mounted() {},
   destroyed() {
     // console.log(1);
     // document.removeEventListener("keydown", this.listener);
@@ -553,7 +549,7 @@ export default {
 }
 .topic-difficulty .topic {
   font-size: 2.5rem;
-  font-family: 'SDSamliphopangche_Basic';
+  font-family: "SDSamliphopangche_Basic";
   color: #fff;
   position: absolute;
   top: 700%;
@@ -562,12 +558,12 @@ export default {
 }
 .topic-difficulty .difficulty {
   font-size: 1.5rem;
-  font-family: 'SDSamliphopangche_Basic';
+  font-family: "SDSamliphopangche_Basic";
   color: #fff;
   position: absolute;
   top: 820%;
   left: 60%;
-  z-index: 3; 
+  z-index: 3;
 }
 .wrong-letters-container {
   position: absolute;
@@ -619,7 +615,7 @@ export default {
   justify-content: center;
   color: white;
   border-radius: 6px;
-  font-family: 'SDSamliphopangche_Basic';
+  font-family: "SDSamliphopangche_Basic";
   font-size: 2rem;
   border: solid 2px #1cb959;
   margin: 3px;
@@ -633,7 +629,7 @@ export default {
   justify-content: center;
   color: white;
   border-radius: 6px;
-  font-family: 'SDSamliphopangche_Basic';
+  font-family: "SDSamliphopangche_Basic";
   font-size: 2rem;
   border: solid 2px #a38468;
   margin: 3px;
@@ -655,7 +651,7 @@ export default {
   color: white;
   background: #957457;
   border-radius: 6px;
-  font-family: 'SDSamliphopangche_Basic';
+  font-family: "SDSamliphopangche_Basic";
   display: flex;
   justify-content: center;
   align-items: center;
@@ -726,6 +722,4 @@ export default {
   width: 100%;
   height: 90%;
 } */
-
-
 </style>
