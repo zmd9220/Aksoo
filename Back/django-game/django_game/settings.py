@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     # local 앱
     'games',
     'learn',
+    'accounts',
     
     # 3rd party 라이브러리
     'corsheaders',
