@@ -27,7 +27,7 @@
         <router-link :to="{ name: 'HangManMain' }">HangManMain</router-link> |
         <router-link :to="{ name: 'HangMan_vue' }">HangMan_vue</router-link> |
 
-        <router-link :to="{ name: 'cardflip' }">cardflip</router-link> |
+        <router-link :to="{ name: 'CardflipMain' }">CardflipMain</router-link> |
         <router-link :to="{ name: 'Halloffame' }">Halloffame</router-link> |
       </span>
       <router-view @login="isLogin = true" />
