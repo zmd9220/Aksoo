@@ -414,7 +414,7 @@ export default {
   left: 37%;
   display: none;
   animation-name: cage;
-  animation-duration: 3s;
+  animation-duration: 2s;
   animation-timing-function: linear;
   /* animation-iteration-count: infinite; */
   /* animation-direction: alternate; */
