@@ -97,6 +97,7 @@ const routes = [
     path: '/HangMan_vue/HangManPage',
     name: 'HangManPage',
     component: HangManPage,
+    props: true,
   },
   {
     path: '/Cardflip/cardflip',

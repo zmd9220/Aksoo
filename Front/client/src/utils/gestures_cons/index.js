@@ -11,7 +11,7 @@ import ChieuchGesture from "./Chieuch";
 import KieukGesture from "./Kieuk";
 import TieutGesture from "./Tieut";
 import PieupGesture from "./Pieup";
-
+// import ChangeGesture from "./Change";
 
 import { Gestures, GestureEstimator } from "fingerpose";
 
@@ -33,6 +33,8 @@ const GE_cons = new GestureEstimator([
   TieutGesture,
   PieupGesture,
 
+  // ChangeGesture,
+
 ]);
 
 const CustomGestures_cons = {
@@ -51,6 +53,7 @@ const CustomGestures_cons = {
   TieutGesture,
   PieupGesture,
 
+  // ChangeGesture,
 };
 
 export { CustomGestures_cons, GE_cons };

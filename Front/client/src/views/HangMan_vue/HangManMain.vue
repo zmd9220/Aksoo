@@ -1,30 +1,36 @@
 <template>
-  <div class="hangman-main">
-    <div class="hangman-desc">
-      <h1>행맨</h1>
-      <h2>어쩌구 저쩌구 행맨 게임을 경험해 보세요!</h2>
+  <div class="main">
+    <div class="background-img">     
+      <img src="@/assets/cloud.png" class="cloud">
+      <img src="@/assets/Learn/LearnStart/shape-2.svg" class="Shape-2">
     </div>
-    <div class="hangman-main-box">
-      <div class="hangman-thumbnail-box"></div>
-      <div class="hangman-select-box">
-        <div class="hangman-select-box-title">어쩌구를 선택하세요</div>
-        <div class="hangman-topic">
-          <select class="selectBox" v-model="topic">
-          <option disabled selected style="text-align:center">주제</option>
-          <option v-for="option in topic_options" v-bind:value="option.text" :key="option" style="text-align:center">
-            {{ option.text }}
-          </option>
-          </select>
+    <div class="hangman-main">
+      <div class="hangman-desc">
+        <h1>단어 맞추기</h1>
+        <h2>지문자를 단어 맞추기 게임으로 익혀 보세요!</h2>
+      </div>
+      <div class="hangman-main-box">
+        <div class="hangman-thumbnail-box"></div>
+        <div class="hangman-select-box">
+          <div class="hangman-select-box-title">테마를 선택하세요</div>
+          <div class="hangman-topic">
+            <select class="selectBox" v-model="topic">
+            <option disabled selected style="text-align:center">주제</option>
+            <option v-for="option in topic_options" v-bind:value="option" :key="option" style="text-align:center">
+              {{ option.text }}
+            </option>
+            </select>
+          </div>
+          <div class="hangman-diff">
+            <select class="selectBox" v-model="diff">
+            <option disabled selected style="text-align:center">난이도</option>
+            <option v-for="option in diff_options" v-bind:value="option" :key="option" style="text-align:center">
+              {{ option.text }}
+            </option>
+            </select>
+          </div>
+          <div class="hangman-start-button" @click="gotoHangManPage">게임시작!</div>
         </div>
-        <div class="hangman-diff">
-          <select class="selectBox" v-model="diff">
-          <option disabled selected style="text-align:center">난이도</option>
-          <option v-for="option in diff_options" v-bind:value="option.text" :key="option" style="text-align:center">
-            {{ option.text }}
-          </option>
-          </select>
-        </div>
-        <div class="hangman-start-button" @click="gotoHangManPage">게임시작!</div>
       </div>
     </div>
   </div>
@@ -37,14 +43,13 @@ export default {
           topic: '주제',
           diff: '난이도',
           topic_options: [
-            { text: 'FOOD', value: 0 },
-            { text: 'ANIMAL', value: 1 },
-            { text: 'SPORT', value: 2 }
+            { text: 'FRUIT', value: 1 },
+            { text: 'ANIMAL', value: 2 },
           ],
           diff_options: [
-            { text: 'EASY', value: 0 },
-            { text: 'MIDDLE', value: 1 },
-            { text: 'HARD', value: 2 }
+            { text: 'EASY', value: 5 },
+            { text: 'MIDDLE', value: 4 },
+            { text: 'HARD', value: 3 }
           ],
         }
     },
@@ -65,14 +70,17 @@ export default {
         // router.push({ name: 'user', params: { userId: 123 }})
       }
     },
+    updated: {
+
+    },
 };
 </script>
 
 <style scoped>
 .hangman-main .hangman-desc{
   display: flex;
-  margin-top: 10vh;
-  margin-bottom: 10vh;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
 } 
 
 .hangman-main .hangman-desc h1{
@@ -86,7 +94,7 @@ export default {
 .hangman-main .hangman-desc h2{
   font-family: GowunDodum-Regular;
   font-size: 1.125rem;
-  margin: 3vh 5vh 0 10vh;
+  margin: 3vh 5vh 0 0;
 } 
 
 .hangman-main .hangman-main-box{
@@ -181,4 +189,29 @@ export default {
   font-size: 2rem;
   color: #E5D2BD;
 }
+
+/* 이미지들 */
+/* .background-img {
+  height: 90%;
+} */
+.cloud {
+  position: absolute;
+  top: 25%;
+  width: 80%;
+  left: 10%;
+  z-index: -3;
+  overflow: hidden;
+  transition-duration: 7s;
+  transition-property: transform;
+}
+
+img.Shape-2 {
+  position: absolute;
+  z-index: 0;
+  width: 100%;
+  left: 0%;
+  top: 87.5%;
+  height: 12.5%;
+  }
+
 </style>
