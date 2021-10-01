@@ -1,45 +1,8 @@
 <template>
   <div class="acid">
-    <audio id="answer" src="@/assets/music/answer/Correct 1.mp3"></audio>
-    <audio
-      id="wrongAnswer"
-      src="@/assets/music/wrongAnswer/Error 2.mp3"
-    ></audio>
     <template v-if="!modelLoaded">
       <loading message="👋 Loading hand detection model..." />
     </template>
-
-    <div v-if="gameIsOver">
-      <b-modal  v-model="showend"  class="modal-border" size="sm"
-      id="bv-modal-example" hide-footer hide-header no-close-on-backdrop>
-        <b-button class="mt-3 modal-close-btn" block @click="$bvModal.hide('bv-modal-example')">
-              <span class="close-btn-txt">닫기</span></b-button>
-        <p class="game-over-text">GAME OVER</p>
-        <div class="modal-cardFont">Score</div>
-        <div class="modal-score">{{score}}</div>
-        <div class="row">
-          <div class="column">
-            <div class="modal-rank-cardFont">Rank</div>
-            <span>
-              <div class="modal-rank-score">
-                <img src="@/assets/trophy.png" alt="trophy" class="rank-img">43
-              </div>
-            </span> 
-            <b-button class="mt-3 modal-restart-btn" block @click="resetGame">
-              <span class="restart-btn-txt">다시하기</span></b-button>
-          </div>
-          <div class="column">
-            <div class="modal-hscore-cardFont">Best score</div>
-            <span>
-              <div class="modal-hscore-score">
-                <img src="@/assets/best-badge.png" alt="best-badge" class="best-score-img">2500</div>
-            </span>
-            <b-button class="mt-3 modal-halloffame-btn" block >
-              <span class="halloffame-btn-txt">명예의전당</span></b-button>
-          </div>
-        </div>
-      </b-modal>
-    </div>
 
     <b-modal
       v-model="show"
@@ -124,13 +87,20 @@
                   >게임 시작하기</b-button
                 > -->
 
-                <!-- <div
+                <div
                   id="message"
                   class="hidden"
                   style="display: none; background-color: grey; opacity: 85%"
                 >
                   Game Over!
                   <hr />
+
+                  <div class="game-result">
+                    <p>Score: {{ score }}</p>
+                    <p>Your Highest Score:</p>
+                    <p>Ranking:</p>
+                  </div>
+
                   <button
                     class="btn btn-danger pull-right"
                     id="reset"
@@ -139,7 +109,7 @@
                     <span class="glyphicon glyphicon-flash" id="reset"></span>
                     ReStart
                   </button>
-                </div> -->
+                </div>
 
                 <!-- disabled -->
               </span>
@@ -147,16 +117,16 @@
               <!-- <img src="./background.gif" class="bg" style="object-fit: fill" /> -->
             </div>
           </div>
-          <!-- <div class="panel-footer">
+          <div class="panel-footer">
             <strong>Score: {{ score }}</strong>
             <strong
               >Life :
               <span v-for="idx in hart" :key="idx">
                 <img src="./heart.gif" style="width: 20px" /> </span
             ></strong>
-          </div> -->
+          </div>
         </div>
-        <!-- <hr /> -->
+        <hr />
       </div>
     </div>
     <div class="acid_right">
@@ -231,14 +201,12 @@ export default {
       score: 0,
       hart: "5",
       show: true,
-      showend: true,
       consonant: "",
       modelLoaded: false,
       minimizeCamera: false,
       test: "",
       mode: 0,
       per: 0,
-      gameIsOver: false
     };
   },
 
@@ -335,18 +303,14 @@ export default {
 
     moveLetters: function () {
       var boxes = document.querySelectorAll("#box > div");
-      var wrongAnswer = document.getElementById("wrongAnswer");
-
       for (var i = 0; i < boxes.length; i++) {
         boxes[i].style.bottom = parseInt(boxes[i].style.bottom) - 8 + "px";
-        if (parseInt(boxes[i].style.bottom) <= 50) {
-          wrongAnswer.play();
+        if (parseInt(boxes[i].style.bottom) <= -10) {
           boxes[i].remove();
           this.hart = parseInt(this.hart) - 1;
           this.decreaseLetterSpeed(hart);
           if (this.hart == 0) {
-            // this.toggleText();
-            this.gameIsOver = true
+            this.toggleText();
             this.endGame();
           }
         }
@@ -381,10 +345,10 @@ export default {
         text.style.display = "none";
       }
     },
-    // resetText: function () {
-    //   var text = document.getElementById("message");
-    //   text.style.display = "none";
-    // },
+    resetText: function () {
+      var text = document.getElementById("message");
+      text.style.display = "none";
+    },
     togglestart: function () {
       // var text = document.getElementById("start");
       // text.style.display = "none";
@@ -401,24 +365,22 @@ export default {
     resetGame: function () {
       // this.togglerestart();
 
-      this.gameIsOver = false
-      // this.resetText();
+      this.resetText();
 
       // message.classList.add("hidden"); // add
       // resetButton.classList.add("disabled");
       // score.innerHTML = 0;
       this.score = 0;
       this.hart = 5;
-      // console.log(1);
-
+      console.log(1);
       var boxes = document.querySelectorAll("#quiz");
       for (var i = 0; i < boxes.length; i++) {
         boxes[i].remove();
       }
-      // console.log(2);
+      console.log(2);
       // console.log(1);
       this.endGame();
-      // console.log(3);
+      console.log(3);
       this.startGame();
       // console.log(3);
     },
@@ -441,8 +403,6 @@ export default {
       // console.log(this.test);
 
       if (boxes[0]) {
-        var answer = document.getElementById("answer");
-        answer.play();
         boxes[0].remove();
         // score.innerHTML = parseInt(score.innerHTML) + 1;
         this.score += 1;
@@ -483,12 +443,7 @@ export default {
     //     resetButton.onclick = resetGame;
     // })
   },
-  created() {
-    this.endGame();
-  },
-  destroyed() {
-    this.endGame();
-  },
+  created() {},
 };
 </script>
 
@@ -507,7 +462,7 @@ export default {
   width: 100%;
   /* background: url("./background.gif"); */
   /* background-size: 100% 100%; */
-  background-image: linear-gradient(to top, #fff, #dfe9f3);
+  background-image: linear-gradient(to top, #dfe9f3, #fff);
   border-radius: 3rem;
   box-shadow: 0.31rem 0.38rem 0.44rem 0rem rgba(0, 0, 0, 0.43);
 
@@ -517,6 +472,7 @@ export default {
   font-size: 55px;
   font-weight: bold;
   color: purple;
+  position: relative;
 }
 
 #box > .ground {
@@ -882,197 +838,5 @@ export default {
 }
 .camera {
   z-index: 999;
-}
-
-/* game-over modal */
-
-
-.modal-close-btn {
-  position: absolute;
-  width: 15%;
-  height: 15%;
-  left: 80%;
-  border: none;
-  background-color: grey;
-  box-shadow: 0.00rem 0.38vh 0.56rem 0 rgba(0, 0, 0, 0.3);
-  object-fit: contain;
-  border-radius: 2.00rem;
-}
-
-.close-btn-txt {
-  font-family: SDSamliphopangche_Basic;
-  font-size: 3.5vh;
-}
-
-.game-over-text {
-  font-family: SDSamliphopangche_Basic;
-  font-size: 6vh;
-  margin-bottom: 3%;
-  font-weight: bolder;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 0.63;
-  letter-spacing: normal;
-  text-shadow: 0.00rem 0.38rem 0.56rem rgba(0, 0, 0, 0.3);
-  text-align: center;
-  color: #1e3663;
-}
-
-.modal-cardFont {
-  color: #b59e7a;
-  font-size: 5vh;
-  font-family: 'SDSamliphopangche_Basic';
-  margin-bottom: 0;  
-  padding: 0;
-  margin-top: 1.5vh;
-}
-
-.modal-score {
-  position: relative;
-  left: 27.5%;
-  width: 40%;
-  height: 6vh;
-  background-color: #e5d2bd;
-  margin-bottom: 0;
-  margin-top: 1%;
-  margin-left: 3vh;
-  margin-right: 3vh;
-  border-radius: 30px;
-  border: solid 4px #b49f7b;
-  box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.733);
-  color: #957457;
-  font-family: 'SDSamliphopangche_Basic';
-  font-size: 5vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0;
-}
-
-.rank-img {
-  position: absolute;
-  left: -11.5%;
-  width: 25%;
-}
-
-.modal-rank-cardFont {
-  color: #b59e7a;
-  font-size: 4vh;
-  font-family: 'SDSamliphopangche_Basic';
-  margin-bottom: 0;  
-  padding: 0;
-  margin-top: 1.5vh;
-}
-
-.modal-rank-score {
-  position: relative;
-  left: 20%;
-  width: 50%;
-  height:5vh;
-  background-color: #e5d2bd;
-  margin-bottom: 0;
-  margin-top: 0.5%;
-  margin-left: 3vh;
-  margin-right: 3vh;
-  border-radius: 30px;
-  border: solid 4px #b49f7b;
-  box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.733);
-  color: #957457;
-  font-family: 'SDSamliphopangche_Basic';
-  font-size: 4vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0;
-}
-
-.best-score-img {
-  position: absolute;
-  left: -10%;
-  width: 25%;
-}
-
-.modal-hscore-cardFont {
-  color: #b59e7a;
-  font-size: 4vh;
-  font-family: 'SDSamliphopangche_Basic';
-  margin-bottom: 0;  
-  padding: 0;
-  margin-top: 1.5vh;
-}
-
-.modal-hscore-score {
-  position: relative;
-  left: 20%;
-  width: 50%;
-  height: 5vh;
-  background-color: #e5d2bd;
-  margin-bottom: 0;
-  margin-top: 0.5%;
-  margin-left: 3vh;
-  margin-right: 3vh;
-  border-radius: 30px;
-  border: solid 4px #b49f7b;
-  box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.733);
-  color: #957457;
-  font-family: 'SDSamliphopangche_Basic';
-  font-size: 4vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0;
-}
-
-
-.row {
-  display: flex;
-}
-
-.column {
-  flex: 50%;
-}
-
-.modal-restart-btn {
-  width: 40%;
-  height: 40%;
-  /* border: solid 0.5vh #76300b; */
-  border: none;
-  background-color: #fe6e27;
-  box-shadow: 0.00rem 0.38vh 0.56rem 0 rgba(0, 0, 0, 0.3);
-  object-fit: contain;
-  border-radius: 2.00rem;
-}
-
-.modal-restart-btn {
-  width: 40%;
-  height: 40%;
-  /* border: solid 0.5vh #76300b; */
-  border: none;
-  background-color: #fe6e27;
-  box-shadow: 0.00rem 0.38vh 0.56rem 0 rgba(0, 0, 0, 0.3);
-  object-fit: contain;
-  border-radius: 2.00rem;
-}
-
-.restart-btn-txt {
-  font-family: SDSamliphopangche_Basic;
-  font-size: 3.5vh;
-}
-
-
-.modal-halloffame-btn {
-  width: 40%;
-  height: 40%;
-  /* border: solid 0.5vh #76300b; */
-  border: none;
-  background-color: #68bbf7;
-  box-shadow: 0.00rem 0.38vh 0.56rem 0 rgba(0, 0, 0, 0.3);
-  object-fit: contain;
-  border-radius: 2.00rem;
-}
-
-.halloffame-btn-txt {
-  font-family: SDSamliphopangche_Basic;
-  font-size: 3.5vh;
 }
 </style>
