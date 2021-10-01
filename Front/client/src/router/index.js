@@ -18,6 +18,7 @@ import Learning from '@/views/Learn/Learning'
 // import HangMan_vue from '@/views/HangMan_vue/HangMan_vue'
 import cardflip from '@/views/Cardflip/cardflip'
 import Halloffame from '@/views/Halloffame/Halloffame'
+import Profile from '@/views/Profile/Profile'
 
 Vue.use(VueRouter)
 
@@ -108,6 +109,11 @@ const routes = [
     path: '/Halloffame/Halloffame',
     name: 'Halloffame',
     component: Halloffame,
+  },
+  {
+    path: '/Profile/Profile',
+    name: 'Profile',
+    component: Profile,
   },
 ]
 
