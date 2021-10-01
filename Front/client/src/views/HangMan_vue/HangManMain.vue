@@ -1,8 +1,8 @@
 <template>
   <div class="main">
-    <div class="background-img">     
-      <img src="@/assets/cloud.png" class="cloud">
-      <img src="@/assets/Learn/LearnStart/shape-2.svg" class="Shape-2">
+    <div class="background-img">
+      <img src="@/assets/cloud.png" class="cloud" />
+      <img src="@/assets/Learn/LearnStart/shape-2.svg" class="Shape-2" />
     </div>
     <div class="hangman-main">
       <div class="hangman-desc">
@@ -15,21 +15,39 @@
           <div class="hangman-select-box-title">테마를 선택하세요</div>
           <div class="hangman-topic">
             <select class="selectBox" v-model="topic">
-            <option disabled selected style="text-align:center">주제</option>
-            <option v-for="option in topic_options" v-bind:value="option" :key="option" style="text-align:center">
-              {{ option.text }}
-            </option>
+              <option disabled selected style="text-align: center">주제</option>
+              <option
+                v-for="option in topic_options"
+                v-bind:value="option"
+                :key="option"
+                style="text-align: center"
+              >
+                {{ option.text }}
+              </option>
             </select>
           </div>
           <div class="hangman-diff">
             <select class="selectBox" v-model="diff">
-            <option disabled selected style="text-align:center">난이도</option>
-            <option v-for="option in diff_options" v-bind:value="option" :key="option" style="text-align:center">
-              {{ option.text }}
-            </option>
+              <option disabled selected style="text-align: center">
+                난이도
+              </option>
+              <option
+                v-for="option in diff_options"
+                v-bind:value="option"
+                :key="option"
+                style="text-align: center"
+              >
+                {{ option.text }}
+              </option>
             </select>
           </div>
-          <div class="hangman-start-button" @click="gotoHangManPage">게임시작!</div>
+          <div class="hangman-start-button" @click="gotoHangManPage">
+            게임시작!
+          </div>
+          <audio
+            id="gameStart"
+            src="@/assets/music/pageMove/Jump High.mp3"
+          ></audio>
         </div>
       </div>
     </div>
@@ -38,68 +56,71 @@
 
 <script>
 export default {
-    data() {
-        return {
-          topic: '주제',
-          diff: '난이도',
-          topic_options: [
-            { text: 'FRUIT', value: 1 },
-            { text: 'ANIMAL', value: 2 },
-          ],
-          diff_options: [
-            { text: 'EASY', value: 5 },
-            { text: 'MIDDLE', value: 4 },
-            { text: 'HARD', value: 3 }
-          ],
-        }
-    },
-    name: "HangManMain",
-    components: {
-    },
-    methods: {
-      gotoHangManPage() {
-        if (this.topic === '주제'){
-          alert('주제를 선택해주세요')
-        } else if (this.diff === '난이도') {
-          alert('난이도를 선택해주세요')
-        } else {
-          this.$router.push({ name: 'HangManPage', params: { topic: this.topic, diff: this.diff}})
-        }
+  data() {
+    return {
+      topic: "주제",
+      diff: "난이도",
+      topic_options: [
+        { text: "FRUIT", value: 1 },
+        { text: "ANIMAL", value: 2 },
+      ],
+      diff_options: [
+        { text: "EASY", value: 5 },
+        { text: "MIDDLE", value: 4 },
+        { text: "HARD", value: 3 },
+      ],
+    };
+  },
+  name: "HangManMain",
+  components: {},
+  methods: {
+    gotoHangManPage() {
+      var audio = document.getElementById("gameStart");
 
-        // // 이름을 가지는 라우트
-        // router.push({ name: 'user', params: { userId: 123 }})
+      if (this.topic === "주제") {
+        alert("주제를 선택해주세요");
+      } else if (this.diff === "난이도") {
+        alert("난이도를 선택해주세요");
+      } else {
+        audio.play();
+        setTimeout(1000);
+        this.$router.push({
+          name: "HangManPage",
+          params: { topic: this.topic, diff: this.diff },
+        });
       }
-    },
-    updated: {
 
+      // // 이름을 가지는 라우트
+      // router.push({ name: 'user', params: { userId: 123 }})
     },
+  },
+  updated: {},
 };
 </script>
 
 <style scoped>
-.hangman-main .hangman-desc{
+.hangman-main .hangman-desc {
   display: flex;
   margin-top: 5vh;
   margin-bottom: 5vh;
-} 
+}
 
-.hangman-main .hangman-desc h1{
+.hangman-main .hangman-desc h1 {
   margin: 0 5vh 0 10vh;
   font-size: 3.75rem;
   /* font-weight: bold; */
   font-family: BinggraeSamanco-Bold;
-  
-} 
+}
 
-.hangman-main .hangman-desc h2{
+.hangman-main .hangman-desc h2 {
   font-family: GowunDodum-Regular;
   font-size: 1.125rem;
   margin: 3vh 5vh 0 0;
-} 
+}
 
-.hangman-main .hangman-main-box{
+.hangman-main .hangman-main-box {
   display: flex;
-  background-color: #F4F1EB;
+  background-color: #f4f1eb;
   height: 50vh;
   width: 60%;
   margin: auto;
@@ -107,14 +128,14 @@ export default {
   box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.733);
 }
 
-.hangman-main .hangman-main-box .hangman-thumbnail-box{
+.hangman-main .hangman-main-box .hangman-thumbnail-box {
   background-color: rgb(158, 157, 157);
   width: 50%;
   height: 80%;
   margin: auto;
   border-radius: 20px;
 }
-.hangman-main .hangman-main-box .hangman-select-box{
+.hangman-main .hangman-main-box .hangman-select-box {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -128,21 +149,21 @@ export default {
   height: 20%;
   /* background-color: #E5D2BD; */
   border-radius: 20px;
-  font-family: 'SDSamliphopangche_Basic';
+  font-family: "SDSamliphopangche_Basic";
   font-size: 2rem;
-  color: #B59E7A;
+  color: #b59e7a;
 }
 
 .hangman-main .hangman-main-box .hangman-select-box .hangman-topic {
   width: 100%;
   height: 20%;
-  background-color: #E5D2BD;
+  background-color: #e5d2bd;
   box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.733);
   border-radius: 40px;
   display: inline-block;
   overflow: hidden;
   border: 3px solid #957457;
-  font-family: 'SDSamliphopangche_Basic';
+  font-family: "SDSamliphopangche_Basic";
   font-size: 2rem;
   color: #957457;
 }
@@ -150,7 +171,7 @@ export default {
 .hangman-main .hangman-main-box .hangman-select-box .hangman-topic .selectBox {
   border: 0px;
   outline: none;
-  background-color: #E5D2BD;
+  background-color: #e5d2bd;
   color: #957457;
   width: 100%;
 }
@@ -158,13 +179,13 @@ export default {
 .hangman-main .hangman-main-box .hangman-select-box .hangman-diff {
   width: 100%;
   height: 20%;
-  background-color: #E5D2BD;
+  background-color: #e5d2bd;
   box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.733);
   border-radius: 40px;
   display: inline-block;
   overflow: hidden;
   border: 3px solid #957457;
-  font-family: 'SDSamliphopangche_Basic';
+  font-family: "SDSamliphopangche_Basic";
   font-size: 2rem;
   color: #957457;
 }
@@ -172,7 +193,7 @@ export default {
 .hangman-main .hangman-main-box .hangman-select-box .hangman-diff .selectBox {
   border: 0px;
   outline: none;
-  background-color: #E5D2BD;
+  background-color: #e5d2bd;
   color: #957457;
   width: 100%;
 }
@@ -182,12 +203,12 @@ export default {
   height: 20%;
   background-color: #957457;
   box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.733);
-  border-radius: 40px;    
+  border-radius: 40px;
   cursor: pointer;
-  border: 3px solid #E5D2BD;
-  font-family: 'SDSamliphopangche_Basic';
+  border: 3px solid #e5d2bd;
+  font-family: "SDSamliphopangche_Basic";
   font-size: 2rem;
-  color: #E5D2BD;
+  color: #e5d2bd;
 }
 
 /* 이미지들 */
@@ -212,6 +233,5 @@ img.Shape-2 {
   left: 0%;
   top: 87.5%;
   height: 12.5%;
-  }
-
+}
 </style>

@@ -1,15 +1,38 @@
 <template>
   <div class="hangman-row">
+    <audio
+      autoplay
+      id="gameStart"
+      src="@/assets/music/pageMove/Jump High.mp3"
+    ></audio>
     <div class="game-container">
       <HangManGame
         ref="game"
         @lifeLoss="lifeLoss"
         @scoreChange="scoreChange"
+        @answers="answers"
         :topic="topic"
         :diff="diff"
       />
       <img class="ground" src="@/assets/WordGuess/back.png" />
-      <img class="wolf" src="@/assets/WordGuess/wolf-1.png" />
+      <!-- <img class="wolf" src="@/assets/WordGuess/wolf-1.png" /> -->
+      <img
+        class="wolf"
+        v-if="answer == true"
+        src="@/assets/WordGuess/wolf4.png"
+      />
+      <img
+        class="wolf"
+        v-else-if="life != 0"
+        src="@/assets/WordGuess/wolf1.png"
+      />
+
+      <img
+        class="wolf"
+        v-else-if="life == 0"
+        src="@/assets/WordGuess/wolf3.png"
+      />
+
       <!-- <img v-bind:class="{}" src="@/assets/WordGuess/bird.png" /> -->
       <img class="cage" src="@/assets/cage.png" v-bind:style="cage(life)" />
       <div>
@@ -121,24 +144,7 @@ export default {
       modelLoaded: false,
       minimizeCamera: false,
       count: 0,
-      //   items: [
-      //     {
-      //       bottom: "23.5%",
-      //       left: "72%",
-      //     },
-      //     {
-      //       bottom: "23%",
-      //       left: "65%",
-      //     },
-      //     {
-      //       bottom: "15%",
-      //       left: "50%",
-      //     },
-      //     {
-      //       bottom: "11%",
-      //       left: "40%",
-      //     },
-      //   ],
+      answer: false,
     };
   },
   name: "HangManPage",
@@ -172,6 +178,10 @@ export default {
     },
     scoreChange: function (payload) {
       this.score = this.score + payload;
+      this.answer = true;
+    },
+    answers: function (answer) {
+      this.answer = answer;
     },
     info: function (life) {
       if (life == 5) {
@@ -199,6 +209,10 @@ export default {
   },
   created: function () {
     this.life = this.diff.value;
+    this.answer = false;
+    // var audio = document.getElementById("gameStart");
+
+    // audio.play();
   },
   computed() {
     // this.count = this.$refs.camera.count/150;
@@ -242,11 +256,11 @@ export default {
 .hangman-row .game-container .wolf {
   z-index: 3;
 
-  width: 25%;
+  width: 55%;
   /* height: 37%; */
   position: absolute;
-  bottom: 8%;
-  left: 15%;
+  bottom: -3%;
+  left: 2%;
 }
 
 .hangman-row .game-container .bird {
@@ -407,14 +421,14 @@ export default {
 .cage {
   z-index: 5;
 
-  width: 16%;
+  width: 20%;
   /* height: 37%; */
   position: absolute;
   bottom: 80%;
-  left: 37%;
+  left: 35%;
   display: none;
   animation-name: cage;
-  animation-duration: 2s;
+  animation-duration: 1s;
   animation-timing-function: linear;
   /* animation-iteration-count: infinite; */
   /* animation-direction: alternate; */

@@ -1,5 +1,10 @@
 <template>
   <div>
+    <audio id="answer" src="@/assets/music/answer/Correct 1.mp3"></audio>
+    <audio
+      id="wrongAnswer"
+      src="@/assets/music/wrongAnswer/Error 2.mp3"
+    ></audio>
     <!-- <b-button @click="show = true" variant="primary">게임 시작하기</b-button> -->
 
     <!-- <b-modal
@@ -100,7 +105,6 @@
         id="nextstage"
         style="padding: 0; border: none; background: none; display: none"
         v-on:click="nextWord"
-        v-
       >
         <b-icon
           icon="arrow-right-short"
@@ -212,6 +216,8 @@ export default {
   },
   methods: {
     listener(letter) {
+      var answer = document.getElementById("answer");
+      var wrongAnswer = document.getElementById("wrongAnswer");
       // if (!this.online) {
       //   this.startGame();
       // }
@@ -222,10 +228,12 @@ export default {
         if (this.selected.includes(letter)) {
           this.correct.push(letter);
           this.updateCorrect(letter);
+          answer.play();
         } else {
           if (!this.wrongs.includes(letter)) {
             this.wrongs.push(letter);
             this.updateWrongs();
+            wrongAnswer.play();
           }
         }
       }
@@ -404,6 +412,7 @@ export default {
       if (this.countCorrect === this.selected.length) {
         this.score += 10;
         this.$emit("scoreChange", 10);
+
         // alert("정답입니다 :) ");
         // setTimeout(function(){ alert("Hello").close }, 3000);
 
@@ -431,6 +440,7 @@ export default {
       this.selected = this.words[Math.floor(Math.random() * this.words.length)];
       // message.classList.add("hidden"); // add
       // resetButton.classList.add("disabled");
+      this.$emit("answers", false);
 
       this.countError = 0;
       this.correct = [];
@@ -587,7 +597,7 @@ export default {
   left: 50%;
   transform: translateX(-50%);
 }
-.word-letters-container {
+/* .word-letters-container {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -595,7 +605,17 @@ export default {
   display: flex;
   flex-direction: row;
   text-align: right;
+} */
+.word-letters-container #nextstage {
+  position: absolute;
+  top: 8%;
+  left: 70%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: row;
+  text-align: right;
 }
+
 .word-letters-container p {
   margin: 0 0 5px;
 }
@@ -669,19 +689,23 @@ export default {
 .answer {
   width: 40px;
   margin: 3px;
+  height: 2.625rem;
   color: white;
   /* background: gray; */
   border-radius: 20%;
   background: #e5d2bd;
   /* transform: scale(1, 2); */
+  border: solid #69c995 2px;
 }
 .wrongAnswer {
   width: 40px;
+  height: 2.625rem;
   margin: 3px;
   color: white;
   /* background: gray; */
   border-radius: 20%;
   background: #e5d2bd;
+  border: solid #f4775c 2px;
   /* transform: scale(1, 2); */
 }
 
