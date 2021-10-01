@@ -7,7 +7,7 @@ djangorestframework==3.12.4
 djangorestframework-jwt==1.11.0
 hangul-utils==0.2
 idna==3.2
-
+mysqlclient==2.0.3
 PyJWT==1.7.1
 PyMySQL==1.0.2
 pytz==2021.1

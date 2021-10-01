@@ -1,63 +1,50 @@
 <template>
   <div>
-    <img src="@/assets/deco.png" class="decoImg" />
-    <div class="imgLeft">
-      <img src="@/assets/signUp.png" class="signImg" />
-    </div>
-    <div class="signMain">
-      <div style="font-size: 1.5rem; text-align: left">CREATE ACOUNT</div>
-      <div class="googleLogin">
-        <button type="button" class="googleBtn">
-          <img
-            src="@/assets/googleLogo.png"
-            alt=""
-            style="margin: 1%; width: 26%; height: 90%"
-          />
-          구글로 로그인</button
-        ><button type="button" class="googleBtn">
-          <img
-            src="@/assets/googleLogo.png"
-            alt=""
-            style="margin: 1%; width: 26%; height: 90%"
-          />
-          구글로 로그인
-        </button>
-      </div>
-      <div style="color: #868c93; text-decoration: underline">OR</div>
-
-      <div class="group-field">
-        <div class="input-group clearfix">
-          <input
-            id="email"
-            name="email"
-            type="text"
-            inputmode="email"
-            class=""
-            value=""
-            placeholder="Email Address"
-          />
-        </div>
-      </div>
-      <div class="group-field">
-        <div class="input-group">
-          <input
-            type="password"
-            id="password"
-            name="password"
-            class=""
-            value=""
-            style="display: block"
-            placeholder="Password"
-          /><input
-            type="text"
-            id="_password"
-            name=""
-            class=""
-            placeholder=""
-            value=""
-            style="display: none"
-          />
-          <!-- <a
+    <div class="account-wrapper">
+      <div class="wrap_inner clearfix">
+        <div class="wrap-form">
+          <form>
+            <fieldset>
+              <div class="wrap-form">
+                <div class="group-field">
+                  <div class="input-group-label">
+                    <label for="" class="mendantory">이메일</label>
+                  </div>
+                  <div class="input-group clearfix">
+                    <input
+                      id="email"
+                      name="email"
+                      type="text"
+                      inputmode="email"
+                      class=""
+                      value=""
+                    />
+                  </div>
+                </div>
+                <div class="group-field">
+                  <div class="input-group-label">
+                    <label for="" class="mendantory">비밀번호</label>
+                  </div>
+                  <div class="input-group">
+                    <div style="position: relative' width: 100%">
+                      <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        class=""
+                        placeholder=""
+                        value=""
+                        style="width: 100%; display: block"
+                      /><input
+                        type="text"
+                        id="_password"
+                        name=""
+                        class=""
+                        placeholder=""
+                        value=""
+                        style="width: 100%; display: none"
+                      />
+                      <!-- <a
                         href=""
                         class=""
                         tabindex="-1"
@@ -76,35 +63,154 @@
                         "
                         ><i class="ico visible-eye-on"></i
                       ></a> -->
+                    </div>
+                    <ul class="validation-check">
+                      <li>
+                        <i class="ico check-small disabled"></i>영문, 숫자,
+                        특수문자 2개 이상 조합
+                      </li>
+                      <li><i class="ico check-small disabled"></i>6~16자리</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="group-field">
+                  <div class="input-group-label">
+                    <label for="" class="mendantory">비밀번호 확인</label>
+                  </div>
+                  <div class="input-group">
+                    <div style="position: relative">
+                      <input
+                        type="password"
+                        id="passwordConfirm"
+                        name="passwordConfirm"
+                        class=""
+                        placeholder=""
+                        value=""
+                        style="width: 100%; display: block"
+                      /><input
+                        type="text"
+                        id="_passwordConfirm"
+                        name=""
+                        class=""
+                        placeholder=""
+                        value=""
+                        style="width: 100%; display: none"
+                      /><a
+                        href=""
+                        class=""
+                        tabindex="-1"
+                        style="
+                          position: absolute;
+                          top: 50%;
+                          right: 6px;
+                          margin-top: -17px;
+                          padding: 4px 10px;
+                          background: transparent;
+                          border-radius: 2px;
+                          color: rgb(0, 0, 0);
+                          text-align: center;
+                          text-decoration: none;
+                          user-select: none;
+                        "
+                        ><i class="ico visible-eye-on"></i
+                      ></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="group-field">
+                  <div class="input-group-label">
+                    <label for="">닉네임</label>
+                  </div>
+                  <div class="input-group">
+                    <input
+                      type="text"
+                      id="nickname"
+                      name="nickname"
+                      placeholder="실명은 사용하지 않는 것이 좋습니다. "
+                      value=""
+                    />
+                  </div>
+                </div>
+                <!-- <div class="group-field">
+                  <div class="input-group-label">
+                    <label for="">성별</label>
+                  </div>
+                  <div class="input-group">
+                    <div class="input-group clearfix">
+                      <fieldset>
+                        <input
+                          name="gender"
+                          id="M"
+                          type="radio"
+                          class="radio-button"
+                          form="[object Object]"
+                          value="M"
+                        /><label for="M">남자</label
+                        ><input
+                          name="gender"
+                          id="F"
+                          type="radio"
+                          class="radio-button"
+                          form="[object Object]"
+                          value="F"
+                        /><label for="F">여자</label>
+                      </fieldset>
+                    </div>
+                  </div>
+                </div>
+                <div class="group-field">
+                  <div class="input-group-label">
+                    <label for="" class="mendantory">생년월일</label>
+                  </div>
+                  <div class="input-group">
+                    <input
+                      id="birthday"
+                      name="birthday"
+                      placeholder="yyyy/mm/dd"
+                      autocomplete="on"
+                      type="text"
+                      class=""
+                      value=""
+                    />
+                  </div>
+                </div> -->
+                <div class="group-field">
+                  <div class="input-group checks">
+                    <input id="checkOver14" type="checkbox" /><label
+                      for="checkOver14"
+                      ><small
+                        >본인이 만 14세 이상임을 확인합니다.(필수)</small
+                      ></label
+                    >
+                  </div>
+                </div>
+                <div class="group-field">
+                  <div class="input-group button-group" style="display: block">
+                    <div>
+                      <button
+                        type="submit"
+                        class="button-normal larger disabled"
+                        disabled=""
+                        @click="login"
+                      >
+                        회원가입
+                      </button>
+                    </div>
+                    <div>
+                      <button
+                        class="button-normal color-gray larger"
+                        type="button"
+                        @click="login"
+                      >
+                        취소
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+          </form>
         </div>
-      </div>
-      <div class="group-field">
-        <div class="input-group">
-          <input
-            type="text"
-            id="nickname"
-            name="nickname"
-            placeholder="Nickname "
-            value=""
-          />
-        </div>
-      </div>
-      <div>
-        <button
-          type="submit"
-          class="button-normal larger disabled"
-          disabled=""
-          @click="login"
-        >
-          Sign In
-        </button>
-      </div>
-
-      <div class="group-field">
-        <div style="color: #858484; text-align: left; float: left">
-          이미 계정이 있으신가요? &nbsp;
-        </div>
-        <div @click="login" style="color: #4285f4; float: left">로그인</div>
       </div>
     </div>
   </div>
@@ -149,109 +255,11 @@ export default {
 </script>
 
 <style>
-.imgLeft {
-  display: flex;
-  z-index: 1;
-  width: 49%;
-  height: 100%;
-  position: absolute;
-  background-image: linear-gradient(to right, #fff, #fdf9e8);
-}
-.decoImg {
-  left: 0px;
-  object-fit: contain;
-  margin: 5% 2%;
-  width: 53%;
-  height: 75%;
-  z-index: 3;
-  position: absolute;
-}
-.signImg {
-  object-fit: contain;
-  margin: 37.5% 10%;
-  z-index: 4;
-  width: 80%;
-  height: 23%;
-  position: absolute;
-}
-.signMain {
-  display: flex;
-  z-index: 2;
-  width: 55%;
-  height: 100%;
-  right: 0px;
-  position: absolute;
-  border-radius: 7.63rem;
-  background-color: #fff;
-  padding: 3% 6%;
-  flex-direction: column;
-  float: center;
-}
-.googleLogin {
-  width: 100%;
-  height: 20%;
-}
-.googleBtn {
-  font-size: 90%;
-  width: 28%;
-  height: 35%;
-  padding: 1%;
-  margin: 8%;
-  background-color: #fff;
-  border-radius: 0.75rem;
-  box-shadow: 0rem 0.19rem 0.38rem 0rem rgba(0, 0, 0, 0.4);
-  border: solid 0.13rem #8c8c8c;
-}
-.input-group {
-  width: 100%;
-  height: 100%;
-  padding: 3% 10%;
-  border: 0px;
-  margin: 1%;
-  /* text-align: left; */
-  /* border-bottom: 2px; */
-}
-#email {
-  width: 90%;
-  height: 100%;
-  border: 0;
-  border-bottom: 3px solid #868c93;
-  margin: 2%;
-}
-#password {
-  width: 90%;
-  height: 100%;
-  border: 0;
-  border-bottom: 3px solid #868c93;
-  margin: 2%;
-}
-#nickname {
-  width: 90%;
-  height: 100%;
-  border: 0;
-  border-bottom: 3px solid #868c93;
-  margin: 2%;
-}
-
-.button-normal {
-  margin: 5% 0 10% 0;
-  font-size: 110%;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  width: 20%;
-  height: 4 0%;
-  border-radius: 0.75rem;
-  box-shadow: 0rem 0.19rem 0.38rem 0rem rgba(0, 0, 0, 0.4);
-  background-color: #3a80f3;
-  color: white;
-}
-
-.account-wrapper .wrap_inner .group-field {
+.account-wrapper .wrap_inner .group-field .input-group-label {
   position: relative !important;
 }
 
-.account-wrapper .wrap-form .group-field {
+.account-wrapper .wrap-form .group-field .input-group-label {
   text-align: left;
   left: 0px;
   min-height: 20.5px;
