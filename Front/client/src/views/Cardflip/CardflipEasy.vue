@@ -394,6 +394,27 @@ export default {
   transform: rotateY(180deg);
 }
 
+.cardBackImage {	
+  width: 33vh;	
+  height: 28vh;	
+  border-radius: 20px;	
+}	
+.cardImage {	
+  width: 33vh;	
+  height: 28vh;	
+  border: solid 0.3vh #E5D2BD;	
+  border-radius: 20px;	
+}	
+.cardFont {	
+  color: #b88b64;	
+  font-size: 3rem;	
+  font-family: 'SDSamliphopangche_Basic';	
+  margin-bottom: 0;  	
+  padding: 0;	
+  margin-top: 1.5vh;	
+}
+
+
 /* game-over modal */
 
 
