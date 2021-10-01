@@ -12,7 +12,7 @@
         </button>
       </p>
       <p class="letters" v-else>
-        <button v-for="(word, index) in words" :key="word" @click="[no=index%2, setAlphabet(word.mean)]">
+        <button v-for="(word, index) in words" :key="word" @click="[no=index, setAlphabet(word.mean)]">
           {{ word.mean }}
         </button>
       </p>

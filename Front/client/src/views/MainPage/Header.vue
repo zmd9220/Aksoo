@@ -244,7 +244,7 @@ export default {
   border-style: none;
   border-radius: 30px;
   font-family: BinggraeSamanco-Bold;
-  font-size: 1.75rem;
+  font-size: 3.5vh;
   padding-top: 2px;
 }
 </style>
