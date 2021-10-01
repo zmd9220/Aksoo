@@ -95,11 +95,11 @@
                   Game Over!
                   <hr />
 
-                  <div class="game-result">
+                  <!-- <div class="game-result">
                     <p>Score: {{ score }}</p>
                     <p>Your Highest Score:</p>
                     <p>Ranking:</p>
-                  </div>
+                  </div> -->
 
                   <button
                     class="btn btn-danger pull-right"
@@ -117,16 +117,16 @@
               <!-- <img src="./background.gif" class="bg" style="object-fit: fill" /> -->
             </div>
           </div>
-          <div class="panel-footer">
+          <!-- <div class="panel-footer">
             <strong>Score: {{ score }}</strong>
             <strong
               >Life :
               <span v-for="idx in hart" :key="idx">
                 <img src="./heart.gif" style="width: 20px" /> </span
             ></strong>
-          </div>
+          </div> -->
         </div>
-        <hr />
+        <!-- <hr /> -->
       </div>
     </div>
     <div class="acid_right">
@@ -305,7 +305,7 @@ export default {
       var boxes = document.querySelectorAll("#box > div");
       for (var i = 0; i < boxes.length; i++) {
         boxes[i].style.bottom = parseInt(boxes[i].style.bottom) - 8 + "px";
-        if (parseInt(boxes[i].style.bottom) <= -10) {
+        if (parseInt(boxes[i].style.bottom) <= 50) {
           boxes[i].remove();
           this.hart = parseInt(this.hart) - 1;
           this.decreaseLetterSpeed(hart);
@@ -443,7 +443,12 @@ export default {
     //     resetButton.onclick = resetGame;
     // })
   },
-  created() {},
+  created() {
+    this.endGame();
+  },
+  destroyed() {
+    this.endGame();
+  },
 };
 </script>
 
@@ -462,7 +467,7 @@ export default {
   width: 100%;
   /* background: url("./background.gif"); */
   /* background-size: 100% 100%; */
-  background-image: linear-gradient(to top, #dfe9f3, #fff);
+  background-image: linear-gradient(to top, #fff, #dfe9f3);
   border-radius: 3rem;
   box-shadow: 0.31rem 0.38rem 0.44rem 0rem rgba(0, 0, 0, 0.43);
 
@@ -472,7 +477,6 @@ export default {
   font-size: 55px;
   font-weight: bold;
   color: purple;
-  position: relative;
 }
 
 #box > .ground {

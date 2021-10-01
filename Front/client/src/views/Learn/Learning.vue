@@ -17,7 +17,9 @@
         </button>
       </p>
       <b-button>즐겨찾기 추가 {{ selectAlphabet }}</b-button>
-      <img v-bind:src="require(`${imgSrclist[no]}`)" width="500rem">
+      <!-- <img v-bind:src="require(`${imgSrclist[no]}`)" width="500rem"> -->
+      <img v-bind:src="require(`@/assets/letters/${selectAlphabet}.jpg`)" width="500rem">
+      <!-- <img v-bind:src=imgSrclist width="500rem"> -->
     </div>
 
     <!-- 카메라 -->
@@ -55,9 +57,10 @@ import Loading from "@/components/Loading.vue";
 export default {
   data: function () {
     return {
-      imgSrclist: ['./letters/ㄱ.jpg', './letters/ㄴ.jpg', './letters/ㄷ.jpg', './letters/ㄹ.jpg', './letters/ㅁ.jpg', './letters/ㅂ.jpg'],
-      no: 0,
       select: this.$route.params.select,
+      // imgSrclist: ['./fingerspelling_kor_cons.jpg', './fingerspelling_kor_vowels_1.jpg'],
+      // imgSrclist: require('@/assets/letters/'+'ㄱ'+'.jpg'),
+      no: 0,
       selectAlphabet: String,
       words: Object,
       mode_letter: 0,
@@ -73,15 +76,15 @@ export default {
   },
   methods: {
     cameraData: function(payload1, payload2) {
-            this.letter = payload1;
-            this.confidence = payload2;
+      this.letter = payload1;
+      this.confidence = payload2;
     },
     modeChange: function() {
-        this.mode_letter = 1 - this.mode_letter;
-        this.$refs.camera.modeChange();
+      this.mode_letter = 1 - this.mode_letter;
+      this.$refs.camera.modeChange();
     },
     input: function(letter) {
-            this.$refs.game.listener(letter);
+      this.$refs.game.listener(letter);
     },
     changePicture() {
       // this.no = (this.no)%(this.imgSrclist.length);
@@ -109,7 +112,7 @@ export default {
   mounted: function () {
     axios({
       method: 'GET',
-      url: "http://127.0.0.1:8000/learn/getWords/" + this.select
+      url: "http://127.0.0.1:8000/learn/getWords/" + this.$route.params.select
     }).then ((res) => {
       console.log(res)
       console.log(res.data)
@@ -117,7 +120,7 @@ export default {
       if (this.select === 'word') {
         this.setAlphabet(this.words[0].word[0])
       } else {
-        this.setAlphabet(this.words.mean[0])
+        this.setAlphabet(this.words[0].mean)
       }
     }).catch((error) => {
       console.log(error)

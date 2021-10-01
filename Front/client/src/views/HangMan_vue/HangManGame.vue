@@ -59,7 +59,7 @@
       <button
         class="btn btn-danger pull-right"
         id="reset"
-        v-on:click="resetGame"
+        v-on:click="goMain"
       >
         <span class="glyphicon glyphicon-flash" id="reset"></span>
         ReStart
@@ -76,71 +76,13 @@
     <div class="game-container">
       <div class="topic-difficulty" id="options">
         <div class="topic">
-          {{ this.$route.params.topic }}
+          {{ this.$route.params.topic.text }}
         </div>  
         <div class="difficulty">
-          {{ this.$route.params.diff }}
+          {{ this.$route.params.diff.text }}
         </div>
       </div>
-      <!-- <svg height="250" width="200" class="figure-container"> -->
-        <!-- Rod -->
-        <!-- <line x1="60" y1="20" x2="140" y2="20" />
-        <line x1="140" y1="20" x2="140" y2="50" />
-        <line x1="60" y1="20" x2="60" y2="230" />
-        <line x1="20" y1="230" x2="100" y2="230" /> -->
-
-        <!-- Head -->
-        <!-- <circle
-          cx="140"
-          cy="70"
-          r="20"
-          class="figure-part"
-          v-if="this.countError > 0"
-        /> -->
-        <!-- Body -->
-        <!-- <line
-          x1="140"
-          y1="90"
-          x2="140"
-          y2="150"
-          class="figure-part"
-          v-if="this.countError > 1"
-        /> -->
-        <!-- Arms -->
-        <!-- <line
-          x1="140"
-          y1="120"
-          x2="120"
-          y2="100"
-          class="figure-part"
-          v-if="this.countError > 2"
-        />
-        <line
-          x1="140"
-          y1="120"
-          x2="160"
-          y2="100"
-          class="figure-part"
-          v-if="this.countError > 3"
-        /> -->
-        <!-- Legs -->
-        <!-- <line
-          x1="140"
-          y1="150"
-          x2="120"
-          y2="180"
-          class="figure-part"
-          v-if="this.countError > 4"
-        />
-        <line
-          x1="140"
-          y1="150"
-          x2="160"
-          y2="180"
-          class="figure-part"
-          v-if="this.countError > 5"
-        />
-      </svg> -->
+  
     </div>
 
     <div class="letter-container">
@@ -196,7 +138,7 @@
           {{ letter }}
         </div>
       </div>
-      <br />
+      <!-- <br />
       <div class="keyboard-line">
         <div
           class="keyword"
@@ -206,16 +148,10 @@
         >
           {{ letter }}
         </div>
-      </div>
+      </div> -->
     </div>
 
     <div class="wrong-letters-container">
-
-      <!-- <p>hart:</p>
-      <div>{{ 6 - countError }},</div> -->
-
-      <!-- <p>score:</p>
-      <div>{{ score }}</div> -->
     </div>
 
 
@@ -223,23 +159,19 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: "HangManGame",
   data() {
     return {
       wrongs: [],
-      words: [
-        "ㅇㅏ",
-        "ㅎㅏ",
-        // "ㅇㅏㄴㅂㅕㅇㅈㅣㄴ",
-        // "ㅇㅠㄱㅅㅡㅇㅈㅜㄴ",
-        // "ㅎㅏㅌㅐㄹㅣㄴ",
-      ],
+      words: [],
       correct: [],
       selected: "",
       online: false,
-      oportunities: 6,
       countError: 0,
+      life:3,
       countCorrect: 0,
       enter: "",
       answer: [],
@@ -260,21 +192,23 @@ export default {
       bodyTextVariant: "dark",
       footerBgVariant: "light",
       footerTextVariant: "dark",
-      difficulty: ["EASY", "MIDDLE", "HARD"],
-      topic: ["FOOD", "ANIMAL", "SPORT"],
       words1: [
-        "ㄱ", "ㄴ", "ㄷ", "ㄹ", "ㅁ", "ㅂ", "ㅅ", "ㅇ",
+        "ㄱ", "ㄴ", "ㄷ", "ㄹ", "ㅁ", "ㅂ", "ㅅ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ",
       ],
       words2: [
-        "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ", "ㅏ", "ㅑ", 
+        "ㅏ", "ㅑ", "ㅓ", "ㅕ", "ㅗ", "ㅛ", "ㅜ", "ㅠ", "ㅣ", "ㅡ",
       ],
       words3: [
-        "ㅓ", "ㅕ", "ㅗ", "ㅛ", "ㅜ", "ㅠ", "ㅣ", "ㅡ",
+        
       ],
       usedLetters: [],
       score: 0,
       gameover: false,
     };
+  },
+  props: {
+    topic: Object,
+    diff: Object,
   },
   methods: {
     listener(letter) {
@@ -300,6 +234,9 @@ export default {
       const valid = this.$refs.form.checkValidity();
       this.nameState = valid;
       return valid;
+    },
+    goMain() {
+      this.$router.push({ name: 'HangManMain'})
     },
     resetModal() {
       this.name = "";
@@ -422,7 +359,7 @@ export default {
 
       this.countError++;
       this.$emit('lifeLoss')
-      if (this.countError === 6) {
+      if (this.countError === this.life) {
         this.toggleText();
         // this.online = false;
         // var modal = document.getElementById("gameovermodal");
@@ -464,7 +401,7 @@ export default {
       // console.log(aux);
       this.countCorrect += aux;
       // console.log(this.countCorrect);
-      // console.log(this.countCorrect);
+
       if (this.countCorrect === this.selected.length) {
         this.score += 10;
         this.$emit("scoreChange", 10);
@@ -513,7 +450,7 @@ export default {
     showModal() {
     let element = this.$refs.gameovermodal.$el
     element.modal('show')
-    }
+    },
     // resetKeyboard() {
     //   console.log(1);
     //   for (let i = 0; i < this.words1.length; i++) {
@@ -527,13 +464,39 @@ export default {
     //   }
     //   console.log(3);
     // },
+  getWords: function () {
+    // 상품정보를 받아오는 axios
+    const localURL = "http://127.0.0.1:8000/games/hangman/"+ this.topic.value ;
+    axios
+        .get(localURL) 
+        .then((res) => {
+          // for (var key1 in res.data){
+          //   console.log(key1);
+          // }
+          res.data.forEach(element => {
+            this.words.push(element.word);
+          });
+        })
+        .then(() => {
+          this.resetGame;
+          this.startGame();
+        })
+        .catch(() => {
+        // console.log(err)
+        });
+    },
   },
   created() {
+
     // document.onkeydown = (evt) => {
     //   evt = evt || window.event;
     //   this.listener(evt);
     // };
-    this.startGame();
+    this.life = this.diff.value;
+    this.getWords();
+
+  },
+  mounted() {
   },
   destroyed() {
     // console.log(1);
@@ -547,8 +510,8 @@ export default {
   padding: 20px 30px;
   position: relative;
   margin: auto;
-  height: 300px;
-  width: 450px;
+  /* height: 300px;
+  width: 450px; */
 }
 #message {
   display: block;
@@ -589,16 +552,22 @@ export default {
   display: column;
 }
 .topic-difficulty .topic {
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-family: 'SDSamliphopangche_Basic';
-  color: #eec28d;
-  text-shadow: 0px 3px 2.9px rgba(0, 0, 0, 0.21);
+  color: #fff;
+  position: absolute;
+  top: 700%;
+  left: 59%;
+  z-index: 3;
 }
 .topic-difficulty .difficulty {
   font-size: 1.5rem;
   font-family: 'SDSamliphopangche_Basic';
-  color: #eec28d;
-  text-shadow: 0px 3px 2.9px rgba(0, 0, 0, 0.21);
+  color: #fff;
+  position: absolute;
+  top: 820%;
+  left: 60%;
+  z-index: 3; 
 }
 .wrong-letters-container {
   position: absolute;
@@ -719,4 +688,44 @@ export default {
   background: #e5d2bd;
   /* transform: scale(1, 2); */
 }
+
+/* 이미지 */
+/* .background-img{
+  height: 700px;
+  width: 100%;
+  background: url("./background.gif");
+  background-size: 100% 100%;
+  background-image: linear-gradient(to top, #dfe9f3, #fff);
+  border-radius: 3rem;
+  box-shadow: 0.31rem 0.38rem 0.44rem 0rem rgba(0, 0, 0, 0.43);
+
+  overflow: hidden;
+  position: relative;
+  font-family: "Georgia";
+  font-size: 55px;
+  font-weight: bold;
+  color: purple;
+  position: relative;
+} */
+
+/* .background-img .sky {
+  z-index: 2;
+
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+
+} */
+/* .background-img .sky {
+  position: absolute;
+  z-index: 0;
+  left: 0%;
+  top: 10%;
+  width: 100%;
+  height: 90%;
+} */
+
+
 </style>
