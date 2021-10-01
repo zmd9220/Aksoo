@@ -8,12 +8,15 @@ from rest_framework.decorators import api_view, authentication_classes, permissi
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
-from .models import User, TierCode
+# from .models import User, TierCode
+from .models import TierCode
 from .serializer import UserSerializer
 from games.models import Hangman, AcidRain, CardMatching
 from games.serializer import HangmanSerializer, AcidRainSerializer, CardMatchingSerializer
 from learn.models import Word
 from learn.serializer import WordSerializer
+
+# from rest_framework_jwt
 
 from hangul_utils import split_syllables, join_jamos
 

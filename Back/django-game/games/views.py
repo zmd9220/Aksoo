@@ -1,14 +1,21 @@
 from django.shortcuts import render, get_object_or_404, get_list_or_404
 # from .serializer import UserDetailSerializer, UserSerializer
+from django.contrib.auth import get_user_model
+
 from rest_framework.response import Response
 from rest_framework import serializers, status
-from .models import User, Word, Hangman, AcidRain, CardMatching
-from .serializer import WordSerializer, HangmanSerializer, AcidRainSerializer, CardMatchingSerializer, UserSerializer
-from django.contrib.auth import get_user_model
 
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+
+from .models import Hangman, AcidRain, CardMatching
+from .serializer import HangmanSerializer, AcidRainSerializer, CardMatchingSerializer
+from learn.models import Word
+from learn.serializer import WordSerializer 
+# from accounts.models import User
+from accounts.serializer import UserSerializer
+
 from hangul_utils import split_syllables, join_jamos
 
 
@@ -29,7 +36,7 @@ def set_score(request, select_game):
     print(request.user)
     # 현재 유저 정보 가져오기
     # user = get_object_or_404(User, id=request.user.id)
-    user = get_object_or_404(User, id=7)
+    user = get_object_or_404(get_user_model(), id=7)
     # 행맨
     if select_game == 3:
         # 현재 hangman 테이블에 이번에 들어온 유저 기록이 존재할 경우
@@ -86,7 +93,7 @@ def set_score(request, select_game):
 @api_view(['GET'])
 def ranking(request, select_game):
     # 행맨
-    user = get_object_or_404(User, id=7)
+    user = get_object_or_404(get_user_model(), id=7)
     if select_game == 3:
         # 현재 hangman 테이블에 이번에 들어온 유저 기록이 존재할 경우
         hangman_list = get_list_or_404(Hangman.objects.order_by('score'))

@@ -62,6 +62,7 @@ test/
 # Django
 /Back/**/venv
 /Back/**/__pycache__
+/Back/**/db.sqlite3
 
 
 ### AI  #################
