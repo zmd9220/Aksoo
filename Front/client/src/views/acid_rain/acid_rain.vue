@@ -1,5 +1,10 @@
 <template>
   <div class="acid">
+    <audio id="answer" src="@/assets/music/answer/Correct 1.mp3"></audio>
+    <audio
+      id="wrongAnswer"
+      src="@/assets/music/wrongAnswer/Error 2.mp3"
+    ></audio>
     <template v-if="!modelLoaded">
       <loading message="👋 Loading hand detection model..." />
     </template>
@@ -330,9 +335,12 @@ export default {
 
     moveLetters: function () {
       var boxes = document.querySelectorAll("#box > div");
+      var wrongAnswer = document.getElementById("wrongAnswer");
+
       for (var i = 0; i < boxes.length; i++) {
         boxes[i].style.bottom = parseInt(boxes[i].style.bottom) - 8 + "px";
         if (parseInt(boxes[i].style.bottom) <= 50) {
+          wrongAnswer.play();
           boxes[i].remove();
           this.hart = parseInt(this.hart) - 1;
           this.decreaseLetterSpeed(hart);
@@ -401,15 +409,16 @@ export default {
       // score.innerHTML = 0;
       this.score = 0;
       this.hart = 5;
-      console.log(1);
+      // console.log(1);
+
       var boxes = document.querySelectorAll("#quiz");
       for (var i = 0; i < boxes.length; i++) {
         boxes[i].remove();
       }
-      console.log(2);
+      // console.log(2);
       // console.log(1);
       this.endGame();
-      console.log(3);
+      // console.log(3);
       this.startGame();
       // console.log(3);
     },
@@ -432,6 +441,8 @@ export default {
       // console.log(this.test);
 
       if (boxes[0]) {
+        var answer = document.getElementById("answer");
+        answer.play();
         boxes[0].remove();
         // score.innerHTML = parseInt(score.innerHTML) + 1;
         this.score += 1;
