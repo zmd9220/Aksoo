@@ -12,23 +12,19 @@
     <div class="game-board">
       <div v-for="(card, index) in gameCards" 
       :key="`card-${index}`" 
-      :card="card" 
+      :class="{ flipped: card.isFlipped, 'opacity-25': card.isMatched }"
       class="flip-container"
       @click="clickCard(card)"
       >
-        <div v-if="card.isMatched"></div>
-        <div class="card flipped front" v-else-if="card.isFlipped">
-            <div class="card" v-if="card.image">
-              <img class="cardImage" :src="require(`@/assets/cardflip/${card.image}`)"/>
-            </div>
-            <div class="card" v-else>
-              <img class="cardImage" :src="require(`@/assets/cardflip/letter/${card.image1}`)"/>
-            </div>
-            <!-- <div class="letter">
-              {{card.letter}}
-            </div> -->
+        <div class="relative">
+          <div class="front" v-if="card.image">
+            <img class="cardImage" :src="require(`@/assets/cardflip/${card.image}`)"/>
+          </div>
+          <div class="front" v-else>
+            <img class="cardImage" :src="require(`@/assets/cardflip/letter/${card.image1}`)"/>
+          </div>
+          <div class="back"><img class="cardBackImage"  src="@/assets/cardflip/back.png" /></div>
         </div>
-        <div class="card back" v-else><img class="cardBackImage"  src="@/assets/cardflip/back.png" /></div>
       </div>
     </div>
     <div class="info-panel">
@@ -43,7 +39,12 @@
         <dir class="cardFont">Best score</dir>
         <dir class="score">2500</dir>
         <dir class="cardFont">Time</dir>
-        <div class="time">{{seconds}}</div>
+        <div>
+          <div id="check_btn" class="last-time" v-if="this.clock">
+            <div class="clock-font">{{seconds}}</div>
+          </div>
+          <div class="time" v-else >{{seconds}}</div>
+        </div>
       </div>
     </div>
   </div>
@@ -124,17 +125,17 @@ export default {
     }
   },
   created() {
-      // On first load shuffle cards for a new game
+      // 새로운 게임 시작시 카드 섞어주기
       this.shuffleCards()
   },
   methods: {
     startGame(){
-      // When game starts, start the timer process
+     // 카드 클릭하면 시간이 지나면서 게임 시작
       this.clockTick()
       this.timer = setInterval(this.clockTick, 1000)
     },
     resetGame(){
-      // when reset button is clicked, reset variables and reshuffle the cards
+      // 다시 시작하기
       this.totalTime = {
           seconds: 99
         }
@@ -142,10 +143,14 @@ export default {
       this.score = 0
       this.gameIsOver = false
       this.timer = null
+      this.clock = false
       this.shuffleCards()
     },
     clockTick(){
       this.totalTime.seconds--;
+      if(this.totalTime.seconds < 10){
+        this.clock = true;
+      }
       if(this.totalTime.seconds === 0){
         clearInterval(this.timer)
         this.gameIsOver = true;
@@ -153,39 +158,30 @@ export default {
           }
     },
     shuffleCards() {
-      // Clear game deck
       this.gameCards = []
-      // Create 2 sets of each of the 12 unique cards
       let cards1 = _.cloneDeep(this.cards1)
       let cards2 = _.cloneDeep(this.cards2)
-      // Load the game deck with both sets of cards and randomize them
       this.gameCards = _.shuffle(this.gameCards.concat(cards1, cards2))
     },
     clickCard(card){
-      // If game is not running, start it
       if(!this.timer){
         this.startGame()
       }
       if (card.isMatched || card.isFlipped || this.flippedCards.length === 2)
         return
-      // If the current card is not flipped then flip it
       if(!card.isFlipped) {
         card.isFlipped = true
-        // If there are less than 2 flipped cards, add this card
         if(this.flippedCards.length < 2) {
           this.flippedCards.push(card)
         }
-        // If there are 2 flipped cards, see if they match
         if(this.flippedCards.length === 2){
           this.matchCards()
         }
       }
     },
     matchCards() {
-        // If the cards match, increment the match count, set the cards as matched and reset the flipprd cards
         if(this.flippedCards[0].letter === this.flippedCards[1].letter) {
           this.totalMatches++
-          // Delay so player can see match before cards are removed
           setTimeout(()=> {
             this.flippedCards.forEach(card => card.isMatched = true)
             this.flippedCards = []
@@ -203,24 +199,16 @@ export default {
               }  
           }, 400)
         }
-        // If not a match, set the cards to not flipped and reset the flipped cards
         else {   
-          // Delay is a bit longer on a non-match       
           setTimeout(()=> {
             this.flippedCards.forEach(card => card.isFlipped = false)
             this.flippedCards = []
           }, 800)
         }
-        // If we have 12 matches, end the game
-        if(this.totalTime.seconds === 10){
-          clearInterval(this.timer)
-          this.gameIsOver = true
-        }
     }
   },
   computed:{
     seconds(){
-        // If single digit, display leading 0
         if(this.totalTime.seconds < 10){
             return `0${this.totalTime.seconds}`
         }
@@ -239,8 +227,6 @@ export default {
 }
 
 .cardFlip .info-panel{
-  /* background-color: #f4f1eb;
-  box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.733); */
   flex:15%;
   border-radius: 20px;
   margin: 2vh;
@@ -305,6 +291,32 @@ export default {
   font-size: 8rem;
 }
 
+@keyframes blink-effect {
+  50% {
+    opacity: 0;
+  }
+}
+
+.cardFlip .info-panel .last-time .clock-font{
+  animation: blink-effect 0.5s step-end infinite;
+  color: white;
+  font-family: 'SDSamliphopangche_Basic';
+  font-size: 8rem;
+}
+
+.cardFlip .info-panel .last-time{
+  width: 80%;
+  height: 25%;
+  border: solid 4px #b88b64;
+  background-color: #ff0000;;
+  margin-bottom: 0;
+  margin-top: 0;
+  margin-left: 3vh;
+  margin-right: 3vh;
+  border-radius: 40px;
+  box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.733);
+}
+
 
 .cardFlip .game-board {
   flex:85%;
@@ -317,21 +329,54 @@ export default {
   row-gap: 1vh;
 }
 
-.card {
-  width: 25vh;
+.flip-container {
+  perspective: 300;
+  width: 27vh;
+  height: 20vh;
+}
+
+.relative {
+  position: relative;
+}
+
+.front,
+.back {
+  backface-visibility: hidden;
+  transition: 0.6s;
+  transform-style: preserve-3d;
+  width: 27vh;
   height: 20vh;
   cursor: pointer;
+  position: absolute;
+}
+
+.flip-container .front {
+  width: 27vh;
+  height: 20vh;
+  transform: rotateY(-180deg);
+}
+
+.flip-container.flipped .front {
+  width: 27vh;
+  height: 20vh;
+  transform: rotateY(0deg);
+}
+.flip-container.flipped .back {
+  width: 27vh;
+  height: 20vh;
+  transform: rotateY(180deg);
+}
+
+.cardBackImage {
+  width: 27vh;
+  height: 20vh;
   border-radius: 20px;
 }
 
-.card .cardBackImage {
-  width: 102%; 
-  height: 100%;
-}
-
-.card .cardImage {
-  width: 100%; 
-  height: 100%;
+.cardImage {
+  width: 27vh;
+  height: 20vh;
+  border: solid 0.3vh #E5D2BD;
   border-radius: 20px;
 }
 
@@ -342,34 +387,6 @@ export default {
   margin-bottom: 0;  
   padding: 0;
   margin-top: 1.5vh;
-}
-
-
-.flip-container {
-  perspective: 1000;
-}
-
-.card .front {
-  backface-visibility: hidden;
-  transition: 0.6s;
-  transform-style: preserve-3d;
-  top: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-}
-
-.back {
-  border: 0px;
-  transform: rotateY(-180deg);
-  position: absolute;
-}
-
-.flip-container.flipped .back {
-  transform: rotateY(0deg);
-}
-.flip-container.flipped .front {
-  transform: rotateY(180deg);
 }
 
 </style>
