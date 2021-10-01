@@ -240,7 +240,7 @@ export default {
   font-stretch: normal;
   font-style: normal;
   width: 20%;
-  height: 40%;
+  height: 4 0%;
   border-radius: 0.75rem;
   box-shadow: 0rem 0.19rem 0.38rem 0rem rgba(0, 0, 0, 0.4);
   background-color: #3a80f3;
