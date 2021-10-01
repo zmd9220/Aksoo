@@ -1,12 +1,35 @@
 <template>
   <div id="app" class="cardFlip">
     <!-- gameover 모달 -->
-    <div v-if="gameIsOver" >
-      <b-modal v-model="show" id="bv-modal-example" hide-footer no-close-on-backdrop>
-        <p>game over</p>
-        <p>Score: {{score}}</p>
-        <b-button class="mt-3" block @click="resetGame">다시하기</b-button>
-        <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-example')">닫기</b-button>
+    <div v-if="gameIsOver">
+      <b-modal  v-model="show"  class="modal-border" size="sm"
+       id="bv-modal-example" hide-footer hide-header no-close-on-backdrop>
+        <b-button class="mt-3 modal-close-btn" block @click="$bvModal.hide('bv-modal-example')">
+              <span class="close-btn-txt">닫기</span></b-button>
+        <p class="game-over-text">GAME OVER</p>
+        <div class="modal-cardFont">Score</div>
+        <div class="modal-score">{{score}}</div>
+        <div class="row">
+          <div class="column">
+            <div class="modal-rank-cardFont">Rank</div>
+            <span>
+              <div class="modal-rank-score">
+                <img src="@/assets/trophy.png" alt="trophy" class="rank-img">43
+              </div>
+            </span> 
+            <b-button class="mt-3 modal-restart-btn" block @click="resetGame">
+              <span class="restart-btn-txt">다시하기</span></b-button>
+          </div>
+          <div class="column">
+            <div class="modal-hscore-cardFont">Best score</div>
+            <span>
+              <div class="modal-hscore-score">
+                <img src="@/assets/best-badge.png" alt="best-badge" class="best-score-img">2500</div>
+            </span>
+            <b-button class="mt-3 modal-halloffame-btn" block >
+              <span class="halloffame-btn-txt">명예의전당</span></b-button>
+          </div>
+        </div>
       </b-modal>
     </div>
     <div class="game-board">
@@ -371,4 +394,184 @@ export default {
   transform: rotateY(180deg);
 }
 
+/* game-over modal */
+
+
+.modal-close-btn {
+  position: absolute;
+  width: 15%;
+  height: 15%;
+  left: 80%;
+  border: none;
+  background-color: grey;
+  box-shadow: 0.00rem 0.38vh 0.56rem 0 rgba(0, 0, 0, 0.3);
+  object-fit: contain;
+  border-radius: 2.00rem;
+}
+
+.close-btn-txt {
+  font-family: SDSamliphopangche_Basic;
+  font-size: 3.5vh;
+}
+
+.game-over-text {
+  font-family: SDSamliphopangche_Basic;
+  font-size: 6vh;
+  margin-bottom: 3%;
+  font-weight: bolder;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 0.63;
+  letter-spacing: normal;
+  text-shadow: 0.00rem 0.38rem 0.56rem rgba(0, 0, 0, 0.3);
+  text-align: center;
+  color: #1e3663;
+}
+
+.modal-cardFont {
+  color: #b59e7a;
+  font-size: 5vh;
+  font-family: 'SDSamliphopangche_Basic';
+  margin-bottom: 0;  
+  padding: 0;
+  margin-top: 1.5vh;
+}
+
+.modal-score {
+  position: relative;
+  left: 27.5%;
+  width: 40%;
+  height: 6vh;
+  background-color: #e5d2bd;
+  margin-bottom: 0;
+  margin-top: 1%;
+  margin-left: 3vh;
+  margin-right: 3vh;
+  border-radius: 30px;
+  border: solid 4px #b49f7b;
+  box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.733);
+  color: #957457;
+  font-family: 'SDSamliphopangche_Basic';
+  font-size: 5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
+.rank-img {
+  position: absolute;
+  left: -11.5%;
+  width: 25%;
+}
+
+.modal-rank-cardFont {
+  color: #b59e7a;
+  font-size: 4vh;
+  font-family: 'SDSamliphopangche_Basic';
+  margin-bottom: 0;  
+  padding: 0;
+  margin-top: 1.5vh;
+}
+
+.modal-rank-score {
+  position: relative;
+  left: 20%;
+  width: 50%;
+  height:5vh;
+  background-color: #e5d2bd;
+  margin-bottom: 0;
+  margin-top: 0.5%;
+  margin-left: 3vh;
+  margin-right: 3vh;
+  border-radius: 30px;
+  border: solid 4px #b49f7b;
+  box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.733);
+  color: #957457;
+  font-family: 'SDSamliphopangche_Basic';
+  font-size: 4vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
+.best-score-img {
+  position: absolute;
+  left: -10%;
+  width: 25%;
+}
+
+.modal-hscore-cardFont {
+  color: #b59e7a;
+  font-size: 4vh;
+  font-family: 'SDSamliphopangche_Basic';
+  margin-bottom: 0;  
+  padding: 0;
+  margin-top: 1.5vh;
+}
+
+.modal-hscore-score {
+  position: relative;
+  left: 20%;
+  width: 50%;
+  height: 5vh;
+  background-color: #e5d2bd;
+  margin-bottom: 0;
+  margin-top: 0.5%;
+  margin-left: 3vh;
+  margin-right: 3vh;
+  border-radius: 30px;
+  border: solid 4px #b49f7b;
+  box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.733);
+  color: #957457;
+  font-family: 'SDSamliphopangche_Basic';
+  font-size: 4vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
+
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 50%;
+}
+
+.modal-restart-btn {
+  width: 40%;
+  height: 40%;
+  /* border: solid 0.5vh #76300b; */
+  border: none;
+  background-color: #fe6e27;
+  box-shadow: 0.00rem 0.38vh 0.56rem 0 rgba(0, 0, 0, 0.3);
+  object-fit: contain;
+  border-radius: 2.00rem;
+}
+
+.restart-btn-txt {
+  font-family: SDSamliphopangche_Basic;
+  font-size: 3.5vh;
+}
+
+
+.modal-halloffame-btn {
+  width: 40%;
+  height: 40%;
+  /* border: solid 0.5vh #76300b; */
+  border: none;
+  background-color: #68bbf7;
+  box-shadow: 0.00rem 0.38vh 0.56rem 0 rgba(0, 0, 0, 0.3);
+  object-fit: contain;
+  border-radius: 2.00rem;
+}
+
+.halloffame-btn-txt {
+  font-family: SDSamliphopangche_Basic;
+  font-size: 3.5vh;
+}
 </style>
