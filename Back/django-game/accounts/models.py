@@ -10,9 +10,9 @@ class TierCode(models.Model):
 
 
 class User(models.Model):
-    email = models.CharField(max_length=45, blank=True, null=True)
-    nickname = models.CharField(max_length=45, blank=True, null=True)
-    password = models.CharField(max_length=45, blank=True, null=True)
+    email = models.CharField(max_length=45)
+    nickname = models.CharField(max_length=45)
+    password = models.CharField(max_length=45)
     tier = models.ForeignKey(TierCode, models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
