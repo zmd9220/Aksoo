@@ -12,7 +12,7 @@
         </button>
       </p>
       <p class="letters" v-else>
-        <button v-for="(word, index) in words" :key="word" @click="[no=index%2, setAlphabet(word.mean)]">
+        <button v-for="(word, index) in words" :key="word" @click="[no=index, setAlphabet(word.mean)]">
           {{ word.mean }}
         </button>
       </p>
@@ -55,7 +55,7 @@ import Loading from "@/components/Loading.vue";
 export default {
   data: function () {
     return {
-      imgSrclist: ['./fingerspelling_kor_cons.jpg', './fingerspelling_kor_vowels_1.jpg'],
+      imgSrclist: ['./letters/ㄱ.jpg', './letters/ㄴ.jpg', './letters/ㄷ.jpg', './letters/ㄹ.jpg', './letters/ㅁ.jpg', './letters/ㅂ.jpg'],
       no: 0,
       select: this.$route.params.select,
       selectAlphabet: String,
