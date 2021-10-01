@@ -33,45 +33,88 @@
         <div class="game-recode">
           <img src="@/assets/acidStart.png" alt="acidrain_picture" class="acidrain-pic">
           <div style="display:flex; width:100%;justify-content: space-between;">
-            <div>
+            <div style="display: flex; flex-direction: column; justify-content: space-around;">
               <h4>산성비</h4>
               <div class="user-recode-wrapper">
-                <h5>현재 랭킹 {{acid_rain.rank}}위</h5>
-                <h5>최고 점수 {{acid_rain.max_score}}P</h5>
+                <h5>현재 랭킹 <span style="color: #957457;">{{acid_rain.rank}}위</span></h5>
+                <h5>최고 점수 <span style="color: #957457;">{{acid_rain.max_score}}P</span></h5>
               </div>
             </div>
-            <div>
-              <div>PLAY</div>
-              <div>명예의전당</div>
+            <div style="display: flex; flex-direction: column; justify-content: space-between;">
+              <div style="height:1.8vh"></div>
+              <div class="play-button">PLAY</div>
+              <div style="text-align: end; color:#957457; font-weight:500; font-size:1.8vh;">명예의전당</div>
             </div>
           </div>
         </div>
+
         <div class="line"></div>
-        <div class="flip-card">
+
         <div class="game-recode">
           <img src="@/assets/acidStart.png" alt="acidrain_picture" class="acidrain-pic">
-          <h4>카드 뒤집기</h4>
-          <h5>현재 랭킹 {{flip_card.rank}}위</h5>
-          <h5>최고 점수 {{flip_card.max_score}}P</h5>
-          <div>PLAY</div>
-          <div>명예의전당</div>
+          <div style="display:flex; width:100%;justify-content: space-between;">
+            <div style="display: flex; flex-direction: column; justify-content: space-around;">
+              <h4>카드 뒤집기</h4>
+              <div class="user-recode-wrapper">
+                <h5>현재 랭킹 <span style="color: #957457;">{{flip_card.rank}}위</span></h5>
+                <h5>최고 점수 <span style="color: #957457;">{{flip_card.max_score}}P</span></h5>
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column; justify-content: space-between;">
+              <div style="height:1.8vh"></div>
+              <div class="play-button">PLAY</div>
+              <div style="text-align: end; color:#957457; font-weight:500; font-size:1.8vh;">명예의전당</div>
+            </div>
+          </div>
         </div>
-        </div>
+
         <div class="line"></div>
-        <div class="word-guess">
+
         <div class="game-recode">
           <img src="@/assets/acidStart.png" alt="acidrain_picture" class="acidrain-pic">
-          <h4>단어 맞추기</h4>
-          <h5>현재 랭킹 {{word_guess.rank}}위</h5>
-          <h5>최고 점수 {{word_guess.max_score}}P</h5>
-          <div>PLAY</div>
-          <div>명예의전당</div>
+          <div style="display:flex; width:100%;justify-content: space-between;">
+            <div style="display: flex; flex-direction: column; justify-content: space-around;">
+              <h4>단어 맞추기</h4>
+              <div class="user-recode-wrapper">
+                <h5>현재 랭킹 <span style="color: #957457;">{{word_guess.rank}}위</span></h5>
+                <h5>최고 점수 <span style="color: #957457;">{{word_guess.max_score}}P</span></h5>
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column; justify-content: space-between;">
+              <div style="height:1.8vh"></div>
+              <div class="play-button">PLAY</div>
+              <div style="text-align: end; color:#957457; font-weight:500; font-size:1.8vh;">명예의전당</div>
+            </div>
+          </div>
         </div>
-        </div>
+
         <div class="line"></div>
+
       </div>
       <div class="friends-list">
-        <h2>친구 목록</h2> {{friend_num}}
+        <div style="display:flex;">
+          <h2 style="margin-top:1.3vh">친구 목록</h2> <div style="font-size:5vh; margin-left:2vw; color:#957457;">{{friend_num}}</div>
+        </div>
+        <div class="friend-profile-list">
+          <div class="friend-profile" v-for="item in friend_num" :key="item">
+            <img src="@/assets/croc.png" alt="profile_picture" class="profile-pic">
+            <div style="display:flex; width:100%;justify-content: space-between;">
+              <div style="display: flex; flex-direction: column; justify-content: space-around;">
+                <div style="display:flex">
+                <img src="@/assets/dot-gr.png" alt="tier-picture" class="tier-pic" style="margin-right:0.5rem">
+                <h4>{{friend_recode.username}}</h4>
+                </div>
+                <div class="user-recode-wrapper">
+                  <h5 style="color: gray">최고 점수 <span style="color: #957457;">{{friend_recode.max_score}}P</span></h5>
+                </div>
+              </div>
+              <div style="display: flex; flex-direction: column; justify-content: center;">
+                <div class="delete-button"><span>삭제</span></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   </div>
@@ -83,9 +126,9 @@ export default {
     return {
       nickname: '비비디바비디부',
       tier: 'Platinum',
-      friend_num: '8',
-      max_rank: '15',
-      sum_score: '3800',
+      friend_num: 8,
+      max_rank: '10',
+      sum_score: '4400',
       acid_rain: {
         rank: 10,
         max_score: 1500,
@@ -98,6 +141,10 @@ export default {
         rank: 13,
         max_score: 1600,
       },
+      friend_recode: {
+          username: '김펭수',
+          max_score: '1500',
+      },
     }
   }
 };
@@ -108,18 +155,13 @@ export default {
   width: 100%;
   height: 35vh;
   display: flex;
-  /* margin-left:4rem; */
-  /* justify-content: center; */
   align-items: center;
-  /* flex-direction: column;
-  align-items: flex-start; */
 }
 .my-profile .profile-pic{
   background-color: yellow;
   height: 25vh;
   width: 25vh;
-  margin-left:20vw;
-  /* border: 3px solid gold; */
+  margin-left:25vw;
   border-radius: 100%;
 }
 .my-profile h3{
@@ -134,10 +176,8 @@ export default {
 .my-profile .user-box-wrapper{
   display: flex;
   margin-left: 2.5vw;
-  /* color:gray; */
   font-weight: 500;
   font-size: 4vh;
-  /* margin-right: 200vw; */
 }
 .my-profile .user-box-wrapper h5{
   color: gray;
@@ -162,7 +202,7 @@ export default {
   align-items: center;
 }
 .recode-wrapper .play-record{
-  width: 70%;
+  width: 60%;
   height: 60vh;
   margin-top: 8vh;
   display: flex;
@@ -172,18 +212,30 @@ export default {
 .recode-wrapper .play-record .game-recode{
   display: flex;
   width: 100%;
-  /* justify-content: space-between; */
+}
+.recode-wrapper .play-record .game-recode h4{
+  margin-left: 1.5vw;
 }
 .recode-wrapper .play-record .game-recode .user-recode-wrapper{
+  margin-left: 1.5vw;
   display: flex;
-  /* font-size: 10vh; */
 }
 .recode-wrapper .play-record .game-recode .user-recode-wrapper h5{
-  /* display: flex; */
   font-size: 2vh;
+  margin-right: 2vw;
+}
+.recode-wrapper .play-record .game-recode .play-button{
+  text-align: center;
+  color: #957457;
+  font-size: 3vh;
+  background-color: #E5D2BD;
+  height: 5vh;
+  width: 10vw;
+  border-radius: 4vh;
 }
 h2 {
   margin-bottom: 3vh;
+  color: black;
 }
 
 .line {
@@ -199,10 +251,54 @@ h2 {
   border-radius: 10px;
 }
 .recode-wrapper .friends-list{
-  width: 70%;
+  width: 60%;
   height: 40vh;
   margin-top: 8vh;
-  background-color: gray;
+}
+.recode-wrapper .friends-list .friend-profile-list{
+	display: flex;
+	flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+}
+.recode-wrapper .friends-list .friend-profile-list .friend-profile{
   display: flex;
+  width: 48%;
+  height: 13vh;
+  background-color: #F4F1EB;
+  margin:0vh 0.5vw 2.5vh 0.5vw;
+  border-radius: 3vh;
+}
+.recode-wrapper .friends-list .friend-profile-list .friend-profile .profile-pic{
+  background-color: yellow;
+  height: 10vh;
+  width: 10vh;
+  margin-left:1vw;
+  margin-top:1.5vh;
+  margin-right: 1vw;
+  border-radius: 100%;
+}
+.recode-wrapper .friends-list .friend-profile-list .friend-profile h4{
+  margin-top: 1.5vh;
+  font-size: 2.5vh;
+  font-weight: bold;
+}
+.recode-wrapper .friends-list .friend-profile-list .friend-profile h5{
+  /* margin-top: 1.5vh; */
+  font-size: 2vh;
+}
+.delete-button{
+  text-align: center;
+  color: #957457;
+  font-size: 2vh;
+  color: gray;
+  background-color: #E5D2BD;
+  height: 4vh;
+  width: 5vw;
+  vertical-align: middle;
+  border-radius: 4vh;
+  margin-right: 1.5vw;
+  display: inline-block;
+  line-height: 4vh;
 }
 </style>
