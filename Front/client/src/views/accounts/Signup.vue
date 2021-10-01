@@ -11,14 +11,14 @@
           <img
             src="@/assets/googleLogo.png"
             alt=""
-            style="margin: 1%; width: 26%; height: 90%"
+            style="margin: 1%; width: 20%; height: 80%; margin-right: 5%"
           />
           구글로 로그인</button
         ><button type="button" class="googleBtn">
           <img
             src="@/assets/googleLogo.png"
             alt=""
-            style="margin: 1%; width: 26%; height: 90%"
+            style="margin: 1%; width: 20%; height: 80%; margin-right: 5%"
           />
           구글로 로그인
         </button>
@@ -153,18 +153,18 @@ export default {
   display: flex;
   z-index: 1;
   width: 49%;
-  height: 100%;
+  height: 90%;
   position: absolute;
   background-image: linear-gradient(to right, #fff, #fdf9e8);
 }
 .decoImg {
+  position: absolute;
   left: 0px;
   object-fit: contain;
-  margin: 5% 2%;
-  width: 53%;
+  margin: 2.5% 4%;
+  width: 50%;
   height: 75%;
   z-index: 3;
-  position: absolute;
 }
 .signImg {
   object-fit: contain;
@@ -178,7 +178,7 @@ export default {
   display: flex;
   z-index: 2;
   width: 55%;
-  height: 100%;
+  height: 90%;
   right: 0px;
   position: absolute;
   border-radius: 7.63rem;

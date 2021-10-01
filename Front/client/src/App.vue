@@ -26,6 +26,7 @@
         <router-link :to="{ name: 'HangManMain' }">HangManMain</router-link> |
         <router-link :to="{ name: 'CardflipMain' }">CardflipMain</router-link> |
         <router-link :to="{ name: 'Halloffame' }">Halloffame</router-link> |
+
         <!-- | <router-link :to="{ name: 'HangManGame' }">HangManGame</router-link>  -->
         <!-- <router-link :to="{ name: 'HangManPage' }">HangManPage</router-link> | -->
         <!-- <router-link :to="{ name: 'HangMan_vue' }">HangMan_vue</router-link> | -->

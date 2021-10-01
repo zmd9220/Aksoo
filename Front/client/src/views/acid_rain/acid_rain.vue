@@ -25,7 +25,7 @@
                 <img src="@/assets/trophy.png" alt="trophy" class="rank-img">43
               </div>
             </span> 
-            <b-button class="mt-3 modal-restart-btn" block @click="resetGame">
+            <b-button class="modal-restart-btn" block @click="resetGame">
               <span class="restart-btn-txt">다시하기</span></b-button>
           </div>
           <div class="column">
@@ -34,7 +34,7 @@
               <div class="modal-hscore-score">
                 <img src="@/assets/best-badge.png" alt="best-badge" class="best-score-img">2500</div>
             </span>
-            <b-button class="mt-3 modal-halloffame-btn" block >
+            <b-button class="modal-halloffame-btn" block >
               <span class="halloffame-btn-txt">명예의전당</span></b-button>
           </div>
         </div>
@@ -1032,16 +1032,6 @@ export default {
   flex: 50%;
 }
 
-.modal-restart-btn {
-  width: 40%;
-  height: 40%;
-  /* border: solid 0.5vh #76300b; */
-  border: none;
-  background-color: #fe6e27;
-  box-shadow: 0.00rem 0.38vh 0.56rem 0 rgba(0, 0, 0, 0.3);
-  object-fit: contain;
-  border-radius: 2.00rem;
-}
 
 .modal-restart-btn {
   width: 40%;
@@ -1063,7 +1053,6 @@ export default {
 .modal-halloffame-btn {
   width: 40%;
   height: 40%;
-  /* border: solid 0.5vh #76300b; */
   border: none;
   background-color: #68bbf7;
   box-shadow: 0.00rem 0.38vh 0.56rem 0 rgba(0, 0, 0, 0.3);
