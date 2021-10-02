@@ -1,7 +1,8 @@
 <template>
-  <div>
+  <div class="camera-wrapper">
     <!-- <button @click="modeChange">모드변경</button> -->
     <!-- <button @click="handChange">오른손왼손</button> -->
+
     <div class="camera card">
       <!-- <div class="camera__most-recent" v-show="mostRecent.name.length > 0">
         <p class="cam-subtitle">
@@ -49,8 +50,6 @@ export default {
     WebCam,
   },
 
-  props: ["mode"],
-
   data() {
     return {
       ctx: null,
@@ -64,9 +63,7 @@ export default {
       test: "",
 
       minConfidence: 8,
-      // mode: 0, // 0:모음, 1:자음
-      // mode: this.mode,
-      use_left_hand: 0, // 0:오른손, 1:왼손
+      mode: 0, // 0:모음, 1:자음
       last: "*",
       count: 0,
       detection: {
@@ -154,12 +151,12 @@ export default {
               name = "ㅔ";
             }
             break;
-          // case CustomGestures_vowel.YeGesture.name:
-          //   name = "ㅖ";
-          //   // if (this.detection.hand2 === 1){
-          //   // name = "ㅖ";
-          //   // }
-          //   break;
+          case CustomGestures_vowel.YeGesture.name:
+            name = "ㅖ";
+            // if (this.detection.hand2 === 1){
+            // name = "ㅖ";
+            // }
+            break;
 
           default:
             break;
@@ -308,21 +305,20 @@ export default {
           }
         }
         if (this.last !== this.mostRecent.name) {
-          console.log("단어변화");
+          // console.log("단어변화");
           this.last = this.mostRecent.name;
           this.count = 0;
         } else {
           // console.log(this.count);
           this.count++;
           if (this.count > 150) {
-            console.log("단어입력");
+            // console.log("단어입력");
             // console.log(this.last);
             this.last = "*";
             this.count = 0;
           }
         }
-        this.$emit("word", this.mostRecent.name);
-        this.$emit("per", this.mostRecent.confidence);
+        this.$emit("word", this.mostRecent.name, this.mostRecent.confidence);
         // Continue detection loop
         requestAnimationFrame(() => this.detect(model));
       }
@@ -355,9 +351,6 @@ export default {
     },
     modeChange() {
       this.mode = 1 - this.mode;
-    },
-    handChange() {
-      this.use_left_hand = 1 - this.use_left_hand;
     },
   },
 };
