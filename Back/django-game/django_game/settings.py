@@ -62,6 +62,9 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
 
+    #django-swagger-ui
+    'drf_yasg',
+
     # django 기본
     'django.contrib.admin',
     'django.contrib.auth',
