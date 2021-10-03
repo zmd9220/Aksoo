@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.utils.translation import ugettext_lazy as _
+
 # Create your models here.
 class TierCode(models.Model):
     tier = models.CharField(max_length=45)
@@ -10,12 +12,17 @@ class TierCode(models.Model):
 
 class CustomUser(AbstractUser):
     # email = models.CharField(max_length=45)
+    username = None
+    email = models.EmailField(_('email address'), unique=True)
+    
     nickname = models.CharField(max_length=45)
     # password = models.CharField(max_length=45)
     tier = models.ForeignKey(TierCode, models.DO_NOTHING)
     # 팔로워 기능 M:N 필드
     followers = models.ManyToManyField('self', symmetrical=False, related_name='followings')
 
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
     # class Meta:
     #     managed = False
     #     db_table = 'custom_user'
