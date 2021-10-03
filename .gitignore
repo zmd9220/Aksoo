@@ -9,6 +9,7 @@ package-lock.json
 
 ### Front  ##############
 /Front/**/*.env
+/Front/**/*.env.local
 /Front/node_modules
 /Front/.vscode
 

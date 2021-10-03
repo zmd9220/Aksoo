@@ -220,13 +220,15 @@
                     </div>
                   </div>
                 </div>
+                <button @click="signup()">button</button>
               </div>
-            </fieldset>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
+            <!-- </fieldset> -->
+          <!-- </form> -->
+        <!-- </div> -->
+      <!-- </div> -->
+    <!-- </div> -->
+  <!-- </div> -->
+  
 </template>
 
 <script>
@@ -251,9 +253,16 @@ export default {
     },
     signup: function () {
       axios({
-        method: "post",
+        method: "POST",
         url: "http://127.0.0.1:8000/accounts/signup/",
         data: this.credentials,
+        // test 용
+        // data: {
+        //   email: 'test3@gmail.com',
+        //   password: 'pass1',
+        //   passwordConfirmation: 'pass1',
+        //   nickname: 'hi',
+        // }
       })
         .then((res) => {
           console.log(res);
@@ -261,6 +270,7 @@ export default {
         })
         .catch((err) => {
           console.log(err);
+          console.log(err.data)
         });
     },
   },
