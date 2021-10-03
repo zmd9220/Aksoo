@@ -10,8 +10,10 @@ import YuGesture from "./Yu";
 import EoGesture from "./Eo";
 import YeoGesture from "./Yeo";
 import EGesture from "./E";
+
 // import YeGesture from "./Ye";
 // import YoGesture from "./Yo";
+// import ChangeGesture from "./Change";
 
 import { Gestures, GestureEstimator } from "fingerpose";
 
@@ -31,6 +33,7 @@ const GE_vowel = new GestureEstimator([
   EoGesture, // ㅓ
   YeoGesture, // ㅕ
   EGesture, // ㅔ
+  // ChangeGesture,
   // YeGesture, // ㅖ
   // YoGesture, // ㅛ
 ])
@@ -50,6 +53,7 @@ const CustomGestures_vowel = {
   EoGesture,
   YeoGesture,
   EGesture,
+  // ChangeGesture,
   // YeGesture,
   // YoGesture,
 };

@@ -1,50 +1,63 @@
 <template>
   <div>
-    <div class="account-wrapper">
-      <div class="wrap_inner clearfix">
-        <div class="wrap-form">
-          <form>
-            <fieldset>
-              <div class="wrap-form">
-                <div class="group-field">
-                  <div class="input-group-label">
-                    <label for="" class="mendantory">이메일</label>
-                  </div>
-                  <div class="input-group clearfix">
-                    <input
-                      id="email"
-                      name="email"
-                      type="text"
-                      inputmode="email"
-                      class=""
-                      value=""
-                    />
-                  </div>
-                </div>
-                <div class="group-field">
-                  <div class="input-group-label">
-                    <label for="" class="mendantory">비밀번호</label>
-                  </div>
-                  <div class="input-group">
-                    <div style="position: relative' width: 100%">
-                      <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        class=""
-                        placeholder=""
-                        value=""
-                        style="width: 100%; display: block"
-                      /><input
-                        type="text"
-                        id="_password"
-                        name=""
-                        class=""
-                        placeholder=""
-                        value=""
-                        style="width: 100%; display: none"
-                      />
-                      <!-- <a
+    <img src="@/assets/deco.png" class="decoImg" />
+    <div class="imgLeft">
+      <img src="@/assets/signUp.png" class="signImg" />
+    </div>
+    <div class="signMain">
+      <div style="font-size: 1.5rem; text-align: left">CREATE ACOUNT</div>
+      <div class="googleLogin">
+        <button type="button" class="googleBtn">
+          <img
+            src="@/assets/googleLogo.png"
+            alt=""
+            style="margin: 1%; width: 20%; height: 80%; margin-right: 5%"
+          />
+          구글로 로그인</button
+        ><button type="button" class="googleBtn">
+          <img
+            src="@/assets/googleLogo.png"
+            alt=""
+            style="margin: 1%; width: 20%; height: 80%; margin-right: 5%"
+          />
+          구글로 로그인
+        </button>
+      </div>
+      <div style="color: #868c93; text-decoration: underline">OR</div>
+
+      <div class="group-field">
+        <div class="input-group clearfix">
+          <input
+            id="email"
+            name="email"
+            type="text"
+            inputmode="email"
+            class=""
+            value=""
+            placeholder="Email Address"
+          />
+        </div>
+      </div>
+      <div class="group-field">
+        <div class="input-group">
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class=""
+            value=""
+            style="display: block"
+            placeholder="Password"
+          /><input
+            type="text"
+            id="_password"
+            name=""
+            class=""
+            placeholder=""
+            value=""
+            style="display: none"
+          />
+          <!-- <a
                         href=""
                         class=""
                         tabindex="-1"
@@ -255,7 +268,105 @@ export default {
 </script>
 
 <style>
-.account-wrapper .wrap_inner .group-field .input-group-label {
+.imgLeft {
+  display: flex;
+  z-index: 1;
+  width: 49%;
+  height: 90%;
+  position: absolute;
+  background-image: linear-gradient(to right, #fff, #fdf9e8);
+}
+.decoImg {
+  position: absolute;
+  left: 0px;
+  object-fit: contain;
+  margin: 2.5% 4%;
+  width: 50%;
+  height: 75%;
+  z-index: 3;
+}
+.signImg {
+  object-fit: contain;
+  margin: 37.5% 10%;
+  z-index: 4;
+  width: 80%;
+  height: 23%;
+  position: absolute;
+}
+.signMain {
+  display: flex;
+  z-index: 2;
+  width: 55%;
+  height: 90%;
+  right: 0px;
+  position: absolute;
+  border-radius: 7.63rem;
+  background-color: #fff;
+  padding: 3% 6%;
+  flex-direction: column;
+  float: center;
+}
+.googleLogin {
+  width: 100%;
+  height: 20%;
+}
+.googleBtn {
+  font-size: 90%;
+  width: 28%;
+  height: 35%;
+  padding: 1%;
+  margin: 8%;
+  background-color: #fff;
+  border-radius: 0.75rem;
+  box-shadow: 0rem 0.19rem 0.38rem 0rem rgba(0, 0, 0, 0.4);
+  border: solid 0.13rem #8c8c8c;
+}
+.input-group {
+  width: 100%;
+  height: 100%;
+  padding: 3% 10%;
+  border: 0px;
+  margin: 1%;
+  /* text-align: left; */
+  /* border-bottom: 2px; */
+}
+#email {
+  width: 90%;
+  height: 100%;
+  border: 0;
+  border-bottom: 3px solid #868c93;
+  margin: 2%;
+}
+#password {
+  width: 90%;
+  height: 100%;
+  border: 0;
+  border-bottom: 3px solid #868c93;
+  margin: 2%;
+}
+#nickname {
+  width: 90%;
+  height: 100%;
+  border: 0;
+  border-bottom: 3px solid #868c93;
+  margin: 2%;
+}
+
+.button-normal {
+  margin: 5% 0 10% 0;
+  font-size: 110%;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  width: 20%;
+  height: 4 0%;
+  border-radius: 0.75rem;
+  box-shadow: 0rem 0.19rem 0.38rem 0rem rgba(0, 0, 0, 0.4);
+  background-color: #3a80f3;
+  color: white;
+}
+
+.account-wrapper .wrap_inner .group-field {
   position: relative !important;
 }
 

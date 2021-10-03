@@ -2,7 +2,8 @@
   <div class="camera-wrapper">
     <!-- <button @click="modeChange">모드변경</button> -->
     <!-- <button @click="handChange">오른손왼손</button> -->
-    <div class="camera card">
+
+    <div class="camera-card">
       <!-- <div class="camera__most-recent" v-show="mostRecent.name.length > 0">
         <p class="cam-subtitle">
           {{ mostRecent.name }}
@@ -41,6 +42,7 @@ import { Gestures } from "fingerpose";
 import { CustomGestures_vowel, GE_vowel } from "../utils/gestures_vowel";
 import { CustomGestures_cons, GE_cons } from "../utils/gestures_cons";
 import { drawHandMesh } from "../utils/handmesh";
+
 
 export default {
   name: "Camera",
@@ -117,6 +119,9 @@ export default {
           case CustomGestures_vowel.YuGesture.name:
             name = "ㅠ";
             break;
+          // case CustomGestures_vowel.ChangeGesture.name:
+          //   name = "변경";
+          //   break;
           case CustomGestures_vowel.EoGesture.name:
             // name = "ㅓ";
             if (this.detection.hand2 === 1) {
@@ -190,6 +195,9 @@ export default {
           case Gestures.ThumbsUpGesture.name:
             name = "ㅎ";
             break;
+          // case CustomGestures_cons.ChangeGesture.name:
+          //   name = "변경";
+          //   break;
 
           default:
             break;
@@ -295,6 +303,7 @@ export default {
         } else {
           // console.log(this.count);
           this.count++;
+          this.$emit('count',this.count);
           if (this.count > 150) {
             // console.log("단어입력");
             this.$emit('input', this.last)
@@ -344,15 +353,18 @@ export default {
 </script>
 
 <style scoped>
-.camera {
+.camera-wrapper {
+  top:-10%
+}
+
+.camera-card {
   transform: scale(-1, 1);
   /* position: fixed; */
-  /* bottom: 0;
-  right: 0; */
-  /* left: 50%; */
+  top: 50%;
+  left: -5%;
   /* transform: translateX(-50%); */
-  width: calc(640px * 0.70);
-  height: calc(480px * 0.70);
+  width: calc(640px * 0.7);
+  height: calc(480px * 0.7);
   /* height: 100%; */
   
 }
@@ -389,4 +401,15 @@ video {
 .web-cam {
   filter: brightness(25%);
 }
+
+/* .vue-circular-progress {
+  position: absolute;
+  z-index: 20;
+  left: 70%;
+  top: 75%;
+}
+
+.percent {
+  display: none !important;
+} */
 </style>

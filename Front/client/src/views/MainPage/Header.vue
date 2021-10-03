@@ -24,7 +24,7 @@
             <b-collapse id="collapse-1" class="user-collapse">
               <b-card  class="card-text">
                 <p><span class="nickname">하태린</span> 님</p>
-                <b-button class="user-btn" href="" style="color: #f5785d;">마이페이지</b-button>
+                <b-button class="user-btn" href="" style="color: #f5785d;" @click="$router.push({ name: 'Profile'})">마이페이지</b-button>
                 <b-button class="user-btn" href="">로그아웃</b-button>
                 
               </b-card>

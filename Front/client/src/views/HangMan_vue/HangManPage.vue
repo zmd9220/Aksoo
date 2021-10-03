@@ -1,8 +1,11 @@
 <template>
     <div class="hangman-row">
         <div class="game-container">
-            <HangManGame ref="game" @lifeLoss="lifeLoss" @scoreChange="scoreChange"
+            <HangManGame ref="game" @lifeLoss="lifeLoss" @scoreChange="scoreChange" :topic="topic" :diff="diff"
             />
+            <img class="ground" src="@/assets/WordGuess/back@3x_remove.jpg" />
+            <img class="wolf" src="@/assets/WordGuess/wolf-1.png" />
+            <img class="bird" src="@/assets/WordGuess/bird.png" />
         </div>
         <div class="right-status-column">
             <div class="nickname">{{nickname}} 님</div>
@@ -36,12 +39,31 @@
                     </div>
                 </div>
         </div>
-            <div v-if="mode_letter" class="game-mode-cons" @click="modeChange">자음</div>
-            <div v-else class="game-mode-vowel" @click="modeChange">모음</div>
+            <div v-if="mode_letter" class="game-mode-cons" @click="modeChange">
+                자음
+                <Progress :transitionDuration="5" :radius="15" :strokeWidth="7" :value="this.count">
+                    <div class="content"></div>
+                </Progress>
+                {{count}}
+            </div>
+            <div v-else class="game-mode-vowel" @click="modeChange">
+                모음
+                <!-- <Progress :transitionDuration="50" :radius="15" :strokeWidth="7" value="80"/> -->
+                <!-- <Progress :transitionDuration="10" :radius="15" :strokeWidth="7" :value="30">
+                    <div class="content"></div>
+                </Progress> -->
+                <!-- {{count}} -->
+            </div>
+                <!-- <b-progress :value="count" :max="100" class="mb-3"></b-progress> -->
+            
             <div class="letter">
                 <div class="selected-letter">{{ letter }}</div>
                 <div class="selected-confidence">정확도 : {{ confidence }}</div>
+                    
             </div>
+                <b-progress height="1px" :value="count" :max="80" class="mb-3" style="margin-bottom:0 !important">
+
+                </b-progress>
             <div class="camera">
                 <template v-if="!modelLoaded">
                     <!-- <img src="./croc.png" style="width: 80px" />  -->
@@ -54,6 +76,7 @@
                 @word="cameraData"
                 @modeChange="modeChange"
                 @input="input"
+                @count="count1"
                 ref="camera"
                 />
             </div>
@@ -65,19 +88,22 @@
 import Camera from "@/components/Camera0.vue";
 import Loading from "@/components/Loading.vue";
 import HangManGame from "./HangManGame.vue";
-
+// import axios from 'axios';
+import Progress from "easy-circular-progress";
 export default {
     data() {
         return {
             nickname: '김재민',
             life: 6,
             score: 0,
+            words: '',
             best_score: 0,
             mode_letter: 0,
-            letter: 'ㅏ',
-            confidence: '90%',
+            letter: '',
+            confidence: '',
             modelLoaded: false,
             minimizeCamera: false,
+            count: 0,
         }
     },
     name: "HangManPage",
@@ -85,6 +111,11 @@ export default {
         Camera,
         Loading,
         HangManGame,
+        Progress,
+    },
+    props: {
+        topic: Object,
+        diff: Object,
     },
     methods: {
         cameraData: function(payload1, payload2) {
@@ -98,12 +129,23 @@ export default {
         input: function(letter) {
             this.$refs.game.listener(letter);
         },
+        count1: function(cnt) {
+            this.count = cnt/150*100;
+        },
         lifeLoss: function() {
             this.life--;
         },
         scoreChange: function(payload) {
             this.score = this.score + payload;
         },
+
+    },
+    created: function() {
+        this.life = this.diff.value;
+    },
+    computed() {
+        // this.count = this.$refs.camera.count/150;
+        // console.log(this.$refs.camera.count/150)
     },
 };
 </script>
@@ -114,7 +156,8 @@ export default {
     display: flex;
     width: 100%;
     height: 90vh;
-    margin: 5vh;
+    /* height: 50%; */
+    /* margin: 5vh; */
 }
 
 .hangman-row .game-container {
@@ -123,6 +166,41 @@ export default {
     border-radius: 20px;
     margin: 2vh;
     box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.733);
+    background: linear-gradient(to top, #fff,#dee8f7);
+    position: relative;
+    overflow: hidden;
+}
+
+.hangman-row .game-container .ground {
+  z-index: 2;
+
+  width: 110%;
+  /* height: 37%; */
+  position: absolute;
+  bottom: -20px;
+  left: 0px;
+
+  /* margin: 44% 0 0 0; */
+}
+
+.hangman-row .game-container .wolf{
+  z-index: 3;
+
+  width: 25%;
+  /* height: 37%; */
+  position: absolute;
+  bottom: 8%;
+  left: 15%;
+}
+
+.hangman-row .game-container .bird{
+  z-index: 3;
+
+  width: 10%;
+  /* height: 37%; */
+  position: absolute;
+  bottom: 30%;
+  left: 88%;
 }
 
 .hangman-row .right-status-column {
@@ -135,7 +213,7 @@ export default {
     height: 10%;
     background-color: #f4f1eb;
     margin-bottom: 1.5vh;
-    border-radius: 30px;
+    border-radius: 20px;
     border: solid 4px #a4a4a3;
     box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.733);
     color: #917052;
@@ -151,7 +229,7 @@ export default {
     height: 25%;
     background-color: #f4f1eb;
     margin-bottom: 1.5vh;
-    border-radius: 40px;
+    border-radius: 20px;
     box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.733);
     font-family: 'SDSamliphopangche_Basic';
     font-size: 2rem;
@@ -180,7 +258,7 @@ export default {
     height: 2.5rem;
     background-color: #E5D2BD;
     box-shadow: 4px 4px 5px rgba(128, 128, 128, 0.733);
-    border-radius: 15px;
+    border-radius: 20px;
     border: 3px solid #957457;
     font-family: 'SDSamliphopangche_Basic';
     /* font-size: 1rem; */
@@ -197,7 +275,7 @@ export default {
     height: 10%;
     background-color: #f4f1eb;
     margin-bottom: 1.5vh;
-    border-radius: 30px;
+    border-radius: 20px;
     box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.733);
     border: solid 4px #fe6f28;
     color: #917052;
@@ -213,7 +291,7 @@ export default {
     height: 10%;
     background-color: #f4f1eb;
     margin-bottom: 1.5vh;
-    border-radius: 30px;
+    border-radius: 20px;
     box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.733);
     border: solid 4px #86c7f4;
     color: #917052;
@@ -260,8 +338,15 @@ export default {
     height: 41%;
     background-color: #f4f1eb;
     border-radius: 20px;
+    margin-left: 0;
     overflow: hidden;
+    padding-top:0;
+    padding-left: 0;
     box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.733);
 }
 
+
+.percent {
+    display: none !important;
+}
 </style>
