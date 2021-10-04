@@ -11,14 +11,14 @@
           <img
             src="@/assets/googleLogo.png"
             alt=""
-            style="margin: 1%; width: 26%; height: 90%"
+            style="margin: 1%; width: 20%; height: 90%"
           />
           구글로 로그인</button
         ><button type="button" class="googleBtn">
           <img
             src="@/assets/googleLogo.png"
             alt=""
-            style="margin: 1%; width: 26%; height: 90%"
+            style="margin: 1%; width: 20%; height: 90%"
           />
           구글로 로그인
         </button>
@@ -90,14 +90,15 @@
         </div>
       </div>
       <div>
-        <button
+        <b-button
           type="submit"
           class="button-normal larger disabled"
           disabled=""
           @click="login"
+          variant="primary"
         >
-          Sign In
-        </button>
+          회원가입
+        </b-button>
       </div>
 
       <div class="group-field">
@@ -153,14 +154,14 @@ export default {
   display: flex;
   z-index: 1;
   width: 49%;
-  height: 100%;
+  height: 95%;
   position: absolute;
   background-image: linear-gradient(to right, #fff, #fdf9e8);
 }
 .decoImg {
   left: 0px;
   object-fit: contain;
-  margin: 5% 2%;
+  margin: 3% 2%;
   width: 53%;
   height: 75%;
   z-index: 3;
@@ -190,6 +191,7 @@ export default {
 .googleLogin {
   width: 100%;
   height: 20%;
+  font-size: 2vh;
 }
 .googleBtn {
   font-size: 90%;
@@ -234,13 +236,13 @@ export default {
 }
 
 .button-normal {
-  margin: 5% 0 10% 0;
+  margin: 5% 0 5% 0 !important;
   font-size: 110%;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
   width: 20%;
-  height: 40%;
+  height: 4 0%;
   border-radius: 0.75rem;
   box-shadow: 0rem 0.19rem 0.38rem 0rem rgba(0, 0, 0, 0.4);
   background-color: #3a80f3;
