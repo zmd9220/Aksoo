@@ -1,7 +1,5 @@
 <template>
   <div class="acid">
-<<<<<<< HEAD
-=======
     <audio id="gameOver" src="@/assets/music/gameover/gameover.mp3"></audio>
     <audio id="click" src="@/assets/music/answer/Correct 2.mp3"></audio>
     <audio id="answer" src="@/assets/music/answer/Correct 1.mp3"></audio>
@@ -9,7 +7,6 @@
       id="wrongAnswer"
       src="@/assets/music/wrongAnswer/Error 2.mp3"
     ></audio>
->>>>>>> fb3f131a0b79f3743c9294efbd94858947722640
     <template v-if="!modelLoaded">
       <loading message="👋 Loading hand detection model..." />
     </template>
@@ -45,16 +42,10 @@
                   class="rank-img"
                 />43
               </div>
-<<<<<<< HEAD
-            </span> 
-            <b-button class="modal-restart-btn" block @click="resetGame">
-              <span class="restart-btn-txt">다시하기</span></b-button>
-=======
             </span>
             <b-button class="mt-3 modal-restart-btn" block @click="resetGame">
               <span class="restart-btn-txt">다시하기</span></b-button
             >
->>>>>>> fb3f131a0b79f3743c9294efbd94858947722640
           </div>
           <div class="column">
             <div class="modal-hscore-cardFont">Best score</div>
@@ -67,14 +58,9 @@
                 />2500
               </div>
             </span>
-<<<<<<< HEAD
-            <b-button class="modal-halloffame-btn" block >
-              <span class="halloffame-btn-txt">명예의전당</span></b-button>
-=======
             <b-button class="mt-3 modal-halloffame-btn" block>
               <span class="halloffame-btn-txt">명예의전당</span></b-button
             >
->>>>>>> fb3f131a0b79f3743c9294efbd94858947722640
           </div>
         </div>
       </b-modal>
@@ -298,12 +284,9 @@ export default {
       test: "",
       mode: 0,
       per: 0,
-<<<<<<< HEAD
-=======
       gameIsOver: false,
       clicked: false,
       clickedCon: false,
->>>>>>> fb3f131a0b79f3743c9294efbd94858947722640
     };
   },
 
