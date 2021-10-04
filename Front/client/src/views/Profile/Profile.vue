@@ -83,6 +83,9 @@
                   font-weight: 500;
                   font-size: 1.8vh;
                 "
+                @click="
+                  $router.push({ name: 'RankingMain', params: { whatgame: 0 } })
+                "
               >
                 명예의전당
               </div>
@@ -135,6 +138,9 @@
                   color: #957457;
                   font-weight: 500;
                   font-size: 1.8vh;
+                "
+                @click="
+                  $router.push({ name: 'RankingMain', params: { whatgame: 1 } })
                 "
               >
                 명예의전당
@@ -190,6 +196,9 @@
                   color: #957457;
                   font-weight: 500;
                   font-size: 1.8vh;
+                "
+                @click="
+                  $router.push({ name: 'RankingMain', params: { whatgame: 2 } })
                 "
               >
                 명예의전당
@@ -289,6 +298,9 @@ export default {
 };
 </script>
 <style scoped>
+* {
+  text-align: start;
+}
 .my-profile {
   background-color: #f4f1eb;
   width: 100%;

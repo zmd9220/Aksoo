@@ -235,7 +235,7 @@ export default {
   background-color: #f4f1eb;
   flex: 70%;
   border-radius: 20px;
-  margin: 2vh;
+  margin: 2vh 2vh 0 2vh;
   box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.733);
   background: linear-gradient(to top, #fff, #dee8f7);
   position: relative;
@@ -308,6 +308,8 @@ export default {
   /* display: row;
     justify-content: space-around; */
 }
+
+
 
 .hangman-row .right-status-column .game-status .game-status-li {
   display: flex;

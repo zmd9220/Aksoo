@@ -42,20 +42,21 @@
           <div data-v-3adcea5a="" class="mgi_thum">
             <img
               data-v-3adcea5a=""
-              src="@/assets/acid_rain.png"
+              src="@/assets/acid-rain-cover.png"
               alt="산성비 소개"
             />
           </div>
-          <p data-v-3adcea5a="" class="ta_c">
-            빠르고 날쌔게~ 떨어지는 산성비를 피하자!
+          <p class="game-title">"빗방울이 내리기 전에 타격!"</p>
+          <span data-v-3adcea5a="" class="game-content">
+            하늘에서 독성의 비가 내린다?
+          </span>
+          <p class="game-content">
+            도치를 위해 빠르게 산성비를 제거해주세요!
           </p>
-          <div data-v-3adcea5a="" class="main-play-game">
-            <a data-v-3adcea5a="" title="산성비 게임 시작하기"
-              ><img
-                data-v-3adcea5a=""
-                src="@/assets/button_play_game.png"
-                alt="산성비 게임 시작하기"
-            /></a>
+          <div>
+            <b-button to="acid_rain/acid_rain/" class="start-game-btn">
+              <span class="start-game-btn-text">게임 시작하기</span> 
+            </b-button>
           </div>
         </div>
         <div
@@ -66,18 +67,21 @@
           <div data-v-3adcea5a="" class="mgi_thum">
             <img
               data-v-3adcea5a=""
-              src="/images/main/tt04.png"
+              src="@/assets/acid-rain-cover.png"
               alt="행맨 소개"
             />
           </div>
-          <p data-v-3adcea5a="" class="ta_c">행맨의 달인에 도전해 보세요!</p>
-          <div data-v-3adcea5a="" class="main-play-game">
-            <a data-v-3adcea5a="" title="행맨 게임 시작하기"
-              ><img
-                data-v-3adcea5a=""
-                src="@/assets/button_play_game.png"
-                alt="행맨 게임 시작하기"
-            /></a>
+          <p class="game-title">"단어를 맞춰 늑대에서 도망치자!"</p>
+          <span data-v-3adcea5a="" class="game-content">
+            뒤에 늑대가 쫓아온다고요?
+          </span>
+          <p class="game-content">
+            단어를 맞춰 짹짹이가 도망가게 해주세요!
+          </p>         
+          <div>
+            <b-button to="acid_rain/acid_rain/" class="start-game-btn">
+              <span class="start-game-btn-text">게임 시작하기</span> 
+            </b-button>
           </div>
         </div>
         <div
@@ -88,20 +92,21 @@
           <div data-v-3adcea5a="" class="mgi_thum">
             <img
               data-v-3adcea5a=""
-              src="/images/main/tt06.png"
+              src="@/assets/acid-rain-cover.png"
               alt="카드 뒤집기 소개"
             />
           </div>
-          <p data-v-3adcea5a="" class="ta_c">
-            카드를 뒤집을 역전의 용사, 누구인가?
+          <p class="game-title">"카드의 짝을 찾아주자!"</p>
+          <span data-v-3adcea5a="" class="game-content">
+            뒤집고 뒤집어 승부를 뒤집는 영웅은 누구?
+          </span>
+          <p class="game-content">
+            완벽한 전략으로 모든 카드를 뒤집어봐요!
           </p>
-          <div data-v-3adcea5a="" class="main-play-game">
-            <a data-v-3adcea5a="" title="카드 뒤집기 게임 시작하기"
-              ><img
-                data-v-3adcea5a=""
-                src="@/assets/button_play_game.png"
-                alt="카드 뒤집기 게임 시작하기"
-            /></a>
+          <div>
+            <b-button to="acid_rain/acid_rain/" class="start-game-btn">
+              <span class="start-game-btn-text">게임 시작하기</span> 
+            </b-button>
           </div>
         </div>
       </div>
@@ -199,4 +204,33 @@
   width: 10%;
   z-index: -1;
 }
+
+.game-title {
+  font-family: BinggraeSamanco;
+  font-size: 3.5vh;
+  font-weight: bold;
+  margin-top: 3%;
+}
+
+.game-content {
+  font-family: GowunDodum-Regular;
+  font-size: 2vh;
+}
+
+.start-game-btn {
+ position: relative;
+ background-color: #fe6e27;
+ width: 70%;
+ margin-bottom: 10%;
+ border: none;
+ border-radius: 20px;
+ box-shadow: 0.00rem 0.31rem 0.25rem 0.00rem rgba(0, 0, 0, 0.35);
+}
+
+.start-game-btn-text {
+  font-family: SDSamliphopangche_Basic;
+  font-size: 2.5vh;
+  color: white;
+}
+
 </style>

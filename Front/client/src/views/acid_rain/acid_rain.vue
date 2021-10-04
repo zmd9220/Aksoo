@@ -131,9 +131,10 @@
         <div class="panel panel-default">
           <div class="panel-body">
             <div id="box">
-              <img class="ground" src="@/assets/ground.png" />
+              <!-- <img class="ground" src="@/assets/ground.png" /> -->
               <img class="gosm" src="@/assets/right.gif" />
               <img class="lgosm" src="@/assets/left.gif" />
+              <img class="ground" src="@/assets/tree-ground.png" />
               <!-- <div id="message" class="hidden" style="display: none">
                 Game Over!
                 <br />
@@ -213,14 +214,14 @@
         <br />
         <br />
         <strong
-          >Score:
-          <div style="float: right; margin: 0 12px">{{ score }}</div></strong
+          > Score:
+          <div style="float: right; margin: 0 5%">{{ score }}</div></strong
         >
         <br />
         <br />
         <strong
           >Best Score:
-          <div style="float: right; margin: 0 12px">0</div></strong
+          <div style="float: right; margin: 0 5%">0</div></strong
         >
       </div>
       <div class="c">{{ consonant }}</div>
@@ -670,6 +671,10 @@ export default {
   }
 }
 
+.tree-ground {
+  width: 100%;
+}
+
 .bg {
   width: 100%;
   height: 100%;
@@ -782,13 +787,13 @@ export default {
   font-weight: bold;
 }
 .a {
-  width: 80%;
+  /* width: 80%; */
   height: 7%;
   box-shadow: 2px 2px gray;
   border-radius: 2.56rem;
   border-width: 2px;
   /* padding: 10% 0; */
-  margin: 2%;
+  margin: 0% 2% 6% 2%;
   text-align: center;
   background-color: #f4f1eb;
   padding: 5%;
@@ -804,13 +809,13 @@ export default {
   /* vertical-align: middle; */
 }
 .b {
-  width: 80%;
+  /* width: 80%; */
   height: 20%;
   box-shadow: 2px 2px gray;
   border-radius: 2.56rem;
   border-width: 2px;
-  padding: 5% 0;
-  margin: 2%;
+  padding: 4% 0;
+  margin: 0% 2% 6% 2%;
   text-align: left;
   background-color: #f4f1eb;
 
@@ -818,7 +823,7 @@ export default {
 }
 .b > strong {
   padding: 5%;
-  margin: 2% 5%;
+  margin: 0%;
   font-family: SDSamliphopangche_Basic;
   font-size: 130%;
   color: #b59e7a;
@@ -834,19 +839,21 @@ export default {
   border-radius: 1.06rem;
   float: center;
   text-align: center;
+  font-size: 3vh;
+  width: 50%;
   box-shadow: 0.19rem 0.19rem 0.13rem 0rem rgba(0, 0, 0, 0.3);
   border: solid 0.19rem #af9b76;
   background-color: #e5d2bd;
 }
 .c,
 .d {
-  width: 80%;
+  /* width: 80%; */
   height: 7%;
   box-shadow: 2px 2px gray;
   border-radius: 2.56rem;
   border-width: 2px;
   /* padding: 10% 0; */
-  margin: 2%;
+  margin: 0% 2% 6% 2%;
   text-align: center;
   background-color: #f4f1eb;
   padding: 4%;
