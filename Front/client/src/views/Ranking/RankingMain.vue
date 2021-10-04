@@ -50,6 +50,9 @@
 </template>
 <script>
 import RankingList from '@/views/Ranking/RankingList.vue'
+import Vue from 'vue'
+import VueConfetti from 'vue-confetti'
+Vue.use(VueConfetti)
 
 export default {
     name: "RankingMain",
@@ -141,8 +144,22 @@ export default {
         if( this.whatgame != undefined){
             this.what_game = this.whatgame;
         }
-
+        this.$confetti.start();
+        this.$confetti.update({
+            particles: [
+                {
+                    type: 'rect',
+                    dropRate: 8,
+                    size: 5,
+            },
+        ]});
+        setTimeout(() => {
+            this.$confetti.stop();
+        }, 5000);
     },
+    destroyed() {
+        this.$confetti.stop()
+    }
 }
 </script>
 <style scoped>
@@ -234,6 +251,7 @@ export default {
     top:110%;
     left:20%;
     height: 75%;
+    z-index: 10;
 }
 .Shape-2 {
   position: absolute;
