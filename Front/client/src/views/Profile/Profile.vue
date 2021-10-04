@@ -6,18 +6,17 @@
       src="@/assets/music/pageMove/Jump High.mp3"
     ></audio>
     <div class="my-profile">
-      <img src="@/assets/croc.png" alt="profile_picture" class="profile-pic" />
+      <img :src='"@/assets/Profile/prf-" + profile_name[profile%7] +".png"' alt="profile_picture" class="profile-pic" />
       <div class="">
         <div style="height: 2vh"></div>
         <h3>{{ nickname }}</h3>
         <div class="tier-wrapper">
-          <img
-            src="@/assets/dot-bl.png"
-            alt="tier-picture"
-            class="tier-pic"
-            style="width: 1.5rem; margin-right: 0.5rem"
-          />
-          {{ tier }}
+          <img v-if="tier == 5" src="@/assets/Ranking/brz.png" alt="tier-picture" class="tier-pic" style="width: 1.5rem; margin-right: 0.5rem"/>
+          <img v-if="tier == 4" src="@/assets/Ranking/slv.png" alt="tier-picture" class="tier-pic" style="width: 1.5rem; margin-right: 0.5rem"/>
+          <img v-if="tier == 3" src="@/assets/Ranking/gld.png" alt="tier-picture" class="tier-pic" style="width: 1.5rem; margin-right: 0.5rem"/>
+          <img v-if="tier == 2" src="@/assets/Ranking/pltn.png" alt="tier-picture" class="tier-pic" style="width: 1.5rem; margin-right: 0.5rem"/>
+          <img v-if="tier == 1" src="@/assets/Ranking/dmd.png" alt="tier-picture" class="tier-pic" style="width: 1.5rem; margin-right: 0.5rem"/>
+          {{tier_num_to_str[tier]}}
         </div>
         <div class="user-box-wrapper">
           <div style="margin-right: 5vw">
@@ -219,7 +218,7 @@
         <div class="friend-profile-list">
           <div class="friend-profile" v-for="item in friend_num" :key="item">
             <img
-              src="@/assets/croc.png"
+              :src='"@/assets/Profile/prf-" + profile_name[friend_recode.profile%7] +".png"'
               alt="profile_picture"
               class="profile-pic"
             />
@@ -234,12 +233,19 @@
                 "
               >
                 <div style="display: flex">
-                  <img
+                  <!-- <img
                     src="@/assets/dot-gr.png"
                     alt="tier-picture"
                     class="tier-pic"
                     style="margin-right: 0.5rem"
-                  />
+                  /> -->
+                  <div style="display: flex; align-items:center">
+                    <img v-if="friend_recode.tier == 5" src="@/assets/Ranking/brz.png" alt="tier-picture" class="tier-pic" style="width: 2vw; height:70%; margin-right: 0.5rem"/>
+                    <img v-if="friend_recode.tier == 4" src="@/assets/Ranking/slv.png" alt="tier-picture" class="tier-pic" style="width: 2vw; height:70%; margin-right: 0.5rem"/>
+                    <img v-if="friend_recode.tier == 3" src="@/assets/Ranking/gld.png" alt="tier-picture" class="tier-pic" style="width: 2vw; height:70%; margin-right: 0.5rem"/>
+                    <img v-if="friend_recode.tier == 2" src="@/assets/Ranking/pltn.png" alt="tier-picture" class="tier-pic" style="width: 2vw; height:70%; margin-right: 0.5rem"/>
+                    <img v-if="friend_recode.tier == 1" src="@/assets/Ranking/dmd.png" alt="tier-picture" class="tier-pic" style="width: 2vw; height:70%; margin-right: 0.5rem"/>
+                  </div>
                   <h4>{{ friend_recode.username }}</h4>
                 </div>
                 <div class="user-recode-wrapper">
@@ -272,8 +278,11 @@ export default {
   name: "Profile",
   data() {
     return {
+      tier_num_to_str: [0, 'Diamond', 'Platinum', 'Gold', 'Silver', 'Bronze'],
+      profile_name: ['bird', 'cml', 'croc', 'ele', 'gsm', 'hippo', 'shark'],
+      profile: 3,
       nickname: "비비디바비디부",
-      tier: "Platinum",
+      tier: 2,
       friend_num: 8,
       max_rank: "10",
       sum_score: "4400",
@@ -290,7 +299,9 @@ export default {
         max_score: 1600,
       },
       friend_recode: {
+        profile: 5,
         username: "김펭수",
+        tier:4,
         max_score: "1500",
       },
     };
@@ -309,7 +320,7 @@ export default {
   align-items: center;
 }
 .my-profile .profile-pic {
-  background-color: yellow;
+  background-color: #FEF8E2;
   height: 25vh;
   width: 25vh;
   margin-left: 25vw;
@@ -320,9 +331,12 @@ export default {
   margin-left: 2vw;
 }
 .my-profile .tier-wrapper {
-  display: flex;
   margin-left: 2.5vw;
-  color: gray;
+  display: flex; 
+  height:100%; 
+  align-items: center; 
+  color: gray; 
+  width:15%
 }
 .my-profile .user-box-wrapper {
   display: flex;
@@ -425,7 +439,7 @@ h2 {
   .friend-profile-list
   .friend-profile
   .profile-pic {
-  background-color: yellow;
+  background-color: #FEF8E2;
   height: 10vh;
   width: 10vh;
   margin-left: 1vw;
