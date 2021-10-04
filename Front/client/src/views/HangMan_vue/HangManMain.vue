@@ -210,6 +210,11 @@ export default {
   font-size: 2rem;
   color: #e5d2bd;
 }
+.hangman-start-button:active {
+  position: relative;
+  box-shadow: 0rem 0.15rem 0.12rem 0rem rgba(0, 0, 0, 0.3);
+  top: 2px;
+}
 
 /* 이미지들 */
 /* .background-img {

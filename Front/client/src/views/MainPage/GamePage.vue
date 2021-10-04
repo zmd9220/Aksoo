@@ -1,5 +1,10 @@
 <template>
   <div class="main">
+    <audio
+      autoplay
+      id="gameStart"
+      src="@/assets/music/pageMove/Jump High.mp3"
+    ></audio>
     <p class="title">
       <span class="title-text">게임하기 </span>
       <span class="title-script">어쩌구 저쩌구 게임을 경험해 보세요!</span>
@@ -101,8 +106,8 @@
         </div>
       </div>
     </div>
-    <img src="@/assets/grass.png" alt="grass" class="grass">
-    <img src="@/assets/gosm.png" alt="gosm" class="gosm">
+    <img src="@/assets/grass.png" alt="grass" class="grass" />
+    <img src="@/assets/gosm.png" alt="gosm" class="gosm" />
   </div>
 </template>
 
@@ -110,7 +115,6 @@
 </script>
 
 <style scoped>
-
 .title {
   position: absolute;
   left: 10%;
