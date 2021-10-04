@@ -12,7 +12,7 @@
       <div class="bt">
         <b-button class="goword" @click="setlevel('con')">자음</b-button>
         <b-button class="goword" @click="setlevel('vow')">모음</b-button>
-        <b-button class="goword" @click="setlevel('word')">단어</b-button>
+        <!-- <b-button class="goword" @click="setlevel('word')">단어</b-button> -->
         <!-- <b-button class="gonext" @click="setlevel('bookmark')" >즐겨찾기</b-button> -->
         <b-button class="goback" @click="handSelect()">&lt;- 이전</b-button>
         <b-button class="gonext" @click="goNextLevel()">다음 -></b-button>

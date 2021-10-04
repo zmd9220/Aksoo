@@ -10,7 +10,7 @@
           <b-button size="sm" class="goback" @click="goWordSelect()">&lt;- 이전</b-button>
         </span>
         <span class="btn-letters">
-          <button v-for="(word, index) in words[0].word" :key="word" @click="[no=index%2, setAlphabet(word)]">
+          <button class="letter-btn" v-for="(word, index) in words[0].word" :key="word" @click="[no=index%2, setAlphabet(word)]">
             {{ word }}
           </button>
         </span>
@@ -36,13 +36,13 @@
 
       <!-- 카메라 -->
       <div class="right-status-column">
-        <div v-if="mode_letter" class="game-mode-cons" @click="modeChange">자음</div>
-        <div v-else class="game-mode-vowel" @click="modeChange">모음</div>
+        <!-- <div v-if="mode_letter" class="game-mode-cons" @click="modeChange">자음</div>
+        <div v-else class="game-mode-vowel" @click="modeChange">모음</div> -->
         <div class="letter">
             <div class="selected-letter">{{ letter }}</div>
             <div class="selected-confidence">정확도 : {{ confidence }}</div>
         </div>
-        <div class="camera">
+        <div class="camera1">
           <template v-if="!modelLoaded">
               <!-- <img src="./croc.png" style="width: 80px" />  -->
               <loading message="👋 Loading hand detection model..." />
@@ -64,7 +64,7 @@
 
 <script>
 import axios from 'axios';
-import Camera from "@/components/Camera.vue";
+import Camera from "@/components/CameraLearn.vue";
 import Loading from "@/components/Loading.vue";
 
 export default {
@@ -159,6 +159,7 @@ export default {
   font-family: 'BinggraeSamanco';
   font-size: 1.7rem;
   margin-right: 10%;
+  margin-left: 0%;
 }
 
 .box {
@@ -169,7 +170,9 @@ export default {
   width: 80%;
   font-family: 'BinggraeSamanco-bold';
   font-size: 2.3rem;
-  justify-items: center;
+  text-align: left;
+  margin-left: 6.5%;
+
 }
 
 .letter-btn {
@@ -197,6 +200,7 @@ export default {
     border-radius: 20px;
     margin-right: 5%;
     box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.733);
+    border: solid 0.4vh #917052;
 }
 
 .cardimg {
@@ -208,12 +212,12 @@ export default {
 .right-status-column {
     flex:50%;
     border-radius: 20px;
-    margin: 2vh;
+    /* margin: 2vh; */
 }
 
 .game-mode-cons {
     width: 100%;
-    height: 10%;
+    height: 5%;
     background-color: #f4f1eb;
     margin-bottom: 1.5vh;
     border-radius: 30px;
@@ -229,7 +233,7 @@ export default {
 
 .game-mode-vowel {
     width: 100%;
-    height: 10%;
+    height: 5%;
     background-color: #f4f1eb;
     margin-bottom: 1.5vh;
     border-radius: 30px;
@@ -244,14 +248,19 @@ export default {
 }
 
 .letter {
-    width: 100%;
-    height: 7%;
+    position: absolute;
+    top: 25%;
+    right: 16%;
+    width: 30%;
+    height: 5%;
     background-color: #f4f1eb;
-    margin-bottom: 1.5vh;
     border-radius: 20px;
     box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.733);
     display: flex;
     justify-content: space-around;
+    z-index: 1500;
+    /* margin-left: 10%; */
+    border: solid 0.4vh #917052;
 }
 
 .letter .selected-letter {
@@ -274,13 +283,18 @@ export default {
     align-items: center;
 }
 
-.camera {
-    width: 100%;
-    height: 41%;
+.camera1 {
+    width: 94%;
+    height: 100%;
     background-color: #f4f1eb;
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.733);
+    margin-left: 0%;
+    margin-right: 0%;
+    margin-top: 0%;
+    padding-top: 0%;
+    z-index: -1;
 }
 
 img.cloud {
