@@ -5,6 +5,7 @@
       id="gameStart"
       src="@/assets/music/pageMove/Jump High.mp3"
     ></audio>
+
     <div class="game-container">
       <HangManGame
         ref="game"

@@ -1,5 +1,7 @@
 <template>
   <div class="acid">
+    <audio id="gameOver" src="@/assets/music/gameover/gameover.mp3"></audio>
+    <audio id="click" src="@/assets/music/answer/Correct 2.mp3"></audio>
     <audio id="answer" src="@/assets/music/answer/Correct 1.mp3"></audio>
     <audio
       id="wrongAnswer"
@@ -10,32 +12,55 @@
     </template>
 
     <div v-if="gameIsOver">
-      <b-modal  v-model="showend"  class="modal-border" size="sm"
-      id="bv-modal-example" hide-footer hide-header no-close-on-backdrop>
-        <b-button class="mt-3 modal-close-btn" block @click="$bvModal.hide('bv-modal-example')">
-              <span class="close-btn-txt">닫기</span></b-button>
+      <b-modal
+        v-model="showend"
+        class="modal-border"
+        size="sm"
+        id="bv-modal-example"
+        hide-footer
+        hide-header
+        no-close-on-backdrop
+      >
+        <b-button
+          class="mt-3 modal-close-btn"
+          block
+          @click="$bvModal.hide('bv-modal-example')"
+        >
+          <span class="close-btn-txt">닫기</span></b-button
+        >
         <p class="game-over-text">GAME OVER</p>
         <div class="modal-cardFont">Score</div>
-        <div class="modal-score">{{score}}</div>
+        <div class="modal-score">{{ score }}</div>
         <div class="row">
           <div class="column">
             <div class="modal-rank-cardFont">Rank</div>
             <span>
               <div class="modal-rank-score">
-                <img src="@/assets/trophy.png" alt="trophy" class="rank-img">43
+                <img
+                  src="@/assets/trophy.png"
+                  alt="trophy"
+                  class="rank-img"
+                />43
               </div>
-            </span> 
+            </span>
             <b-button class="mt-3 modal-restart-btn" block @click="resetGame">
-              <span class="restart-btn-txt">다시하기</span></b-button>
+              <span class="restart-btn-txt">다시하기</span></b-button
+            >
           </div>
           <div class="column">
             <div class="modal-hscore-cardFont">Best score</div>
             <span>
               <div class="modal-hscore-score">
-                <img src="@/assets/best-badge.png" alt="best-badge" class="best-score-img">2500</div>
+                <img
+                  src="@/assets/best-badge.png"
+                  alt="best-badge"
+                  class="best-score-img"
+                />2500
+              </div>
             </span>
-            <b-button class="mt-3 modal-halloffame-btn" block >
-              <span class="halloffame-btn-txt">명예의전당</span></b-button>
+            <b-button class="mt-3 modal-halloffame-btn" block>
+              <span class="halloffame-btn-txt">명예의전당</span></b-button
+            >
           </div>
         </div>
       </b-modal>
@@ -55,10 +80,24 @@
         <div style="width: 45%; float: right">
           <div cols="3">자음 모음을 선택해 주세요</div>
           <div cols="3">
-            <b-button id="modalBtn" v-on:click="con">자음</b-button>
+            <b-button
+              id="modalBtn"
+              v-bind:class="{ white: !clicked, blue: clicked }"
+              v-on:click="
+                [con(), (clicked = !clicked), (clickedCon = false), click()]
+              "
+              >자음</b-button
+            >
           </div>
           <div cols="3">
-            <b-button id="modalBtn" v-on:click="col">모음</b-button>
+            <b-button
+              id="modalBtn"
+              v-bind:class="{ white: !clickedCon, blue: clickedCon }"
+              v-on:click="
+                [col(), (clickedCon = !clickedCon), (clicked = false), click()]
+              "
+              >모음</b-button
+            >
           </div>
           <div cols="3">
             <div class="w-100">
@@ -67,7 +106,7 @@
                 variant="primary"
                 size="sm"
                 class="float-right"
-                @click="[(show = false), startGame()]"
+                @click="[(show = false), startGame(), click()]"
               >
                 GO!
               </b-button>
@@ -238,7 +277,9 @@ export default {
       test: "",
       mode: 0,
       per: 0,
-      gameIsOver: false
+      gameIsOver: false,
+      clicked: false,
+      clickedCon: false,
     };
   },
 
@@ -250,6 +291,10 @@ export default {
     hart = this.hart;
   },
   methods: {
+    click() {
+      var click = document.getElementById("click");
+      click.play();
+    },
     con() {
       this.consonant = "자음"; // mode 1
       // Camera.data.mode = 1;
@@ -336,6 +381,7 @@ export default {
     moveLetters: function () {
       var boxes = document.querySelectorAll("#box > div");
       var wrongAnswer = document.getElementById("wrongAnswer");
+      var gameOver = document.getElementById("gameOver");
 
       for (var i = 0; i < boxes.length; i++) {
         boxes[i].style.bottom = parseInt(boxes[i].style.bottom) - 8 + "px";
@@ -346,7 +392,8 @@ export default {
           this.decreaseLetterSpeed(hart);
           if (this.hart == 0) {
             // this.toggleText();
-            this.gameIsOver = true
+            gameOver.play();
+            this.gameIsOver = true;
             this.endGame();
           }
         }
@@ -401,7 +448,7 @@ export default {
     resetGame: function () {
       // this.togglerestart();
 
-      this.gameIsOver = false
+      this.gameIsOver = false;
       // this.resetText();
 
       // message.classList.add("hidden"); // add
@@ -445,7 +492,7 @@ export default {
         answer.play();
         boxes[0].remove();
         // score.innerHTML = parseInt(score.innerHTML) + 1;
-        this.score += 1;
+        this.score += 10;
         this.decreaseLetterSpeed(score);
       }
       // else {
@@ -880,12 +927,27 @@ export default {
   text-align: center;
   color: #937356;
 }
+#modalBtn:active {
+  position: relative;
+  box-shadow: 0rem 0.15rem 0.12rem 0rem rgba(0, 0, 0, 0.3);
+  top: 2px;
+}
 .camera {
   z-index: 999;
 }
 
-/* game-over modal */
+.white {
+  background-color: #e5d2bd !important;
+  color: #937356 !important;
+  border: solid 0.19rem #957252 !important;
+}
+.blue {
+  background-color: #937356 !important;
+  color: #e5d2bd !important;
+  border: solid 0.19rem #e5d2bd !important;
+}
 
+/* game-over modal */
 
 .modal-close-btn {
   position: absolute;
@@ -894,9 +956,9 @@ export default {
   left: 80%;
   border: none;
   background-color: grey;
-  box-shadow: 0.00rem 0.38vh 0.56rem 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0rem 0.38vh 0.56rem 0 rgba(0, 0, 0, 0.3);
   object-fit: contain;
-  border-radius: 2.00rem;
+  border-radius: 2rem;
 }
 
 .close-btn-txt {
@@ -913,7 +975,7 @@ export default {
   font-style: normal;
   line-height: 0.63;
   letter-spacing: normal;
-  text-shadow: 0.00rem 0.38rem 0.56rem rgba(0, 0, 0, 0.3);
+  text-shadow: 0rem 0.38rem 0.56rem rgba(0, 0, 0, 0.3);
   text-align: center;
   color: #1e3663;
 }
@@ -921,8 +983,8 @@ export default {
 .modal-cardFont {
   color: #b59e7a;
   font-size: 5vh;
-  font-family: 'SDSamliphopangche_Basic';
-  margin-bottom: 0;  
+  font-family: "SDSamliphopangche_Basic";
+  margin-bottom: 0;
   padding: 0;
   margin-top: 1.5vh;
 }
@@ -941,7 +1003,7 @@ export default {
   border: solid 4px #b49f7b;
   box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.733);
   color: #957457;
-  font-family: 'SDSamliphopangche_Basic';
+  font-family: "SDSamliphopangche_Basic";
   font-size: 5vh;
   display: flex;
   justify-content: center;
@@ -958,8 +1020,8 @@ export default {
 .modal-rank-cardFont {
   color: #b59e7a;
   font-size: 4vh;
-  font-family: 'SDSamliphopangche_Basic';
-  margin-bottom: 0;  
+  font-family: "SDSamliphopangche_Basic";
+  margin-bottom: 0;
   padding: 0;
   margin-top: 1.5vh;
 }
@@ -968,7 +1030,7 @@ export default {
   position: relative;
   left: 20%;
   width: 50%;
-  height:5vh;
+  height: 5vh;
   background-color: #e5d2bd;
   margin-bottom: 0;
   margin-top: 0.5%;
@@ -978,7 +1040,7 @@ export default {
   border: solid 4px #b49f7b;
   box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.733);
   color: #957457;
-  font-family: 'SDSamliphopangche_Basic';
+  font-family: "SDSamliphopangche_Basic";
   font-size: 4vh;
   display: flex;
   justify-content: center;
@@ -995,8 +1057,8 @@ export default {
 .modal-hscore-cardFont {
   color: #b59e7a;
   font-size: 4vh;
-  font-family: 'SDSamliphopangche_Basic';
-  margin-bottom: 0;  
+  font-family: "SDSamliphopangche_Basic";
+  margin-bottom: 0;
   padding: 0;
   margin-top: 1.5vh;
 }
@@ -1015,14 +1077,13 @@ export default {
   border: solid 4px #b49f7b;
   box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.733);
   color: #957457;
-  font-family: 'SDSamliphopangche_Basic';
+  font-family: "SDSamliphopangche_Basic";
   font-size: 4vh;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 0;
 }
-
 
 .row {
   display: flex;
@@ -1038,9 +1099,9 @@ export default {
   /* border: solid 0.5vh #76300b; */
   border: none;
   background-color: #fe6e27;
-  box-shadow: 0.00rem 0.38vh 0.56rem 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0rem 0.38vh 0.56rem 0 rgba(0, 0, 0, 0.3);
   object-fit: contain;
-  border-radius: 2.00rem;
+  border-radius: 2rem;
 }
 
 .modal-restart-btn {
@@ -1049,9 +1110,9 @@ export default {
   /* border: solid 0.5vh #76300b; */
   border: none;
   background-color: #fe6e27;
-  box-shadow: 0.00rem 0.38vh 0.56rem 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0rem 0.38vh 0.56rem 0 rgba(0, 0, 0, 0.3);
   object-fit: contain;
-  border-radius: 2.00rem;
+  border-radius: 2rem;
 }
 
 .restart-btn-txt {
@@ -1059,16 +1120,15 @@ export default {
   font-size: 3.5vh;
 }
 
-
 .modal-halloffame-btn {
   width: 40%;
   height: 40%;
   /* border: solid 0.5vh #76300b; */
   border: none;
   background-color: #68bbf7;
-  box-shadow: 0.00rem 0.38vh 0.56rem 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0rem 0.38vh 0.56rem 0 rgba(0, 0, 0, 0.3);
   object-fit: contain;
-  border-radius: 2.00rem;
+  border-radius: 2rem;
 }
 
 .halloffame-btn-txt {

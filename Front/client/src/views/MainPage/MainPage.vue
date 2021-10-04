@@ -1,39 +1,46 @@
 <template>
   <div>
+    <audio
+      autoplay
+      id="gameStart"
+      src="@/assets/music/pageMove/Jump High.mp3"
+    ></audio>
     <div class="background-img">
-      <img src="@/assets/shape-1.png" alt="yellowcloud1" class="shape-1">
-      <img src="@/assets/shape-2-main.png" alt="yellowcloud2" class="shape-2">
+      <img src="@/assets/shape-1.png" alt="yellowcloud1" class="shape-1" />
+      <img src="@/assets/shape-2-main.png" alt="yellowcloud2" class="shape-2" />
 
-      <img src="@/assets/dot-bl.png" alt="bluedot" class="bluedot">
-      <img src="@/assets/dot-gr.png" alt="greendot" class="greendot">
-      <img src="@/assets/dot-rd.png" alt="reddot" class="reddot">
-      <img src="@/assets/dot-yl.png" alt="yellowdot" class="yellowdot">
+      <img src="@/assets/dot-bl.png" alt="bluedot" class="bluedot" />
+      <img src="@/assets/dot-gr.png" alt="greendot" class="greendot" />
+      <img src="@/assets/dot-rd.png" alt="reddot" class="reddot" />
+      <img src="@/assets/dot-yl.png" alt="yellowdot" class="yellowdot" />
 
       <div class="letters">
-        <img src="@/assets/eung-yl.png" alt="eung" class="eung">
-        <img src="@/assets/chieut-bl.png" alt="chieut" class="chieut">
-        <img src="@/assets/hieuh-rd.png" alt="hieuh" class="hieuh">
-        <img src="@/assets/lieul-yl.png" alt="lieul" class="lieul">
-        <img src="@/assets/pieup-gr.png" alt="pieup" class="pieup">
+        <img src="@/assets/eung-yl.png" alt="eung" class="eung" />
+        <img src="@/assets/chieut-bl.png" alt="chieut" class="chieut" />
+        <img src="@/assets/hieuh-rd.png" alt="hieuh" class="hieuh" />
+        <img src="@/assets/lieul-yl.png" alt="lieul" class="lieul" />
+        <img src="@/assets/pieup-gr.png" alt="pieup" class="pieup" />
       </div>
 
-      <img src="@/assets/croc.png" alt="croc" class="croc">
+      <img src="@/assets/croc.png" alt="croc" class="croc" />
     </div>
-    
+
     <div class="welcomewords">
       <p>아직 준비가 되지 않은 당신 옆에</p>
       <p>악수가 함께 하겠습니다</p>
     </div>
 
-    <br>
+    <br />
 
     <div class="servicewords">
       <p>수어의 첫 걸음은 지문자부터!</p>
-      <p>지문자를 처음 접하는 사용자는 누구나 쉽고 재미있게 익힐 수 있습니다.</p>
+      <p>
+        지문자를 처음 접하는 사용자는 누구나 쉽고 재미있게 익힐 수 있습니다.
+      </p>
       <p>자음연습, 모음연습, 단어연습을 통해 단계별로 실력을 향상시켜보세요.</p>
     </div>
 
-    <br>
+    <br />
 
     <div>
       <b-button to="Start" class="start">
@@ -44,13 +51,10 @@
 </template>
 
 <script>
-export default {
-  
-}
+export default {};
 </script>
 
 <style scoped>
-
 .shape-1 {
   position: absolute;
   top: 10%;
