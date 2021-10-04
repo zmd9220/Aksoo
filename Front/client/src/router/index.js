@@ -22,6 +22,7 @@ import CardflipEasy from '@/views/Cardflip/CardflipEasy'
 import CardflipMain from '@/views/Cardflip/CardflipMain'
 import Halloffame from '@/views/Halloffame/Halloffame'
 import Profile from '@/views/Profile/Profile'
+import RankingMain from '@/views/Ranking/RankingMain'
 
 Vue.use(VueRouter)
 
@@ -132,6 +133,12 @@ const routes = [
     path: '/Profile/Profile',
     name: 'Profile',
     component: Profile,
+  },
+  {
+    path: '/Rangking/RankingMain',
+    name: 'RankingMain',
+    component: RankingMain,
+    props: true,
   },
 ]
 
