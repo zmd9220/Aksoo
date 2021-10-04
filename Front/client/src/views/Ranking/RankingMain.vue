@@ -224,6 +224,13 @@ export default {
     z-index: 10;
     font-weight: bold;
     /* background-color: gray; */
+    animation-name: first;
+    animation-duration: 6s;
+}
+@keyframes first {
+  0% {opacity: 0;}
+  66% {opacity: 0;}
+  100% {opacity: 1;}
 }
 .ranking-page-wrapper .second-score{
     position:absolute;
@@ -234,6 +241,13 @@ export default {
     width: 10%;
     z-index: 10;
     font-weight: bold;
+    animation-name: second;
+    animation-duration: 5s;
+}
+@keyframes second {
+  0% {opacity: 0;}
+  50% {opacity: 0;}
+  100% {opacity: 1;}
 }
 .ranking-page-wrapper .third-score{
     position:absolute;
@@ -244,6 +258,13 @@ export default {
     width: 10%;
     z-index: 10;
     font-weight: bold;
+    /* opacity: 0; */
+    animation-name: third;
+    animation-duration: 4s;
+}
+@keyframes third {
+  from {opacity: 0;}
+  to {opacity: 1;}
 }
 .ranking-page-wrapper .ranking-list{
     position: absolute;
