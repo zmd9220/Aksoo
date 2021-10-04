@@ -15,8 +15,8 @@
         <b-nav-item href="/GamePage/"
           ><span class="play">게임하기</span></b-nav-item
         >
-        <b-nav-item href="#"
-          ><span class="halloffame">명예의전당</span></b-nav-item
+        <b-nav-item 
+          ><span class="halloffame" @click='$router.push({ name: "RankingMain" })'>명예의전당</span></b-nav-item
         >
 
         <!-- Navbar dropdowns -->

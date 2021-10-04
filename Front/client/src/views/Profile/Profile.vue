@@ -43,7 +43,7 @@
             <div style="display: flex; flex-direction: column; justify-content: space-between;">
               <div style="height:1.8vh"></div>
               <div class="play-button">PLAY</div>
-              <div style="text-align: end; color:#957457; font-weight:500; font-size:1.8vh;">명예의전당</div>
+              <div style="text-align: end; color:#957457; font-weight:500; font-size:1.8vh;" @click='$router.push({ name: "RankingMain", params: {whatgame: 0} })'>명예의전당</div>
             </div>
           </div>
         </div>
@@ -63,7 +63,7 @@
             <div style="display: flex; flex-direction: column; justify-content: space-between;">
               <div style="height:1.8vh"></div>
               <div class="play-button">PLAY</div>
-              <div style="text-align: end; color:#957457; font-weight:500; font-size:1.8vh;">명예의전당</div>
+              <div style="text-align: end; color:#957457; font-weight:500; font-size:1.8vh;" @click='$router.push({ name: "RankingMain", params: {whatgame: 1} })'>명예의전당</div>
             </div>
           </div>
         </div>
@@ -83,7 +83,7 @@
             <div style="display: flex; flex-direction: column; justify-content: space-between;">
               <div style="height:1.8vh"></div>
               <div class="play-button">PLAY</div>
-              <div style="text-align: end; color:#957457; font-weight:500; font-size:1.8vh;">명예의전당</div>
+              <div style="text-align: end; color:#957457; font-weight:500; font-size:1.8vh;" @click='$router.push({ name: "RankingMain", params: {whatgame: 2} })'>명예의전당</div>
             </div>
           </div>
         </div>
@@ -150,6 +150,9 @@ export default {
 };
 </script>
 <style scoped>
+*{
+  text-align: start ;
+}
 .my-profile{
   background-color: #F4F1EB;
   width: 100%;
