@@ -11,14 +11,14 @@
           <img
             src="@/assets/googleLogo.png"
             alt=""
-            style="margin: 1%; width: 20%; height: 80%; margin-right: 5%"
+            style="margin: 1%; width: 20%; height: 90%"
           />
           구글로 로그인</button
         ><button type="button" class="googleBtn">
           <img
             src="@/assets/googleLogo.png"
             alt=""
-            style="margin: 1%; width: 20%; height: 80%; margin-right: 5%"
+            style="margin: 1%; width: 20%; height: 90%"
           />
           구글로 로그인
         </button>
@@ -76,159 +76,39 @@
                         "
                         ><i class="ico visible-eye-on"></i
                       ></a> -->
-                    </div>
-                    <ul class="validation-check">
-                      <li>
-                        <i class="ico check-small disabled"></i>영문, 숫자,
-                        특수문자 2개 이상 조합
-                      </li>
-                      <li><i class="ico check-small disabled"></i>6~16자리</li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="group-field">
-                  <div class="input-group-label">
-                    <label for="" class="mendantory">비밀번호 확인</label>
-                  </div>
-                  <div class="input-group">
-                    <div style="position: relative">
-                      <input
-                        type="password"
-                        id="passwordConfirm"
-                        name="passwordConfirm"
-                        class=""
-                        placeholder=""
-                        value=""
-                        style="width: 100%; display: block"
-                      /><input
-                        type="text"
-                        id="_passwordConfirm"
-                        name=""
-                        class=""
-                        placeholder=""
-                        value=""
-                        style="width: 100%; display: none"
-                      /><a
-                        href=""
-                        class=""
-                        tabindex="-1"
-                        style="
-                          position: absolute;
-                          top: 50%;
-                          right: 6px;
-                          margin-top: -17px;
-                          padding: 4px 10px;
-                          background: transparent;
-                          border-radius: 2px;
-                          color: rgb(0, 0, 0);
-                          text-align: center;
-                          text-decoration: none;
-                          user-select: none;
-                        "
-                        ><i class="ico visible-eye-on"></i
-                      ></a>
-                    </div>
-                  </div>
-                </div>
-                <div class="group-field">
-                  <div class="input-group-label">
-                    <label for="">닉네임</label>
-                  </div>
-                  <div class="input-group">
-                    <input
-                      type="text"
-                      id="nickname"
-                      name="nickname"
-                      placeholder="실명은 사용하지 않는 것이 좋습니다. "
-                      value=""
-                    />
-                  </div>
-                </div>
-                <!-- <div class="group-field">
-                  <div class="input-group-label">
-                    <label for="">성별</label>
-                  </div>
-                  <div class="input-group">
-                    <div class="input-group clearfix">
-                      <fieldset>
-                        <input
-                          name="gender"
-                          id="M"
-                          type="radio"
-                          class="radio-button"
-                          form="[object Object]"
-                          value="M"
-                        /><label for="M">남자</label
-                        ><input
-                          name="gender"
-                          id="F"
-                          type="radio"
-                          class="radio-button"
-                          form="[object Object]"
-                          value="F"
-                        /><label for="F">여자</label>
-                      </fieldset>
-                    </div>
-                  </div>
-                </div>
-                <div class="group-field">
-                  <div class="input-group-label">
-                    <label for="" class="mendantory">생년월일</label>
-                  </div>
-                  <div class="input-group">
-                    <input
-                      id="birthday"
-                      name="birthday"
-                      placeholder="yyyy/mm/dd"
-                      autocomplete="on"
-                      type="text"
-                      class=""
-                      value=""
-                    />
-                  </div>
-                </div> -->
-                <div class="group-field">
-                  <div class="input-group checks">
-                    <input id="checkOver14" type="checkbox" /><label
-                      for="checkOver14"
-                      ><small
-                        >본인이 만 14세 이상임을 확인합니다.(필수)</small
-                      ></label
-                    >
-                  </div>
-                </div>
-                <div class="group-field">
-                  <div class="input-group button-group" style="display: block">
-                    <div>
-                      <button
-                        type="submit"
-                        class="button-normal larger disabled"
-                        disabled=""
-                        @click="login"
-                      >
-                        회원가입
-                      </button>
-                    </div>
-                    <div>
-                      <button
-                        class="button-normal color-gray larger"
-                        type="button"
-                        @click="login"
-                      >
-                        취소
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <button @click="signup()">button</button>
-              </div>
-            <!-- </fieldset> -->
-          <!-- </form> -->
-        <!-- </div> -->
-      <!-- </div> -->
-    <!-- </div> -->
-  <!-- </div> -->
-  
+        </div>
+      </div>
+      <div class="group-field">
+        <div class="input-group">
+          <input
+            type="text"
+            id="nickname"
+            name="nickname"
+            placeholder="Nickname "
+            value=""
+          />
+        </div>
+      </div>
+      <div>
+        <b-button
+          type="submit"
+          class="button-normal larger disabled"
+          disabled=""
+          @click="login"
+          variant="primary"
+        >
+          회원가입
+        </b-button>
+      </div>
+
+      <div class="group-field">
+        <div style="color: #858484; text-align: left; float: left">
+          이미 계정이 있으신가요? &nbsp;
+        </div>
+        <div @click="login" style="color: #4285f4; float: left">로그인</div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -282,7 +162,7 @@ export default {
   display: flex;
   z-index: 1;
   width: 49%;
-  height: 90%;
+  height: 95%;
   position: absolute;
   background-image: linear-gradient(to right, #fff, #fdf9e8);
 }
@@ -290,8 +170,8 @@ export default {
   position: absolute;
   left: 0px;
   object-fit: contain;
-  margin: 2.5% 4%;
-  width: 50%;
+  margin: 3% 2%;
+  width: 53%;
   height: 75%;
   z-index: 3;
 }
@@ -319,6 +199,7 @@ export default {
 .googleLogin {
   width: 100%;
   height: 20%;
+  font-size: 2vh;
 }
 .googleBtn {
   font-size: 90%;
@@ -363,7 +244,7 @@ export default {
 }
 
 .button-normal {
-  margin: 5% 0 10% 0;
+  margin: 5% 0 5% 0 !important;
   font-size: 110%;
   font-weight: normal;
   font-stretch: normal;

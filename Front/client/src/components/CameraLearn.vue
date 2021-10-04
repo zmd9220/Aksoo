@@ -1,19 +1,6 @@
 <template>
   <div class="camera-wrapper">
-    <!-- <button @click="modeChange">모드변경</button> -->
-    <!-- <button @click="handChange">오른손왼손</button> -->
-
     <div class="camera card">
-      <!-- <div class="camera__most-recent" v-show="mostRecent.name.length > 0">
-        <p class="cam-subtitle">
-          {{ mostRecent.name }}
-        </p>
-
-        <p class="cam-subtitle">
-          {{ mostRecent.confidence }}
-        </p>
-      </div> -->
-
       <web-cam
         class="web-cam"
         ref="webcam"
@@ -44,7 +31,7 @@ import { CustomGestures_cons, GE_cons } from "../utils/gestures_cons";
 import { drawHandMesh } from "../utils/handmesh";
 
 export default {
-  name: "Camera",
+  name: "CameraLearn",
 
   components: {
     WebCam,
@@ -63,7 +50,7 @@ export default {
       test: "",
 
       minConfidence: 8,
-      mode: 0, // 0:모음, 1:자음
+      mode: this.$route.params.mode_letter, // 0:모음, 1:자음
       last: "*",
       count: 0,
       detection: {
@@ -360,31 +347,12 @@ export default {
 .camera {
   border-radius: 30px;
   transform: scale(-1, 1);
-
-  /* position: fixed; */
-  bottom: 0;
-  right: 0;
-
-  width: calc(640px * 0.6);
-  height: calc(480px * 0.6);
+  width: calc(640px * 1.1);
+  height: calc(480px * 1.1);
+  margin: 0%;
+  padding: 0%;
 }
 
-.camera__most-recent {
-  transform: scale(-1, 1);
-
-  position: relative;
-  top: 0;
-  left: 0;
-
-  text-align: left;
-  padding: 0.5rem 0.85rem;
-  z-index: 11;
-
-  display: flex;
-  justify-content: space-between;
-
-  background-color: rgba(255, 255, 255, 0.25);
-}
 p {
   color: white;
 }
@@ -401,5 +369,10 @@ video {
 .web-cam {
   filter: brightness(25%);
   border-radius: 30px;
+  
+}
+
+.card {
+  border: 0;
 }
 </style>

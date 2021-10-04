@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
     <div class="hangman-row">
         <div class="game-container">
             <HangManGame ref="game" @lifeLoss="lifeLoss" @scoreChange="scoreChange" :topic="topic" :diff="diff"
@@ -6,6 +7,64 @@
             <img class="ground" src="@/assets/WordGuess/back@3x_remove.jpg" />
             <img class="wolf" src="@/assets/WordGuess/wolf-1.png" />
             <img class="bird" src="@/assets/WordGuess/bird.png" />
+=======
+  <div class="hangman-row">
+    <audio
+      autoplay
+      id="gameStart"
+      src="@/assets/music/pageMove/Jump High.mp3"
+    ></audio>
+
+    <div class="game-container">
+      <HangManGame
+        ref="game"
+        @lifeLoss="lifeLoss"
+        @scoreChange="scoreChange"
+        @answers="answers"
+        :topic="topic"
+        :diff="diff"
+      />
+      <img class="ground" src="@/assets/WordGuess/back.png" />
+      <!-- <img class="wolf" src="@/assets/WordGuess/wolf-1.png" /> -->
+      <img
+        class="wolf"
+        v-if="answer == true"
+        src="@/assets/WordGuess/wolf4.png"
+      />
+      <img
+        class="wolf"
+        v-else-if="life != 0"
+        src="@/assets/WordGuess/wolf1.png"
+      />
+
+      <img
+        class="wolf"
+        v-else-if="life == 0"
+        src="@/assets/WordGuess/wolf3.png"
+      />
+
+      <!-- <img v-bind:class="{}" src="@/assets/WordGuess/bird.png" /> -->
+      <img class="cage" src="@/assets/cage.png" v-bind:style="cage(life)" />
+      <div>
+        <img
+          class="bird"
+          v-bind:style="info(life)"
+          src="@/assets/WordGuess/bird.png"
+        />
+      </div>
+    </div>
+
+    <div class="right-status-column">
+      <div class="nickname">{{ nickname }} 님</div>
+      <div class="game-status">
+        <div class="game-status-li li-start">
+          <div>Life</div>
+          <div>
+            <span v-for="idx in life" :key="idx">
+              <img src="./heart.png" style="width: 40px" />
+            </span>
+          </div>
+>>>>>>> fb3f131a0b79f3743c9294efbd94858947722640
         </div>
         <div class="right-status-column">
             <div class="nickname">{{nickname}} 님</div>
@@ -161,6 +220,7 @@ export default {
 }
 
 .hangman-row .game-container {
+<<<<<<< HEAD
     background-color: #f4f1eb;
     flex:70%;
     border-radius: 20px;
@@ -169,6 +229,16 @@ export default {
     background: linear-gradient(to top, #fff,#dee8f7);
     position: relative;
     overflow: hidden;
+=======
+  background-color: #f4f1eb;
+  flex: 70%;
+  border-radius: 20px;
+  margin: 2vh 2vh 0 2vh;
+  box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.733);
+  background: linear-gradient(to top, #fff, #dee8f7);
+  position: relative;
+  overflow: hidden;
+>>>>>>> fb3f131a0b79f3743c9294efbd94858947722640
 }
 
 .hangman-row .game-container .ground {
@@ -236,6 +306,8 @@ export default {
     /* display: row;
     justify-content: space-around; */
 }
+
+
 
 .hangman-row .right-status-column .game-status .game-status-li {
     display: flex;

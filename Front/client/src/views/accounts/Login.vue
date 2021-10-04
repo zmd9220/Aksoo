@@ -1,24 +1,26 @@
 <template>
   <div>
-    <img src="@/assets/deco.png" class="decoImg" />
+    <img src="@/assets/gosm-login.png" class="gosm-login">
+    <img src="@/assets/shark-login.png" class="shark-login">
+    <img src="@/assets/deco-login.png" class="decoImg-login" />
     <div class="imgLeft">
-      <img src="@/assets/login.png" class="signImg" />
+      <img src="@/assets/login.png" class="loginImg" />
     </div>
     <div class="signMain">
-      <div style="font-size: 1.5rem; text-align: left">CREATE ACOUNT</div>
+      <div style="font-size: 1.5rem; text-align: left">Sign In</div>
       <div class="googleLogin">
         <button type="button" class="googleBtn">
           <img
             src="@/assets/googleLogo.png"
             alt=""
-            style="margin: 1%; width: 15%; height: 80%; margin-right: 5%"
+            style="margin: 1%; width: 20%; height: 90%"
           />
           구글로 로그인</button
         ><button type="button" class="googleBtn">
           <img
             src="@/assets/googleLogo.png"
             alt=""
-            style="margin: 1%; width: 15%; height: 80%; margin-right: 5%"
+            style="margin: 1%; width: 20%; height: 90%"
           />
           구글로 로그인
         </button>
@@ -78,7 +80,7 @@
                       ></a> -->
         </div>
       </div>
-      <div class="group-field">
+      <!-- <div class="group-field">
         <div class="input-group">
           <input
             type="text"
@@ -88,23 +90,24 @@
             value=""
           />
         </div>
-      </div>
+      </div> -->
       <div>
-        <button
+        <b-button
           type="submit"
           class="button-normal larger disabled"
           disabled=""
           @click="login"
+          variant="primary"
         >
-          Sign In
-        </button>
+          로그인
+        </b-button>
       </div>
 
       <div class="group-field">
         <div style="color: #858484; text-align: left; float: left">
-          이미 계정이 있으신가요? &nbsp;
+          계정이 없으신가요?  
         </div>
-        <div @click="login" style="color: #4285f4; float: left">로그인</div>
+        <div @click="signup" style="color: #4285f4; float: left; margin-left: 1%;"> 회원가입</div>
       </div>
     </div>
   </div>
@@ -143,20 +146,34 @@ export default {
   display: flex;
   z-index: 1;
   width: 49%;
-  height: 90%;
+  height: 95%;
   position: absolute;
   background-image: linear-gradient(to right, #fff, #fdf9e8);
 }
-.decoImg {
-  position: absolute;
+.decoImg-login {
   left: 0px;
   object-fit: contain;
-  margin: 2.5% 4%;
-  width: 50%;
+  margin: 3% 2%;
+  width: 53%;
   height: 75%;
   z-index: 3;
+  position: absolute;
 }
-.signImg {
+.gosm-login {
+  position: absolute;
+  z-index: 2;
+  width: 15%;
+  left: 2.5%;
+  top: 65%;
+}
+.shark-login {
+  position: absolute;
+  z-index: 2;
+  width: 15%;
+  left: 35%;
+  top: 25%;
+}
+.loginImg {
   object-fit: contain;
   margin: 37.5% 10%;
   z-index: 4;
@@ -166,9 +183,9 @@ export default {
 }
 .signMain {
   display: flex;
-  z-index: 2;
+  z-index: 1;
   width: 55%;
-  height: 90%;
+  height: 100%;
   right: 0px;
   position: absolute;
   border-radius: 7.63rem;
@@ -180,6 +197,7 @@ export default {
 .googleLogin {
   width: 100%;
   height: 20%;
+  font-size: 2vh;
 }
 .googleBtn {
   font-size: 90%;
@@ -224,7 +242,7 @@ export default {
 }
 
 .button-normal {
-  margin: 5% 0 10% 0;
+  margin: 5% 0 15% 0 !important;
   font-size: 110%;
   font-weight: normal;
   font-stretch: normal;
@@ -233,7 +251,7 @@ export default {
   height: 4 0%;
   border-radius: 0.75rem;
   box-shadow: 0rem 0.19rem 0.38rem 0rem rgba(0, 0, 0, 0.4);
-  background-color: #3a80f3;
+  /* color: #3a80f3; */
   color: white;
 }
 

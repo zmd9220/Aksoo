@@ -11,7 +11,7 @@ import EoGesture from "./Eo";
 import YeoGesture from "./Yeo";
 import EGesture from "./E";
 
-// import YeGesture from "./Ye";
+import YeGesture from "./Ye";
 // import YoGesture from "./Yo";
 // import ChangeGesture from "./Change";
 
@@ -34,7 +34,7 @@ const GE_vowel = new GestureEstimator([
   YeoGesture, // ㅕ
   EGesture, // ㅔ
   // ChangeGesture,
-  // YeGesture, // ㅖ
+  YeGesture, // ㅖ
   // YoGesture, // ㅛ
 ])
 
@@ -54,7 +54,7 @@ const CustomGestures_vowel = {
   YeoGesture,
   EGesture,
   // ChangeGesture,
-  // YeGesture,
+  YeGesture,
   // YoGesture,
 };
 

@@ -9,9 +9,15 @@
           </router-link>
         </b-navbar-brand>
         <b-nav-item href="/"><span class="home">Home</span></b-nav-item>
-        <b-nav-item href="/Start/"><span class="learn">학습하기</span></b-nav-item>
-        <b-nav-item href="/GamePage/"><span class="play">게임하기</span></b-nav-item>
-        <b-nav-item href="#"><span class="halloffame">명예의전당</span></b-nav-item>
+        <b-nav-item href="/Start/"
+          ><span class="learn">학습하기</span></b-nav-item
+        >
+        <b-nav-item href="/GamePage/"
+          ><span class="play">게임하기</span></b-nav-item
+        >
+        <b-nav-item 
+          ><span class="halloffame" @click='$router.push({ name: "RankingMain" })'>명예의전당</span></b-nav-item
+        >
 
         <!-- Navbar dropdowns -->
         <div class="login">
@@ -24,7 +30,13 @@
             <b-collapse id="collapse-1" class="user-collapse">
               <b-card  class="card-text">
                 <p><span class="nickname">하태린</span> 님</p>
-                <b-button class="user-btn" href="" style="color: #f5785d;" @click="$router.push({ name: 'Profile'})">마이페이지</b-button>
+                <b-button
+                  class="user-btn"
+                  href=""
+                  style="color: #f5785d"
+                  @click="$router.push({ name: 'Profile' })"
+                  >마이페이지</b-button
+                >
                 <b-button class="user-btn" href="">로그아웃</b-button>
                 
               </b-card>
@@ -85,6 +97,11 @@ export default {
   color: #000;
 }
 
+/* .home:hover {
+  background-color: black;
+  color: #fff;
+} */
+
 .learn {
   position: absolute;
   left: 41%;
@@ -102,6 +119,10 @@ export default {
   text-align: center;
   color: #000;
 }
+/* .learn:hover {
+  background-color: black;
+  color: #fff;
+} */
 
 .play {
   position: absolute;
