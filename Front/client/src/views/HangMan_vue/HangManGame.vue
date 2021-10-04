@@ -1,14 +1,11 @@
 <template>
   <div>
-<<<<<<< HEAD
-=======
     <audio id="answer" src="@/assets/music/answer/Correct 1.mp3"></audio>
     <audio
       id="wrongAnswer"
       src="@/assets/music/wrongAnswer/Error 2.mp3"
     ></audio>
     <audio id="gameOver" src="@/assets/music/gameover/gameover.mp3"></audio>
->>>>>>> fb3f131a0b79f3743c9294efbd94858947722640
     <!-- <b-button @click="show = true" variant="primary">게임 시작하기</b-button> -->
     
 
@@ -80,8 +77,6 @@
         <span class="glyphicon glyphicon-flash" id="reset"></span>
         명예의 전당
       </button>
-<<<<<<< HEAD
-=======
     </div> -->
 
     <div v-if="gameIsOver">
@@ -137,7 +132,6 @@
           </div>
         </div>
       </b-modal>
->>>>>>> fb3f131a0b79f3743c9294efbd94858947722640
     </div>
 
     <div class="game-container">
@@ -345,11 +339,8 @@ export default {
       }
     },
     toggleText: function () {
-<<<<<<< HEAD
-=======
       this.gameIsOver = true;
 
->>>>>>> fb3f131a0b79f3743c9294efbd94858947722640
       var text = document.getElementById("message");
       if (text.style.display === "none") {
         text.style.display = "block";
@@ -432,14 +423,10 @@ export default {
       this.countError++;
       this.$emit('lifeLoss')
       if (this.countError === this.life) {
-<<<<<<< HEAD
-        this.toggleText();
-=======
         // this.toggleText();
         this.gameIsOver = true;
         var gameOver = document.getElementById("gameOver");
         gameOver.play();
->>>>>>> fb3f131a0b79f3743c9294efbd94858947722640
         // this.online = false;
         // var modal = document.getElementById("gameovermodal");
         // if (this.gameover === false) {
@@ -806,9 +793,6 @@ export default {
   height: 90%;
 } */
 
-<<<<<<< HEAD
-
-=======
 /* game-over modal */
 
 .modal-close-btn {
@@ -986,5 +970,4 @@ export default {
   font-family: SDSamliphopangche_Basic;
   font-size: 3.5vh;
 }
->>>>>>> fb3f131a0b79f3743c9294efbd94858947722640
 </style>

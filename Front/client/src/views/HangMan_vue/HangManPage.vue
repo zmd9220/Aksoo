@@ -1,13 +1,4 @@
 <template>
-<<<<<<< HEAD
-    <div class="hangman-row">
-        <div class="game-container">
-            <HangManGame ref="game" @lifeLoss="lifeLoss" @scoreChange="scoreChange" :topic="topic" :diff="diff"
-            />
-            <img class="ground" src="@/assets/WordGuess/back@3x_remove.jpg" />
-            <img class="wolf" src="@/assets/WordGuess/wolf-1.png" />
-            <img class="bird" src="@/assets/WordGuess/bird.png" />
-=======
   <div class="hangman-row">
     <audio
       autoplay
@@ -64,7 +55,6 @@
               <img src="./heart.png" style="width: 40px" />
             </span>
           </div>
->>>>>>> fb3f131a0b79f3743c9294efbd94858947722640
         </div>
         <div class="right-status-column">
             <div class="nickname">{{nickname}} 님</div>
@@ -139,8 +129,10 @@
                 ref="camera"
                 />
             </div>
-        </div>
+          </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -220,16 +212,6 @@ export default {
 }
 
 .hangman-row .game-container {
-<<<<<<< HEAD
-    background-color: #f4f1eb;
-    flex:70%;
-    border-radius: 20px;
-    margin: 2vh;
-    box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.733);
-    background: linear-gradient(to top, #fff,#dee8f7);
-    position: relative;
-    overflow: hidden;
-=======
   background-color: #f4f1eb;
   flex: 70%;
   border-radius: 20px;
@@ -238,7 +220,6 @@ export default {
   background: linear-gradient(to top, #fff, #dee8f7);
   position: relative;
   overflow: hidden;
->>>>>>> fb3f131a0b79f3743c9294efbd94858947722640
 }
 
 .hangman-row .game-container .ground {

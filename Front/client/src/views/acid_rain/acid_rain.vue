@@ -727,7 +727,7 @@ export default {
 
 #message {
   position: absolute;
-  vertical-align: middle;
+  /* vertical-align: middle; */
   height: 100%;
   box-sizing: border-box;
   font-size: 100px;

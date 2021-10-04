@@ -121,10 +121,10 @@ body {
   font-style: normal;
 }
 
-#nav {
+/* #nav { */
   /* padding: 30px; */
   /* height: 867px; */
-}
+/* } */
 
 #nav a {
   font-weight: bold;
