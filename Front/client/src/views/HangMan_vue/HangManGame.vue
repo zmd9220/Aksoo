@@ -284,6 +284,7 @@ export default {
         } else {
           if (!this.wrongs.includes(letter)) {
             this.wrongs.push(letter);
+
             this.updateWrongs();
             wrongAnswer.play();
           }
@@ -337,22 +338,22 @@ export default {
         option.style.display = "block";
       }
     },
-    toggleText: function () {
-      this.gameIsOver = true;
+    // toggleText: function () {
+    //   this.gameIsOver = true;
 
-      var text = document.getElementById("message");
-      if (text.style.display === "none") {
-        text.style.display = "block";
-      } else {
-        text.style.display = "none";
-      }
-      // var textwin = document.getElementById("messagewin");
-      // if (textwin.style.display === "none") {
-      //   textwin.style.display = "block";
-      // } else {
-      //   textwin.style.display = "none";
-      // }
-    },
+    //   var text = document.getElementById("message");
+    //   if (text.style.display === "none") {
+    //     text.style.display = "block";
+    //   } else {
+    //     text.style.display = "none";
+    //   }
+    //   // var textwin = document.getElementById("messagewin");
+    //   // if (textwin.style.display === "none") {
+    //   //   textwin.style.display = "block";
+    //   // } else {
+    //   //   textwin.style.display = "none";
+    //   // }
+    // },
     keyboardClick(letter) {
       if (this.wrongs.includes(letter)) {
         return {
@@ -422,9 +423,11 @@ export default {
       this.$emit("lifeLoss");
       if (this.countError === this.life) {
         // this.toggleText();
-        this.gameIsOver = true;
+
         var gameOver = document.getElementById("gameOver");
-        gameOver.play();
+        setTimeout(gameOver.play(), 1000);
+        // gameOver.play();
+        this.gameIsOver = true;
         // this.online = false;
         // var modal = document.getElementById("gameovermodal");
         // if (this.gameover === false) {

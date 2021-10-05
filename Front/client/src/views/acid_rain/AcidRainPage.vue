@@ -2,7 +2,8 @@
   <div class="acid">
     <audio id="gameOver" src="@/assets/music/gameover/gameover.mp3"></audio>
     <audio id="click" src="@/assets/music/answer/Correct 2.mp3"></audio>
-    <audio id="answer" src="@/assets/music/answer/Correct 1.mp3"></audio>
+    <!-- <audio id="answer" src="@/assets/music/answer/Correct 1.mp3"></audio> -->
+    <audio id="answer" src="@/assets/music/answer/pop.mp3"></audio>
     <audio
       id="wrongAnswer"
       src="@/assets/music/wrongAnswer/Error 2.mp3"
@@ -17,8 +18,10 @@
         @lifeLoss="lifeLoss"
         @scoreChange="scoreChange"
         @answers="answers"
-        :topic="topic"
-        :diff="diff"
+        :consonant="consonant"
+        :mode="mode"
+        :confidence="confidence"
+        :letter="letter"
       />
     </div>
     <div class="right-status-column">
@@ -59,8 +62,8 @@
         </Progress>
         <!-- {{ count }} -->
       </div>
-      <div v-else class="game-mode-vowel" @click="modeChange">
-        모음
+      <div v-else class="game-mode-vowel">
+        {{ consonant }}
         <!-- <Progress :transitionDuration="50" :radius="15" :strokeWidth="7" value="80"/> -->
         <!-- <Progress :transitionDuration="10" :radius="15" :strokeWidth="7" :value="30">
                     <div class="content"></div>
@@ -91,68 +94,20 @@
           @on-loaded="modelLoaded = true"
           @on-minimize="minimizeCamera = true"
           @word="cameraData"
-          @modeChange="modeChange"
-          @input="input"
+          :mode="mode"
           @count="count1"
-          ref="camera"
         />
       </div>
     </div>
-    <!-- <div class="a">하태린 님</div>
-
-      <div class="b">
-        <strong
-          >Life :
-          <span v-for="idx in hart" :key="idx">
-            <img
-              src="@/assets/hart.png"
-              style="width: 30px; float: right; margin: 0 8px"
-            /> </span
-        ></strong>
-        <br />
-        <br />
-        <strong>
-          Score:
-          <div style="float: right; margin: 0 5%">{{ score }}</div></strong
-        >
-        <br />
-        <br />
-        <strong
-          >Best Score:
-          <div style="float: right; margin: 0 5%">0</div></strong
-        >
-      </div>
-      <div class="c">{{ consonant }}</div>
-      <div class="d">
-        {{ test }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ per }}
-      </div>
-      <camera
-        v-show="modelLoaded && !minimizeCamera"
-        @on-loaded="modelLoaded = true"
-        @on-minimize="minimizeCamera = true"
-        :test="test"
-        @word="testEmit"
-        :mode="mode"
-        @per="testPer"
-      /> -->
   </div>
 </template>
 
 
 <script>
-import Camera from "@/components/Camera.vue";
+import Camera from "@/components/Camera1.vue";
 import Loading from "@/components/Loading.vue";
 
 import AcidRainGame from "./AcidRainGame.vue";
-
-var placeLetterInterval = 1000;
-var placeLetterTimer, moveLettersTimer;
-
-var aiLetterTimer;
-// var startButton, resetButton;
-var box,
-  score,
-  hart = 5;
 
 export default {
   name: "Acid_rain",
@@ -167,270 +122,50 @@ export default {
     return {
       nickname: "하태린",
       score: 0,
-      hart: "5",
+      life: 5,
       show: true,
       showend: true,
-      consonant: "",
+      // consonant: "",
       modelLoaded: false,
       minimizeCamera: false,
       test: "",
-      mode: 0,
-      per: 0,
+      // mode: 0,
+      // per: 0,
       gameIsOver: false,
+      letter: "",
+      count: 0,
+      confidence: "",
+      best_score: 0,
       // clicked: false,
       // clickedCon: false,
     };
   },
   props: {
-    topic: Object,
-    // mode: Object,
+    consonant: Object,
+    mode: Object,
   },
-  mounted() {
-    // document.addEventListener("DOMContentLoaded", this.doTest);
-    // message = document.getElementById("message");
-    box = document.getElementById("box");
-    score = document.getElementById("score");
-    hart = this.hart;
-  },
+
   methods: {
-    click() {
-      var click = document.getElementById("click");
-      click.play();
-    },
-    con() {
-      this.consonant = "자음"; // mode 1
-      // Camera.data.mode = 1;
-      this.mode = 1;
-    },
-    col() {
-      this.consonant = "모음"; // mode 0
-      // Camera.data.mode = 0;
-      this.mode = 0;
-    },
-    placeLetter: function () {
-      // 12593 ~ 12643
-      // var Con = 12593 + Math.floor(Math.random() * 50);
-      var Con;
-      if (this.consonant === "자음") {
-        // console.log(1);
-        Con = 12593 + Math.floor(Math.random() * 29);
-      } else {
-        Con = 12623 + Math.floor(Math.random() * 20);
-      }
-      // for (let i = 12593; i < 12644; i++) {
-      //   console.log(i + " : " + consonant[i]);
-      // }
-      var consonant = [
-        12595, 12597, 12598, 12602, 12603, 12604, 12605, 12606, 12607, 12608,
-        12612, 12594, 12600, 12611, 12614, 12617, 12632, 12633, 12634, 12637,
-        12638, 12639, 12642, 12624, 12626, 12628, 12630,
-      ];
-      for (var i = 0; i < consonant.length; i++) {
-        if (Con == consonant[i]) {
-          return;
-        }
-      }
-      var letter = String.fromCharCode(Con); // ㄾ ㅘ ㅢ
-      console.log(letter + " " + Con);
-
-      /*
-ㅘ 12632
-ㅙ 12633
-ㅚ 12634
-ㅝ 12637
-ㅞ 12638
-ㅟ 12639
-ㅢ 12642
-ㅐ 12624
-ㅒ 12626
-ㅔ 12628
-ㅖ 12630
-
-ㄲ 12594
-ㄸ 12600
-ㅃ 12611
-ㅆ 12614
-ㅉ 12617
-ㄳ 12595
-ㄵ 12597
-ㄶ 12598
-ㄺ 12602
-ㄻ 12603
-ㄼ 12604
-ㄽ 12605
-ㄾ 12606
-ㄿ 12607
-ㅀ 12608
-ㅄ 12612
-    */
-      // 한글
-      // var letter = String.fromCharCode(12593 + Math.floor(Math.random() * 50)); // ㄾ ㅘ ㅢ
-      // 영어
-      // var letter = String.fromCharCode(97 + Math.floor(Math.random() * 26));
-      var newLetter = document.createElement("div");
-      newLetter.id = "quiz";
-      newLetter.innerHTML = letter;
-      newLetter.className = letter;
-
-      // newLetter.style.right = Math.random() * 300 + "px";
-      // newLetter.style.top = 1000 - (Math.random() * 500) + "px";
-      newLetter.style.left = 100 + Math.random() * 700 + "px";
-      newLetter.style.bottom = 400 + Math.random() * 500 + "px";
-
-      box.appendChild(newLetter);
-    },
-
-    moveLetters: function () {
-      var boxes = document.querySelectorAll("#box > div");
-      var wrongAnswer = document.getElementById("wrongAnswer");
-      var gameOver = document.getElementById("gameOver");
-
-      for (var i = 0; i < boxes.length; i++) {
-        boxes[i].style.bottom = parseInt(boxes[i].style.bottom) - 8 + "px";
-        if (parseInt(boxes[i].style.bottom) <= 50) {
-          wrongAnswer.play();
-          boxes[i].remove();
-          this.hart = parseInt(this.hart) - 1;
-          this.decreaseLetterSpeed(hart);
-          if (this.hart == 0) {
-            // this.toggleText();
-            gameOver.play();
-            this.gameIsOver = true;
-            this.endGame();
-          }
-        }
-      }
-    },
-
-    endGame: function () {
-      // this.togglerestart();
-      clearInterval(moveLettersTimer);
-      clearInterval(placeLetterTimer);
-      clearInterval(aiLetterTimer);
-
-      // document.removeEventListener("keydown", this.keyboardInput);
-      // message.classList.remove("hidden");
-
-      // resetButton.classList.remove("disabled");
-    },
-
-    decreaseLetterSpeed: function (score) {
-      if (parseInt(score.innerHTML) % 20 === 0) {
-        clearInterval(placeLetterTimer);
-        placeLetterInterval = placeLetterInterval * 1.1;
-        placeLetterTimer = setInterval(this.placeLetter, placeLetterInterval);
-      }
-    },
-
-    toggleText: function () {
-      var text = document.getElementById("message");
-      if (text.style.display === "none") {
-        text.style.display = "block";
-      } else {
-        text.style.display = "none";
-      }
-    },
-    // resetText: function () {
-    //   var text = document.getElementById("message");
-    //   text.style.display = "none";
+    // testEmit(test) {
+    //   this.test = test;
     // },
-    togglestart: function () {
-      // var text = document.getElementById("start");
-      // text.style.display = "none";
+    // testPer(per) {
+    //   this.per = per;
+    // },
+    cameraData: function (payload1, payload2) {
+      this.letter = payload1;
+      this.confidence = payload2;
     },
-    togglerestart: function () {
-      var text = document.getElementById("restart");
-      if (text.style.display === "none") {
-        text.style.display = "block";
-      } else {
-        text.style.display = "none";
-      }
+    input: function (letter) {
+      this.$refs.game.listener(letter);
     },
-
-    resetGame: function () {
-      // this.togglerestart();
-
-      this.gameIsOver = false;
-      // this.resetText();
-
-      // message.classList.add("hidden"); // add
-      // resetButton.classList.add("disabled");
-      // score.innerHTML = 0;
-      this.score = 0;
-      this.hart = 5;
-      // console.log(1);
-
-      var boxes = document.querySelectorAll("#quiz");
-      for (var i = 0; i < boxes.length; i++) {
-        boxes[i].remove();
-      }
-      // console.log(2);
-      // console.log(1);
-      this.endGame();
-      // console.log(3);
-      this.startGame();
-      // console.log(3);
+    lifeLoss: function () {
+      this.life--;
     },
-    testEmit(test) {
-      this.test = test;
+    scoreChange: function (payload) {
+      this.score = this.score + payload;
+      this.answer = true;
     },
-    testPer(per) {
-      this.per = per;
-    },
-    aiLetter: function () {
-      // console.log(31);
-
-      // console.log(Camera.data.detection.name);
-      // var test = Camera.detection.name;
-      // this.test = test;
-      // console.log(test);
-      // console.log(1);
-
-      var boxes = document.getElementsByClassName(this.test);
-      // console.log(this.test);
-
-      if (boxes[0]) {
-        var answer = document.getElementById("answer");
-        answer.play();
-        boxes[0].remove();
-        // score.innerHTML = parseInt(score.innerHTML) + 1;
-        this.score += 10;
-        this.decreaseLetterSpeed(score);
-      }
-      // else {
-      //   score.innerHTML = parseInt(score.innerHTML) - 1;
-      // }
-    },
-
-    startGame: function () {
-      console.log("start");
-      this.togglestart();
-      // this.resetText();
-      this.hart = 5;
-
-      placeLetterTimer = setInterval(this.placeLetter, placeLetterInterval);
-      moveLettersTimer = setInterval(this.moveLetters, 100);
-      aiLetterTimer = setInterval(this.aiLetter, 10);
-
-      // document.addEventListener("keydown", this.keyboardInput);
-      // this.keyboardInput();
-
-      // startButton.classList.add("disabled");
-    },
-
-    // document.addEventListener("DOMContentLoaded", function(event) {
-    //     console.log("OH HAI THERE!");
-
-    //     message = document.getElementById('message');
-    //     box = document.getElementById('box');
-    //     score = document.getElementById("score");
-
-    //     startButton = document.getElementById('start')
-    //     startButton.onclick = startGame;
-
-    //     resetButton = document.getElementById('reset')
-    //     resetButton.onclick = resetGame;
-    // })
   },
   created() {
     this.endGame();
@@ -599,6 +334,7 @@ export default {
   transition-delay: 0;
   z-index: 200;
 }
+
 .modal-content {
   /* height: 100% !important; */
   border: 0px !important;

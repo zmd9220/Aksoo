@@ -10,7 +10,7 @@
       <span v-else>
         <router-link :to="{ name: 'Signup' }">Signup</router-link> |
         <router-link :to="{ name: 'Login' }">Login</router-link> |
-        <router-link :to="{ name: 'Acid_rain' }">Acid_rain</router-link> |
+        <router-link :to="{ name: 'AcidRainMain' }">Acid_rain</router-link> |
         <router-link :to="{ name: 'MainPage' }">MainPage</router-link> |
         <router-link :to="{ name: 'GamePage' }">GamePage</router-link> |
         <router-link :to="{ name: 'LearnStartPage' }"
@@ -22,15 +22,14 @@
         >
         |
         <router-link :to="{ name: 'LearnWordPage' }">LeanWordPage</router-link>
-        | 
+        |
         <router-link :to="{ name: 'HangManMain' }">HangManMain</router-link> |
         <router-link :to="{ name: 'CardflipMain' }">CardflipMain</router-link> |
         <router-link :to="{ name: 'Halloffame' }">Halloffame</router-link> |
-        
+
         <!-- | <router-link :to="{ name: 'HangManGame' }">HangManGame</router-link>  -->
         <!-- <router-link :to="{ name: 'HangManPage' }">HangManPage</router-link> | -->
         <!-- <router-link :to="{ name: 'HangMan_vue' }">HangMan_vue</router-link> | -->
-
       </span>
       <router-view @login="isLogin = true" />
     </div>

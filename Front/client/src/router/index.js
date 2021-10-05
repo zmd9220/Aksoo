@@ -4,7 +4,9 @@ import TodoList from '@/views/todos/TodoList'
 import CreateTodo from '@/views/todos/CreateTodo'
 import Signup from '@/views/accounts/Signup'
 import Login from '@/views/accounts/Login'
-import Acid_rain from '@/views/acid_rain/acid_rain'
+import AcidRainPage from '@/views/acid_rain/AcidRainPage'
+import AcidRainMain from '@/views/acid_rain/AcidRainMain'
+import AcidRainGame from '@/views/acid_rain/AcidRainGame'
 import Header from '@/views/MainPage/Header'
 import MainPage from '@/views/MainPage/MainPage'
 import GamePage from '@/views/MainPage/GamePage'
@@ -58,9 +60,20 @@ const routes = [
     component: Login,
   },
   {
-    path: '/acid_rain/acid_rain',
-    name: 'Acid_rain',
-    component: Acid_rain,
+    path: '/acid_rain/AcidRainPage',
+    name: 'AcidRainPage',
+    component: AcidRainPage,
+    props: true,
+  },
+  {
+    path: '/acid_rain/AcidRainMain',
+    name: 'AcidRainMain',
+    component: AcidRainMain,
+  },
+  {
+    path: '/acid_rain/AcidRainGame',
+    name: 'AcidRainGame',
+    component: AcidRainGame,
   },
   {
     path: '/MainPage/Header',
