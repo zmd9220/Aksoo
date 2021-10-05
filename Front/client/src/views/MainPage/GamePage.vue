@@ -126,15 +126,9 @@
   top: 15%;
 }
 
-.section-game {
-  position: absolute;
-  left: 5%;
-  top: 20%;
-}
-
 .title-text {
   font-family: BinggraeSamanco-Bold;
-  font-size: 5vw;
+  font-size: 3.75vw;
   font-weight: bold;
   font-stretch: normal;
   font-style: normal;
@@ -142,7 +136,7 @@
 
 .title-script {
   font-family: GowunDodum-Regular;
-  font-size: 1.75vw;
+  font-size: 1vw;
 }
 
 .mgi_thum img[data-v-3adcea5a] {
@@ -193,14 +187,13 @@
   left: 0%;
   top: 87.5%;
   width: 100%;
-  height: 12.5%;
   z-index: -1;
 }
 
 .gosm {
   position: absolute;
   left: 70%;
-  top: 85.5%;
+  top: 85%;
   width: 10%;
   z-index: -1;
 }

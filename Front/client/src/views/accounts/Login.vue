@@ -114,7 +114,7 @@
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
 
 // const SERVER_URL = process.env.VUE_APP_SERVER_URL
 
@@ -123,29 +123,19 @@ export default {
   data: function () {
     return {
       credentials: {
-        username: null,
+        email: null,
         password: null,
-        passwordConfirmation: null,
       },
     };
   },
   methods: {
+    // 로그인
     login: function () {
-      this.$router.push("/accounts/login");
-    },
-    signup: function () {
-      axios({
-        method: "post",
-        url: "http://127.0.0.1:8000/accounts/signup/",
-        data: this.credentials,
-      })
-        .then((res) => {
-          console.log(res);
-          this.$router.push({ name: "Login" });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      this.$store.dispatch('userStore/loginUser', this.credentials)
+      // test 용
+      // this.$store.dispatch('userStore/loginUser', {email: "test2@gma.com", password: "test1"})
+      this.$emit('login')
+      this.$router.push({ name: 'MainPage' }) 
     },
   },
 };
