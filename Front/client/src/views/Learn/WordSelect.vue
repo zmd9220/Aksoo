@@ -22,12 +22,18 @@
       <img src="@/assets/cloud.png" class="cloud">
       <img src="@/assets/Learn/LearnStart/shape-2.svg" class="Shape-2">
     </div>
+    <Footer />
   </div>
 </template>
 
 <script>
+import Footer from "@/views/MainPage/Footer.vue";
+
 export default {
   name: "handSelect",
+  components: {
+    Footer,
+  },
   data: function () {
     return {
       level: '',

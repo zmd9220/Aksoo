@@ -9,93 +9,145 @@
     ></audio>
     <!-- <template v-if="!modelLoaded">
       <loading message="👋 Loading hand detection model..." />
-    </template> -->
+    </template>
 
-    <div class="game-container">
-      <AcidRainGame
-        ref="game"
-        @lifeLoss="lifeLoss"
-        @scoreChange="scoreChange"
-        @answers="answers"
-        :topic="topic"
-        :diff="diff"
-      />
-    </div>
-    <div class="right-status-column">
-      <div class="nickname">{{ nickname }} 님</div>
-      <div class="game-status">
-        <div class="game-status-li li-start">
-          <div>Life</div>
-          <div>
-            <span v-for="idx in life" :key="idx">
-              <img src="./heart.png" style="width: 40px" />
-            </span>
-          </div>
-        </div>
-        <div class="game-status-li">
-          <div>Score</div>
-          <div class="game-status-box">
-            <span>
-              {{ score }}
-            </span>
-          </div>
-        </div>
-        <div class="game-status-li li-end">
-          <div>Best Score</div>
-          <div class="game-status-box">
-            {{ best_score }}
-          </div>
-        </div>
-      </div>
-      <div v-if="mode_letter" class="game-mode-cons" @click="modeChange">
-        자음
-        <Progress
-          :transitionDuration="5"
-          :radius="15"
-          :strokeWidth="7"
-          :value="this.count"
-        >
-          <div class="content"></div>
-        </Progress>
-        <!-- {{ count }} -->
-      </div>
-      <div v-else class="game-mode-vowel" @click="modeChange">
-        모음
-        <!-- <Progress :transitionDuration="50" :radius="15" :strokeWidth="7" value="80"/> -->
-        <!-- <Progress :transitionDuration="10" :radius="15" :strokeWidth="7" :value="30">
-                    <div class="content"></div>
-                </Progress> -->
-        <!-- {{count}} -->
-      </div>
-      <!-- <b-progress :value="count" :max="100" class="mb-3"></b-progress> -->
-
-      <div class="letter">
-        <div class="selected-letter">{{ letter }}</div>
-        <div class="selected-confidence">정확도 : {{ confidence }}</div>
-      </div>
-      <b-progress
-        height="1px"
-        :value="count"
-        :max="80"
-        class="mb-3"
-        style="margin-bottom: 0 !important"
+    <div v-if="gameIsOver">
+      <b-modal
+        v-model="showend"
+        class="modal-border"
+        size="sm"
+        id="bv-modal-example"
+        hide-footer
+        hide-header
+        no-close-on-backdrop
       >
-      </b-progress>
-      <div class="camera">
-        <template v-if="!modelLoaded">
-          <!-- <img src="./croc.png" style="width: 80px" />  -->
-          <loading message="👋 Loading hand detection model..." />
-        </template>
-        <camera
-          v-show="modelLoaded && !minimizeCamera"
-          @on-loaded="modelLoaded = true"
-          @on-minimize="minimizeCamera = true"
-          @word="cameraData"
-          @modeChange="modeChange"
-          @input="input"
-          @count="count1"
-          ref="camera"
-        />
+         <b-button
+          class="mt-3 modal-close-btn"
+          block
+          @click="$bvModal.hide('bv-modal-example')"
+        >
+          <span class="close-btn-txt">닫기</span></b-button
+        > -->
+    <p class="game-over-text">GAME OVER</p>
+    <div class="modal-cardFont">Score</div>
+    <div class="modal-score">{{ score }}</div>
+    <div class="row">
+      <div class="column">
+        <div class="modal-rank-cardFont">Rank</div>
+        <span>
+          <div class="modal-rank-score">
+            <img src="@/assets/trophy.png" alt="trophy" class="rank-img" />43
+          </div>
+        </span>
+      </div>
+    </div>
+    <div class="game-status-li">
+      <div>Score</div>
+      <div class="game-status-box">
+        <span>
+          {{ score }}
+        </span>
+        <b-button class="mt-3 modal-halloffame-btn" block href="#">
+          <span class="halloffame-btn-txt">명예의전당</span></b-button
+        >
+      </div>
+    </div>
+    <div class="game-status-li li-end">
+      <div>Best Score</div>
+      <div class="game-status-box">
+        {{ best_score }}
+      </div>
+    </div>
+    <!-- <b-row>
+          <b-col cols="3">자-모음</b-col>
+          <b-col cols="6">
+            <b-form-select v-model="Consonant" :options="consonant">
+            </b-form-select>
+          </b-col>
+        </b-row> -->
+
+    <div class="acid_left">
+      <title>The Game Formerly Known as Typing</title>
+      <!-- <script src="js/game.js"></script> -->
+      <!-- <link href="css/style.css" rel="stylesheet"> -->
+
+      <div class="container">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div id="box">
+              <!-- <img class="ground" src="@/assets/ground.png" /> -->
+              <img class="gosm" src="@/assets/right.gif" />
+              <img class="lgosm" src="@/assets/left.gif" />
+              <img class="ground" src="@/assets/tree-ground.png" />
+              <!-- <div id="message" class="hidden" style="display: none">
+                Game Over!
+                <br />
+                <button
+                  class="btn btn-danger pull-right"
+                  id="reset"
+                  v-on:click="resetGame"
+                >
+                  <span class="glyphicon glyphicon-flash" id="reset"></span>
+                  ReStart
+                </button>
+              </div> -->
+              <!-- <span id="message" class="hidden" style="display: none"
+                >Game Over!</span
+              > -->
+              <span id="menu" class="menu">
+                <!-- <button
+                  class="btn btn-success pull-right"
+                  id="start"
+                  v-on:click="startGame"
+                  style="display: block"
+                >
+                  <span class="glyphicon glyphicon-play" id="start"></span>
+                  Start
+                </button> -->
+                <!-- <b-button id="start" @click="show = true" variant="primary"
+                  >게임 시작하기</b-button
+                > -->
+
+                <div
+                  id="message"
+                  class="hidden"
+                  style="display: none; background-color: grey; opacity: 85%"
+                >
+                  Game Over!
+                  <hr />
+
+                  <div class="game-result">
+                    <p>Score: {{ score }}</p>
+                    <p>Your Highest Score:</p>
+                    <p>Ranking:</p>
+                  </div>
+
+                  <button
+                    class="btn btn-danger pull-right"
+                    id="reset"
+                    v-on:click="resetGame"
+                  >
+                    <span class="glyphicon glyphicon-flash" id="reset"></span>
+                    ReStart
+                  </button>
+                </div>
+
+                <!-- disabled -->
+              </span>
+
+              <!-- <img src="./background.gif" class="bg" style="object-fit: fill" /> -->
+            </div>
+          </div>
+          <div class="panel-footer">
+            <strong>Score: {{ score }}</strong>
+            <strong
+              >Life :
+              <span v-for="idx in hart" :key="idx">
+                <img src="./heart.gif" style="width: 20px" /> </span
+            ></strong>
+          </div>
+        </div>
+        <hr />
       </div>
     </div>
     <!-- <div class="a">하태린 님</div>
@@ -169,7 +221,6 @@ export default {
       score: 0,
       hart: "5",
       show: true,
-      showend: true,
       consonant: "",
       modelLoaded: false,
       minimizeCamera: false,
@@ -282,13 +333,12 @@ export default {
 
     moveLetters: function () {
       var boxes = document.querySelectorAll("#box > div");
-      var wrongAnswer = document.getElementById("wrongAnswer");
+      // var wrongAnswer = document.getElementById("wrongAnswer");
       var gameOver = document.getElementById("gameOver");
 
       for (var i = 0; i < boxes.length; i++) {
         boxes[i].style.bottom = parseInt(boxes[i].style.bottom) - 8 + "px";
-        if (parseInt(boxes[i].style.bottom) <= 50) {
-          wrongAnswer.play();
+        if (parseInt(boxes[i].style.bottom) <= -10) {
           boxes[i].remove();
           this.hart = parseInt(this.hart) - 1;
           this.decreaseLetterSpeed(hart);
@@ -330,10 +380,10 @@ export default {
         text.style.display = "none";
       }
     },
-    // resetText: function () {
-    //   var text = document.getElementById("message");
-    //   text.style.display = "none";
-    // },
+    resetText: function () {
+      var text = document.getElementById("message");
+      text.style.display = "none";
+    },
     togglestart: function () {
       // var text = document.getElementById("start");
       // text.style.display = "none";
@@ -358,16 +408,15 @@ export default {
       // score.innerHTML = 0;
       this.score = 0;
       this.hart = 5;
-      // console.log(1);
-
+      console.log(1);
       var boxes = document.querySelectorAll("#quiz");
       for (var i = 0; i < boxes.length; i++) {
         boxes[i].remove();
       }
-      // console.log(2);
+      console.log(2);
       // console.log(1);
       this.endGame();
-      // console.log(3);
+      console.log(3);
       this.startGame();
       // console.log(3);
     },
@@ -390,8 +439,6 @@ export default {
       // console.log(this.test);
 
       if (boxes[0]) {
-        var answer = document.getElementById("answer");
-        answer.play();
         boxes[0].remove();
         // score.innerHTML = parseInt(score.innerHTML) + 1;
         this.score += 10;
@@ -432,12 +479,7 @@ export default {
     //     resetButton.onclick = resetGame;
     // })
   },
-  created() {
-    this.endGame();
-  },
-  destroyed() {
-    this.endGame();
-  },
+  created() {},
 };
 </script>
 
@@ -635,7 +677,7 @@ export default {
 
 #message {
   position: absolute;
-  vertical-align: middle;
+  /* vertical-align: middle; */
   height: 100%;
   box-sizing: border-box;
   font-size: 100px;
@@ -1048,17 +1090,6 @@ export default {
   border-radius: 2rem;
 }
 
-.modal-restart-btn {
-  width: 40%;
-  height: 40%;
-  /* border: solid 0.5vh #76300b; */
-  border: none;
-  background-color: #fe6e27;
-  box-shadow: 0rem 0.38vh 0.56rem 0 rgba(0, 0, 0, 0.3);
-  object-fit: contain;
-  border-radius: 2rem;
-}
-
 .restart-btn-txt {
   font-family: SDSamliphopangche_Basic;
   font-size: 3.5vh;
@@ -1067,7 +1098,6 @@ export default {
 .modal-halloffame-btn {
   width: 40%;
   height: 40%;
-  /* border: solid 0.5vh #76300b; */
   border: none;
   background-color: #68bbf7;
   box-shadow: 0rem 0.38vh 0.56rem 0 rgba(0, 0, 0, 0.3);

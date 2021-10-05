@@ -28,22 +28,26 @@
         <router-link :to="{ name: 'Halloffame' }">Halloffame</router-link> |
 
         <!-- | <router-link :to="{ name: 'HangManGame' }">HangManGame</router-link>  -->
+        |
         <!-- <router-link :to="{ name: 'HangManPage' }">HangManPage</router-link> | -->
         <!-- <router-link :to="{ name: 'HangMan_vue' }">HangMan_vue</router-link> | -->
       </span>
       <router-view @login="isLogin = true" />
     </div>
+    <!-- <Footer /> -->
   </div>
 </template>
 
 
 <script>
 import Header from "./views/MainPage/Header.vue";
+// import Footer from "./views/MainPage/Footer.vue";
 
 export default {
   name: "App",
   components: {
     Header,
+    // Footer,
   },
   data: function () {
     return {
@@ -116,10 +120,10 @@ body {
   font-style: normal;
 }
 
-#nav {
-  /* padding: 30px; */
-  /* height: 867px; */
-}
+/* #nav { */
+/* padding: 30px; */
+/* height: 867px; */
+/* } */
 
 #nav a {
   font-weight: bold;

@@ -5,132 +5,161 @@
       id="gameStart"
       src="@/assets/music/pageMove/Jump High.mp3"
     ></audio>
-    <p class="title">
-      <span class="title-text">게임하기 </span>
-      <span class="title-script">어쩌구 저쩌구 게임을 경험해 보세요!</span>
-    </p>
-    <div data-v-3adcea5a="" class="section-game">
-      <div
-        data-v-3adcea5a=""
-        class="ss01 is-aniamte-fade animated fadeIn"
-        style="animation-delay: 0.5s"
-      >
-        <img data-v-3adcea5a="" src="/images/main/section02_txt01.png" alt="" />
-      </div>
-      <div data-v-3adcea5a="" class="hoem-game-char">
+    <div class="contents">
+      <p class="title">
+        <span class="title-text">게임하기 </span>
+        <span class="title-script">다양한 지문자 게임을 경험해 보세요!</span>
+      </p>
+      <div data-v-3adcea5a="" class="section-game">
         <div
           data-v-3adcea5a=""
-          class="ss02 is-animated__single animated rollIn"
-          style="animation-delay: 1.7s"
+          class="ss01 is-aniamte-fade animated fadeIn"
+          style="animation-delay: 0.5s"
         >
-          <img data-v-3adcea5a="" src="/images/main/tt07.png" alt="" />
+          <img data-v-3adcea5a="" src="/images/main/section02_txt01.png" alt="" />
         </div>
-        <div
-          data-v-3adcea5a=""
-          class="ss03 is-aniamte-fade animated fadeIn"
-          style="animation-delay: 0.8s"
-        >
-          <img data-v-3adcea5a="" src="/images/main/tt03.png" alt="" />
-        </div>
-      </div>
-      <div data-v-3adcea5a="" class="home-game-group">
-        <div
-          data-v-3adcea5a=""
-          class="ss04 is-animated mm_box animated fadeInUpBig"
-          style="animation-delay: 0.3s"
-        >
-          <div data-v-3adcea5a="" class="mgi_thum">
-            <img
-              data-v-3adcea5a=""
-              src="@/assets/acid-rain-cover.png"
-              alt="산성비 소개"
-            />
+        <div data-v-3adcea5a="" class="hoem-game-char">
+          <div
+            data-v-3adcea5a=""
+            class="ss02 is-animated__single animated rollIn"
+            style="animation-delay: 1.7s"
+          >
+            <img data-v-3adcea5a="" src="/images/main/tt07.png" alt="" />
           </div>
-          <p class="game-title">"빗방울이 내리기 전에 타격!"</p>
-          <span data-v-3adcea5a="" class="game-content">
-            하늘에서 독성의 비가 내린다?
-          </span>
-          <p class="game-content">
-            도치를 위해 빠르게 산성비를 제거해주세요!
-          </p>
-          <div>
-            <b-button to="acid_rain/acid_rain/" class="start-game-btn">
-              <span class="start-game-btn-text">게임 시작하기</span> 
-            </b-button>
+          <div
+            data-v-3adcea5a=""
+            class="ss03 is-aniamte-fade animated fadeIn"
+            style="animation-delay: 0.8s"
+          >
+            <img data-v-3adcea5a="" src="/images/main/tt03.png" alt="" />
           </div>
         </div>
-        <div
-          data-v-3adcea5a=""
-          class="ss05 is-animated mm_box animated fadeInUpBig"
-          style="animation-delay: 0.6s"
-        >
-          <div data-v-3adcea5a="" class="mgi_thum">
-            <img
-              data-v-3adcea5a=""
-              src="@/assets/acid-rain-cover.png"
-              alt="행맨 소개"
-            />
+        <div data-v-3adcea5a="" class="home-game-group">
+          <div
+            data-v-3adcea5a=""
+            class="ss04 is-animated mm_box animated fadeInUpBig"
+            style="animation-delay: 0.3s"
+          >
+            <div data-v-3adcea5a="" class="mgi_thum">
+              <img
+                data-v-3adcea5a=""
+                src="@/assets/acid-rain-cover.png"
+                alt="산성비 소개"
+              />
+            </div>
+            <p class="game-title">"빗방울이 내리기 전에 타격!"</p>
+            <span data-v-3adcea5a="" class="game-content">
+              하늘에서 독성의 비가 내린다?
+            </span>
+            <p class="game-content">
+              도치를 위해 빠르게 산성비를 제거해주세요!
+            </p>
+            <div>
+              <b-button to="acid_rain/acid_rain/" class="start-game-btn">
+                <span class="start-game-btn-text">게임 시작하기</span> 
+              </b-button>
+            </div>
           </div>
-          <p class="game-title">"단어를 맞춰 늑대에서 도망치자!"</p>
-          <span data-v-3adcea5a="" class="game-content">
-            뒤에 늑대가 쫓아온다고요?
-          </span>
-          <p class="game-content">
-            단어를 맞춰 짹짹이가 도망가게 해주세요!
-          </p>         
-          <div>
-            <b-button to="acid_rain/acid_rain/" class="start-game-btn">
-              <span class="start-game-btn-text">게임 시작하기</span> 
-            </b-button>
+          <div
+            data-v-3adcea5a=""
+            class="ss05 is-animated mm_box animated fadeInUpBig"
+            style="animation-delay: 0.6s"
+          >
+            <div data-v-3adcea5a="" class="mgi_thum">
+              <img
+                data-v-3adcea5a=""
+                src="@/assets/acid-rain-cover.png"
+                alt="행맨 소개"
+              />
+            </div>
+            <p class="game-title">"단어를 맞춰 늑대에서 도망치자!"</p>
+            <span data-v-3adcea5a="" class="game-content">
+              뒤에 늑대가 쫓아온다고요?
+            </span>
+            <p class="game-content">
+              단어를 맞춰 짹짹이가 도망가게 해주세요!
+            </p>         
+            <div>
+              <b-button @click="gotoHangman" to="acid_rain/acid_rain/" class="start-game-btn">
+                <span class="start-game-btn-text">게임 시작하기</span> 
+              </b-button>
+            </div>
           </div>
-        </div>
-        <div
-          data-v-3adcea5a=""
-          class="ss06 is-animated mm_box animated fadeInUpBig"
-          style="animation-delay: 0.9s"
-        >
-          <div data-v-3adcea5a="" class="mgi_thum">
-            <img
-              data-v-3adcea5a=""
-              src="@/assets/acid-rain-cover.png"
-              alt="카드 뒤집기 소개"
-            />
-          </div>
-          <p class="game-title">"카드의 짝을 찾아주자!"</p>
-          <span data-v-3adcea5a="" class="game-content">
-            뒤집고 뒤집어 승부를 뒤집는 영웅은 누구?
-          </span>
-          <p class="game-content">
-            완벽한 전략으로 모든 카드를 뒤집어봐요!
-          </p>
-          <div>
-            <b-button to="acid_rain/acid_rain/" class="start-game-btn">
-              <span class="start-game-btn-text">게임 시작하기</span> 
-            </b-button>
+          <div
+            data-v-3adcea5a=""
+            class="ss06 is-animated mm_box animated fadeInUpBig"
+            style="animation-delay: 0.9s"
+          >
+            <div data-v-3adcea5a="" class="mgi_thum">
+              <img
+                data-v-3adcea5a=""
+                src="@/assets/acid-rain-cover.png"
+                alt="카드 뒤집기 소개"
+              />
+            </div>
+            <p class="game-title">"카드의 짝을 찾아주자!"</p>
+            <span data-v-3adcea5a="" class="game-content">
+              뒤집고 뒤집어 승부를 뒤집는 영웅은 누구?
+            </span>
+            <p class="game-content">
+              완벽한 전략으로 모든 카드를 뒤집어봐요!
+            </p>
+            <div>
+              <b-button @click="gotoCardfilp" to="acid_rain/acid_rain/" class="start-game-btn">
+                <span class="start-game-btn-text">게임 시작하기</span> 
+              </b-button>
+            </div>
           </div>
         </div>
       </div>
     </div>
     <img src="@/assets/grass.png" alt="grass" class="grass" />
     <img src="@/assets/gosm.png" alt="gosm" class="gosm" />
+    <Footer />
   </div>
 </template>
 
 <script>
+import Footer from "@/views/MainPage/Footer.vue";
+
+export default {
+  name: "GamePage",
+  components: {
+    Footer,
+  },
+  methods: {
+    // gotoAcidrain() {
+    //   this.$router.push({ name: "CardflipHard" });
+    // },
+    gotoCardfilp() {
+      this.$router.push({ name: "CardflipMain" });
+    },
+    gotoHangman() {
+      this.$router.push({ name: "HangManMain" });
+    },
+
+  },
+}
+
 </script>
 
 <style scoped>
-.title {
-  position: absolute;
+.contents {
+  position: relative;
+  top: 15%;
+}
+
+/* .title {
+  position: relative;
   left: 10%;
   top: 15%;
 }
 
 .section-game {
-  position: absolute;
+  position: relative;
   left: 5%;
   top: 20%;
-}
+} */
 
 .title-text {
   font-family: BinggraeSamanco-Bold;

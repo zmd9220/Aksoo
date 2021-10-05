@@ -8,6 +8,7 @@ import AcidRainPage from '@/views/acid_rain/AcidRainPage'
 import AcidRainMain from '@/views/acid_rain/AcidRainMain'
 import AcidRainGame from '@/views/acid_rain/AcidRainGame'
 import Header from '@/views/MainPage/Header'
+import Footer from '@/views/MainPage/Footer'
 import MainPage from '@/views/MainPage/MainPage'
 import GamePage from '@/views/MainPage/GamePage'
 import LearnStartPage from '@/views/Learn/LearnStart'
@@ -79,6 +80,11 @@ const routes = [
     path: '/MainPage/Header',
     name: 'Header',
     component: Header,
+  },
+  {
+    path: '/MainPage/Footer',
+    name: 'Footer',
+    component: Footer,
   },
   {
     path: '/Start',

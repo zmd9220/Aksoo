@@ -24,13 +24,13 @@
         hide-header
         no-close-on-backdrop
       >
-        <b-button
+        <!-- <b-button
           class="mt-3 modal-close-btn"
           block
           @click="$bvModal.hide('bv-modal-example')"
         >
           <span class="close-btn-txt">닫기</span></b-button
-        >
+        > -->
         <p class="game-over-text">GAME OVER</p>
         <div class="modal-cardFont">Score</div>
         <div class="modal-score">{{ score }}</div>
@@ -61,7 +61,7 @@
                 />2500
               </div>
             </span>
-            <b-button class="mt-3 modal-halloffame-btn" block>
+            <b-button class="mt-3 modal-halloffame-btn" block href="#">
               <span class="halloffame-btn-txt">명예의전당</span></b-button
             >
           </div>
@@ -113,6 +113,7 @@
           </div>
           <div class="time" v-else>{{ seconds }}</div>
         </div>
+        <div class="time-margin"></div>
       </div>
     </div>
   </div>
@@ -300,9 +301,8 @@ export default {
 <style scoped>
 .cardFlip {
   display: flex;
-  width: 100%;
-  height: 100vh;
-  margin: 5vh;
+  width: 97%;
+  margin-left: 5vh;
 }
 
 .cardFlip .info-panel {
@@ -345,7 +345,7 @@ export default {
   box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.733);
   color: #917052;
   font-family: "SDSamliphopangche_Basic";
-  font-size: 3rem;
+  font-size: 2.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -407,7 +407,7 @@ export default {
 
 .flip-container {
   perspective: 300;
-  width: 27vh;
+  width: 29vh;
   height: 20vh;
 }
 
@@ -420,47 +420,51 @@ export default {
   backface-visibility: hidden;
   transition: 0.6s;
   transform-style: preserve-3d;
-  width: 27vh;
+  width: 29vh;
   height: 20vh;
   cursor: pointer;
   position: absolute;
 }
 
 .flip-container .front {
-  width: 27vh;
+  width: 29vh;
   height: 20vh;
   transform: rotateY(-180deg);
 }
 
 .flip-container.flipped .front {
-  width: 27vh;
+  width: 29vh;
   height: 20vh;
   transform: rotateY(0deg);
 }
 .flip-container.flipped .back {
-  width: 27vh;
+  width: 29vh;
   height: 20vh;
   transform: rotateY(180deg);
 }
 
 .cardBackImage {
-  width: 27vh;
+  width: 29vh;
   height: 20vh;
   border-radius: 20px;
 }
 .cardImage {
-  width: 27vh;
+  width: 29vh;
   height: 20vh;
   border: solid 0.3vh #e5d2bd;
   border-radius: 20px;
 }
 .cardFont {
   color: #b88b64;
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-family: "SDSamliphopangche_Basic";
   margin-bottom: 0;
   padding: 0;
   margin-top: 1.5vh;
+}
+
+.time-margin {
+  padding-top: 8%;
 }
 
 /* game-over modal */

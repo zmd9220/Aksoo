@@ -30,7 +30,7 @@
       <div class="game-container">
         <!-- <b-button>즐겨찾기 추가 {{ selectAlphabet }}</b-button> -->
         <!-- <img v-bind:src="require(`${imgSrclist[no]}`)" width="500rem"> -->
-        <img class="cardimg" v-bind:src="require(`@/assets/cardflip/letter/${selectAlphabet}.png`)" width="500rem">
+        <img class="cardimg" v-bind:src="require(`@/assets/Learn/Letters/${selectAlphabet}.png`)" width="500rem">
         <!-- <img v-bind:src=imgSrclist width="500rem"> -->
       </div>
 

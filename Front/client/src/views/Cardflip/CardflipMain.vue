@@ -1,30 +1,36 @@
 <template>
-  <div class="hangman-main">
-    <div class="hangman-desc">
-      <h1>카드뒤집기</h1>
-      <h2>어쩌구 저쩌구 행맨 게임을 경험해 보세요!</h2>
+  <div>
+    <div class="background-img">
+      <img src="@/assets/cloud.png" class="cloud" />
+      <img src="@/assets/Learn/LearnStart/shape-2.svg" class="Shape-2" />
     </div>
-    <div class="hangman-main-box">
-      <div class="hangman-thumbnail-box"></div>
-      <div class="hangman-select-box">
-        <div class="hangman-select-box-title">난이도를 선택하세요</div>
-        <!-- <div class="hangman-topic">
-          <div class="selectBox text-align:center" @click="gotoHard">
+    <div class="hangman-main">
+      <div class="hangman-desc">
+        <h1>카드뒤집기</h1>
+        <h2>지문자를 카드뒤집기 게임으로 익혀보세요!</h2>
+      </div>
+      <div class="hangman-main-box">
+        <div class="hangman-thumbnail-box"></div>
+        <div class="hangman-select-box">
+          <div class="hangman-select-box-title">난이도를 선택하세요</div>
+          <!-- <div class="hangman-topic">
+            <div class="selectBox text-align:center" @click="gotoHard">
+              상 (6X5)
+            </div>
+          </div>
+          <div class="hangman-diff">
+            <div class="hangman-start-button text-align:center" @click="gotoMiddle">
+              중 (5X4)
+            </div>
+          </div> -->
+          <div class="hangman-start-button text-align:center" @click="gotoHard">
             상 (6X5)
           </div>
-        </div>
-        <div class="hangman-diff">
           <div class="hangman-start-button text-align:center" @click="gotoMiddle">
             중 (5X4)
           </div>
-        </div> -->
-        <div class="hangman-start-button text-align:center" @click="gotoHard">
-          상 (6X5)
+          <div class="hangman-start-button" @click="gotoEasy">하 (4X3)</div>
         </div>
-        <div class="hangman-start-button text-align:center" @click="gotoMiddle">
-          중 (5X4)
-        </div>
-        <div class="hangman-start-button" @click="gotoEasy">하 (4X3)</div>
       </div>
     </div>
   </div>
@@ -51,8 +57,8 @@ export default {
 <style scoped>
 .hangman-main .hangman-desc {
   display: flex;
-  margin-top: 10vh;
-  margin-bottom: 10vh;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
 }
 
 .hangman-main .hangman-desc h1 {
@@ -65,7 +71,7 @@ export default {
 .hangman-main .hangman-desc h2 {
   font-family: GowunDodum-Regular;
   font-size: 1.125rem;
-  margin: 3vh 5vh 0 10vh;
+  margin: 3vh 5vh 0 0;
 }
 
 .hangman-main .hangman-main-box {
@@ -151,5 +157,25 @@ export default {
   position: relative;
   box-shadow: 0rem 0.15rem 0.12rem 0rem rgba(0, 0, 0, 0.3);
   top: 2px;
+}
+
+.cloud {
+  position: absolute;
+  top: 25%;
+  width: 80%;
+  left: 10%;
+  z-index: -3;
+  overflow: hidden;
+  transition-duration: 7s;
+  transition-property: transform;
+}
+
+img.Shape-2 {
+  position: absolute;
+  z-index: 0;
+  width: 100%;
+  left: 0%;
+  top: 87.5%;
+  height: 12.5%;
 }
 </style>
