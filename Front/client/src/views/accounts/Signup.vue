@@ -6,7 +6,7 @@
     </div>
     <div class="signMain" style="z-index: -2;">
       <div style="font-size: 1.5rem; text-align: left; margin-top: 5%; font-weight: bold;">CREATE ACOUNT</div>
-      <div class="googleLogin">
+      <!-- <div class="googleLogin"> -->
         <!-- <button type="button" class="googleBtn">
           <img
             src="@/assets/googleLogo.png"
@@ -22,7 +22,7 @@
           />
           구글로 로그인
         </button> -->
-      </div>
+      <!-- </div> -->
       <!-- <div style="color: #868c93; text-decoration: underline">OR</div> -->
 
       <div class="group-field">
@@ -33,7 +33,7 @@
             type="text"
             inputmode="email"
             class=""
-            value=""
+            v-model="credentials.email"
             placeholder="Email Address"
           />
         </div>
@@ -45,18 +45,24 @@
             id="password"
             name="password"
             class=""
-            value=""
+            v-model="credentials.password"
             style="display: block"
             placeholder="Password"
-          /><input
-            type="text"
-            id="_password"
-            name=""
-            class=""
-            placeholder=""
-            value=""
-            style="display: none"
           />
+        </div>
+      </div>
+      <div class="group-field">
+        <div class="input-group">
+          <input
+            type="password"
+            id="passwordConfirmation"
+            name="passwordConfirmation"
+            class=""
+            placeholder="Password Confirmation"
+            v-model="credentials.passwordConfirmation"
+            style="display: block"
+          />
+        </div>
           <!-- <a
                         href=""
                         class=""
@@ -76,7 +82,6 @@
                         "
                         ><i class="ico visible-eye-on"></i
                       ></a> -->
-        </div>
       </div>
       <div class="group-field">
         <div class="input-group">
@@ -85,16 +90,15 @@
             id="nickname"
             name="nickname"
             placeholder="Nickname "
-            value=""
+            v-model="credentials.nickname"
+            style="display: block"
           />
         </div>
       </div>
       <div>
         <b-button
-          type="submit"
-          class="button-normal larger disabled"
-          disabled=""
-          @click="login"
+          class="button-normal larger"
+          @click="signup(credentials)"
           variant="primary"
         >
           회원가입
@@ -123,6 +127,7 @@ export default {
       credentials: {
         email: null,
         password: null,
+        passwordConfirmation: null,
         nickname: null,
       },
     };
@@ -151,6 +156,7 @@ export default {
         .catch((err) => {
           console.log(err);
           console.log(err.data)
+          alert("입력을 확인해주세요.")
         });
     },
   },
@@ -231,6 +237,13 @@ export default {
   margin: 2%;
 }
 #password {
+  width: 90%;
+  height: 100%;
+  border: 0;
+  border-bottom: 3px solid #868c93;
+  margin: 2%;
+}
+#passwordConfirmation {
   width: 90%;
   height: 100%;
   border: 0;

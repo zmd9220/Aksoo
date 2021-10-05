@@ -54,7 +54,7 @@
                 />2500
               </div>
             </span>
-            <b-button class="mt-3 modal-halloffame-btn" block href="#">
+            <b-button class="mt-3 modal-halloffame-btn" block href="/Rangking/RankingMain">
               <span class="halloffame-btn-txt">명예의전당</span></b-button
             >
           </div>

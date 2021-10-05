@@ -46,7 +46,8 @@
 
         <ranking-list class="ranking-list" :Rank="Rank"/>
         <img src="@/assets/Learn/LearnStart/shape-2.svg" class="Shape-2" />
-    </div>
+
+  </div>
 </template>
 <script>
 import RankingList from '@/views/Ranking/RankingList.vue'

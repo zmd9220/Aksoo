@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Header />
+    <Header :isLogin="isLogin" @logout="logout"/>
     <div id="nav">
       <span v-if="isLogin">
         <router-link :to="{ name: 'TodoList' }">Todo List</router-link> |
@@ -61,7 +61,7 @@ export default {
       this.$router.push({ name: "Login" });
     },
   },
-  created: function () {
+  updated: function () {
     const token = localStorage.getItem("jwt");
     if (token) {
       this.isLogin = true;
