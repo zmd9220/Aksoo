@@ -1,5 +1,10 @@
 <template>
   <div id="app" class="cardFlip">
+    <audio
+      loop
+      id="gameBgm"
+      src="@/assets/music/bgm/Beat_Your_Competition.mp3"
+    ></audio>
     <audio loop id="tictoc" src="@/assets/music/game/tictoc.wav"></audio>
     <audio
       loop
@@ -247,6 +252,7 @@ export default {
         this.startGame();
       }
       var cardFilp = document.getElementById("cardFilp");
+      cardFilp.volume = 0.8;
       cardFilp.play();
       if (card.isMatched || card.isFlipped || this.flippedCards.length === 2)
         return;
@@ -294,6 +300,11 @@ export default {
       }
       return this.totalTime.seconds;
     },
+  },
+  mounted() {
+    var gameBgm = document.getElementById("gameBgm");
+    gameBgm.volume = 0.2;
+    gameBgm.play();
   },
 };
 </script>

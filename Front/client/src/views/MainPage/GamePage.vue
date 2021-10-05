@@ -114,10 +114,8 @@ export default {
     gotoHangman() {
       this.$router.push({ name: "HangManMain" });
     },
-
   },
-}
-
+};
 </script>
 
 <style scoped>
@@ -240,5 +238,4 @@ export default {
   font-size: 2.5vh;
   color: white;
 }
-
 </style>

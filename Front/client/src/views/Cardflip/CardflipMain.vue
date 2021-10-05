@@ -1,5 +1,11 @@
 <template>
   <div>
+    <audio
+      autoplay
+      id="gameStart"
+      src="@/assets/music/pageMove/Jump High.mp3"
+    ></audio>
+
     <div class="background-img">
       <img src="@/assets/cloud.png" class="cloud" />
       <img src="@/assets/Learn/LearnStart/shape-2.svg" class="Shape-2" />
@@ -26,7 +32,10 @@
           <div class="hangman-start-button text-align:center" @click="gotoHard">
             상 (6X5)
           </div>
-          <div class="hangman-start-button text-align:center" @click="gotoMiddle">
+          <div
+            class="hangman-start-button text-align:center"
+            @click="gotoMiddle"
+          >
             중 (5X4)
           </div>
           <div class="hangman-start-button" @click="gotoEasy">하 (4X3)</div>
@@ -162,6 +171,13 @@ export default {
   position: relative;
   box-shadow: 0rem 0.15rem 0.12rem 0rem rgba(0, 0, 0, 0.3);
   top: 2px;
+}
+.hangman-start-button:hover {
+  position: relative;
+  box-shadow: 0rem 0.15rem 0.12rem 0rem rgba(0, 0, 0, 0.3);
+  top: 2px;
+  background-color: #957457;
+  color: #e5d2bd;
 }
 
 .cloud {

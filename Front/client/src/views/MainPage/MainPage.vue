@@ -1,6 +1,11 @@
 <template>
   <div>
     <audio
+      loop
+      id="gameBgm"
+      src="@/assets/music/bgm/About_That_Oldie.mp3"
+    ></audio>
+    <audio
       autoplay
       id="gameStart"
       src="@/assets/music/pageMove/Jump High.mp3"
@@ -51,7 +56,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  mounted() {
+    var gameBgm = document.getElementById("gameBgm");
+    gameBgm.volume = 0.3;
+    gameBgm.play();
+  },
+};
 </script>
 
 <style scoped>

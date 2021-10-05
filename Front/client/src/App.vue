@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Header :isLogin="isLogin" @logout="logout"/>
+    <Header :isLogin="isLogin" @logout="logout" />
     <div id="nav">
       <span v-if="isLogin">
         <router-link :to="{ name: 'TodoList' }">Todo List</router-link> |
