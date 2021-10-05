@@ -18,6 +18,7 @@ class CustomUser(AbstractUser):
     nickname = models.CharField(max_length=45)
     # password = models.CharField(max_length=45)
     tier = models.ForeignKey(TierCode, models.DO_NOTHING)
+    total_score = models.IntegerField(default=0)
     # 팔로워 기능 M:N 필드
     followers = models.ManyToManyField('self', symmetrical=False, related_name='followings')
 

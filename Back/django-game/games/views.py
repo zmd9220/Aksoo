@@ -43,11 +43,13 @@ def set_score(request, select_game):
         # 현재 hangman 테이블에 이번에 들어온 유저 기록이 존재할 경우
         if user.hangman_set.filter(user=user.pk).exists():
             my_hangman = get_object_or_404(Hangman, user=user.pk)
-            print(my_hangman.__dict__)
+            # print(my_hangman.__dict__)
             # 현재 점수보다 새로 들어온 점수가 클 경우에만 갱신
             if my_hangman.score < request.data['score']:
                 serializer = HangmanSerializer(my_hangman, data=request.data)
                 if serializer.is_valid(raise_exception=True):
+                    # 총점 갱신
+                    user.total_score += request.data['score']-my_hangman.score
                     serializer.save()
             # 갱신 필요 X 바로 리턴
             else:
@@ -56,6 +58,8 @@ def set_score(request, select_game):
         else:
             serializer = HangmanSerializer(data=request.data)
             if serializer.is_valid(raise_exception=True):
+                # 총점 추가
+                user.total_score += request.data['score']
                 serializer.save(user=user)
     # 카드 뒤집기
     elif select_game == 2:
@@ -64,12 +68,16 @@ def set_score(request, select_game):
             if my_cardmatching.score < request.data['score']:
                 serializer = CardMatchingSerializer(my_cardmatching, data=request.data)
                 if serializer.is_valid(raise_exception=True):
+                    # 총점 갱신
+                    user.total_score += request.data['score']-my_cardmatching.score
                     serializer.save()
             else:
                 return Response({'처리 안됨': '이유 - 점수가 낮음'}, status=status.HTTP_200_OK)
         else:
             serializer = CardMatchingSerializer(data=request.data)
             if serializer.is_valid(raise_exception=True):
+                # 총점 추가
+                user.total_score += request.data['score']
                 serializer.save(user=user)
     # 산성비
     elif select_game == 1:
@@ -78,16 +86,21 @@ def set_score(request, select_game):
             if my_acidrain.score < request.data['score']:
                 serializer = AcidRainSerializer(my_acidrain, data=request.data)
                 if serializer.is_valid(raise_exception=True):
+                    # 총점 갱신
+                    user.total_score += request.data['score']-my_acidrain.score
                     serializer.save()
             else:
                 return Response({'처리 안됨': '이유 - 점수가 낮음'}, status=status.HTTP_200_OK)
         else:
             serializer = AcidRainSerializer(data=request.data)
             if serializer.is_valid(raise_exception=True):
+                # 총점 추가
+                user.total_score += request.data['score']
                 serializer.save(user=user)
     # 이외의 것은 모두 잘못된 요청
     else:
         return Response({'처리 안됨': '이유 - 잘못된 select_game'}, status=status.HTTP_400_BAD_REQUEST)
+    user.save()
     # 응답
     return Response(serializer.data, status=status.HTTP_201_CREATED)
 
