@@ -13,6 +13,13 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('id', 'email', 'nickname', 'password')
         read_only_fields = ('tier',)
 
+
+class FollowDetailSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ('id', 'email', 'nickname', 'tier')
+
 class UserDetailSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
     
@@ -20,17 +27,18 @@ class UserDetailSerializer(serializers.ModelSerializer):
     # followData = serializers.DictField(child=serializers.CharField(), read_only=True)
     followData = serializers.SerializerMethodField()
     def get_followData(self, obj):
-        return { 'followerCnt': obj.followers.count(), 'followingCnt': obj.followings.count(), }
+        return { 'followerCnt': obj.followers.count(), 
+            'followingCnt': obj.followings.count(), 
+            'followingData': FollowDetailSerializer(obj.followings.all(), many=True).data, 
+        }
 
     # review_like_Data = serializers.SerializerMethodField()
     # def get_review_like_Data(self, obj):
     #     return { 'reviewData': Review.objects.value_lists(pk=obj.pk), 'likeData': obj.like_reviews.value_lists(), }
 
-
-
     class Meta:
         model = User
-        fields = ('id', 'email', 'nickname', 'password', 'followData', 'tier',)
+        fields = ('id', 'email', 'nickname', 'password', 'followData', 'tier', 'total_score')
 
 # class UserRankSerializer(serializers.ModelSerializer):
 #     hangman_rank = serializers.SerializerMethodField()
