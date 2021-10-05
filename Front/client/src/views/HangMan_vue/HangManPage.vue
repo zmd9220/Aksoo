@@ -135,7 +135,7 @@
 import Camera from "@/components/Camera0.vue";
 import Loading from "@/components/Loading.vue";
 import HangManGame from "./HangManGame.vue";
-// import axios from 'axios';
+// import axios from "axios";
 import Progress from "easy-circular-progress";
 
 export default {
@@ -214,14 +214,32 @@ export default {
         return { display: "block" };
       }
     },
+    // bestScore: function () {
+    //   // 상품정보를 받아오는 axios
+    //   const localURL = "http://127.0.0.1:8000/games/setScore/3";
+    //   axios
+    //     .get(localURL)
+    //     .then((res) => {
+    //       // for (var key1 in res.data){
+    //       //   console.log(key1);
+    //       // }
+    //       console.log(res);
+    //       // res.data.forEach((element) => {
+    //       //   this.words.push(element.word);
+    //       // });
+    //     })
+    //     .then(() => {
+    //       //
+    //     })
+    //     .catch(() => {
+    //       // console.log(err)
+    //     });
+    // },
   },
   created: function () {
     this.life = this.diff.value;
     this.answer = false;
-
-    // var audio = document.getElementById("gameStart");
-
-    // audio.play();
+    // this.bestScore();
   },
   computed() {
     // this.count = this.$refs.camera.count/150;

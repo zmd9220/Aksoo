@@ -1,5 +1,6 @@
 <template>
   <div class="ranking-page-wrapper">
+    <audio autoplay id="gameStart" src="@/assets/music/ranking.mp3"></audio>
     <img src="@/assets/Ranking/land2.png" alt="land" class="land-img" />
     <img src="@/assets/Ranking/cloud.png" alt="cloud" class="cloud-img" />
     <img src="@/assets/Ranking/cloud.png" alt="cloud" class="cloud-img-2" />
