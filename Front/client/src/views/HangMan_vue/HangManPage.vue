@@ -81,7 +81,7 @@
         >
           <div class="content"></div>
         </Progress>
-        {{ count }}
+        <!-- {{ count }} -->
       </div>
       <div v-else class="game-mode-vowel" @click="modeChange">
         모음
@@ -308,8 +308,6 @@ export default {
   /* display: row;
     justify-content: space-around; */
 }
-
-
 
 .hangman-row .right-status-column .game-status .game-status-li {
   display: flex;
