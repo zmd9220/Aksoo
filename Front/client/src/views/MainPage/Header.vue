@@ -9,16 +9,17 @@
           </router-link>
         </b-navbar-brand>
         <b-nav-item href="/"><span class="home">Home</span></b-nav-item>
-        <b-nav-item href="/Start/"
+        <b-nav-item href="/Start/" :isLogin="isLogin" @logout="logout"
           ><span class="learn">학습하기</span></b-nav-item
         >
-        <b-nav-item href="/GamePage/"
+        <b-nav-item href="/GamePage/" :isLogin="isLogin" @logout="logout"
           ><span class="play">게임하기</span></b-nav-item
         >
-        <b-nav-item
+        <b-nav-item 
           ><span
             class="halloffame"
             @click="$router.push({ name: 'RankingMain' })"
+            :isLogin="isLogin" @logout="logout"
             >명예의전당</span
           ></b-nav-item
         >
@@ -235,6 +236,7 @@ export default {
   left: 81%;
   top: 1.688rem;
   height: 50px;
+  width: 50px;
 }
 
 .user-collapse {

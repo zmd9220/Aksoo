@@ -10,6 +10,9 @@
 <script>
 export default {
   name: "Footer",
+  props: {
+    isLogin: Boolean,
+  },
 };
 </script>
 
@@ -32,7 +35,7 @@ export default {
 }
 
 .copyright-link {
-  text-decoration: none;
+  /* text-decoration: none; */
   color: white !important;
 }
 
