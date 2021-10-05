@@ -35,7 +35,7 @@
             type="text"
             inputmode="email"
             class=""
-            value=""
+            v-model="credentials.email"
             placeholder="Email Address"
           />
         </div>
@@ -47,7 +47,7 @@
             id="password"
             name="password"
             class=""
-            value=""
+            v-model="credentials.password"
             style="display: block"
             placeholder="Password"
           /><input
@@ -93,10 +93,8 @@
       </div> -->
       <div>
         <b-button
-          type="submit"
-          class="button-normal larger disabled"
-          disabled=""
-          @click="login"
+          class="button-normal larger"
+          @click="login(credentials)"
           variant="primary"
         >
           로그인
@@ -114,7 +112,7 @@
 </template>
 
 <script>
-// import axios from "axios";
+import axios from "axios";
 
 // const SERVER_URL = process.env.VUE_APP_SERVER_URL
 
@@ -131,11 +129,25 @@ export default {
   methods: {
     // 로그인
     login: function () {
-      this.$store.dispatch('userStore/loginUser', this.credentials)
-      // test 용
-      // this.$store.dispatch('userStore/loginUser', {email: "test2@gma.com", password: "test1"})
-      this.$emit('login')
-      this.$router.push({ name: 'MainPage' }) 
+      axios({
+        method: 'post',
+        url: 'http://127.0.0.1:8000/accounts/signin/',
+        data: this.credentials,
+      })
+        .then(res => {
+          console.log(res)
+          this.$store.dispatch('userStore/loginUser', this.credentials)
+          localStorage.setItem('jwt', res.data.token)
+          // test 용  
+          // this.$store.dispatch('userStore/loginUser', {email: "test2@gma.com", password: "test1"})
+          this.$emit('login')
+          this.isLogin = true;
+          this.$router.push({ name: 'MainPage' })
+        })
+        .catch(err => {
+          console.log(err)
+          alert("아이디나 비밀번호를 확인해주세요.")
+        })
     },
   },
 };
