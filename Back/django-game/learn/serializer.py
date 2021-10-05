@@ -10,7 +10,6 @@ class AlphabetSerializer(serializers.ModelSerializer):
         model = Alphabet
         fields = '__all__'
 
-
 class WordSerializer(serializers.ModelSerializer):
 
     class Meta:

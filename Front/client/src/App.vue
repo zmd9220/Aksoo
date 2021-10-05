@@ -28,9 +28,13 @@
         <router-link :to="{ name: 'Halloffame' }">Halloffame</router-link> |
         
         <!-- | <router-link :to="{ name: 'HangManGame' }">HangManGame</router-link>  -->
+        | 
         <!-- <router-link :to="{ name: 'HangManPage' }">HangManPage</router-link> | -->
         <!-- <router-link :to="{ name: 'HangMan_vue' }">HangMan_vue</router-link> | -->
-
+<!-- 
+        <router-link :to="{ name: 'HangManMain' }">HangManMain</router-link> |
+        <router-link :to="{ name: 'cardflip' }">cardflip</router-link> |
+        <router-link :to="{ name: 'Halloffame' }">Halloffame</router-link> | -->
       </span>
       <router-view @login="isLogin = true" />
     </div>
@@ -120,10 +124,10 @@ body {
   font-style: normal;
 }
 
-#nav {
+/* #nav { */
   /* padding: 30px; */
   /* height: 867px; */
-}
+/* } */
 
 #nav a {
   font-weight: bold;

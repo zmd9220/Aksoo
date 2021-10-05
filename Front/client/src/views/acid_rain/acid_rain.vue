@@ -164,13 +164,20 @@
                   >게임 시작하기</b-button
                 > -->
 
-                <!-- <div
+                <div
                   id="message"
                   class="hidden"
                   style="display: none; background-color: grey; opacity: 85%"
                 >
                   Game Over!
                   <hr />
+
+                  <div class="game-result">
+                    <p>Score: {{ score }}</p>
+                    <p>Your Highest Score:</p>
+                    <p>Ranking:</p>
+                  </div>
+
                   <button
                     class="btn btn-danger pull-right"
                     id="reset"
@@ -179,7 +186,7 @@
                     <span class="glyphicon glyphicon-flash" id="reset"></span>
                     ReStart
                   </button>
-                </div> -->
+                </div>
 
                 <!-- disabled -->
               </span>
@@ -187,16 +194,16 @@
               <!-- <img src="./background.gif" class="bg" style="object-fit: fill" /> -->
             </div>
           </div>
-          <!-- <div class="panel-footer">
+          <div class="panel-footer">
             <strong>Score: {{ score }}</strong>
             <strong
               >Life :
               <span v-for="idx in hart" :key="idx">
                 <img src="./heart.gif" style="width: 20px" /> </span
             ></strong>
-          </div> -->
+          </div>
         </div>
-        <!-- <hr /> -->
+        <hr />
       </div>
     </div>
     <div class="acid_right">
@@ -271,7 +278,6 @@ export default {
       score: 0,
       hart: "5",
       show: true,
-      showend: true,
       consonant: "",
       modelLoaded: false,
       minimizeCamera: false,
@@ -386,8 +392,7 @@ export default {
 
       for (var i = 0; i < boxes.length; i++) {
         boxes[i].style.bottom = parseInt(boxes[i].style.bottom) - 8 + "px";
-        if (parseInt(boxes[i].style.bottom) <= 50) {
-          wrongAnswer.play();
+        if (parseInt(boxes[i].style.bottom) <= -10) {
           boxes[i].remove();
           this.hart = parseInt(this.hart) - 1;
           this.decreaseLetterSpeed(hart);
@@ -429,10 +434,10 @@ export default {
         text.style.display = "none";
       }
     },
-    // resetText: function () {
-    //   var text = document.getElementById("message");
-    //   text.style.display = "none";
-    // },
+    resetText: function () {
+      var text = document.getElementById("message");
+      text.style.display = "none";
+    },
     togglestart: function () {
       // var text = document.getElementById("start");
       // text.style.display = "none";
@@ -457,16 +462,15 @@ export default {
       // score.innerHTML = 0;
       this.score = 0;
       this.hart = 5;
-      // console.log(1);
-
+      console.log(1);
       var boxes = document.querySelectorAll("#quiz");
       for (var i = 0; i < boxes.length; i++) {
         boxes[i].remove();
       }
-      // console.log(2);
+      console.log(2);
       // console.log(1);
       this.endGame();
-      // console.log(3);
+      console.log(3);
       this.startGame();
       // console.log(3);
     },
@@ -489,8 +493,6 @@ export default {
       // console.log(this.test);
 
       if (boxes[0]) {
-        var answer = document.getElementById("answer");
-        answer.play();
         boxes[0].remove();
         // score.innerHTML = parseInt(score.innerHTML) + 1;
         this.score += 10;
@@ -531,12 +533,7 @@ export default {
     //     resetButton.onclick = resetGame;
     // })
   },
-  created() {
-    this.endGame();
-  },
-  destroyed() {
-    this.endGame();
-  },
+  created() {},
 };
 </script>
 
@@ -555,7 +552,7 @@ export default {
   width: 100%;
   /* background: url("./background.gif"); */
   /* background-size: 100% 100%; */
-  background-image: linear-gradient(to top, #fff, #dfe9f3);
+  background-image: linear-gradient(to top, #dfe9f3, #fff);
   border-radius: 3rem;
   box-shadow: 0.31rem 0.38rem 0.44rem 0rem rgba(0, 0, 0, 0.43);
 
@@ -565,6 +562,7 @@ export default {
   font-size: 55px;
   font-weight: bold;
   color: purple;
+  position: relative;
 }
 
 #box > .ground {
@@ -729,7 +727,7 @@ export default {
 
 #message {
   position: absolute;
-  vertical-align: middle;
+  /* vertical-align: middle; */
   height: 100%;
   box-sizing: border-box;
   font-size: 100px;
@@ -1100,16 +1098,7 @@ export default {
   flex: 50%;
 }
 
-.modal-restart-btn {
-  width: 40%;
-  height: 40%;
-  /* border: solid 0.5vh #76300b; */
-  border: none;
-  background-color: #fe6e27;
-  box-shadow: 0rem 0.38vh 0.56rem 0 rgba(0, 0, 0, 0.3);
-  object-fit: contain;
-  border-radius: 2rem;
-}
+
 
 .modal-restart-btn {
   width: 40%;
@@ -1130,7 +1119,6 @@ export default {
 .modal-halloffame-btn {
   width: 40%;
   height: 40%;
-  /* border: solid 0.5vh #76300b; */
   border: none;
   background-color: #68bbf7;
   box-shadow: 0rem 0.38vh 0.56rem 0 rgba(0, 0, 0, 0.3);

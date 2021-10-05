@@ -133,9 +133,16 @@ export default {
     },
     signup: function () {
       axios({
-        method: "post",
+        method: "POST",
         url: "http://127.0.0.1:8000/accounts/signup/",
         data: this.credentials,
+        // test 용
+        // data: {
+        //   email: 'test3@gmail.com',
+        //   password: 'pass1',
+        //   passwordConfirmation: 'pass1',
+        //   nickname: 'hi',
+        // }
       })
         .then((res) => {
           console.log(res);
@@ -143,6 +150,7 @@ export default {
         })
         .catch((err) => {
           console.log(err);
+          console.log(err.data)
         });
     },
   },
@@ -159,6 +167,7 @@ export default {
   background-image: linear-gradient(to right, #fff, #fdf9e8);
 }
 .decoImg {
+  position: absolute;
   left: 0px;
   top: 3%;
   object-fit: contain;
@@ -180,7 +189,7 @@ export default {
   display: flex;
   z-index: -2;
   width: 55%;
-  height: 100%;
+  height: 90%;
   right: 0px;
   position: absolute;
   border-radius: 7.63rem;
@@ -254,7 +263,7 @@ export default {
   position: relative !important;
 }
 
-.account-wrapper .wrap-form .group-field {
+.account-wrapper .wrap-form .group-field .input-group-label {
   text-align: left;
   left: 0px;
   min-height: 20.5px;

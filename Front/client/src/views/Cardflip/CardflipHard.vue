@@ -113,6 +113,7 @@
           </div>
           <div class="time" v-else>{{ seconds }}</div>
         </div>
+        <div class="time-margin"></div>
       </div>
     </div>
   </div>
@@ -302,9 +303,8 @@ export default {
 <style scoped>
 .cardFlip {
   display: flex;
-  width: 100%;
-  height: 100vh;
-  margin: 5vh;
+  width: 97%;
+  margin-left: 5vh;
 }
 
 .cardFlip .info-panel {
@@ -347,7 +347,7 @@ export default {
   box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.733);
   color: #917052;
   font-family: "SDSamliphopangche_Basic";
-  font-size: 3rem;
+  font-size: 2.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -460,11 +460,15 @@ export default {
 
 .cardFont {
   color: #b88b64;
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-family: "SDSamliphopangche_Basic";
   margin-bottom: 0;
   padding: 0;
   margin-top: 1.5vh;
+}
+
+.time-margin {
+  padding-top: 8%;
 }
 
 /* game-over modal */
