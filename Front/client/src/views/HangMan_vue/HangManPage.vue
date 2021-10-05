@@ -79,14 +79,6 @@
       </div>
       <div v-if="mode_letter" class="game-mode-cons" @click="modeChange">
         자음
-        <Progress
-          :transitionDuration="5"
-          :radius="15"
-          :strokeWidth="7"
-          :value="this.count"
-        >
-          <div class="content"></div>
-        </Progress>
         <!-- {{ count }} -->
       </div>
       <div v-else class="game-mode-vowel" @click="modeChange">
@@ -136,7 +128,6 @@ import Camera from "@/components/Camera0.vue";
 import Loading from "@/components/Loading.vue";
 import HangManGame from "./HangManGame.vue";
 // import axios from 'axios';
-import Progress from "easy-circular-progress";
 
 export default {
   data() {
@@ -160,7 +151,6 @@ export default {
     Camera,
     Loading,
     HangManGame,
-    Progress,
   },
   props: {
     topic: Object,

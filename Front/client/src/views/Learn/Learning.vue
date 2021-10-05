@@ -23,6 +23,7 @@
             v-for="(word, index) in words[0].word"
             :key="word"
             @click="[(no = index % 2), setAlphabet(word)]"
+            v-bind:style="[selectAlphabet==word? {'color':'#F4775C'}:{'color':'rgba(128, 128, 128, 0.733)'}]"
           >
             {{ word }}
           </button>
@@ -40,6 +41,7 @@
             v-for="(word, index) in words"
             :key="word"
             @click="[(no = index), setAlphabet(word.mean)]"
+            v-bind:style="[selectAlphabet==word.mean? {'color':'#F4775C'}:{'color':'rgba(128, 128, 128, 0.733)'}]"
           >
             {{ word.mean }}
           </button>
