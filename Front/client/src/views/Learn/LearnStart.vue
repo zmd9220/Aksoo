@@ -78,11 +78,14 @@
         </button>
       </div>
     </div>
+    <Footer />
   </div>
 </template>
 
 
 <script>
+import Footer from "@/views/MainPage/Footer.vue";
+
 export default {
   name: "LearnStartPage",
   methods: {
@@ -90,6 +93,9 @@ export default {
       this.$router.push("/WordSelect").catch(() => {});
     },
   },
+  components: {
+    Footer,
+  }
 };
 </script>
 

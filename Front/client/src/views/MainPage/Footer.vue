@@ -33,7 +33,7 @@ export default {
 
 .copyright-link {
   text-decoration: none;
-  color: white;
+  color: white !important;
 }
 
 </style>
