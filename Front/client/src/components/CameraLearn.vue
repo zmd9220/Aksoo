@@ -132,18 +132,18 @@ export default {
               name = "ㅕ";
             }
             break;
-          case CustomGestures_vowel.EGesture.name:
-            // name = "ㅔ";
-            if (this.detection.hand2 === 1) {
-              name = "ㅔ";
-            }
-            break;
-          case CustomGestures_vowel.YeGesture.name:
-            name = "ㅖ";
-            // if (this.detection.hand2 === 1){
-            // name = "ㅖ";
-            // }
-            break;
+          // case CustomGestures_vowel.EGesture.name:
+          //   // name = "ㅔ";
+          //   if (this.detection.hand2 === 1) {
+          //     name = "ㅔ";
+          //   }
+          //   break;
+          // case CustomGestures_vowel.YeGesture.name:
+          //   name = "ㅖ";
+          //   // if (this.detection.hand2 === 1){
+          //   // name = "ㅖ";
+          //   // }
+          //   break;
 
           default:
             break;
