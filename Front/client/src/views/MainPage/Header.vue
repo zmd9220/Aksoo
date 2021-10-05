@@ -26,10 +26,7 @@
         <!-- Navbar dropdowns -->
         <div class="login">
           <span v-if="isLogin">
-            <b-button class="logout-btn" href="">로그아웃</b-button>
-          </span>
-
-          <span v-else>
+            <!-- <b-button class="logout-btn" @click.native="logout" href="">로그아웃</b-button> -->
             <b-avatar
               v-b-toggle.collapse-1
               src="https://placekitten.com/300/300"
@@ -45,26 +42,41 @@
                   @click="$router.push({ name: 'Profile' })"
                   >마이페이지</b-button
                 >
-                <b-button class="user-btn" href="">로그아웃</b-button>
+                <b-button class="user-btn" @click.native="logout" href="#"
+                  >로그아웃</b-button
+                >
               </b-card>
             </b-collapse>
-            <b-button class="login-btn" href="/accounts/login/"
-              >로그인</b-button
-            >
+          </span>
+
+          <span v-else>
+            <b-button class="login-btn" href="/accounts/login">로그인</b-button>
           </span>
         </div>
       </b-navbar-nav>
     </b-navbar>
-    <!-- <img src="@/assets/layer-2.png"
-    class="Layer-2">
-    <img src="@/assets/shape-2.png"
-    class="Shape-2"> -->
   </div>
 </template>
 
 <script>
+// import isLogin from "./views/App.vue"
+
 export default {
   name: "Header",
+  props: {
+    isLogin: Boolean,
+  },
+  methods: {
+    logout: function () {
+      this.$emit("logout");
+      // this.isLogin = false;
+      // localStorage.removeItem("jwt");
+      // this.$router.push({ name: "Login" });
+    },
+  },
+  updated: function () {
+    console.log(this.$parent.isLogin);
+  },
 };
 </script>
 
@@ -220,9 +232,9 @@ export default {
 
 .avatar-user {
   position: absolute;
-  left: 75%;
+  left: 81%;
   top: 1.688rem;
-  height: 43px;
+  height: 50px;
 }
 
 .user-collapse {

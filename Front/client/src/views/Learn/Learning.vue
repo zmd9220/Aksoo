@@ -83,6 +83,7 @@
         </div>
       </div>
     </div>
+    <Footer />
   </div>
 </template>
 
@@ -90,6 +91,8 @@
 import axios from "axios";
 import Camera from "@/components/CameraLearn.vue";
 import Loading from "@/components/Loading.vue";
+import Footer from "@/views/MainPage/Footer.vue";
+
 
 export default {
   data: function () {
@@ -110,6 +113,7 @@ export default {
   components: {
     Camera,
     Loading,
+    Footer,
   },
   methods: {
     cameraData: function (payload1, payload2) {

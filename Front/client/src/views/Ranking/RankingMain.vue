@@ -1,6 +1,5 @@
 <template>
   <div class="ranking-page-wrapper">
-    <audio autoplay id="gameStart" src="@/assets/music/ranking.mp3"></audio>
     <img src="@/assets/Ranking/land2.png" alt="land" class="land-img" />
     <img src="@/assets/Ranking/cloud.png" alt="cloud" class="cloud-img" />
     <img src="@/assets/Ranking/cloud.png" alt="cloud" class="cloud-img-2" />
@@ -49,7 +48,12 @@
 
     <!-- <img src="@/assets/Ranking/podium1.png" alt="podium" class="podium-img"> -->
     <img src="@/assets/Ranking/podium.png" alt="podium" class="podium-img" />
-    <div class="first-score">
+    <div
+      class="first-score"
+      v-bind:style="[
+        Rank[0].profile % 7 == 1 ? { top: '49%' } : { top: '45%' },
+      ]"
+    >
       <div style="display: table-cell; vertical-align: bottom">
         <!-- <div style="height:5vh;"> -->
         <!-- <div style="display: flex; height:100%; align-items: center; font-weight: bold; color: gray;">
@@ -63,32 +67,57 @@
         {{ Rank[0].nickname }}
         <!-- </div> -->
         <img
-          src="@/assets/Ranking/croc.png"
+          :src="
+            '@/assets/Ranking/Animal/' +
+            profile_name[Rank[0].profile % 7] +
+            '.png'
+          "
           alt="first"
           style="max-width: 100%; max-height: 100%"
         />
       </div>
     </div>
-    <div class="second-score">
+    <div
+      class="second-score"
+      v-bind:style="[
+        Rank[1].profile % 7 == 1 ? { top: '61%' } : { top: '57%' },
+      ]"
+    >
       <div style="display: table-cell; vertical-align: bottom">
         <div>{{ Rank[1].nickname }}</div>
         <img
-          src="@/assets/Ranking/gosm.png"
+          :src="
+            '@/assets/Ranking/Animal/' +
+            profile_name[Rank[1].profile % 7] +
+            '.png'
+          "
           alt="second"
           style="max-width: 100%; max-height: 100%"
         />
       </div>
     </div>
-    <div class="third-score">
+    <div
+      class="third-score"
+      v-bind:style="[
+        Rank[2].profile % 7 == 1 ? { top: '64%' } : { top: '60%' },
+      ]"
+    >
       <div style="display: table-cell; vertical-align: bottom">
         <div>{{ Rank[2].nickname }}</div>
         <img
-          src="@/assets/Ranking/shark.png"
+          :src="
+            '@/assets/Ranking/Animal/' +
+            profile_name[Rank[2].profile % 7] +
+            '.png'
+          "
           alt="third"
           style="max-width: 100%; max-height: 100%"
         />
       </div>
     </div>
+
+    <ranking-list class="ranking-list" :Rank="Rank" />
+    <img src="@/assets/Learn/LearnStart/shape-2.svg" class="Shape-2" />
 
     <ranking-list class="ranking-list" :Rank="Rank" />
     <img src="@/assets/Learn/LearnStart/shape-2.svg" class="Shape-2" />
@@ -204,6 +233,9 @@ export default {
       this.$confetti.stop();
     }, 5000);
   },
+  mounted() {
+    window.scrollTo(0, 0);
+  },
   destroyed() {
     this.$confetti.stop();
   },
@@ -264,7 +296,7 @@ export default {
 .ranking-page-wrapper .first-score {
   position: absolute;
   display: table;
-  top: 45%;
+  /* top:45%; */
   right: 45%;
   height: 23%;
   width: 10%;
@@ -288,7 +320,7 @@ export default {
 .ranking-page-wrapper .second-score {
   position: absolute;
   display: table;
-  top: 57%;
+  /* top:57%; */
   left: 34%;
   height: 23%;
   width: 10%;
@@ -311,7 +343,7 @@ export default {
 .ranking-page-wrapper .third-score {
   position: absolute;
   display: table;
-  top: 60%;
+  /* top:60%; */
   right: 34%;
   height: 23%;
   width: 10%;

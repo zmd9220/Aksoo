@@ -42,13 +42,18 @@
         </div>
       </div>
     </div>
+    <Footer />
   </div>
 </template>
 
 <script>
+import Footer from "@/views/MainPage/Footer.vue";
+
 export default {
   name: "CardfilpMain",
-  components: {},
+  components: {
+    Footer,
+  },
   methods: {
     gotoHard() {
       this.$router.push({ name: "CardflipHard" });

@@ -6,70 +6,6 @@
       src="@/assets/music/wrongAnswer/Error 2.mp3"
     ></audio>
     <audio id="gameOver" src="@/assets/music/gameover/gameover.mp3"></audio>
-    <!-- <b-button @click="show = true" variant="primary">게임 시작하기</b-button> -->
-
-    <!-- <b-modal
-      v-model="show"
-      title="주제와 난이도를 선택해주세요"
-      :header-bg-variant="headerBgVariant"
-      :header-text-variant="headerTextVariant"
-      :body-bg-variant="bodyBgVariant"
-      :body-text-variant="bodyTextVariant"
-      :footer-bg-variant="footerBgVariant"
-      :footer-text-variant="footerTextVariant"
-      :difficulty="Difficulty"
-      :topic="Topic"
-    >
-      <b-container fluid>
-        <b-row>
-          <b-col cols="3">주제</b-col>
-          <b-col cols="6">
-            <b-form-select v-model="Topic" :options="topic"></b-form-select>
-          </b-col>
-        </b-row>
-
-        <b-row>
-          <b-col cols="3">난이도</b-col>
-          <b-col>
-            <b-form-select v-model="Difficulty" :options="difficulty">
-            </b-form-select>
-          </b-col>
-        </b-row>
-      </b-container> -->
-
-    <!-- <template #modal-footer>
-        <div class="w-100">
-          <b-button
-            variant="primary"
-            size="sm"
-            class="float-right"
-            @click="[(show = false), startGame()]"
-          >
-            GO!
-          </b-button>
-        </div>
-      </template>
-    </b-modal> -->
-
-    <!-- <div id="message" class="hidden" style="display: none; background-color: grey; opacity: 90%;">
-      Game Over!
-      <hr />
-
-      <div class="game-result">
-        <p>Score: {{ score }}</p>
-        <p>Your Highest Score:</p>
-        <p>Ranking:</p>
-      </div>
-
-      <button class="btn btn-danger pull-right" id="reset" v-on:click="goMain">
-        <span class="glyphicon glyphicon-flash" id="reset"></span>
-        ReStart
-      </button>
-      <button class="btn btn-success pull-right" id="reset">
-        <span class="glyphicon glyphicon-flash" id="reset"></span>
-        명예의 전당
-      </button>
-    </div> -->
 
     <div v-if="gameIsOver">
       <b-modal
@@ -118,7 +54,7 @@
                 />2500
               </div>
             </span>
-            <b-button class="mt-3 modal-halloffame-btn" block href="#">
+            <b-button class="mt-3 modal-halloffame-btn" block href="/Rangking/RankingMain">
               <span class="halloffame-btn-txt">명예의전당</span></b-button
             >
           </div>
@@ -127,14 +63,7 @@
     </div>
 
     <div class="game-container">
-      <div class="topic-difficulty" id="options">
-        <div class="topic">
-          {{ this.$route.params.topic.text }}
-        </div>
-        <div class="difficulty">
-          {{ this.$route.params.diff.text }}
-        </div>
-      </div>
+      <img :src='"@/assets/WordGuess/board/"+ board_topic + "-" + board_diff +".png"' alt="land" class="board">
     </div>
 
     <div class="letter-container">
@@ -212,6 +141,8 @@ export default {
   name: "HangManGame",
   data() {
     return {
+      board_topic: '',
+      board_diff: '',
       wrongs: [],
       words: [],
       correct: [],
@@ -572,6 +503,8 @@ export default {
     //   this.listener(evt);
     // };
     this.life = this.diff.value;
+    this.board_topic = this.$route.params.topic.text;
+    this.board_diff = this.$route.params.diff.text;
     this.getWords();
   },
   mounted() {},
@@ -625,27 +558,15 @@ export default {
 .figure-part {
   display: block;
 }
-.topic-difficulty {
-  display: column;
-}
-.topic-difficulty .topic {
-  font-size: 2.5rem;
-  font-family: "SDSamliphopangche_Basic";
-  color: #fff;
+
+.board {
   position: absolute;
-  top: 700%;
+  top: 50vh;
   left: 59%;
+  height: 20vh;
   z-index: 3;
 }
-.topic-difficulty .difficulty {
-  font-size: 1.5rem;
-  font-family: "SDSamliphopangche_Basic";
-  color: #fff;
-  position: absolute;
-  top: 820%;
-  left: 60%;
-  z-index: 3;
-}
+
 .wrong-letters-container {
   position: absolute;
   top: 40%;

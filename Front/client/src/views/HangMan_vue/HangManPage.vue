@@ -21,7 +21,7 @@
         :topic="topic"
         :diff="diff"
       />
-      <img class="ground" src="@/assets/WordGuess/back.png" />
+      <img class="ground" src="@/assets/WordGuess/land-new.png" />
       <!-- <img class="wolf" src="@/assets/WordGuess/wolf-1.png" /> -->
       <img
         class="wolf"

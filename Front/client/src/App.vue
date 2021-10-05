@@ -1,12 +1,6 @@
 <template>
   <div id="app">
-    <!-- <audio
-      autoplay
-      loop
-      id="gameBgm"
-      src="@/assets/music/bgm/If_I_Had_a_Chicken.mp3"
-    ></audio> -->
-    <Header />
+    <Header :isLogin="isLogin" @logout="logout" />
     <div id="nav">
       <span v-if="isLogin">
         <router-link :to="{ name: 'TodoList' }">Todo List</router-link> |
@@ -67,7 +61,7 @@ export default {
       this.$router.push({ name: "Login" });
     },
   },
-  created: function () {
+  updated: function () {
     const token = localStorage.getItem("jwt");
     if (token) {
       this.isLogin = true;
