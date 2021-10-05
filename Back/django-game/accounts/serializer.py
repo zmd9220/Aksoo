@@ -26,11 +26,21 @@ class UserDetailSerializer(serializers.ModelSerializer):
     # def get_review_like_Data(self, obj):
     #     return { 'reviewData': Review.objects.value_lists(pk=obj.pk), 'likeData': obj.like_reviews.value_lists(), }
 
+
+
     class Meta:
         model = User
-        fields = ('id', 'email', 'nickname', 'password', 'followData', )
+        fields = ('id', 'email', 'nickname', 'password', 'followData', 'tier',)
 
-
+# class UserRankSerializer(serializers.ModelSerializer):
+#     hangman_rank = serializers.SerializerMethodField()
+#     def get_hangman_rank(self, obj):    
+#         return {
+#         'rank': obj.hangman_set.filter(score__gt=my_hangman.score).count() + 1,
+#         'score': my_hangman.score,
+#         }
+#     class Meta:
+#         model = User
 
 class SignInSerializer(serializers.Serializer):
     email = serializers.CharField(max_length=255, required=True)

@@ -25,11 +25,10 @@ from django.contrib.auth import authenticate
 # django jwt 토큰 발급시 추가 데이터를 담기 위해 import 2
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
-# from rest_framework_jwt
+
 
 # django drf-yasg(swagger)
 from drf_yasg.utils import swagger_auto_schema
-
 
 from hangul_utils import split_syllables, join_jamos
 
@@ -64,13 +63,6 @@ def signup(request):
     # password는 write_only 이므로 직렬화 과정에는 포함 되지만 표현(response)할 때는 나타나지 않는다. 
     return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-# JWT 토큰 발급시 제공할 데이터 목록 (payload) 관리
-# def jwt_response_payload_handler(token, user=None, request=None):
-#     return {
-#         'token': token,
-#         'user': UserSerializer(user, context={'request': request}).data,
-#         # 'userId': user.pk
-#     }
 
 @api_view(['GET'])
 # JWT 토큰 확인
@@ -84,10 +76,56 @@ def user_detail(request, user_pk):
     # serializer = UserSerializer(user, followData=followData)
     # 상세 정보는 UserDetail로 변경
     serializer = UserDetailSerializer(user)
-    # print(serializer.data)
+    print(serializer.data)
+    # 행맨
+    # 현재 hangman 테이블에 이번에 요청한 유저 기록이 존재할 경우 데이터 가져오기
+    if user.hangman_set.filter(user=user.pk).exists():
+        my_hangman = get_object_or_404(Hangman, user=user.pk)
+        hangman_info = {
+            'rank': Hangman.objects.filter(score__gt=my_hangman.score).count() + 1,
+            'score': my_hangman.score,
+        }
+    # 기록이 없으면 0점으로 반환
+    else:
+        hangman_info = {
+            'rank': 0,
+            'score': 0,
+        }
+    # 카드 뒤집기
+    if user.cardmatching_set.filter(user=user.pk).exists():
+        my_cardmatching = get_object_or_404(CardMatching, user=user.pk)
+        card_matching_info = {
+            'rank': CardMatching.objects.filter(score__gt=my_cardmatching.score).count() + 1,
+            'score': my_cardmatching.score,
+        }
+    else:
+        card_matching_info = {
+            'rank': 0,
+            'score': 0,
+        }
+    # 산성비
+    if user.acidrain_set.filter(user=user.pk).exists():
+        my_acidrain = get_object_or_404(AcidRain, user=user.pk)
+        acid_rain_info = {
+            'rank': AcidRain.objects.filter(score__gt=my_cardmatching.score).count() + 1,
+            'score': my_acidrain.score,
+        }
+    else:
+        acid_rain_info = {
+            'rank': 0,
+            'score': 0,
+        }
+    # 응답
+    return Response({
+            'userData': {
+                'hangman': hangman_info, 'cardMatching': card_matching_info, 'acidRain': acid_rain_info,
+                'userDetail': serializer.data,
+                },
+            }, status=status.HTTP_202_ACCEPTED)
+    # return Response(serializer.data)
 
-    return Response(serializer.data)
 
+# 토큰 발급 커스텀을 위한 기본 코드
 # def get_tokens_for_user(user):
 #     refresh = RefreshToken.for_user(user)
 
@@ -95,7 +133,6 @@ def user_detail(request, user_pk):
 #         'refresh': str(refresh),
 #         'access': str(refresh.access_token),
 #     }
-
 
 
 # @api_view(['POST'])
@@ -131,7 +168,8 @@ class signin(APIView):
             return JsonResponse({'message':serializer.errors}, status=400)
 
 
-
+# @api_view(['POST'])
+# simple_jwt를 이용한 JWT 토큰 발급 방법 2
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super().validate(attrs)
@@ -147,7 +185,37 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         # data['groups'] = self.user.groups.values_list('name', flat=True)
         return data
 
-# @api_view(['POST'])
-# simple_jwt를 이용한 JWT 토큰 발급 방법 2
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
+
+
+@api_view(['GET', 'POST'])
+# 인증 여부 판단
+@authentication_classes([JWTCookieAuthentication])
+# 인증 확인 되었을 때만 권한 부여
+@permission_classes([IsAuthenticated])
+def follow(request, user_pk):
+    # 현재 팔로우 될 유저 객체(요청 받은 아이디 = 대상)
+    person = get_object_or_404(get_user_model(), pk=user_pk)
+    # 현재 팔로우 할 유저 객체(현재 접속 중인 유저 = 나)
+    user = request.user
+    if request.method == 'GET':
+        # 현재 해당 유저의 팔로우 여부 반환
+        return Response({'isFollow': person.followers.filter(pk=user.pk).exists()})
+    else: # POST
+        # 현재 접속한 유저가 자신에게 팔로우하는 것을 막기
+        if person != user:
+            if person.followers.filter(pk=user.pk).exists():
+                person.followers.remove(user)
+                isFollow = False
+            else:
+                person.followers.add(user)
+                isFollow = True
+            # isFollow와 followData만 알면 되므로 시리얼라이저가 필요없음
+            followData = {
+                'fiCnt' : user.followers.count(),
+                'fwCnt' : user.followings.count(),
+            }
+            # return Response(response_data, status=200)
+            return Response({'isFollow': isFollow, 'followData': followData})
+        return Response({'error': '본인 계정에는 팔로우를 할 수 없습니다.'}, status=status.HTTP_400_BAD_REQUEST)

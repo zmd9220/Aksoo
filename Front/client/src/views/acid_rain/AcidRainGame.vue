@@ -40,7 +40,7 @@
                 />43
               </div>
             </span>
-            <b-button class="mt-3 modal-restart-btn" block @click="resetGame">
+            <b-button class="mt-3 modal-restart-btn" block @click="$router.push({ name: 'AcidRainMain'})">
               <span class="restart-btn-txt">다시하기</span></b-button
             >
           </div>

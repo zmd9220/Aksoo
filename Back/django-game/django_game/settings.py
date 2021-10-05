@@ -174,11 +174,6 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# JST Token의 유효기간
-JWT_AUTH = {
-    'JWT_RESPONSE_PAYLOAD_HANDLER': 'accounts.views.jwt_response_payload_handler',
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),
-}
 
 # REST_FRAMEWORK = {
 #     'DEFAULT_PERMISSION_CLASSES': (
