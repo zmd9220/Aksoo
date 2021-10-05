@@ -43,12 +43,14 @@ import { CustomGestures_vowel, GE_vowel } from "../utils/gestures_vowel";
 import { CustomGestures_cons, GE_cons } from "../utils/gestures_cons";
 import { drawHandMesh } from "../utils/handmesh";
 
+
 export default {
   name: "Camera",
 
   components: {
     WebCam,
   },
+
 
   data() {
     return {
@@ -301,10 +303,10 @@ export default {
         } else {
           // console.log(this.count);
           this.count++;
-          this.$emit("count", this.count);
-          if (this.count > 100) {
+          this.$emit('count',this.count);
+          if (this.count > 150) {
             // console.log("단어입력");
-            this.$emit("input", this.last);
+            this.$emit('input', this.last)
             // console.log(this.last);
             this.last = "*";
             this.count = 0;
@@ -352,7 +354,7 @@ export default {
 
 <style scoped>
 .camera-wrapper {
-  top: -10%;
+  top:-10%
 }
 
 .camera-card {
@@ -364,6 +366,7 @@ export default {
   width: calc(640px * 0.9);
   height: calc(480px * 0.9);
   /* height: 100%; */
+  
 }
 
 .camera__most-recent {
