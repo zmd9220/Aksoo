@@ -14,7 +14,7 @@ from .serializer import AlphabetSerializer, AlphabetBookmarkSerializer, WordSeri
 
 from hangul_utils import split_syllables, join_jamos
 
-# Create your views here.
+# con = 자음, vow = 모음, word = 단어 학습하기에 제공
 @api_view(['GET'])
 def get_words(request, select):
     if select == 'con':
@@ -23,7 +23,7 @@ def get_words(request, select):
     elif select == 'vow':
         response_word = get_list_or_404(Alphabet, type=2)
         serializer = AlphabetSerializer(response_word, many=True)
-    else:
+    elif select == 'word':
         response_word = Word.objects.all()[:10]
         print(response_word)
         for word in response_word:
@@ -31,8 +31,12 @@ def get_words(request, select):
             # print(tmp)
             word.word = split_syllables(word.word)
         serializer = WordSerializer(response_word, many=True)
+    else:
+        return Response({'error': '잘못된 select 키워드'}, status=status.HTTP_400_BAD_REQUEST)
     return Response(serializer.data)    
-    
+
+
+# 즐겨찾기 (구현 X)
 @api_view(['GET', 'POST'])
 def bookmark(request):
     pass
