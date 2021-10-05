@@ -6,34 +6,11 @@
       src="@/assets/music/pageMove/Jump High.mp3"
     ></audio>
     <div class="contents">
-      <p class="title">
-        <span class="title-text">게임하기 </span>
-        <span class="title-script">다양한 지문자 게임을 경험해 보세요!</span>
-      </p>
+      <div class="title">
+        <h1 class="title-text">게임하기 </h1>
+        <h2 class="title-script">다양한 지문자 게임을 경험해 보세요!</h2>
+      </div>
       <div data-v-3adcea5a="" class="section-game">
-        <div
-          data-v-3adcea5a=""
-          class="ss01 is-aniamte-fade animated fadeIn"
-          style="animation-delay: 0.5s"
-        >
-          <img data-v-3adcea5a="" src="/images/main/section02_txt01.png" alt="" />
-        </div>
-        <div data-v-3adcea5a="" class="hoem-game-char">
-          <div
-            data-v-3adcea5a=""
-            class="ss02 is-animated__single animated rollIn"
-            style="animation-delay: 1.7s"
-          >
-            <img data-v-3adcea5a="" src="/images/main/tt07.png" alt="" />
-          </div>
-          <div
-            data-v-3adcea5a=""
-            class="ss03 is-aniamte-fade animated fadeIn"
-            style="animation-delay: 0.8s"
-          >
-            <img data-v-3adcea5a="" src="/images/main/tt03.png" alt="" />
-          </div>
-        </div>
         <div data-v-3adcea5a="" class="home-game-group">
           <div
             data-v-3adcea5a=""
@@ -54,8 +31,8 @@
             <p class="game-content">
               도치를 위해 빠르게 산성비를 제거해주세요!
             </p>
-            <div>
-              <b-button to="acid_rain/acid_rain/" class="start-game-btn">
+            <div class="btn-position">
+              <b-button @click="gotoAcidrain" to="acid_rain/acid_rain/" class="start-game-btn">
                 <span class="start-game-btn-text">게임 시작하기</span> 
               </b-button>
             </div>
@@ -72,14 +49,14 @@
                 alt="행맨 소개"
               />
             </div>
-            <p class="game-title">"단어를 맞춰 늑대에서 도망치자!"</p>
+            <p class="game-title">"단어를 맞춰 늑대한테 도망치자!"</p>
             <span data-v-3adcea5a="" class="game-content">
               뒤에 늑대가 쫓아온다고요?
             </span>
             <p class="game-content">
               단어를 맞춰 짹짹이가 도망가게 해주세요!
             </p>         
-            <div>
+            <div class="btn-position">
               <b-button @click="gotoHangman" to="acid_rain/acid_rain/" class="start-game-btn">
                 <span class="start-game-btn-text">게임 시작하기</span> 
               </b-button>
@@ -104,7 +81,7 @@
             <p class="game-content">
               완벽한 전략으로 모든 카드를 뒤집어봐요!
             </p>
-            <div>
+            <div class="btn-position">
               <b-button @click="gotoCardfilp" to="acid_rain/acid_rain/" class="start-game-btn">
                 <span class="start-game-btn-text">게임 시작하기</span> 
               </b-button>
@@ -128,9 +105,9 @@ export default {
     Footer,
   },
   methods: {
-    // gotoAcidrain() {
-    //   this.$router.push({ name: "CardflipHard" });
-    // },
+    gotoAcidrain() {
+      this.$router.push({ name: "AcidRainMain" });
+    },
     gotoCardfilp() {
       this.$router.push({ name: "CardflipMain" });
     },
@@ -144,34 +121,27 @@ export default {
 </script>
 
 <style scoped>
-.contents {
+/* .contents {
   position: relative;
   top: 15%;
-}
-
-/* .title {
-  position: relative;
-  left: 10%;
-  top: 15%;
-}
-
-.section-game {
-  position: relative;
-  left: 5%;
-  top: 20%;
 } */
 
-.title-text {
-  font-family: BinggraeSamanco-Bold;
-  font-size: 5vw;
-  font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
+.title {
+  display: flex;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
 }
 
-.title-script {
+.title h1{
+  margin: 0 5vh 0 10vh;
+  font-size: 3.75rem;
+  font-family: BinggraeSamanco-Bold;
+}
+
+.title h2 {
   font-family: GowunDodum-Regular;
-  font-size: 1.75vw;
+  font-size: 1.125rem;
+  margin: 3vh 5vh 0 0;
 }
 
 .mgi_thum img[data-v-3adcea5a] {
@@ -196,14 +166,18 @@ export default {
 .mm_box[data-v-3adcea5a] {
   border-radius: 15px;
   border: 5px solid #fff;
-  overflow: hidden;
-  max-width: 365px;
+   max-width: 365px;
   margin: 0 20px;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
   background: #fff;
   -webkit-box-shadow: 0 5px 5px rgb(68 68 68 / 40%);
   box-shadow: 0 5px 5px rgb(68 68 68 / 40%);
+  height: 50vh;
+
+  overflow: hidden;
+ 
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -215,6 +189,7 @@ export default {
   -webkit-box-flex: 1;
   -ms-flex: 1 0 1%;
   flex: 1 0 1%;
+  
 }
 
 .grass {
@@ -246,11 +221,15 @@ export default {
   font-size: 2vh;
 }
 
+.btn-position {
+  position: absolute;
+  bottom: 26%;
+  width: 16%;
+}
+
 .start-game-btn {
- position: relative;
  background-color: #fe6e27;
  width: 70%;
- margin-bottom: 10%;
  border: none;
  border-radius: 20px;
  box-shadow: 0.00rem 0.31rem 0.25rem 0.00rem rgba(0, 0, 0, 0.35);

@@ -363,8 +363,8 @@ export default {
   top: 50%;
   left: -5%;
   /* transform: translateX(-50%); */
-  width: calc(640px * 0.9);
-  height: calc(480px * 0.9);
+  width: calc(640px * 1.0);
+  height: calc(480px * 1.0);
   /* height: 100%; */
   
 }

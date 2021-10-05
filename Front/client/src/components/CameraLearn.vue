@@ -347,8 +347,8 @@ export default {
 .camera {
   border-radius: 30px;
   transform: scale(-1, 1);
-  width: calc(640px * 1.1);
-  height: calc(480px * 1.1);
+  width: calc(640px * 1.2);
+  height: calc(480px * 1.2);
   margin: 0%;
   padding: 0%;
 }

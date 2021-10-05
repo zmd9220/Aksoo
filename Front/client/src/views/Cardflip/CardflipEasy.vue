@@ -464,7 +464,7 @@ export default {
 }
 .cardFont {
   color: #b88b64;
-  font-size: 2.5rem;
+  font-size: 3.2rem;
   font-family: "SDSamliphopangche_Basic";
   margin-bottom: 0;
   padding: 0;

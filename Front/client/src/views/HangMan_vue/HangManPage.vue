@@ -98,7 +98,7 @@
         <div class="selected-confidence">정확도 : {{ confidence }}</div>
       </div>
       <b-progress
-        height="1px"
+        height="3px"
         :value="count"
         :max="80"
         class="mb-3"
