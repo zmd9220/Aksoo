@@ -16,7 +16,10 @@ import HangManGame from '@/views/HangMan_vue/HangManGame'
 import HangManPage from '@/views/HangMan_vue/HangManPage'
 import Learning from '@/views/Learn/Learning'
 // import HangMan_vue from '@/views/HangMan_vue/HangMan_vue'
-import cardflip from '@/views/Cardflip/cardflip'
+import CardflipHard from '@/views/Cardflip/CardflipHard'
+import CardflipMiddle from '@/views/Cardflip/CardflipMiddle'
+import CardflipEasy from '@/views/Cardflip/CardflipEasy'
+import CardflipMain from '@/views/Cardflip/CardflipMain'
 import Halloffame from '@/views/Halloffame/Halloffame'
 import Profile from '@/views/Profile/Profile'
 import RankingMain from '@/views/Ranking/RankingMain'
@@ -102,9 +105,24 @@ const routes = [
     props: true,
   },
   {
-    path: '/Cardflip/cardflip',
-    name: 'cardflip',
-    component: cardflip,
+    path: '/Cardflip/CardflipHard',
+    name: 'CardflipHard',
+    component: CardflipHard,
+  },
+  {
+    path: '/Cardflip/CardflipMiddle',
+    name: 'CardflipMiddle',
+    component: CardflipMiddle,
+  },
+  {
+    path: '/Cardflip/CardflipEasy',
+    name: 'CardflipEasy',
+    component: CardflipEasy,
+  },
+  {
+    path: '/Cardflip/CardflipMain',
+    name: 'CardflipMain',
+    component: CardflipMain,
   },
   {
     path: '/Halloffame/Halloffame',
