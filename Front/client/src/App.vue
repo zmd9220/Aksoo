@@ -61,7 +61,7 @@ export default {
       this.$router.push({ name: "Login" });
     },
   },
-  updated: function () {
+  mounted: function () {
     const token = localStorage.getItem("jwt");
     if (token) {
       this.isLogin = true;

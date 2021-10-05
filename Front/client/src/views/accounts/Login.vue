@@ -112,7 +112,7 @@
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
 
 // const SERVER_URL = process.env.VUE_APP_SERVER_URL
 
@@ -129,25 +129,28 @@ export default {
   methods: {
     // 로그인
     login: function () {
-      axios({
-        method: 'post',
-        url: 'http://127.0.0.1:8000/accounts/signin/',
-        data: this.credentials,
-      })
-        .then(res => {
-          console.log(res)
-          this.$store.dispatch('userStore/loginUser', this.credentials)
-          localStorage.setItem('jwt', res.data.token)
-          // test 용  
-          // this.$store.dispatch('userStore/loginUser', {email: "test2@gma.com", password: "test1"})
-          this.$emit('login')
-          this.isLogin = true;
-          this.$router.push({ name: 'MainPage' })
-        })
-        .catch(err => {
-          console.log(err)
-          alert("아이디나 비밀번호를 확인해주세요.")
-        })
+      this.$store.dispatch('userStore/loginUser', this.credentials)
+      this.$router.push({ name: 'MainPage' })
+      this.$emit('login')
+      this.isLogin = true;
+      // axios({
+      //   method: 'post',
+      //   url: 'http://127.0.0.1:8000/accounts/signin/',
+      //   data: this.credentials,
+      // })
+      //   .then(res => {
+      //     console.log(res)
+
+      //     localStorage.setItem('jwt', res.data.token)
+      //     // test 용
+      //     // this.$store.dispatch('userStore/loginUser', {email: "test2@gma.com", password: "test1"})
+
+
+      //   })
+        // .catch(err => {
+        //   console.log(err)
+        //   alert("아이디나 비밀번호를 확인해주세요.")
+        // })
     },
   },
 };
