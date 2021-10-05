@@ -1,5 +1,10 @@
 <template>
   <div class="main">
+    <audio
+      autoplay
+      id="gameStart"
+      src="@/assets/music/pageMove/Jump High.mp3"
+    ></audio>
     <audio id="click" src="@/assets/music/answer/Correct 2.mp3"></audio>
     <div class="background-img">
       <img src="@/assets/cloud.png" class="cloud" />
@@ -207,6 +212,13 @@ export default {
   box-shadow: 0rem 0.15rem 0.12rem 0rem rgba(0, 0, 0, 0.3);
   top: 2px;
 }
+.hangman-start-button:hover {
+  position: relative;
+  box-shadow: 0rem 0.15rem 0.12rem 0rem rgba(0, 0, 0, 0.3);
+  top: 2px;
+  background-color: #e5d2bd;
+  color: #957457;
+}
 
 /* 이미지들 */
 /* .background-img {
@@ -256,14 +268,21 @@ img.Shape-2 {
   box-shadow: 0rem 0.15rem 0.12rem 0rem rgba(0, 0, 0, 0.3);
   top: 2px;
 }
+.hangman-start:hover {
+  position: relative;
+  box-shadow: 0rem 0.15rem 0.12rem 0rem rgba(0, 0, 0, 0.3);
+  top: 2px;
+  background-color: #957457;
+  color: #e5d2bd;
+}
 .white {
-  background-color: #e5d2bd !important;
-  color: #937356 !important;
+  background-color: #e5d2bd;
+  color: #937356;
   border: solid 0.19rem #957252 !important;
 }
 .blue {
-  background-color: #937356 !important;
-  color: #e5d2bd !important;
+  background-color: #937356;
+  color: #e5d2bd;
   border: solid 0.19rem #e5d2bd !important;
 }
 </style>

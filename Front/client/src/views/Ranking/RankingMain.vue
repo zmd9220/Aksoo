@@ -47,12 +47,12 @@
       class="wordguess-img"
     />
 
-        <!-- <img src="@/assets/Ranking/podium1.png" alt="podium" class="podium-img"> -->
-        <img src="@/assets/Ranking/podium.png" alt="podium" class="podium-img">
-        <div class="first-score">
-            <div style="display:table-cell; vertical-align:bottom">
-                <!-- <div style="height:5vh;"> -->
-                    <!-- <div style="display: flex; height:100%; align-items: center; font-weight: bold; color: gray;">
+    <!-- <img src="@/assets/Ranking/podium1.png" alt="podium" class="podium-img"> -->
+    <img src="@/assets/Ranking/podium.png" alt="podium" class="podium-img" />
+    <div class="first-score">
+      <div style="display: table-cell; vertical-align: bottom">
+        <!-- <div style="height:5vh;"> -->
+        <!-- <div style="display: flex; height:100%; align-items: center; font-weight: bold; color: gray;">
                         <img v-if="Rank[0].tier ==5" src="@/assets/Ranking/brz.png" alt="tier_picture" style="height:40%; margin-right:1vw;">
                         <img v-if="Rank[0].tier ==4" src="@/assets/Ranking/slv.png" alt="tier_picture" style="height:40%; margin-right:1vw;">
                         <img v-if="Rank[0].tier ==3" src="@/assets/Ranking/gld.png" alt="tier_picture" style="height:40%; margin-right:1vw;">
@@ -60,28 +60,38 @@
                         <img v-if="Rank[0].tier ==1" src="@/assets/Ranking/dmd.png" alt="tier_picture" style="height:40%; margin-right:1vw;">
                         {{Rank[0].tier}}
                     </div> -->
-                    {{Rank[0].nickname}}
-                <!-- </div> -->
-                <img src="@/assets/Ranking/croc.png" alt="first" style="max-width:100%; max-height:100%">
-            </div>
-        </div>
-        <div class="second-score">
-            <div style="display:table-cell; vertical-align:bottom">
-                <div>{{Rank[1].nickname}}</div>
-                <img src="@/assets/Ranking/gosm.png" alt="second" style="max-width:100%; max-height:100%">
-            </div>
-        </div>
-        <div class="third-score">
-            <div style="display:table-cell; vertical-align:bottom">
-                <div>{{Rank[2].nickname}}</div>
-                <img src="@/assets/Ranking/shark.png" alt="third" style="max-width:100%; max-height:100%">
-            </div>
-        </div>
-
-        <ranking-list class="ranking-list" :Rank="Rank"/>
-        <img src="@/assets/Learn/LearnStart/shape-2.svg" class="Shape-2" />
+        {{ Rank[0].nickname }}
+        <!-- </div> -->
+        <img
+          src="@/assets/Ranking/croc.png"
+          alt="first"
+          style="max-width: 100%; max-height: 100%"
+        />
+      </div>
+    </div>
+    <div class="second-score">
+      <div style="display: table-cell; vertical-align: bottom">
+        <div>{{ Rank[1].nickname }}</div>
+        <img
+          src="@/assets/Ranking/gosm.png"
+          alt="second"
+          style="max-width: 100%; max-height: 100%"
+        />
+      </div>
+    </div>
+    <div class="third-score">
+      <div style="display: table-cell; vertical-align: bottom">
+        <div>{{ Rank[2].nickname }}</div>
+        <img
+          src="@/assets/Ranking/shark.png"
+          alt="third"
+          style="max-width: 100%; max-height: 100%"
+        />
+      </div>
     </div>
 
+    <ranking-list class="ranking-list" :Rank="Rank" />
+    <img src="@/assets/Learn/LearnStart/shape-2.svg" class="Shape-2" />
   </div>
 </template>
 <script>

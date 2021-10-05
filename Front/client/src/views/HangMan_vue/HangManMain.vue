@@ -1,5 +1,10 @@
 <template>
   <div class="main">
+    <audio
+      autoplay
+      id="gameStart"
+      src="@/assets/music/pageMove/Jump High.mp3"
+    ></audio>
     <div class="background-img">
       <img src="@/assets/cloud.png" class="cloud" />
       <img src="@/assets/Learn/LearnStart/shape-2.svg" class="Shape-2" />
@@ -88,7 +93,6 @@ export default {
         alert("난이도를 선택해주세요");
       } else {
         audio.play();
-        setTimeout(1000);
         this.$router.push({
           name: "HangManPage",
           params: { topic: this.topic, diff: this.diff },
@@ -219,6 +223,13 @@ export default {
   position: relative;
   box-shadow: 0rem 0.15rem 0.12rem 0rem rgba(0, 0, 0, 0.3);
   top: 2px;
+}
+.hangman-start-button:hover {
+  position: relative;
+  box-shadow: 0rem 0.15rem 0.12rem 0rem rgba(0, 0, 0, 0.3);
+  top: 2px;
+  background-color: #e5d2bd;
+  color: #957457;
 }
 
 /* 이미지들 */
