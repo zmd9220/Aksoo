@@ -6,7 +6,7 @@ from rest_framework import serializers, status
 
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.permissions import IsAuthenticated
-from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+# from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from dj_rest_auth.jwt_auth import JWTCookieAuthentication
 
 # from .models import User
@@ -65,12 +65,12 @@ def signup(request):
     return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 # JWT 토큰 발급시 제공할 데이터 목록 (payload) 관리
-def jwt_response_payload_handler(token, user=None, request=None):
-    return {
-        'token': token,
-        'user': UserSerializer(user, context={'request': request}).data,
-        # 'userId': user.pk
-    }
+# def jwt_response_payload_handler(token, user=None, request=None):
+#     return {
+#         'token': token,
+#         'user': UserSerializer(user, context={'request': request}).data,
+#         # 'userId': user.pk
+#     }
 
 @api_view(['GET'])
 # JWT 토큰 확인

@@ -387,7 +387,7 @@ export default {
 
     moveLetters: function () {
       var boxes = document.querySelectorAll("#box > div");
-      var wrongAnswer = document.getElementById("wrongAnswer");
+      // var wrongAnswer = document.getElementById("wrongAnswer");
       var gameOver = document.getElementById("gameOver");
 
       for (var i = 0; i < boxes.length; i++) {
