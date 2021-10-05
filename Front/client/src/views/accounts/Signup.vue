@@ -4,10 +4,10 @@
     <div class="imgLeft">
       <img src="@/assets/signUp.png" class="signImg" />
     </div>
-    <div class="signMain">
-      <div style="font-size: 1.5rem; text-align: left">CREATE ACOUNT</div>
+    <div class="signMain" style="z-index: -2;">
+      <div style="font-size: 1.5rem; text-align: left; margin-top: 5%; font-weight: bold;">CREATE ACOUNT</div>
       <div class="googleLogin">
-        <button type="button" class="googleBtn">
+        <!-- <button type="button" class="googleBtn">
           <img
             src="@/assets/googleLogo.png"
             alt=""
@@ -21,9 +21,9 @@
             style="margin: 1%; width: 20%; height: 90%"
           />
           구글로 로그인
-        </button>
+        </button> -->
       </div>
-      <div style="color: #868c93; text-decoration: underline">OR</div>
+      <!-- <div style="color: #868c93; text-decoration: underline">OR</div> -->
 
       <div class="group-field">
         <div class="input-group clearfix">
@@ -105,7 +105,7 @@
         <div style="color: #858484; text-align: left; float: left">
           이미 계정이 있으신가요? &nbsp;
         </div>
-        <div @click="login" style="color: #4285f4; float: left">로그인</div>
+        <a href="login" style="color: #4285f4; float: left; text-decoration: none;">로그인</a>
       </div>
     </div>
   </div>
@@ -121,9 +121,9 @@ export default {
   data: function () {
     return {
       credentials: {
-        username: null,
+        email: null,
         password: null,
-        passwordConfirmation: null,
+        nickname: null,
       },
     };
   },
@@ -152,32 +152,33 @@ export default {
 <style>
 .imgLeft {
   display: flex;
-  z-index: 1;
+  z-index: -3;
   width: 49%;
-  height: 95%;
+  height: 90%;
   position: absolute;
   background-image: linear-gradient(to right, #fff, #fdf9e8);
 }
 .decoImg {
   left: 0px;
+  top: 3%;
   object-fit: contain;
   margin: 3% 2%;
-  width: 53%;
+  width: 50%;
   height: 75%;
-  z-index: 3;
+  z-index: -1;
   position: absolute;
 }
 .signImg {
   object-fit: contain;
-  margin: 37.5% 10%;
-  z-index: 4;
+  margin: 37.5% 6%;
+  z-index: -1;
   width: 80%;
   height: 23%;
   position: absolute;
 }
 .signMain {
   display: flex;
-  z-index: 2;
+  z-index: -2;
   width: 55%;
   height: 100%;
   right: 0px;

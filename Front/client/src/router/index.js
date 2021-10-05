@@ -6,6 +6,7 @@ import Signup from '@/views/accounts/Signup'
 import Login from '@/views/accounts/Login'
 import Acid_rain from '@/views/acid_rain/acid_rain'
 import Header from '@/views/MainPage/Header'
+import Footer from '@/views/MainPage/Footer'
 import MainPage from '@/views/MainPage/MainPage'
 import GamePage from '@/views/MainPage/GamePage'
 import LearnStartPage from '@/views/Learn/LearnStart'
@@ -66,6 +67,11 @@ const routes = [
     path: '/MainPage/Header',
     name: 'Header',
     component: Header,
+  },
+  {
+    path: '/MainPage/Footer',
+    name: 'Footer',
+    component: Footer,
   },
   {
     path: '/Start',
