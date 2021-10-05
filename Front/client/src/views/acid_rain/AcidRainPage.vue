@@ -1,5 +1,10 @@
 <template>
   <div class="acid">
+    <audio
+      loop
+      id="gameBgm"
+      src="@/assets/music/bgm/Dog_and_Pony_Show.mp3"
+    ></audio>
     <audio id="gameOver" src="@/assets/music/gameover/gameover.mp3"></audio>
     <audio id="click" src="@/assets/music/answer/Correct 2.mp3"></audio>
     <!-- <audio id="answer" src="@/assets/music/answer/Correct 1.mp3"></audio> -->
@@ -172,6 +177,11 @@ export default {
   },
   destroyed() {
     this.endGame();
+  },
+  mounted() {
+    var gameBgm = document.getElementById("gameBgm");
+    gameBgm.volume = 0.3;
+    gameBgm.play();
   },
 };
 </script>

@@ -1,5 +1,11 @@
 <template>
   <div id="app">
+    <!-- <audio
+      autoplay
+      loop
+      id="gameBgm"
+      src="@/assets/music/bgm/If_I_Had_a_Chicken.mp3"
+    ></audio> -->
     <Header />
     <div id="nav">
       <span v-if="isLogin">

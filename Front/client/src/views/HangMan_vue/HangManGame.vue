@@ -418,6 +418,13 @@ export default {
       // this.startGame();
       // console.log(3);
     },
+    gameOver() {
+      // this.sleep(1000);
+      // var gameOver = document.getElementById("gameOver");
+      // gameOver.play();
+      this.gameIsOver = true;
+    },
+
     updateWrongs() {
       this.countError++;
       this.$emit("lifeLoss");
@@ -425,9 +432,13 @@ export default {
         // this.toggleText();
 
         var gameOver = document.getElementById("gameOver");
-        setTimeout(gameOver.play(), 1000);
-        // gameOver.play();
-        this.gameIsOver = true;
+        gameOver.play();
+
+        // this.sleep(900);
+        setTimeout(this.gameOver, 1000);
+        // this.gameOver();
+        // this.gameIsOver = true;
+
         // this.online = false;
         // var modal = document.getElementById("gameovermodal");
         // if (this.gameover === false) {

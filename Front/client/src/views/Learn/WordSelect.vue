@@ -1,13 +1,17 @@
 <template>
   <div>
+    <audio
+      autoplay
+      id="gameStart"
+      src="@/assets/music/pageMove/Jump High.mp3"
+    ></audio>
+    <audio id="click" src="@/assets/music/answer/Correct 2.mp3"></audio>
     <div class="main">
       <div>
         <div>
           <h1 class="title">학습하기</h1>
         </div>
-        <div class="contents">
-          학습하실 단계를 선택해주세요.
-        </div>
+        <div class="contents">학습하실 단계를 선택해주세요.</div>
       </div>
       <div class="bt">
         <b-button class="goword" @click="setlevel('con')">자음</b-button>
@@ -18,9 +22,9 @@
         <b-button class="gonext" @click="goNextLevel()">다음 -></b-button>
       </div>
     </div>
-    <div class="background-img">     
-      <img src="@/assets/cloud.png" class="cloud">
-      <img src="@/assets/Learn/LearnStart/shape-2.svg" class="Shape-2">
+    <div class="background-img">
+      <img src="@/assets/cloud.png" class="cloud" />
+      <img src="@/assets/Learn/LearnStart/shape-2.svg" class="Shape-2" />
     </div>
     <Footer />
   </div>
@@ -36,32 +40,39 @@ export default {
   },
   data: function () {
     return {
-      level: '',
-      num: '',
-    }
+      level: "",
+      num: "",
+    };
   },
   methods: {
     setlevel: function (word) {
-      this.level = word
-      if (this.level === 'con'){
-        this.num = 1
-      }else if(this.level === 'vow'){
-        this.num = 0
-      }else {
-        this.num = 0 
+      var click = document.getElementById("click");
+      click.play();
+      this.level = word;
+      if (this.level === "con") {
+        this.num = 1;
+      } else if (this.level === "vow") {
+        this.num = 0;
+      } else {
+        this.num = 0;
       }
     },
     handSelect: function () {
       this.$router.push("/Select").catch(() => {});
     },
     goNextLevel: function () {
-      if (this.level === '') {
-        alert('단계를 선택해주세요')
+      if (this.level === "") {
+        alert("단계를 선택해주세요");
       } else {
         // this.$router.push("/Learn/Learning" + '_' + this.level).catch(() => {});
-        this.$router.push({name: 'Learning', params: {select: this.level,  mode_letter: this.num}}).catch(() => {})
+        this.$router
+          .push({
+            name: "Learning",
+            params: { select: this.level, mode_letter: this.num },
+          })
+          .catch(() => {});
       }
-    }
+    },
   },
 };
 </script>
@@ -82,7 +93,7 @@ export default {
 
 .title {
   font-size: 3vh;
-  font-family: 'BinggraeSamanco-bold';
+  font-family: "BinggraeSamanco-bold";
   position: absolute;
   left: 48%;
   top: 18%;
@@ -90,7 +101,7 @@ export default {
 
 .contents {
   font-size: 2vh;
-  font-family: 'GowunDodum-Regular';
+  font-family: "GowunDodum-Regular";
   position: absolute;
   left: 44%;
   top: 22%;
@@ -108,22 +119,22 @@ export default {
   border-color: rgba(223, 216, 216, 0.959);
   border-width: 0.25vh;
   border-radius: 40px;
-  font-family: 'BinggraeSamanco';
+  font-family: "BinggraeSamanco";
   font-size: 2rem;
 }
 
 .gonext {
   margin: 2%;
   margin-top: 10%;
-  background-color: #69C995;
+  background-color: #69c995;
   text-align: center;
   color: rgb(255, 255, 255);
   width: 30%;
   height: 5%;
-  border-color: #69C995;
+  border-color: #69c995;
   border-width: 0.25vh;
   border-radius: 40px;
-  font-family: 'BinggraeSamanco';
+  font-family: "BinggraeSamanco";
   font-size: 2rem;
 }
 
@@ -138,7 +149,7 @@ export default {
   border-color: rgba(223, 216, 216, 0.959);
   border-width: 0.25vh;
   border-radius: 40px;
-  font-family: 'BinggraeSamanco';
+  font-family: "BinggraeSamanco";
   font-size: 2rem;
 }
 
@@ -160,6 +171,5 @@ img.Shape-2 {
   left: 0%;
   top: 87.5%;
   height: 12.5%;
-  }
-
+}
 </style>

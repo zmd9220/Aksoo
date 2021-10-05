@@ -16,7 +16,11 @@
           class="ss01 is-aniamte-fade animated fadeIn"
           style="animation-delay: 0.5s"
         >
-          <img data-v-3adcea5a="" src="/images/main/section02_txt01.png" alt="" />
+          <img
+            data-v-3adcea5a=""
+            src="/images/main/section02_txt01.png"
+            alt=""
+          />
         </div>
         <div data-v-3adcea5a="" class="hoem-game-char">
           <div
@@ -55,8 +59,8 @@
               도치를 위해 빠르게 산성비를 제거해주세요!
             </p>
             <div>
-              <b-button to="acid_rain/acid_rain/" class="start-game-btn">
-                <span class="start-game-btn-text">게임 시작하기</span> 
+              <b-button to="/acid_rain/AcidRainMain" class="start-game-btn">
+                <span class="start-game-btn-text">게임 시작하기</span>
               </b-button>
             </div>
           </div>
@@ -76,12 +80,14 @@
             <span data-v-3adcea5a="" class="game-content">
               뒤에 늑대가 쫓아온다고요?
             </span>
-            <p class="game-content">
-              단어를 맞춰 짹짹이가 도망가게 해주세요!
-            </p>         
+            <p class="game-content">단어를 맞춰 짹짹이가 도망가게 해주세요!</p>
             <div>
-              <b-button @click="gotoHangman" to="acid_rain/acid_rain/" class="start-game-btn">
-                <span class="start-game-btn-text">게임 시작하기</span> 
+              <b-button
+                @click="gotoHangman"
+                to="acid_rain/acid_rain/"
+                class="start-game-btn"
+              >
+                <span class="start-game-btn-text">게임 시작하기</span>
               </b-button>
             </div>
           </div>
@@ -101,12 +107,14 @@
             <span data-v-3adcea5a="" class="game-content">
               뒤집고 뒤집어 승부를 뒤집는 영웅은 누구?
             </span>
-            <p class="game-content">
-              완벽한 전략으로 모든 카드를 뒤집어봐요!
-            </p>
+            <p class="game-content">완벽한 전략으로 모든 카드를 뒤집어봐요!</p>
             <div>
-              <b-button @click="gotoCardfilp" to="acid_rain/acid_rain/" class="start-game-btn">
-                <span class="start-game-btn-text">게임 시작하기</span> 
+              <b-button
+                @click="gotoCardfilp"
+                to="acid_rain/acid_rain/"
+                class="start-game-btn"
+              >
+                <span class="start-game-btn-text">게임 시작하기</span>
               </b-button>
             </div>
           </div>
@@ -137,10 +145,8 @@ export default {
     gotoHangman() {
       this.$router.push({ name: "HangManMain" });
     },
-
   },
-}
-
+};
 </script>
 
 <style scoped>
@@ -247,13 +253,13 @@ export default {
 }
 
 .start-game-btn {
- position: relative;
- background-color: #fe6e27;
- width: 70%;
- margin-bottom: 10%;
- border: none;
- border-radius: 20px;
- box-shadow: 0.00rem 0.31rem 0.25rem 0.00rem rgba(0, 0, 0, 0.35);
+  position: relative;
+  background-color: #fe6e27;
+  width: 70%;
+  margin-bottom: 10%;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0rem 0.31rem 0.25rem 0rem rgba(0, 0, 0, 0.35);
 }
 
 .start-game-btn-text {
@@ -261,5 +267,4 @@ export default {
   font-size: 2.5vh;
   color: white;
 }
-
 </style>

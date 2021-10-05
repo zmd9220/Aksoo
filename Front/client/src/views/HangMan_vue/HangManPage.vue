@@ -6,6 +6,12 @@
       src="@/assets/music/pageMove/Jump High.mp3"
     ></audio>
 
+    <audio
+      loop
+      id="gameBgm"
+      src="@/assets/music/bgm/Jaunty_Gumption.mp3"
+    ></audio>
+
     <div class="game-container">
       <HangManGame
         ref="game"
@@ -131,6 +137,7 @@ import Loading from "@/components/Loading.vue";
 import HangManGame from "./HangManGame.vue";
 // import axios from 'axios';
 import Progress from "easy-circular-progress";
+
 export default {
   data() {
     return {
@@ -211,6 +218,7 @@ export default {
   created: function () {
     this.life = this.diff.value;
     this.answer = false;
+
     // var audio = document.getElementById("gameStart");
 
     // audio.play();
@@ -218,6 +226,11 @@ export default {
   computed() {
     // this.count = this.$refs.camera.count/150;
     // console.log(this.$refs.camera.count/150)
+  },
+  mounted() {
+    var gameBgm = document.getElementById("gameBgm");
+    gameBgm.volume = 0.3;
+    gameBgm.play();
   },
 };
 </script>
