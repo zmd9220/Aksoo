@@ -34,20 +34,20 @@
       </span>
       <router-view @login="isLogin = true" />
     </div>
-    <Footer />
+    <!-- <Footer /> -->
   </div>
 </template>
 
 
 <script>
 import Header from "./views/MainPage/Header.vue";
-import Footer from "./views/MainPage/Footer.vue";
+// import Footer from "./views/MainPage/Footer.vue";
 
 export default {
   name: "App",
   components: {
     Header,
-    Footer,
+    // Footer,
   },
   data: function () {
     return {

@@ -113,10 +113,19 @@
     </div>
     <img src="@/assets/grass.png" alt="grass" class="grass" />
     <img src="@/assets/gosm.png" alt="gosm" class="gosm" />
+    <Footer />
   </div>
 </template>
 
 <script>
+import Footer from "@/views/MainPage/Footer.vue";
+
+export default {
+  name: "App",
+  components: {
+    Footer,
+  }
+}
 </script>
 
 <style scoped>
