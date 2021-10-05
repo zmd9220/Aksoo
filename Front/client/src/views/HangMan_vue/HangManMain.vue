@@ -33,41 +33,48 @@
         </div>
       </div>
     </div>
+    <Footer />
   </div>
 </template>
 
 <script>
-export default {
-    data() {
-        return {
-          topic: '주제',
-          diff: '난이도',
-          topic_options: [
-            { text: 'FRUIT', value: 1 },
-            { text: 'ANIMAL', value: 2 },
-          ],
-          diff_options: [
-            { text: 'EASY', value: 5 },
-            { text: 'MIDDLE', value: 4 },
-            { text: 'HARD', value: 3 }
-          ],
-        }
-    },
-    name: "HangManMain",
-    components: {
-    },
-    methods: {
-      gotoHangManPage() {
-        if (this.topic === '주제'){
-          alert('주제를 선택해주세요')
-        } else if (this.diff === '난이도') {
-          alert('난이도를 선택해주세요')
-        } else {
-          this.$router.push({ name: 'HangManPage', params: { topic: this.topic, diff: this.diff}})
-        }
+import Footer from "@/views/MainPage/Footer.vue";
 
-        // // 이름을 가지는 라우트
-        // router.push({ name: 'user', params: { userId: 123 }})
+export default {
+  data() {
+    return {
+      topic: "주제",
+      diff: "난이도",
+      topic_options: [
+        { text: "FRUIT", value: 1 },
+        { text: "ANIMAL", value: 2 },
+      ],
+      diff_options: [
+        { text: "EASY", value: 5 },
+        { text: "MIDDLE", value: 4 },
+        { text: "HARD", value: 3 },
+      ],
+    };
+  },
+  name: "HangManMain",
+  components: {
+        Footer,
+  },
+  methods: {
+    gotoHangManPage() {
+      var audio = document.getElementById("gameStart");
+
+      if (this.topic === "주제") {
+        alert("주제를 선택해주세요");
+      } else if (this.diff === "난이도") {
+        alert("난이도를 선택해주세요");
+      } else {
+        audio.play();
+        setTimeout(1000);
+        this.$router.push({
+          name: "HangManPage",
+          params: { topic: this.topic, diff: this.diff },
+        });
       }
     },
     updated: {

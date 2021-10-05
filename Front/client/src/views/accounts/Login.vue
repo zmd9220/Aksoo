@@ -7,9 +7,9 @@
       <img src="@/assets/login.png" class="loginImg" />
     </div>
     <div class="signMain">
-      <div style="font-size: 1.5rem; text-align: left">Sign In</div>
+      <div style="font-size: 1.5rem; text-align: left; margin-top: 5%; font-weight: bold;">Sign In</div>
       <div class="googleLogin">
-        <button type="button" class="googleBtn">
+        <!-- <button type="button" class="googleBtn">
           <img
             src="@/assets/googleLogo.png"
             alt=""
@@ -23,9 +23,9 @@
             style="margin: 1%; width: 20%; height: 90%"
           />
           구글로 로그인
-        </button>
+        </button> -->
       </div>
-      <div style="color: #868c93; text-decoration: underline">OR</div>
+      <!-- <div style="color: #868c93; text-decoration: underline">OR</div> -->
 
       <div class="group-field">
         <div class="input-group clearfix">
@@ -107,7 +107,7 @@
         <div style="color: #858484; text-align: left; float: left">
           계정이 없으신가요?  
         </div>
-        <div @click="signup" style="color: #4285f4; float: left; margin-left: 1%;"> 회원가입</div>
+        <a href="signup" style="color: #4285f4; float: left; text-decoration: none; margin-left: 1%;"> 회원가입</a>
       </div>
     </div>
   </div>
@@ -144,18 +144,19 @@ export default {
 <style>
 .imgLeft {
   display: flex;
-  z-index: 1;
+  z-index: -2;
   width: 49%;
-  height: 95%;
+  height: 90%;
   position: absolute;
   background-image: linear-gradient(to right, #fff, #fdf9e8);
 }
 .decoImg-login {
   left: 0px;
+  top: 6%;
   object-fit: contain;
   margin: 3% 2%;
-  width: 53%;
-  height: 75%;
+  width: 50%;
+  height: 70%;
   z-index: 3;
   position: absolute;
 }
@@ -171,7 +172,7 @@ export default {
   z-index: 2;
   width: 15%;
   left: 35%;
-  top: 25%;
+  top: 20%;
 }
 .loginImg {
   object-fit: contain;
@@ -183,10 +184,11 @@ export default {
 }
 .signMain {
   display: flex;
-  z-index: 1;
+  z-index: -1;
   width: 55%;
-  height: 100%;
-  right: 0px;
+  height: 95%;
+  right: 25px;
+  top: 5%;
   position: absolute;
   border-radius: 7.63rem;
   background-color: #fff;

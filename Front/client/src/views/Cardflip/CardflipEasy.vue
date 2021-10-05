@@ -24,13 +24,13 @@
         hide-header
         no-close-on-backdrop
       >
-        <b-button
+        <!-- <b-button
           class="mt-3 modal-close-btn"
           block
           @click="$bvModal.hide('bv-modal-example')"
         >
           <span class="close-btn-txt">닫기</span></b-button
-        >
+        > -->
         <p class="game-over-text">GAME OVER</p>
         <div class="modal-cardFont">Score</div>
         <div class="modal-score">{{ score }}</div>
@@ -61,7 +61,7 @@
                 />2500
               </div>
             </span>
-            <b-button class="mt-3 modal-halloffame-btn" block>
+            <b-button class="mt-3 modal-halloffame-btn" block href="">
               <span class="halloffame-btn-txt">명예의전당</span></b-button
             >
           </div>

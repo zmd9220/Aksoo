@@ -5,7 +5,7 @@
                 {{item.rank}}.
             </div>
             <div style="display: flex; height:100%; align-items: center;">
-                <img src="@/assets/croc.png" alt="profile_picture" class="profile-pic">
+                <img :src='"@/assets/Profile/prf-" + profile_name[item.profile%7] +".png"' alt="profile_picture" class="profile-pic">
             </div>
             <div style="display: flex; height:100%; align-items: center; font-weight: bold; color: black; width:20%">
                 {{item.nickname}}
@@ -13,12 +13,12 @@
             <div></div>
             <div></div>
             <div style="display: flex; height:100%; align-items: center; font-weight: bold; color: gray; width:15%">
-                <img v-if="item.tier =='Bronze'" src="@/assets/Ranking/brz.png" alt="tier_picture" style="height:40%; margin-right:1vw;">
-                <img v-if="item.tier =='Silver'" src="@/assets/Ranking/slv.png" alt="tier_picture" style="height:40%; margin-right:1vw;">
-                <img v-if="item.tier =='Gold'" src="@/assets/Ranking/gld.png" alt="tier_picture" style="height:40%; margin-right:1vw;">
-                <img v-if="item.tier =='Platinum'" src="@/assets/Ranking/pltn.png" alt="tier_picture" style="height:40%; margin-right:1vw;">
-                <img v-if="item.tier =='Diamond'" src="@/assets/Ranking/dmd.png" alt="tier_picture" style="height:40%; margin-right:1vw;">
-                {{item.tier}}
+                <img v-if="item.tier == 5" src="@/assets/Ranking/brz.png" alt="tier_picture" style="height:40%; margin-right:1vw;">
+                <img v-if="item.tier == 4" src="@/assets/Ranking/slv.png" alt="tier_picture" style="height:40%; margin-right:1vw;">
+                <img v-if="item.tier == 3" src="@/assets/Ranking/gld.png" alt="tier_picture" style="height:40%; margin-right:1vw;">
+                <img v-if="item.tier == 2" src="@/assets/Ranking/pltn.png" alt="tier_picture" style="height:40%; margin-right:1vw;">
+                <img v-if="item.tier == 1" src="@/assets/Ranking/dmd.png" alt="tier_picture" style="height:40%; margin-right:1vw;">
+                {{tier_num_to_str[item.tier]}}
             </div>
             <div style="display: flex; height:100%; align-items: center; font-weight: bold; color: gray; width:8%">
                 {{item.max_score}}P
@@ -35,11 +35,13 @@ export default {
   name: "RankingListItem",
   data () {
     return{
+        tier_num_to_str:[0, 'Diamond', 'Platinum', 'Gold', 'Silver', 'Bronze'],
+        profile_name: ['bird', 'cml', 'croc', 'ele', 'gsm', 'hippo', 'shark'],
     }
   },
   props: {
     item: Object,
-  }
+  },
 }
 </script>
 <style scoped>
@@ -63,10 +65,11 @@ export default {
     font-weight: bold;
 }
 .ranking-list-item-wrapper .ranking-list-item .profile-pic{
-    background-color: orange;
+    background-color: #FEF8E2;
     height: 7vh;
     width: 7vh;
     border-radius: 100%;
+    /* border: 2px solid #EAD9C4; */
 }
 .ranking-list-item-wrapper .ranking-list-item .add-button{
     text-align: center;
