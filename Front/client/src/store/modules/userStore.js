@@ -80,6 +80,7 @@ const userStore = {
         state.hangman.rank = payload.rank
         state.hangman.bestScore = payload.score
       }
+      state.accounts.tier = payload.tier
     } 
   },
   actions: {
