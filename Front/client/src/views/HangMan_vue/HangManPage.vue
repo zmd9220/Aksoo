@@ -52,7 +52,7 @@
     </div>
 
     <div class="right-status-column">
-      <div class="nickname">{{ nickname }} 님</div>
+      <div class="nickname">{{ accounts.nickname }} 님</div>
       <div class="game-status">
         <div class="game-status-li li-start">
           <div>Life</div>
@@ -73,7 +73,7 @@
         <div class="game-status-li li-end">
           <div>Best Score</div>
           <div class="game-status-box">
-            {{ best_score }}
+            {{ hangman.bestScore }}
           </div>
         </div>
       </div>
@@ -129,6 +129,7 @@ import Loading from "@/components/Loading.vue";
 import HangManGame from "./HangManGame.vue";
 // import axios from "axios";
 // import Progress from "easy-circular-progress";
+import { mapState } from 'vuex'
 
 export default {
   data() {
@@ -232,9 +233,12 @@ export default {
     this.answer = false;
     // this.bestScore();
   },
-  computed() {
-    // this.count = this.$refs.camera.count/150;
-    // console.log(this.$refs.camera.count/150)
+  // computed() {
+  //   // this.count = this.$refs.camera.count/150;
+  //   // console.log(this.$refs.camera.count/150)
+  // },
+  computed: {
+    ...mapState('userStore', ['accounts', 'hangman'])
   },
   mounted() {
     var gameBgm = document.getElementById("gameBgm");
