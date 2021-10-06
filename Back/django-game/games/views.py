@@ -14,12 +14,13 @@ from .models import Hangman, AcidRain, CardMatching
 from .serializer import HangmanSerializer, AcidRainSerializer, CardMatchingSerializer
 from learn.models import Word
 from learn.serializer import WordSerializer 
-# from accounts.models import User
+from accounts.models import TierCode
 from accounts.serializer import UserSerializer
 from collections import OrderedDict
 
 from hangul_utils import split_syllables, join_jamos
 
+from django.forms.models import model_to_dict
 
 @api_view(['GET'])
 def hangman(request, select):
@@ -55,7 +56,7 @@ def set_score(request, select_game):
                 serializer = HangmanSerializer(my_hangman, data=request.data)
                 if serializer.is_valid(raise_exception=True):
                     # 총점 갱신
-                    user.total_score += request.data['score']-my_hangman.score
+                    user.total_score = user.total_score+request.data['score']-my_hangman.score
                     serializer.save()
             # 갱신 필요 X 바로 리턴
             else:
@@ -77,7 +78,7 @@ def set_score(request, select_game):
                 serializer = CardMatchingSerializer(my_cardmatching, data=request.data)
                 if serializer.is_valid(raise_exception=True):
                     # 총점 갱신
-                    user.total_score += request.data['score']-my_cardmatching.score
+                    user.total_score = user.total_score+request.data['score']-my_cardmatching.score
                     serializer.save()
             else:
                 serializer = CardMatchingSerializer(my_cardmatching)
@@ -94,12 +95,12 @@ def set_score(request, select_game):
     elif select_game == 1:
         if user.acidrain_set.filter(user_id=user.pk).exists():
             my_acidrain = get_object_or_404(AcidRain, user_id=user.pk)
-            print(my_acidrain)
+            # print(my_acidrain)
             if my_acidrain.score < request.data['score']:
                 serializer = AcidRainSerializer(my_acidrain, data=request.data)
                 if serializer.is_valid(raise_exception=True):
                     # 총점 갱신
-                    user.total_score += request.data['score']-my_acidrain.score
+                    user.total_score = user.total_score+request.data['score']-my_acidrain.score
                     serializer.save()
             else:
                 serializer = AcidRainSerializer(my_acidrain)
@@ -114,9 +115,23 @@ def set_score(request, select_game):
     # 이외의 것은 모두 잘못된 요청
     else:
         return Response({'처리 안됨': '이유 - 잘못된 select_game'}, status=status.HTTP_400_BAD_REQUEST)
-    user.save()
+    # print(user.total_score)
+    # print(user)
+    if 1000 > user.total_score >= 500:
+        tier = get_object_or_404(TierCode, id=4)
+    elif 1500 > user.total_score >= 1000:
+        tier = get_object_or_404(TierCode, id=3)
+    elif 2000 > user.total_score >= 1500:
+        tier = get_object_or_404(TierCode, id=2)
+    else:
+        tier = get_object_or_404(TierCode, id=1)
+    user_serializer = UserSerializer(user, data=model_to_dict(user))
+    if user_serializer.is_valid(raise_exception=True):
+        user_serializer.save(tier=tier)
+    # user.save()
     response = serializer.data
     response['rank'] = rank
+    response['tier'] = tier.id
     # 응답
     return Response(response, status=status.HTTP_201_CREATED)
 
