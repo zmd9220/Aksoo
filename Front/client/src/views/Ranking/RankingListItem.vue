@@ -24,23 +24,68 @@
                 {{item.max_score}}P
             </div>
             <div style="display: flex; height:100%; align-items: center;">
-                <div class="add-button" ><span>친구신청</span></div>
+                <div class="add-button" @click="follow(item.profile)" style="cursor: pointer">
+                    <span v-if="this.isFollow">친구삭제</span>
+                    <span v-else>친구신청</span>
+                </div>
             </div>
         </div>
         <div class="line"></div>
     </div>
 </template>
+
 <script>
+import axios from "axios";
+import {mapState} from 'vuex'
+
+const SERVER_URL = process.env.VUE_APP_SERVER_URL
+
 export default {
   name: "RankingListItem",
   data () {
     return{
         tier_num_to_str:[0, 'Diamond', 'Platinum', 'Gold', 'Silver', 'Bronze'],
         profile_name: ['bird', 'cml', 'croc', 'ele', 'gsm', 'hippo', 'shark'],
+        isFollow: false,
     }
   },
   props: {
     item: Object,
+    Rank: Array,
+  },
+  methods: {
+      follow(id) {
+        axios ({
+        method: 'post',
+        url: SERVER_URL + '/accounts/follow/' + id + '/',
+        headers: {
+          "Authorization": `Bearer ${this.accessToken}`
+        },
+      }).then((res) => {
+        console.log(res)
+        console.log(this.Rank)
+        window.location.reload()
+      }).catch(err => {
+        console.log(err)
+      }) 
+      }
+  },
+  computed: {
+    ...mapState('userStore', ['accounts', 'accessToken'])
+  },
+  mounted: function () {
+    axios ({
+        method: 'get',
+        url: SERVER_URL + '/accounts/follow/' + this.item.profile + '/',
+        headers: {
+          "Authorization": `Bearer ${this.accessToken}`
+        },
+      }).then((res) => {
+        console.log(res.data.isFollow)
+        this.isFollow = res.data.isFollow
+      }).catch(err => {
+        console.log(err)
+      }) 
   },
 }
 </script>
@@ -77,7 +122,7 @@ export default {
     font-size: 2vh;
     background-color: #E5D2BD;
     height: 4vh;
-    width: 6vw;
+    width: 8vw;
     border-radius: 4vh;
     font-weight: bold;
     display: inline-block;
