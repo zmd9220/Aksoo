@@ -51,7 +51,7 @@
         <div class="game-status-li li-end">
           <div>Best Score</div>
           <div class="game-status-box">
-            {{ best_score }}
+            {{ acidRain.bestScore }}
           </div>
         </div>
       </div>
@@ -109,6 +109,7 @@
 
 
 <script>
+import { mapState } from 'vuex'
 import Camera from "@/components/Camera1.vue";
 import Loading from "@/components/Loading.vue";
 
@@ -140,7 +141,6 @@ export default {
       letter: "",
       count: 0,
       confidence: "",
-      best_score: 0,
       // clicked: false,
       // clickedCon: false,
     };
@@ -178,10 +178,13 @@ export default {
   destroyed() {
     this.endGame();
   },
-  mounted() {
+  mounted: function () {
     var gameBgm = document.getElementById("gameBgm");
     gameBgm.volume = 0.3;
     gameBgm.play();
+  },
+  computed: {
+    ...mapState('userStore', ['acidRain'])
   },
 };
 </script>

@@ -16,6 +16,18 @@ const userStore = {
     accessToken: '',
     refreshToken: '',
     isLogin: false,
+    hangman: {
+      bestScore: 0,
+      rank: 0,
+    },
+    cardMatching: {
+      bestScore: 0,
+      rank: 0,
+    },
+    acidRain: {
+      bestScore: 0,
+      rank: 0,
+    }
   },
   mutations: {
     // 로그인 시에는 관련 유저 데이터를 vuex에 저장, 로그인 여부 참으로
@@ -27,6 +39,13 @@ const userStore = {
       state.accessToken = data.access
       state.refreshToken = data.refresh
       state.isLogin = true
+
+      state.hangman.bestScore = data.games.hangman.score
+      state.hangman.rank = data.games.hangman.rank
+      state.cardMatching.bestScore = data.games.cardMatching.score
+      state.cardMatching.rank = data.games.cardMatching.rank
+      state.acidRain.bestScore = data.games.acidRain.score
+      state.acidRain.rank = data.games.acidRain.rank
     },
     // 로그아웃 시에는 관련 유저 데이터를 삭제(공란), 로그인 여부 거짓으로
     DELETE_USER: function (state) {
@@ -37,12 +56,40 @@ const userStore = {
       state.accessToken = ''
       state.refreshToken = ''
       state.isLogin = false
-    }
+
+      state.hangman.bestScore = 0
+      state.hangman.rank = 0
+      state.cardMatching.bestScore = 0
+      state.cardMatching.rank = 0
+      state.acidRain.bestScore = 0
+      state.acidRain.rank = 0
+    },
+    MODIFY_SCORE_RANK(state, data, selectGame) {
+      if (selectGame === 1) {
+        state.acidRain.rank = data.rank
+        state.acidRain.bestScore = data.score
+      } else if (selectGame === 2) {
+        state.cardMatching.rank = data.rank
+        state.cardMatching.bestScore = data.score
+      } else {
+        state.hangman.rank = data.rank
+        state.hangman.bestScore = data.score
+      }
+    } 
   },
   actions: {
     // 유저 로그인
     // credetials(유저 아이디, 패스워드를 담은 오브젝트)에 담아서 ADD_USER를 동작시킨다.
     loginUser: function (context, credentials) {
+        context.commit('ADD_USER', credentials)
+        // vuex에서 처리를 하려면 context를 통한 접근을 권장함 (데이터가 제대로 담김)
+        // axios.defaults.headers.common['Authorization'] = `JWT ${res.data.token}`
+        // axios.defaults.headers.common['Authorization'] = `JWT ${context.state.token}`
+        axios.defaults.headers.common['Authorization'] = `Bearer ${context.state.accessToken}`
+        // 사실 vuex에서 로컬에 저장하기 때문에 밑의 setItem은 필요가 없지만 혹시 몰라 놔둠
+        localStorage.setItem('jwt', context.state.accessToken)
+    },
+    loginUser2: function (context, credentials) {
       axios({
         method: 'POST',
         url: SERVER_URL + '/accounts/signin/',
@@ -63,7 +110,32 @@ const userStore = {
     // 유저 로그아웃
     logoutUser: function (context) {
       context.commit('DELETE_USER')
+      delete axios.defaults.headers.common['Autorization']
       localStorage.removeItem('jwt')
+    },
+    setScore: function (context, data) {
+      // axios로 점수 갱신
+      console.log(data)
+      // console.log(score)
+      axios({
+        method: 'post', 
+        url: SERVER_URL + `/games/setScore/${data.selectGame}/`,
+        data: {
+          score: data.score,
+        },
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+        }
+      }).then(res => {
+          console.log(res)
+          context.commit('MODIFY_SCORE_RANK', res.data, data.selectGame)
+          // this.rank = res.data.rank
+          // this.bestScore = res.data.score
+          }).catch(err => {
+          console.log(err)
+          console.log(err.response)
+          // alert("아이디나 비밀번호를 확인해주세요.")
+      })
     }
   },
 }

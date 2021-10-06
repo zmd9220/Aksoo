@@ -37,7 +37,7 @@
                   src="@/assets/trophy.png"
                   alt="trophy"
                   class="rank-img"
-                />43
+                />{{ acidRain.rank }}
               </div>
             </span>
             <b-button
@@ -56,7 +56,7 @@
                   src="@/assets/best-badge.png"
                   alt="best-badge"
                   class="best-score-img"
-                />2500
+                />{{ acidRain.bestScore }}
               </div>
             </span>
             <b-button
@@ -85,6 +85,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 var placeLetterInterval = 1000;
 var placeLetterTimer, moveLettersTimer;
 
@@ -193,6 +194,12 @@ export default {
           // this.decreaseLetterSpeed(hart);
           if (this.life == 0) {
             // this.toggleText();
+
+            // 데이터 처리하는 함수
+            // this.setScore(1, this.score)
+            // Vuex에 데이터를 보낼때는 오브젝트 형으로 보낼것을 권장 !!!
+            this.$store.dispatch('userStore/setScore', { selectGame: 1, score:this.score})
+
             gameOver.play();
             this.gameIsOver = true;
             this.endGame();
@@ -282,7 +289,9 @@ export default {
       // startButton.classList.add("disabled");
     },
   },
-
+  computed: {
+    ...mapState('userStore', ['acidRain'])
+  },
   destroyed() {
     this.endGame();
   },

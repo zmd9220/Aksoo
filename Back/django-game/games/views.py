@@ -8,6 +8,7 @@ from rest_framework import serializers, status
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.permissions import IsAuthenticated
 # from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+from dj_rest_auth.jwt_auth import JWTCookieAuthentication
 
 from .models import Hangman, AcidRain, CardMatching
 from .serializer import HangmanSerializer, AcidRainSerializer, CardMatchingSerializer
@@ -34,8 +35,13 @@ def hangman(request, select):
 
 
 @api_view(['POST'])
+# JWT 토큰 확인
+@authentication_classes([JWTCookieAuthentication])
+# JWT 토큰 확인 후 인증 확인 되었을 때만 권한 부여
+@permission_classes([IsAuthenticated])
 def set_score(request, select_game):
     # 현재 유저 정보 가져오기
+    # print(request.user.email)
     user = get_object_or_404(get_user_model(), email=request.user.email)
     # user = get_object_or_404(get_user_model(), id=7)
     # 행맨
@@ -53,7 +59,8 @@ def set_score(request, select_game):
                     serializer.save()
             # 갱신 필요 X 바로 리턴
             else:
-                return Response({'처리 안됨': '이유 - 점수가 낮음'}, status=status.HTTP_200_OK)
+                serializer = HangmanSerializer(my_hangman)
+                # return Response({'처리 안됨': '이유 - 점수가 낮음'}, status=status.HTTP_200_OK)
         # 기록이 없으면 새롭게 Row 생성
         else:
             serializer = HangmanSerializer(data=request.data)
@@ -61,6 +68,7 @@ def set_score(request, select_game):
                 # 총점 추가
                 user.total_score += request.data['score']
                 serializer.save(user=user)
+        rank = Hangman.objects.filter(score__gt=serializer.data['score']).count() + 1
     # 카드 뒤집기
     elif select_game == 2:
         if user.cardmatching_set.filter(user=user.pk).exists():
@@ -72,17 +80,21 @@ def set_score(request, select_game):
                     user.total_score += request.data['score']-my_cardmatching.score
                     serializer.save()
             else:
-                return Response({'처리 안됨': '이유 - 점수가 낮음'}, status=status.HTTP_200_OK)
+                serializer = CardMatchingSerializer(my_cardmatching)
+                # return Response({'처리 안됨': '이유 - 점수가 낮음'}, status=status.HTTP_200_OK)
         else:
             serializer = CardMatchingSerializer(data=request.data)
             if serializer.is_valid(raise_exception=True):
                 # 총점 추가
                 user.total_score += request.data['score']
                 serializer.save(user=user)
+        rank = CardMatching.objects.filter(score__gt=serializer.data['score']).count() + 1
+
     # 산성비
     elif select_game == 1:
-        if user.acidrain_set.filter(user=user.pk).exists():
-            my_acidrain = get_object_or_404(AcidRain, user=user.pk)
+        if user.acidrain_set.filter(user_id=user.pk).exists():
+            my_acidrain = get_object_or_404(AcidRain, user_id=user.pk)
+            print(my_acidrain)
             if my_acidrain.score < request.data['score']:
                 serializer = AcidRainSerializer(my_acidrain, data=request.data)
                 if serializer.is_valid(raise_exception=True):
@@ -90,21 +102,55 @@ def set_score(request, select_game):
                     user.total_score += request.data['score']-my_acidrain.score
                     serializer.save()
             else:
-                return Response({'처리 안됨': '이유 - 점수가 낮음'}, status=status.HTTP_200_OK)
+                serializer = AcidRainSerializer(my_acidrain)
+                # return Response({'처리 안됨': '이유 - 점수가 낮음'}, status=status.HTTP_200_OK)
         else:
             serializer = AcidRainSerializer(data=request.data)
             if serializer.is_valid(raise_exception=True):
                 # 총점 추가
                 user.total_score += request.data['score']
                 serializer.save(user=user)
+        rank = AcidRain.objects.filter(score__gt=serializer.data['score']).count() + 1
     # 이외의 것은 모두 잘못된 요청
     else:
         return Response({'처리 안됨': '이유 - 잘못된 select_game'}, status=status.HTTP_400_BAD_REQUEST)
     user.save()
+    response = serializer.data
+    response['rank'] = rank
     # 응답
-    return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(response, status=status.HTTP_201_CREATED)
 
 
+# JWT 토큰 확인
+@authentication_classes([JWTCookieAuthentication])
+# JWT 토큰 확인 후 인증 확인 되었을 때만 권한 부여
+@permission_classes([IsAuthenticated])
+@api_view(['GET'])
+def get_score(request, select_game):
+    print(request)
+    # 행맨
+    if select_game == 3:
+        serializer = HangmanSerializer(get_object_or_404(Hangman, user_id=request.user.pk))
+    # 카드 뒤집기
+    elif select_game == 2:
+        serializer = CardMatchingSerializer(get_object_or_404(CardMatching, user_id=request.user.pk))
+    # 산성비
+    elif select_game == 1:
+        print(1)
+        print(request.user.email)
+        serializer = AcidRainSerializer(get_object_or_404(AcidRain, user=request.user.id))
+        print(serializer.data)
+    # 이외의 것은 모두 잘못된 요청
+    else:
+        return Response({'처리 안됨': '이유 - 잘못된 select_game'}, status=status.HTTP_400_BAD_REQUEST)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+
+# JWT 토큰 확인
+@authentication_classes([JWTCookieAuthentication])
+# JWT 토큰 확인 후 인증 확인 되었을 때만 권한 부여
+@permission_classes([IsAuthenticated])
 @api_view(['GET'])
 def ranking(request, select_game):
     # 행맨

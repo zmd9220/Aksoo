@@ -11,9 +11,9 @@ urlpatterns = [
     # 유저 상세 정보
     path('<int:user_pk>/', views.user_detail, name='user_detail'),
     # simple_jwt를 이용한 토큰 부여 1
-    path('signin/', views.signin.as_view()),
+    path('signin/', views.signin.as_view(), name='signin'),
     # simple_jwt를 이용한 토큰 부여 2
-    path('getToken/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
+    # path('getToken/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     # 팔로잉 팔로우
     path('follow/<int:user_pk>/', views.follow, name='follow'),
     # 구버전 jwt

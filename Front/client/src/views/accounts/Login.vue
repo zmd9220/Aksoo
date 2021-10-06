@@ -112,10 +112,10 @@
 </template>
 
 <script>
-// import axios from "axios";
 import {mapState} from 'vuex'
+import axios from "axios"
 
-// const SERVER_URL = process.env.VUE_APP_SERVER_URL
+const SERVER_URL = process.env.VUE_APP_SERVER_URL
 
 export default {
   name: "Signup",
@@ -130,28 +130,23 @@ export default {
   methods: {
     // 로그인
     login: function () {
-      this.$store.dispatch('userStore/loginUser', this.credentials)
-      this.$router.push({ name: 'MainPage' })
-      this.$emit('login')
-      this.isLogin = true;
-      // axios({
-      //   method: 'post',
-      //   url: 'http://127.0.0.1:8000/accounts/signin/',
-      //   data: this.credentials,
-      // })
-      //   .then(res => {
-      //     console.log(res)
-
-      //     localStorage.setItem('jwt', res.data.token)
-      //     // test 용
-      //     // this.$store.dispatch('userStore/loginUser', {email: "test2@gma.com", password: "test1"})
-
-
-      //   })
-        // .catch(err => {
-        //   console.log(err)
-        //   alert("아이디나 비밀번호를 확인해주세요.")
-        // })
+      axios({
+        method: 'post', 
+        url: SERVER_URL + '/accounts/signin/',
+        data: this.credentials,
+      }).then(res => {
+          console.log(res)
+          this.$store.dispatch('userStore/loginUser', res.data)
+          this.$emit('login')
+          this.isLogin = true;
+          // localStorage.setItem('jwt', res.data.token)
+          this.$router.push({ name: 'MainPage' })
+          // test 용
+          // this.$store.dispatch('userStore/loginUser', {email: "test2@gma.com", password: "test1"})
+        }).catch(err => {
+          console.log(err)
+          alert("아이디나 비밀번호를 확인해주세요.")
+        })
     },
   },
   computed: {
