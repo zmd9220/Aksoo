@@ -108,6 +108,7 @@ export default {
       // mode: 0,
       per: 0,
       gameIsOver: false,
+      count: 0,
     };
   },
   props: {
@@ -156,6 +157,7 @@ export default {
           return;
         }
       }
+      this.count = this.count + 0.4;
       var letters = String.fromCharCode(Con); // ㄾ ㅘ ㅢ
       // console.log(letter + " " + Con);
 
@@ -184,7 +186,7 @@ export default {
       var gameOver = document.getElementById("gameOver");
 
       for (var i = 0; i < boxes.length; i++) {
-        boxes[i].style.bottom = parseInt(boxes[i].style.bottom) - 8 + "px";
+        boxes[i].style.bottom = parseInt(boxes[i].style.bottom) - 8 - this.count+ "px";
         if (parseInt(boxes[i].style.bottom) <= 100) {
           wrongAnswer.play();
           boxes[i].remove();
