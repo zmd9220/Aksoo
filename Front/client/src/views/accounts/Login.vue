@@ -138,7 +138,7 @@ export default {
           this.$store.dispatch('userStore/loginUser', res.data)
           this.$emit('login')
           this.isLogin = true;
-          localStorage.setItem('jwt', res.data.token)
+          // localStorage.setItem('jwt', res.data.token)
           this.$router.push({ name: 'MainPage' })
           // test 용
           // this.$store.dispatch('userStore/loginUser', {email: "test2@gma.com", password: "test1"})
