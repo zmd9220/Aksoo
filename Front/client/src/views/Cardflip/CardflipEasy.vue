@@ -328,7 +328,7 @@ export default {
         console.log('gameisOVER 작동')
       }
     }
-  }
+  },
 };
 </script>
 

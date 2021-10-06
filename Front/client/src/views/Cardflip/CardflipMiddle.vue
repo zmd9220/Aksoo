@@ -125,6 +125,7 @@
 
 <script>
 import _ from "lodash";
+import { mapState } from 'vuex'
 
 export default {
   name: "CardflipMiddel",
@@ -293,6 +294,8 @@ export default {
     },
   },
   computed: {
+    ...mapState('userStore', ['accounts', 'cardMatching']),
+
     seconds() {
       if (this.totalTime.seconds < 10) {
         return `0${this.totalTime.seconds}`;
@@ -304,6 +307,17 @@ export default {
     var gameBgm = document.getElementById("gameBgm");
     gameBgm.volume = 0.2;
     gameBgm.play();
+  },  
+  watch: {
+    gameIsOver(newGameIsOver) {
+      if (newGameIsOver) {
+        // 데이터 처리하는 함수
+        // this.setScore(1, this.score)
+        // Vuex에 데이터를 보낼때는 오브젝트 형으로 보낼것을 권장 !!!
+        this.$store.dispatch('userStore/setScore', { selectGame: 2, score:this.score})
+        console.log('gameisOVER 작동')
+      }
+    }
   },
 };
 </script>
