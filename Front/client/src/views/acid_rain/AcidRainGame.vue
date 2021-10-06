@@ -160,7 +160,7 @@ export default {
       // newLetter.style.right = Math.random() * 300 + "px";
       // newLetter.style.top = 1000 - (Math.random() * 500) + "px";
       newLetter.style.left = 100 + Math.random() * 700 + "px";
-      newLetter.style.bottom = 400 + Math.random() * 500 + "px";
+      newLetter.style.bottom = 700 + Math.random() * 300 + "px";
 
       box.appendChild(newLetter);
     },
@@ -172,7 +172,7 @@ export default {
 
       for (var i = 0; i < boxes.length; i++) {
         boxes[i].style.bottom = parseInt(boxes[i].style.bottom) - 8 + "px";
-        if (parseInt(boxes[i].style.bottom) <= 50) {
+        if (parseInt(boxes[i].style.bottom) <= 100) {
           wrongAnswer.play();
           boxes[i].remove();
           // this.hart = parseInt(this.hart) - 1;

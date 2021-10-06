@@ -173,8 +173,8 @@ img.Shape-2 {
 }
 
 .camel-ele:hover {
-  transform: rotate(30deg);
-  -webkit-transform: rotate(30deg);
+  transform: rotate(13deg);
+  -webkit-transform: rotate(13deg);
 }
 
 .rd-g {

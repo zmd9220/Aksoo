@@ -79,14 +79,6 @@
       </div>
       <div v-if="mode_letter" class="game-mode-cons" @click="modeChange">
         자음
-        <Progress
-          :transitionDuration="5"
-          :radius="15"
-          :strokeWidth="7"
-          :value="this.count"
-        >
-          <div class="content"></div>
-        </Progress>
         <!-- {{ count }} -->
       </div>
       <div v-else class="game-mode-vowel" @click="modeChange">
@@ -104,7 +96,7 @@
         <div class="selected-confidence">정확도 : {{ confidence }}</div>
       </div>
       <b-progress
-        height="3px"
+        height="7px"
         :value="count"
         :max="80"
         class="mb-3"
@@ -136,7 +128,6 @@ import Camera from "@/components/Camera0.vue";
 import Loading from "@/components/Loading.vue";
 import HangManGame from "./HangManGame.vue";
 // import axios from 'axios';
-import Progress from "easy-circular-progress";
 
 export default {
   data() {
@@ -160,7 +151,6 @@ export default {
     Camera,
     Loading,
     HangManGame,
-    Progress,
   },
   props: {
     topic: Object,
@@ -318,8 +308,9 @@ export default {
   box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.733);
   font-family: "SDSamliphopangche_Basic";
   font-size: 2rem;
-  /* display: row;
-    justify-content: space-around; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 .hangman-row .right-status-column .game-status .game-status-li {
@@ -387,7 +378,7 @@ export default {
 
 .hangman-row .right-status-column .letter {
   width: 100%;
-  height: 7%;
+  height: 9%;
   background-color: #f4f1eb;
   margin-bottom: 1.5vh;
   border-radius: 20px;

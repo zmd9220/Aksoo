@@ -458,8 +458,9 @@ export default {
   box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.733);
   font-family: "SDSamliphopangche_Basic";
   font-size: 2rem;
-  /* display: row;
-    justify-content: space-around; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 .right-status-column .game-status .game-status-li {
@@ -527,7 +528,7 @@ export default {
 
 .right-status-column .letter {
   width: 100%;
-  height: 7%;
+  height: 9.5%;
   background-color: #f4f1eb;
   margin-bottom: 1.5vh;
   border-radius: 20px;
