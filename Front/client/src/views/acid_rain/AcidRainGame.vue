@@ -120,7 +120,7 @@ export default {
     // this.endGame();
     // this.life = this.diff.value;
 
-    setTimeout(this.startGame, 1000);
+    setTimeout(this.startGame, 5000);
     // this.startGame();
     this.placeLetter();
     this.moveLetters();

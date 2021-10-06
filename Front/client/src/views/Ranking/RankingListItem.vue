@@ -32,6 +32,8 @@
         </div>
         <div class="line"></div>
     </div>
+    <div class="line"></div>
+  </div>
 </template>
 
 <script>
@@ -87,34 +89,34 @@ export default {
         console.log(err)
       }) 
   },
-}
+};
 </script>
 <style scoped>
 .ranking-list-item-wrapper {
-    width: 100%;
-    height: 17%;
+  width: 100%;
+  height: 17%;
 }
-.ranking-list-item-wrapper .ranking-list-item{
-    width: 100%;
-    height: 70%;
-    display: flex;
-    justify-content: space-between;
+.ranking-list-item-wrapper .ranking-list-item {
+  width: 100%;
+  height: 70%;
+  display: flex;
+  justify-content: space-between;
 }
-.ranking-list-item-wrapper .ranking-list-item .rank{
-    font-size: 3vh;
-    color: #957457;
-    text-align: center;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    font-weight: bold;
+.ranking-list-item-wrapper .ranking-list-item .rank {
+  font-size: 3vh;
+  color: #957457;
+  text-align: center;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
 }
-.ranking-list-item-wrapper .ranking-list-item .profile-pic{
-    background-color: #FEF8E2;
-    height: 7vh;
-    width: 7vh;
-    border-radius: 100%;
-    /* border: 2px solid #EAD9C4; */
+.ranking-list-item-wrapper .ranking-list-item .profile-pic {
+  background-color: #fef8e2;
+  height: 7vh;
+  width: 7vh;
+  border-radius: 100%;
+  /* border: 2px solid #EAD9C4; */
 }
 .ranking-list-item-wrapper .ranking-list-item .add-button{
     text-align: center;
@@ -134,6 +136,6 @@ export default {
   height: 1.5px;
   margin-top: 2vh;
   margin-bottom: 2vh;
-  background-color: #EAD9C4;
+  background-color: #ead9c4;
 }
 </style>

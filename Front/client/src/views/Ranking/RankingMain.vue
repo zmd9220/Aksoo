@@ -1,18 +1,21 @@
 <template>
-    <div class="ranking-page-wrapper">
-        <!-- <audio
-            autoplay
+  <div class="ranking-page-wrapper">
+    <!-- <audio autoplay id="gameStart" src="@/assets/music/ranking.mp3"></audio>x -->
+      <audio
+      autoplay
             loop
             id="gameBgm"
             src="@/assets/music/bgm/happy-clappy-ukulele.mp3"
-        ></audio> -->
-        <img src="@/assets/Ranking/land2.png" alt="land" class="land-img">
-        <img src="@/assets/Ranking/cloud.png" alt="cloud" class="cloud-img">
-        <img src="@/assets/Ranking/cloud.png" alt="cloud" class="cloud-img-2">
+        ></audio>
 
     <div v-if="test1 == 0">
       {{ test1 }}
     </div>
+
+    <img src="@/assets/Ranking/land2.png" alt="land" class="land-img" />
+    <img src="@/assets/Ranking/cloud.png" alt="cloud" class="cloud-img" />
+    <img src="@/assets/Ranking/cloud.png" alt="cloud" class="cloud-img-2" />
+
     <img
       src="@/assets/Ranking/acidrain.png"
       v-if="what_game != 1"
@@ -56,16 +59,11 @@
     />
 
     <!-- <img src="@/assets/Ranking/podium1.png" alt="podium" class="podium-img"> -->
-    <img src="@/assets/Ranking/podium.png" alt="podium" class="podium-img" />
-    <div
-      class="first-score"
-      v-bind:style="[
-        Rank[0].profile % 7 == 1 ? { top: '49%' } : { top: '45%' },
-      ]"
-    >
-      <div style="display: table-cell; vertical-align: bottom">
-        <!-- <div style="height:5vh;"> -->
-        <!-- <div style="display: flex; height:100%; align-items: center; font-weight: bold; color: gray;">
+    <img src="@/assets/Ranking/podium.png" alt="podium" class="podium-img">
+        <div class="first-score" v-bind:style="[Rank[0].profile%7 == 1? {'top':'49%'}: {'top':'45%'}]">
+            <div style="display:table-cell; vertical-align:bottom">
+                <!-- <div style="height:5vh;"> -->
+                    <!-- <div style="display: flex; height:100%; align-items: center; font-weight: bold; color: gray;">
                         <img v-if="Rank[0].tier ==5" src="@/assets/Ranking/brz.png" alt="tier_picture" style="height:40%; margin-right:1vw;">
                         <img v-if="Rank[0].tier ==4" src="@/assets/Ranking/slv.png" alt="tier_picture" style="height:40%; margin-right:1vw;">
                         <img v-if="Rank[0].tier ==3" src="@/assets/Ranking/gld.png" alt="tier_picture" style="height:40%; margin-right:1vw;">
@@ -73,57 +71,23 @@
                         <img v-if="Rank[0].tier ==1" src="@/assets/Ranking/dmd.png" alt="tier_picture" style="height:40%; margin-right:1vw;">
                         {{Rank[0].tier}}
                     </div> -->
-        {{ Rank[0].nickname }}
-        <!-- </div> -->
-        <img
-          :src="
-            '@/assets/Ranking/Animal/' +
-            profile_name[Rank[0].profile % 7] +
-            '.png'
-          "
-          alt="first"
-          style="max-width: 100%; max-height: 100%"
-        />
-      </div>
-    </div>
-    <div
-      class="second-score"
-      v-bind:style="[
-        Rank[1].profile % 7 == 1 ? { top: '61%' } : { top: '57%' },
-      ]"
-    >
-      <div style="display: table-cell; vertical-align: bottom">
-        <div>{{ Rank[1].nickname }}</div>
-        <img
-          :src="
-            '@/assets/Ranking/Animal/' +
-            profile_name[Rank[1].profile % 7] +
-            '.png'
-          "
-          alt="second"
-          style="max-width: 100%; max-height: 100%"
-        />
-      </div>
-    </div>
-    <div
-      class="third-score"
-      v-bind:style="[
-        Rank[2].profile % 7 == 1 ? { top: '64%' } : { top: '60%' },
-      ]"
-    >
-      <div style="display: table-cell; vertical-align: bottom">
-        <div>{{ Rank[2].nickname }}</div>
-        <img
-          :src="
-            '@/assets/Ranking/Animal/' +
-            profile_name[Rank[2].profile % 7] +
-            '.png'
-          "
-          alt="third"
-          style="max-width: 100%; max-height: 100%"
-        />
-      </div>
-    </div>
+                    {{Rank[0].nickname}}
+                <!-- </div> -->
+                <img :src='"@/assets/Ranking/Animal/" + profile_name[Rank[0].profile%7] +".png"' alt="first" style="max-width:100%; max-height:100%;">
+            </div>
+        </div>
+        <div class="second-score" v-bind:style="[Rank[1].profile%7 == 1? {'top':'61%'}: {'top':'57%'}]">
+            <div style="display:table-cell; vertical-align:bottom">
+                <div>{{Rank[1].nickname}}</div>
+                <img :src='"@/assets/Ranking/Animal/" + profile_name[Rank[1].profile%7] +".png"' alt="second" style="max-width:100%; max-height:100%">
+            </div>
+        </div>
+        <div class="third-score" v-bind:style="[Rank[2].profile%7 == 1? {'top':'64%'}: {'top':'60%'}]">
+            <div style="display:table-cell; vertical-align:bottom">
+                <div>{{Rank[2].nickname}}</div>
+                <img :src='"@/assets/Ranking/Animal/" + profile_name[Rank[2].profile%7] +".png"' alt="third" style="max-width:100%; max-height:100%">
+            </div>
+        </div>
     <div v-if="what_start === 0">
       <ranking-list class="ranking-list" :Rank="Rank" />
       <img src="@/assets/Learn/LearnStart/shape-2.svg" class="Shape-2" />
@@ -448,12 +412,10 @@ export default {
     // this.getRank();
   },
   mounted() {
-    // this.getRank();
     window.scrollTo(0, 0);
-    var gameBgm = document.getElementById("gameBgm");
-    gameBgm.volume = 0.3;
-    gameBgm.play();
+
   },
+
   destroyed() {
     this.$confetti.stop();
   },
