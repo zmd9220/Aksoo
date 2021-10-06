@@ -216,7 +216,7 @@ export default {
         if (this.selected.includes(letter)) {
           this.correct.push(letter);
           this.updateCorrect(letter);
-          this.score += 10;
+          // this.score += 10;
         this.$emit("scoreChange", 10);
           answer.play();
         } else {
