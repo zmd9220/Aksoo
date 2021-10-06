@@ -216,6 +216,8 @@ export default {
         if (this.selected.includes(letter)) {
           this.correct.push(letter);
           this.updateCorrect(letter);
+          this.score += 10;
+        this.$emit("scoreChange", 10);
           answer.play();
         } else {
           if (!this.wrongs.includes(letter)) {
@@ -421,8 +423,8 @@ export default {
       // console.log(this.countCorrect);
 
       if (this.countCorrect === this.selected.length) {
-        this.score += 10;
-        this.$emit("scoreChange", 10);
+        this.score += 100;
+        this.$emit("scoreChange", 100);
 
         // alert("정답입니다 :) ");
         // setTimeout(function(){ alert("Hello").close }, 3000);
@@ -453,7 +455,7 @@ export default {
       // resetButton.classList.add("disabled");
       this.$emit("answers", false);
 
-      this.countError = 0;
+      // this.countError = 0;
       this.correct = [];
       this.wrongs = [];
       this.online = true;

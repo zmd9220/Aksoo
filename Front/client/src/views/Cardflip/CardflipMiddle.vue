@@ -192,7 +192,7 @@ export default {
       flippedCards: [],
       totalMatches: 0,
       totalTime: {
-        seconds: 99,
+        seconds: 60,
       },
       timer: null,
       gameIsOver: false,
@@ -213,7 +213,7 @@ export default {
     resetGame() {
       // 다시 시작하기
       this.totalTime = {
-        seconds: 99,
+        seconds: 60,
       };
       this.totalMatches = 0;
       this.score = 0;
@@ -280,9 +280,9 @@ export default {
           answer.play();
           // 점수 산성
           if (this.gameIsOver === true) {
-            this.score += this.seconds * 100;
+            this.score += this.seconds * 10;
           } else {
-            this.score = this.totalMatches * 100;
+            this.score = this.totalMatches * 10;
           }
         }, 400);
       } else {

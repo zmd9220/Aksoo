@@ -1,10 +1,11 @@
 <template>
   <div>
     <audio
-      autoplay
+    autoplay
       loop
       id="gameBgm"
-    ><source src="@/assets/music/bgm/fm-freemusic-inspiring-optimistic-upbeat-energetic-guitar-rhythm.mp3"></audio>
+      src="@/assets/music/bgm/fm-freemusic-inspiring-optimistic-upbeat-energetic-guitar-rhythm.mp3"
+    ></audio>
     <div class="background-img">
       <img src="@/assets/cloud.png" class="cloud" />
       <img src="@/assets/Learn/LearnStart/shape-2.svg" class="Shape-2" />
@@ -256,7 +257,7 @@ export default {
   },
  mounted() {
     var gameBgm = document.getElementById("gameBgm");
-    gameBgm.volume = 0.3;
+    gameBgm.volume = 0.5;
     gameBgm.play();
   },
 };
