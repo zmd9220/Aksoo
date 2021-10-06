@@ -1,8 +1,4 @@
 <template>
-<<<<<<< HEAD
-  <div class="ranking-page-wrapper">
-    <!-- <audio autoplay id="gameStart" src="@/assets/music/ranking.mp3"></audio>x -->
-=======
     <div class="ranking-page-wrapper">
         <audio
             autoplay
@@ -13,16 +9,10 @@
         <img src="@/assets/Ranking/land2.png" alt="land" class="land-img">
         <img src="@/assets/Ranking/cloud.png" alt="cloud" class="cloud-img">
         <img src="@/assets/Ranking/cloud.png" alt="cloud" class="cloud-img-2">
->>>>>>> feature/FE/projectCss
 
     <div v-if="test1 == 0">
       {{ test1 }}
     </div>
-
-    <img src="@/assets/Ranking/land2.png" alt="land" class="land-img" />
-    <img src="@/assets/Ranking/cloud.png" alt="cloud" class="cloud-img" />
-    <img src="@/assets/Ranking/cloud.png" alt="cloud" class="cloud-img-2" />
-
     <img
       src="@/assets/Ranking/acidrain.png"
       v-if="what_game != 1"
@@ -428,31 +418,10 @@ export default {
           };
           this.test1 = this.what_game;
         }
-<<<<<<< HEAD
         // console.log(this.Rank[0].profile);
       } catch (err) {
         console.log(err.response);
       }
-=======
-        this.$confetti.start();
-        this.$confetti.update({
-            particles: [
-                {
-                    type: 'rect',
-                    dropRate: 8,
-                    size: 5,
-            },
-        ]});
-        setTimeout(() => {
-            this.$confetti.stop();
-        }, 5000);
-    },
-    mounted () {
-        window.scrollTo(0, 0)
-        var gameBgm = document.getElementById("gameBgm");
-        gameBgm.volume = 0.3;
-        gameBgm.play();
->>>>>>> feature/FE/projectCss
     },
   },
   created: function () {
@@ -481,6 +450,9 @@ export default {
   mounted() {
     // this.getRank();
     window.scrollTo(0, 0);
+    var gameBgm = document.getElementById("gameBgm");
+    gameBgm.volume = 0.3;
+    gameBgm.play();
   },
   destroyed() {
     this.$confetti.stop();

@@ -59,13 +59,8 @@
 export default {
   mounted() {
     var gameBgm = document.getElementById("gameBgm");
-<<<<<<< HEAD
-    gameBgm.volume = 0.3;
-    // gameBgm.play();
-=======
     gameBgm.volume = 0.2;
     gameBgm.play();
->>>>>>> feature/FE/projectCss
   },
 };
 </script>
