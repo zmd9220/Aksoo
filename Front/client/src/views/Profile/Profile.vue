@@ -32,7 +32,7 @@
             <h5>누적 점수</h5>
           </div>
         </div>
-        <div class="edit-button" style="cursor: pointer">EDIT</div>
+        <!-- <div class="edit-button" style="cursor: pointer">EDIT</div> -->
       </div>
     </div>
     <div class="recode-wrapper">
@@ -255,7 +255,7 @@
                   <h5 style="color: gray">
                     누적 점수
                     <span style="color: #957457"
-                      >{{ friend_recode.max_score }}P - 수정해야함</span
+                      >{{ item.total_score }}P</span
                     >
                   </h5>
                 </div>

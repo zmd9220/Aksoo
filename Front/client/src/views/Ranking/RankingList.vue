@@ -1,6 +1,6 @@
 <template>
     <div class="ranking-list-wrapper">
-        <ranking-list-item v-for="item in Rank" :key="item.rank" :item="item"/>        
+        <ranking-list-item v-for="item in Rank" :key="item.rank" :item="item" :Rank="Rank"/>        
     </div>
 </template>
 <script>
