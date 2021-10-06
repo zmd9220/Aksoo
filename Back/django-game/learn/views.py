@@ -25,7 +25,7 @@ def get_words(request, select):
         serializer = AlphabetSerializer(response_word, many=True)
     elif select == 'word':
         response_word = Word.objects.all()[:10]
-        print(response_word)
+        # print(response_word)
         for word in response_word:
             # tmp = split_syllables(word.word)
             # print(tmp)

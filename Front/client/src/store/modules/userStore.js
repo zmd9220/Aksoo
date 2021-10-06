@@ -11,6 +11,7 @@ const userStore = {
       userId: '',
       email: '',
       tier: 0,
+      nickname: '',
     },
     accessToken: '',
     refreshToken: '',
@@ -22,6 +23,7 @@ const userStore = {
       state.accounts.userId = data.id
       state.accounts.email = data.email
       state.accounts.tier = data.tier
+      state.accounts.nickname = data.nickname
       state.accessToken = data.access
       state.refreshToken = data.refresh
       state.isLogin = true
@@ -31,6 +33,7 @@ const userStore = {
       state.accounts.userId = ''
       state.accounts.email = ''
       state.accounts.tier = 0
+      state.accounts.nickname = ''
       state.accessToken = ''
       state.refreshToken = ''
       state.isLogin = false
@@ -52,6 +55,9 @@ const userStore = {
         axios.defaults.headers.common['Authorization'] = `Bearer ${context.state.token}`
         // 사실 vuex에서 로컬에 저장하기 때문에 밑의 setItem은 필요가 없지만 혹시 몰라 놔둠
         localStorage.setItem('jwt', res.data.access)
+      }).catch(err => {
+        console.log(err)
+        alert("아이디나 비밀번호를 확인해주세요.")
       })
     },
     // 유저 로그아웃

@@ -244,7 +244,7 @@ img.Shape-2 {
   height: 12.5%;
 }
 .acidImg {
-  width: 100%;
+  width: 102%;
   height: 100%;
   object-fit: fill;
   border-radius: 20px;

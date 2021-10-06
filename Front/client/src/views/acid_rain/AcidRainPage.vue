@@ -3,7 +3,7 @@
     <audio
       loop
       id="gameBgm"
-      src="@/assets/music/bgm/Dog_and_Pony_Show.mp3"
+      src="@/assets/music/bgm/Jaunty_Gumption.mp3"
     ></audio>
     <audio id="gameOver" src="@/assets/music/gameover/gameover.mp3"></audio>
     <audio id="click" src="@/assets/music/answer/Correct 2.mp3"></audio>

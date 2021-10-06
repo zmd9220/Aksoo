@@ -40,7 +40,11 @@
                 />43
               </div>
             </span>
-            <b-button class="mt-3 modal-restart-btn" block @click="$router.push({ name: 'AcidRainMain'})">
+            <b-button
+              class="mt-3 modal-restart-btn"
+              block
+              @click="$router.push({ name: 'AcidRainMain' })"
+            >
               <span class="restart-btn-txt">다시하기</span></b-button
             >
           </div>
@@ -55,7 +59,11 @@
                 />2500
               </div>
             </span>
-            <b-button class="mt-3 modal-halloffame-btn" block href="/Rangking/RankingMain">
+            <b-button
+              class="mt-3 modal-halloffame-btn"
+              block
+              href="/Rangking/RankingMain"
+            >
               <span class="halloffame-btn-txt">명예의전당</span></b-button
             >
           </div>
@@ -110,7 +118,9 @@ export default {
   created() {
     // this.endGame();
     // this.life = this.diff.value;
-    this.startGame();
+
+    setTimeout(this.startGame, 1000);
+    // this.startGame();
     this.placeLetter();
     this.moveLetters();
   },
@@ -159,7 +169,9 @@ export default {
 
       // newLetter.style.right = Math.random() * 300 + "px";
       // newLetter.style.top = 1000 - (Math.random() * 500) + "px";
-      newLetter.style.left = 100 + Math.random() * 700 + "px";
+      // newLetter.style.left = 100 + Math.random() * 700 + "px";
+
+      newLetter.style.left = 5 + Math.random() * 80 + "%";
       newLetter.style.bottom = 400 + Math.random() * 500 + "px";
 
       box.appendChild(newLetter);
@@ -236,7 +248,7 @@ export default {
 
     aiLetter: function () {
       var boxes = document.getElementsByClassName(this.letter);
-      console.log(this.letter);
+      // console.log(this.letter);
 
       if (boxes[0]) {
         var answer = document.getElementById("answer");
@@ -260,6 +272,7 @@ export default {
       this.life = 5;
 
       placeLetterTimer = setInterval(this.placeLetter, placeLetterInterval);
+      // placeLetterTimer = setInterval(this.placeLetter, placeLetterInterval);
       moveLettersTimer = setInterval(this.moveLetters, 100);
       aiLetterTimer = setInterval(this.aiLetter, 10);
 
