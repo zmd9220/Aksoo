@@ -4,7 +4,7 @@
     autoplay
       loop
       id="gameBgm"
-      src="@/assets/music/bgm/fm-freemusic-inspiring-optimistic-upbeat-energetic-guitar-rhythm.mp3"
+      src="@/assets/music/bgm/modify_optimistic-upbeat-energetic.mp3"
     ></audio>
     <div class="background-img">
       <img src="@/assets/cloud.png" class="cloud" />

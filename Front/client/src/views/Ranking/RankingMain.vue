@@ -5,7 +5,7 @@
       autoplay
             loop
             id="gameBgm"
-            src="@/assets/music/bgm/happy-clappy-ukulele.mp3"
+            src="@/assets/music/bgm/modify_happy_ukulele.mp3"
         ></audio>
 
     <div v-if="test1 == 0">

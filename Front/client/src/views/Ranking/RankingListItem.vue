@@ -73,7 +73,7 @@ export default {
   computed: {
     ...mapState('userStore', ['accounts', 'accessToken'])
   },
-  mounted: function () {
+  updated: function () {
     axios ({
         method: 'get',
         url: SERVER_URL + '/accounts/follow/' + this.item.profile + '/',
