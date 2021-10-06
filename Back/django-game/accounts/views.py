@@ -11,7 +11,7 @@ from dj_rest_auth.jwt_auth import JWTCookieAuthentication
 
 # from .models import User
 from .models import TierCode
-from .serializer import UserSerializer, UserDetailSerializer, SignInSerializer
+from .serializer import UserSerializer, UserDetailSerializer, SignInSerializer, UserRankSerializer
 from games.models import Hangman, AcidRain, CardMatching
 from games.serializer import HangmanSerializer, AcidRainSerializer, CardMatchingSerializer
 from learn.models import Word
@@ -29,12 +29,19 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 
 # django drf-yasg(swagger)
 from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 
 from hangul_utils import split_syllables, join_jamos
 
+test_param = openapi.Parameter('test', openapi.IN_QUERY, description="test manual param", type=openapi.TYPE_BOOLEAN)
+user_response = openapi.Response('response description', UserSerializer)
 
+
+# @swagger_auto_schema(tags=["TO-DO 생성"], request_body=UserSerializer, query_serializer=UserSerializer)
+@swagger_auto_schema(method='post', request_body=UserSerializer, manual_parameters=[test_param], responses={200: user_response})
+# 'methods' can be used to apply the same modification to multiple methods
+# @swagger_auto_schema(method='post', request_body=UserSerializer)
 @api_view(['POST'])
-@swagger_auto_schema(tags=["TO-DO 생성"], request_body=UserSerializer, query_serializer=UserSerializer)
 def signup(request):
     # 비밀번호와 비밀번호 확인을 client 요청 데이터에서 꺼내기
     password = request.data.get('password')
@@ -64,12 +71,12 @@ def signup(request):
     return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
-@api_view(['GET'])
 # JWT 토큰 확인
 @authentication_classes([JWTCookieAuthentication])
 # JWT 토큰 확인 후 인증 확인 되었을 때만 권한 부여
 @permission_classes([IsAuthenticated])
-@swagger_auto_schema(tags=["TO-DO 생성"], request_body=UserDetailSerializer, query_serializer=UserDetailSerializer)
+@swagger_auto_schema(method='get', tags=["TO-DO 생성"], query_serializer=UserDetailSerializer)
+@api_view(['GET'])
 def user_detail(request, user_pk):
     user = get_object_or_404(get_user_model(), pk=user_pk)
     # print(UserSerializer)
@@ -107,7 +114,7 @@ def user_detail(request, user_pk):
     if user.acidrain_set.filter(user=user.pk).exists():
         my_acidrain = get_object_or_404(AcidRain, user=user.pk)
         acid_rain_info = {
-            'rank': AcidRain.objects.filter(score__gt=my_cardmatching.score).count() + 1,
+            'rank': AcidRain.objects.filter(score__gt=my_acidrain.score).count() + 1,
             'score': my_acidrain.score,
         }
     else:
@@ -143,7 +150,7 @@ class signin(APIView):
 
     def post(self, request):
         received_json_data=request.data
-        print(received_json_data)
+        # print(received_json_data)
         serializer = SignInSerializer(data=received_json_data)
         if serializer.is_valid():
             user = authenticate(
@@ -152,6 +159,8 @@ class signin(APIView):
                 password=received_json_data['password'])
             if user is not None:
                 refresh = RefreshToken.for_user(user)
+                # print(AcidRain.objects.get(user_id=user.id))
+                # print(CardMatching.objects.filter(user_id=user.id).first())
                 return JsonResponse({
                     'refresh': str(refresh),
                     'access': str(refresh.access_token),
@@ -159,6 +168,8 @@ class signin(APIView):
                     'email': user.email,
                     'id': user.id,
                     'tier': user.tier.id,
+                    'nickname': user.nickname,
+                    'games': UserRankSerializer(user).data
                 }, status=200)
             else:
                 return JsonResponse({

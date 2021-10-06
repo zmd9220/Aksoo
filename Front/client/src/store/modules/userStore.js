@@ -16,6 +16,18 @@ const userStore = {
     accessToken: '',
     refreshToken: '',
     isLogin: false,
+    hangman: {
+      bestScore: 0,
+      rank: 0,
+    },
+    cardMatching: {
+      bestScore: 0,
+      rank: 0,
+    },
+    acidRain: {
+      bestScore: 0,
+      rank: 0,
+    }
   },
   mutations: {
     // 로그인 시에는 관련 유저 데이터를 vuex에 저장, 로그인 여부 참으로
@@ -23,24 +35,50 @@ const userStore = {
       state.accounts.userId = data.id
       state.accounts.email = data.email
       state.accounts.tier = data.tier
+      state.accounts.nickname = data.nickname
       state.accessToken = data.access
       state.refreshToken = data.refresh
       state.isLogin = true
+
+      state.hangman.bestScore = data.games.hangman.score
+      state.hangman.rank = data.games.hangman.rank
+      state.cardMatching.bestScore = data.games.cardMatching.score
+      state.cardMatching.rank = data.games.cardMatching.rank
+      state.acidRain.bestScore = data.games.acidRain.score
+      state.acidRain.rank = data.games.acidRain.rank
     },
     // 로그아웃 시에는 관련 유저 데이터를 삭제(공란), 로그인 여부 거짓으로
     DELETE_USER: function (state) {
       state.accounts.userId = ''
       state.accounts.email = ''
       state.accounts.tier = 0
+      state.accounts.nickname = ''
       state.accessToken = ''
       state.refreshToken = ''
       state.isLogin = false
+
+      state.hangman.bestScore = 0
+      state.hangman.rank = 0
+      state.cardMatching.bestScore = 0
+      state.cardMatching.rank = 0
+      state.acidRain.bestScore = 0
+      state.acidRain.rank = 0
     }
   },
   actions: {
     // 유저 로그인
     // credetials(유저 아이디, 패스워드를 담은 오브젝트)에 담아서 ADD_USER를 동작시킨다.
     loginUser: function (context, credentials) {
+
+        context.commit('ADD_USER', credentials)
+        // vuex에서 처리를 하려면 context를 통한 접근을 권장함 (데이터가 제대로 담김)
+        // axios.defaults.headers.common['Authorization'] = `JWT ${res.data.token}`
+        // axios.defaults.headers.common['Authorization'] = `JWT ${context.state.token}`
+        axios.defaults.headers.common['Authorization'] = `Bearer ${context.state.token}`
+        // 사실 vuex에서 로컬에 저장하기 때문에 밑의 setItem은 필요가 없지만 혹시 몰라 놔둠
+        // localStorage.setItem('jwt', res.data.access)
+    },
+    loginUser2: function (context, credentials) {
       axios({
         method: 'POST',
         url: SERVER_URL + '/accounts/signin/',
@@ -61,6 +99,7 @@ const userStore = {
     // 유저 로그아웃
     logoutUser: function (context) {
       context.commit('DELETE_USER')
+      delete axios.defaults.headers.common['Autorization']
       localStorage.removeItem('jwt')
     }
   },
