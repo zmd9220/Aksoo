@@ -3,7 +3,7 @@
     <audio
       autoplay
       id="gameStart"
-      src="@/assets/music/bgm/the-cutest-bunny.mp3"
+      src="@/assets/music/bgm/modify-cutest-bunny.mp3"
     ></audio>
     <div class="my-profile">
       <img :src='"@/assets/Profile/prf-" + profile_name[`${this.accounts.userId}`%7] +".png"' alt="profile_picture" class="profile-pic" />
