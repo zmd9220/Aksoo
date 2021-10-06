@@ -17,7 +17,7 @@
       </div>
       <div class="hangman-main-box">
         <div class="hangman-thumbnail-box">
-          <img src="@/assets/acid-rain-cover.png" class="acidImg" />
+          <img src="@/assets/acidrain-cover.png" class="acidImg" />
         </div>
         <div class="hangman-select-box">
           <div class="hangman-select-box-title">테마를 선택하세요</div>

@@ -3,7 +3,7 @@
     <audio
       loop
       id="gameBgm"
-      src="@/assets/music/bgm/Beat_Your_Competition.mp3"
+      src="@/assets/music/bgm/alexander-nakarada-silly-intro.mp3"
     ></audio>
     <audio loop id="tictoc" src="@/assets/music/game/tictoc.wav"></audio>
     <audio

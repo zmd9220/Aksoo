@@ -1,5 +1,10 @@
 <template>
   <div>
+    <audio
+      loop
+      id="gameBgm"
+      src="@/assets/music/bgm/Wavecont-Upbeat-Inspiring-Corporate-Full-Length.mp3"
+    ></audio>
     <img src="@/assets/gosm-login.png" class="gosm-login">
     <img src="@/assets/shark-login.png" class="shark-login">
     <img src="@/assets/deco-login.png" class="decoImg-login" />
@@ -125,6 +130,11 @@ export default {
         password: null,
       },
     };
+  },
+  mounted() {
+    var gameBgm = document.getElementById("gameBgm");
+    gameBgm.volume = 0.3;
+    gameBgm.play();
   },
   methods: {
     // 로그인

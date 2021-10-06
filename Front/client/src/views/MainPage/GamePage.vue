@@ -20,7 +20,7 @@
             <div data-v-3adcea5a="" class="mgi_thum">
               <img
                 data-v-3adcea5a=""
-                src="@/assets/acid-rain-cover.png"
+                src="@/assets/acidrain-cover.png"
                 alt="산성비 소개"
               />
             </div>
@@ -45,7 +45,7 @@
             <div data-v-3adcea5a="" class="mgi_thum">
               <img
                 data-v-3adcea5a=""
-                src="@/assets/acid-rain-cover.png"
+                src="@/assets/hangman-cover.png"
                 alt="행맨 소개"
               />
             </div>
@@ -70,7 +70,7 @@
             <div data-v-3adcea5a="" class="mgi_thum">
               <img
                 data-v-3adcea5a=""
-                src="@/assets/acid-rain-cover.png"
+                src="@/assets/cardflip-cover.png"
                 alt="카드 뒤집기 소개"
               />
             </div>
@@ -164,12 +164,12 @@ export default {
 .mm_box[data-v-3adcea5a] {
   border-radius: 15px;
   border: 5px solid #fff;
-   max-width: 365px;
+   max-width: 500px;
   margin: 0 20px;
   background: #fff;
   -webkit-box-shadow: 0 5px 5px rgb(68 68 68 / 40%);
   box-shadow: 0 5px 5px rgb(68 68 68 / 40%);
-  height: 50vh;
+  height: 53vh;
 
   overflow: hidden;
  
@@ -220,9 +220,9 @@ export default {
 }
 
 .btn-position {
-  position: absolute;
-  bottom: 26%;
-  width: 16%;
+  /* position: absolute; */
+  /* bottom: 26%; */
+  width: 100%;
 }
 
 .start-game-btn {
