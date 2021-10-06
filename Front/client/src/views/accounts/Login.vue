@@ -113,6 +113,7 @@
 
 <script>
 // import axios from "axios";
+import {mapState} from 'vuex'
 
 // const SERVER_URL = process.env.VUE_APP_SERVER_URL
 
@@ -152,6 +153,9 @@ export default {
         //   alert("아이디나 비밀번호를 확인해주세요.")
         // })
     },
+  },
+  computed: {
+    ...mapState('userStore', ['accounts'])
   },
 };
 </script>

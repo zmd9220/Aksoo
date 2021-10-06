@@ -6,25 +6,25 @@
       src="@/assets/music/pageMove/Jump High.mp3"
     ></audio>
     <div class="my-profile">
-      <img :src='"@/assets/Profile/prf-" + profile_name[profile%7] +".png"' alt="profile_picture" class="profile-pic" />
+      <img :src='"@/assets/Profile/prf-" + profile_name[`${this.accounts.userId}`%7] +".png"' alt="profile_picture" class="profile-pic" />
       <div class="">
         <div style="height: 2vh"></div>
-        <h3>{{ nickname }}</h3>
+        <h3>{{ this.accounts.nickname }}</h3>
         <div class="tier-wrapper">
-          <img v-if="tier == 5" src="@/assets/Ranking/brz.png" alt="tier-picture" class="tier-pic" style="width: 1.5rem; margin-right: 0.5rem"/>
-          <img v-if="tier == 4" src="@/assets/Ranking/slv.png" alt="tier-picture" class="tier-pic" style="width: 1.5rem; margin-right: 0.5rem"/>
-          <img v-if="tier == 3" src="@/assets/Ranking/gld.png" alt="tier-picture" class="tier-pic" style="width: 1.5rem; margin-right: 0.5rem"/>
-          <img v-if="tier == 2" src="@/assets/Ranking/pltn.png" alt="tier-picture" class="tier-pic" style="width: 1.5rem; margin-right: 0.5rem"/>
-          <img v-if="tier == 1" src="@/assets/Ranking/dmd.png" alt="tier-picture" class="tier-pic" style="width: 1.5rem; margin-right: 0.5rem"/>
-          {{tier_num_to_str[tier]}}
+          <img v-if="this.accounts.tier == 5" src="@/assets/Ranking/brz.png" alt="tier-picture" class="tier-pic" style="width: 1.5rem; margin-right: 0.5rem"/>
+          <img v-if="this.accounts.tier == 4" src="@/assets/Ranking/slv.png" alt="tier-picture" class="tier-pic" style="width: 1.5rem; margin-right: 0.5rem"/>
+          <img v-if="this.accounts.tier == 3" src="@/assets/Ranking/gld.png" alt="tier-picture" class="tier-pic" style="width: 1.5rem; margin-right: 0.5rem"/>
+          <img v-if="this.accounts.tier == 2" src="@/assets/Ranking/pltn.png" alt="tier-picture" class="tier-pic" style="width: 1.5rem; margin-right: 0.5rem"/>
+          <img v-if="this.accounts.tier == 1" src="@/assets/Ranking/dmd.png" alt="tier-picture" class="tier-pic" style="width: 1.5rem; margin-right: 0.5rem"/>
+          {{tier_num_to_str[this.accounts.tier]}}
         </div>
         <div class="user-box-wrapper">
           <div style="margin-right: 5vw">
-            {{ friend_num }}
+            {{ userData.userDetail.followData.followingCnt }}
             <h5>친구</h5>
           </div>
           <div style="margin-right: 5vw">
-            {{ max_rank }}
+            {{ max_rank }} 
             <h5>최고 랭킹</h5>
           </div>
           <div>
@@ -32,7 +32,7 @@
             <h5>누적 점수</h5>
           </div>
         </div>
-        <div class="edit-button">EDIT</div>
+        <div class="edit-button" style="cursor: pointer">EDIT</div>
       </div>
     </div>
     <div class="recode-wrapper">
@@ -58,11 +58,11 @@
               <div class="user-recode-wrapper">
                 <h5>
                   현재 랭킹
-                  <span style="color: #957457">{{ acid_rain.rank }}위</span>
+                  <span style="color: #957457">{{ userData.acidRain.rank }}위</span>
                 </h5>
                 <h5>
                   최고 점수
-                  <span style="color: #957457">{{ acid_rain.max_score }}P</span>
+                  <span style="color: #957457">{{ userData.acidRain.score }}P</span>
                 </h5>
               </div>
             </div>
@@ -74,13 +74,14 @@
               "
             >
               <div style="height: 1.8vh"></div>
-              <div class="play-button">PLAY</div>
+              <div class="play-button" @click="gotoAcidrain" style="cursor: pointer">PLAY</div>
               <div
                 style="
                   text-align: end;
                   color: #957457;
                   font-weight: 500;
                   font-size: 1.8vh;
+                  cursor: pointer
                 "
                 @click="
                   $router.push({ name: 'RankingMain', params: { whatgame: 0 } })
@@ -114,11 +115,11 @@
               <div class="user-recode-wrapper">
                 <h5>
                   현재 랭킹
-                  <span style="color: #957457">{{ flip_card.rank }}위</span>
+                  <span style="color: #957457">{{ userData.cardMatching.rank }}위</span>
                 </h5>
                 <h5>
                   최고 점수
-                  <span style="color: #957457">{{ flip_card.max_score }}P</span>
+                  <span style="color: #957457">{{ userData.cardMatching.score }}P</span>
                 </h5>
               </div>
             </div>
@@ -130,13 +131,14 @@
               "
             >
               <div style="height: 1.8vh"></div>
-              <div class="play-button">PLAY</div>
+              <div class="play-button" @click="gotoCardfilp" style="cursor: pointer">PLAY</div>
               <div
                 style="
                   text-align: end;
                   color: #957457;
                   font-weight: 500;
                   font-size: 1.8vh;
+                  cursor: pointer
                 "
                 @click="
                   $router.push({ name: 'RankingMain', params: { whatgame: 1 } })
@@ -170,12 +172,12 @@
               <div class="user-recode-wrapper">
                 <h5>
                   현재 랭킹
-                  <span style="color: #957457">{{ word_guess.rank }}위</span>
+                  <span style="color: #957457">{{ userData.hangman.rank }}위</span>
                 </h5>
                 <h5>
                   최고 점수
                   <span style="color: #957457"
-                    >{{ word_guess.max_score }}P</span
+                    >{{ userData.hangman.score }}P</span
                   >
                 </h5>
               </div>
@@ -188,13 +190,14 @@
               "
             >
               <div style="height: 1.8vh"></div>
-              <div class="play-button">PLAY</div>
+              <div class="play-button" @click="gotoHangman" style="cursor: pointer">PLAY</div>
               <div
                 style="
                   text-align: end;
                   color: #957457;
                   font-weight: 500;
                   font-size: 1.8vh;
+                  cursor: pointer
                 "
                 @click="
                   $router.push({ name: 'RankingMain', params: { whatgame: 2 } })
@@ -212,13 +215,13 @@
         <div style="display: flex">
           <h2 style="margin-top: 1.3vh">친구 목록</h2>
           <div style="font-size: 5vh; margin-left: 2vw; color: #957457">
-            {{ friend_num }}
+            {{ userData.userDetail.followData.followingCnt }}
           </div>
         </div>
-        <div class="friend-profile-list">
-          <div class="friend-profile" v-for="item in friend_num" :key="item">
+        <div class="friend-profile-list"> 
+          <div class="friend-profile" v-for="item in userData.userDetail.followData.followingData" :key="item">
             <img
-              :src='"@/assets/Profile/prf-" + profile_name[friend_recode.profile%7] +".png"'
+              :src='"@/assets/Profile/prf-" + profile_name[item.id%7] +".png"'
               alt="profile_picture"
               class="profile-pic"
             />
@@ -240,19 +243,19 @@
                     style="margin-right: 0.5rem"
                   /> -->
                   <div style="display: flex; align-items:center">
-                    <img v-if="friend_recode.tier == 5" src="@/assets/Ranking/brz.png" alt="tier-picture" class="tier-pic" style="width: 2vw; height:70%; margin-right: 0.5rem"/>
-                    <img v-if="friend_recode.tier == 4" src="@/assets/Ranking/slv.png" alt="tier-picture" class="tier-pic" style="width: 2vw; height:70%; margin-right: 0.5rem"/>
-                    <img v-if="friend_recode.tier == 3" src="@/assets/Ranking/gld.png" alt="tier-picture" class="tier-pic" style="width: 2vw; height:70%; margin-right: 0.5rem"/>
-                    <img v-if="friend_recode.tier == 2" src="@/assets/Ranking/pltn.png" alt="tier-picture" class="tier-pic" style="width: 2vw; height:70%; margin-right: 0.5rem"/>
-                    <img v-if="friend_recode.tier == 1" src="@/assets/Ranking/dmd.png" alt="tier-picture" class="tier-pic" style="width: 2vw; height:70%; margin-right: 0.5rem"/>
+                    <img v-if="item.tier == 5" src="@/assets/Ranking/brz.png" alt="tier-picture" class="tier-pic" style="width: 2vw; height:70%; margin-right: 0.5rem"/>
+                    <img v-if="item.tier == 4" src="@/assets/Ranking/slv.png" alt="tier-picture" class="tier-pic" style="width: 2vw; height:70%; margin-right: 0.5rem"/>
+                    <img v-if="item.tier == 3" src="@/assets/Ranking/gld.png" alt="tier-picture" class="tier-pic" style="width: 2vw; height:70%; margin-right: 0.5rem"/>
+                    <img v-if="item.tier == 2" src="@/assets/Ranking/pltn.png" alt="tier-picture" class="tier-pic" style="width: 2vw; height:70%; margin-right: 0.5rem"/>
+                    <img v-if="item.tier == 1" src="@/assets/Ranking/dmd.png" alt="tier-picture" class="tier-pic" style="width: 2vw; height:70%; margin-right: 0.5rem"/>
                   </div>
-                  <h4>{{ friend_recode.username }}</h4>
+                  <h4>{{ item.nickname }}</h4>
                 </div>
                 <div class="user-recode-wrapper">
                   <h5 style="color: gray">
-                    최고 점수
+                    누적 점수
                     <span style="color: #957457"
-                      >{{ friend_recode.max_score }}P</span
+                      >{{ friend_recode.max_score }}P - 수정해야함</span
                     >
                   </h5>
                 </div>
@@ -264,7 +267,7 @@
                   justify-content: center;
                 "
               >
-                <div class="delete-button"><span>삭제</span></div>
+                <div class="delete-button" @click="deletefollow(item.id)" style="cursor: pointer"><span>삭제</span></div>
               </div>
             </div>
           </div>
@@ -273,11 +276,17 @@
     </div>
   </div>
 </template>
+
 <script>
+import {mapState} from 'vuex'
+import axios from "axios";
+const SERVER_URL = process.env.VUE_APP_SERVER_URL
+
 export default {
   name: "Profile",
   data() {
     return {
+      userData: null,
       tier_num_to_str: [0, 'Diamond', 'Platinum', 'Gold', 'Silver', 'Bronze'],
       profile_name: ['bird', 'cml', 'croc', 'ele', 'gsm', 'hippo', 'shark'],
       profile: 3,
@@ -306,8 +315,72 @@ export default {
       },
     };
   },
+  methods: {
+    gotoAcidrain() {
+      this.$router.push({ name: "AcidRainMain" });
+    },
+    gotoCardfilp() {
+      this.$router.push({ name: "CardflipMain" });
+    },
+    gotoHangman() {
+      this.$router.push({ name: "HangManMain" });
+    },
+    MaxRankPoint() {
+      var ranks = [this.acid_rain.rank, this.flip_card.rank, this.word_guess.rank]
+      var null_rank_count = ranks.filter(x => x==0).length
+      var filtered = ranks.filter(x => x!=0)
+
+      if (null_rank_count > 1) {
+        this.max_rank = this.acid_rain.rank + this.flip_card.rank + this.word_guess.rank
+      } else {
+        this.max_rank = Math.min.apply(Math, filtered)
+      }
+      // this.max_rank = Math.min.apply(Math, [this.acid_rain.rank, this.flip_card.rank, this.word_guess.rank]);
+
+      this.sum_score = this.acid_rain.max_score + this.flip_card.max_score + this.word_guess.max_score
+    },
+    deletefollow(id) {
+      axios ({
+        method: 'post',
+        url: SERVER_URL + '/accounts/follow/' + id + '/',
+        headers: {
+          "Authorization": `Bearer ${this.accessToken}`
+        },
+      }).then((res) => {
+        console.log(res)
+        window.location.reload()
+      }).catch(err => {
+        console.log(err)
+      })
+    }
+  },
+  computed: {
+    ...mapState('userStore', ['accounts', 'accessToken'])
+  },
+  mounted: function () {
+    axios ({
+        method: 'get',
+        url: SERVER_URL + '/accounts/' + this.accounts.userId,
+        headers: {
+          "Authorization": `Bearer ${this.accessToken}`
+        },
+      }).then((res) => {
+        console.log(res)
+        this.userData = res.data.userData
+        this.acid_rain.rank = this.userData.acidRain.rank
+        this.acid_rain.max_score = this.userData.acidRain.score
+        this.flip_card.rank = this.userData.cardMatching.rank
+        this.flip_card.max_score = this.userData.cardMatching.score
+        this.word_guess.rank = this.userData.hangman.rank
+        this.word_guess.max_score = this.userData.hangman.score
+        this.MaxRankPoint()
+      }).catch(err => {
+        console.log(err)
+      })
+  },
 };
 </script>
+
 <style scoped>
 * {
   text-align: start;

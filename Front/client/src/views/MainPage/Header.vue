@@ -27,25 +27,26 @@
         <!-- Navbar dropdowns -->
         <div class="login">
           <span v-if="isLogin">
-            <!-- <b-button class="logout-btn" @click.native="logout" href="">로그아웃</b-button> -->
-            <b-avatar
+            <img
               v-b-toggle.collapse-1
-              src="https://placekitten.com/300/300"
+              :src='"@/assets/Profile/prf-" + profile_name[accounts.userId%7] +".png"'
+              alt="profile_picture"
               class="avatar-user"
-            ></b-avatar>
+            />
             <b-collapse id="collapse-1" class="user-collapse">
               <b-card class="card-text">
-                <p><span class="nickname">하태린</span> 님</p>
+                <p><span class="nickname">{{accounts.nickname}}</span> 님</p>
                 <b-button
                   class="user-btn"
                   href=""
                   style="color: #f5785d"
-                  @click="$router.push({ name: 'Profile' })"
+                  @click="$router.push({ name: 'Profile' });"
                   >마이페이지</b-button
                 >
                 <b-button class="user-btn" @click.native="logout" href="#"
                   >로그아웃</b-button
                 >
+                {{this.profile_img}}
               </b-card>
             </b-collapse>
           </span>
@@ -61,11 +62,18 @@
 
 <script>
 // import isLogin from "./views/App.vue"
+import {mapState} from 'vuex'
+
 
 export default {
   name: "Header",
   props: {
     isLogin: Boolean,
+  },
+  data() {
+    return {
+      profile_name: ['bird', 'cml', 'croc', 'ele', 'gsm', 'hippo', 'shark'],
+    }
   },
   methods: {
     logout: function () {
@@ -77,6 +85,9 @@ export default {
   },
   updated: function () {
     console.log(this.$parent.isLogin);
+  },
+  computed: {
+    ...mapState('userStore', ['accounts'])
   },
 };
 </script>
@@ -237,6 +248,7 @@ export default {
   top: 1.688rem;
   height: 50px;
   width: 50px;
+  border-radius: 50%;
 }
 
 .user-collapse {
