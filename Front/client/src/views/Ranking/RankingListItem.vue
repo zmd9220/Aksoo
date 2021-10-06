@@ -24,52 +24,99 @@
                 {{item.max_score}}P
             </div>
             <div style="display: flex; height:100%; align-items: center;">
-                <div class="add-button" ><span>친구신청</span></div>
+                <div class="add-button" @click="follow(item.profile)" style="cursor: pointer">
+                    <span v-if="this.isFollow">친구삭제</span>
+                    <span v-else>친구신청</span>
+                </div>
             </div>
         </div>
         <div class="line"></div>
     </div>
+    <div class="line"></div>
+  </div>
 </template>
+
 <script>
+import axios from "axios";
+import {mapState} from 'vuex'
+
+const SERVER_URL = process.env.VUE_APP_SERVER_URL
+
 export default {
   name: "RankingListItem",
   data () {
     return{
         tier_num_to_str:[0, 'Diamond', 'Platinum', 'Gold', 'Silver', 'Bronze'],
         profile_name: ['bird', 'cml', 'croc', 'ele', 'gsm', 'hippo', 'shark'],
+        isFollow: false,
     }
   },
   props: {
     item: Object,
+    Rank: Array,
   },
-}
+  methods: {
+      follow(id) {
+        axios ({
+        method: 'post',
+        url: SERVER_URL + '/accounts/follow/' + id + '/',
+        headers: {
+          "Authorization": `Bearer ${this.accessToken}`
+        },
+      }).then((res) => {
+        console.log(res)
+        console.log(this.Rank)
+        window.location.reload()
+      }).catch(err => {
+        console.log(err)
+      }) 
+      }
+  },
+  computed: {
+    ...mapState('userStore', ['accounts', 'accessToken'])
+  },
+  mounted: function () {
+    axios ({
+        method: 'get',
+        url: SERVER_URL + '/accounts/follow/' + this.item.profile + '/',
+        headers: {
+          "Authorization": `Bearer ${this.accessToken}`
+        },
+      }).then((res) => {
+        console.log(res.data.isFollow)
+        this.isFollow = res.data.isFollow
+      }).catch(err => {
+        console.log(err)
+      }) 
+  },
+};
 </script>
 <style scoped>
 .ranking-list-item-wrapper {
-    width: 100%;
-    height: 17%;
+  width: 100%;
+  height: 17%;
 }
-.ranking-list-item-wrapper .ranking-list-item{
-    width: 100%;
-    height: 70%;
-    display: flex;
-    justify-content: space-between;
+.ranking-list-item-wrapper .ranking-list-item {
+  width: 100%;
+  height: 70%;
+  display: flex;
+  justify-content: space-between;
 }
-.ranking-list-item-wrapper .ranking-list-item .rank{
-    font-size: 3vh;
-    color: #957457;
-    text-align: center;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    font-weight: bold;
+.ranking-list-item-wrapper .ranking-list-item .rank {
+  font-size: 3vh;
+  color: #957457;
+  text-align: center;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
 }
-.ranking-list-item-wrapper .ranking-list-item .profile-pic{
-    background-color: #FEF8E2;
-    height: 7vh;
-    width: 7vh;
-    border-radius: 100%;
-    /* border: 2px solid #EAD9C4; */
+.ranking-list-item-wrapper .ranking-list-item .profile-pic {
+  background-color: #fef8e2;
+  height: 7vh;
+  width: 7vh;
+  border-radius: 100%;
+  /* border: 2px solid #EAD9C4; */
 }
 .ranking-list-item-wrapper .ranking-list-item .add-button{
     text-align: center;
@@ -77,7 +124,7 @@ export default {
     font-size: 2vh;
     background-color: #E5D2BD;
     height: 4vh;
-    width: 6vw;
+    width: 8vw;
     border-radius: 4vh;
     font-weight: bold;
     display: inline-block;
@@ -89,6 +136,6 @@ export default {
   height: 1.5px;
   margin-top: 2vh;
   margin-bottom: 2vh;
-  background-color: #EAD9C4;
+  background-color: #ead9c4;
 }
 </style>

@@ -169,7 +169,7 @@ export default {
   background: #fff;
   -webkit-box-shadow: 0 5px 5px rgb(68 68 68 / 40%);
   box-shadow: 0 5px 5px rgb(68 68 68 / 40%);
-  height: 53vh;
+  height: 50%;
 
   overflow: hidden;
  

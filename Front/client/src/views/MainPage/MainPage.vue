@@ -211,11 +211,24 @@ export default {
   overflow: hidden;
   transition-duration: 10s;
   transition-property: transform;
+
+  animation-name: croc;
+  animation-duration: 10s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  /* animation-direction: alternate; */
+  animation-fill-mode: backwards;
 }
 
-.croc:hover {
-  transform: rotate(360deg);
+@keyframes croc {
+  0% {
+    transform: rotate(0deg);
+  -webkit-transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   -webkit-transform: rotate(360deg);
+  }
 }
 
 .welcomewords {
