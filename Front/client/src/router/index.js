@@ -1,7 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import TodoList from '@/views/todos/TodoList'
-import CreateTodo from '@/views/todos/CreateTodo'
 import Signup from '@/views/accounts/Signup'
 import Login from '@/views/accounts/Login'
 import AcidRainPage from '@/views/acid_rain/AcidRainPage'
@@ -18,12 +16,10 @@ import HangManMain from '@/views/HangMan_vue/HangManMain'
 import HangManGame from '@/views/HangMan_vue/HangManGame'
 import HangManPage from '@/views/HangMan_vue/HangManPage'
 import Learning from '@/views/Learn/Learning'
-// import HangMan_vue from '@/views/HangMan_vue/HangMan_vue'
 import CardflipHard from '@/views/Cardflip/CardflipHard'
 import CardflipMiddle from '@/views/Cardflip/CardflipMiddle'
 import CardflipEasy from '@/views/Cardflip/CardflipEasy'
 import CardflipMain from '@/views/Cardflip/CardflipMain'
-import Halloffame from '@/views/Halloffame/Halloffame'
 import Profile from '@/views/Profile/Profile'
 import RankingMain from '@/views/Ranking/RankingMain'
 
@@ -39,16 +35,6 @@ const routes = [
     path: '/GamePage/',
     name: 'GamePage',
     component: GamePage,
-  },
-  {
-    path: '/todos',
-    name: 'TodoList',
-    component: TodoList,
-  },
-  {
-    path: '/todos/create',
-    name: 'CreateTodo',
-    component: CreateTodo,
   },
   {
     path: '/accounts/signup',
@@ -142,11 +128,6 @@ const routes = [
     path: '/Cardflip/CardflipMain',
     name: 'CardflipMain',
     component: CardflipMain,
-  },
-  {
-    path: '/Halloffame/Halloffame',
-    name: 'Halloffame',
-    component: Halloffame,
   },
   {
     path: '/Profile/Profile',
