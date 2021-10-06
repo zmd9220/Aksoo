@@ -1,6 +1,5 @@
 <template>
   <div id="app" class="cardFlip">
-    <!-- <audio loop id="tictoc" src="@/assets/music/game/tictoc.wav"></audio> -->
     <audio
       loop
       id="gameBgm"
@@ -192,7 +191,7 @@ export default {
       flippedCards: [],
       totalMatches: 0,
       totalTime: {
-        seconds: 11,
+        seconds: 99,
       },
       timer: null,
       gameIsOver: false,

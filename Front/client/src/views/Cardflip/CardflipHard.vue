@@ -5,7 +5,6 @@
       id="gameBgm"
       src="@/assets/music/bgm/alexander-nakarada-silly-intro.mp3"
     ></audio>
-    <audio loop id="tictoc" src="@/assets/music/game/tictoc.wav"></audio>
     <audio
       loop
       id="tictoctictoc"
@@ -224,14 +223,14 @@ export default {
       this.shuffleCards();
     },
     clockTick() {
-      var tictoc = document.getElementById("tictoc");
+      // var tictoc = document.getElementById("tictoc");
       var tictoctictoc = document.getElementById("tictoctictoc");
       var gameOver = document.getElementById("gameOver");
 
       this.totalTime.seconds--;
       if (this.totalTime.seconds < 10) {
         this.clock = true;
-        tictoc.pause();
+        // tictoc.pause();
         tictoctictoc.play();
       }
 
