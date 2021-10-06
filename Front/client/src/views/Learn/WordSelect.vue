@@ -34,7 +34,7 @@
 import Footer from "@/views/MainPage/Footer.vue";
 
 export default {
-  name: "handSelect",
+  name: "LearnWordPage",
   components: {
     Footer,
   },

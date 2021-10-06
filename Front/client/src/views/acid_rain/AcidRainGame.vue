@@ -184,7 +184,7 @@ export default {
 
       for (var i = 0; i < boxes.length; i++) {
         boxes[i].style.bottom = parseInt(boxes[i].style.bottom) - 8 + "px";
-        if (parseInt(boxes[i].style.bottom) <= 50) {
+        if (parseInt(boxes[i].style.bottom) <= 100) {
           wrongAnswer.play();
           boxes[i].remove();
           // this.hart = parseInt(this.hart) - 1;

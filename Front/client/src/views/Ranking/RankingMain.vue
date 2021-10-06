@@ -495,8 +495,8 @@ export default {
   position: absolute;
   top: 75%;
   right: 5%;
-  height: 23%;
-  width: 10%;
+  height: 20%;
+  width: 8%;
 }
 .ranking-page-wrapper .podium-img {
   position: absolute;

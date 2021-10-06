@@ -197,14 +197,17 @@ export default {
 
 .hangman-main .hangman-main-box .hangman-select-box .hangman-start-button {
   width: 100%;
-  height: 20%;
+  height: 7vh;
+  line-height: 7vh;
+  vertical-align: middle;
+  display: inline-block;
+  font-size: 2.5rem;
   background-color: #957457;
   box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.733);
   border-radius: 40px;
   cursor: pointer;
   border: 3px solid #e5d2bd;
   font-family: "SDSamliphopangche_Basic";
-  font-size: 2rem;
   color: #e5d2bd;
 }
 .hangman-start-button:active {
@@ -251,15 +254,17 @@ img.Shape-2 {
 }
 .hangman-start {
   width: 100%;
-  height: 20%;
+  height: 7vh;
+  line-height: 7vh;
+  vertical-align: middle;
+  display: inline-block;
+  font-size: 2.5rem;
   background-color: #e5d2bd;
   box-shadow: 5px 5px 5px rgb(128 128 128 / 73%);
   border-radius: 40px;
-  display: inline-block;
   overflow: hidden;
   border: 3px solid #957457;
   font-family: "SDSamliphopangche_Basic";
-  font-size: 2rem;
   color: #957457;
   cursor: pointer;
 }

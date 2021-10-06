@@ -23,6 +23,7 @@
             v-for="(word, index) in words[0].word"
             :key="word"
             @click="[(no = index % 2), setAlphabet(word)]"
+            v-bind:style="[selectAlphabet==word? {'color':'#F4775C'}:{'color':'rgba(128, 128, 128, 0.733)'}]"
           >
             {{ word }}
           </button>
@@ -40,6 +41,7 @@
             v-for="(word, index) in words"
             :key="word"
             @click="[(no = index), setAlphabet(word.mean)]"
+            v-bind:style="[selectAlphabet==word.mean? {'color':'#F4775C'}:{'color':'rgba(128, 128, 128, 0.733)'}]"
           >
             {{ word.mean }}
           </button>
@@ -108,6 +110,8 @@ export default {
       confidence: "90%",
       modelLoaded: false,
       minimizeCamera: false,
+      consCompletedBox: [0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      vowCompletedBox: [0,0,0,0,0,0,0,0,0,0],
     };
   },
   components: {
@@ -124,8 +128,88 @@ export default {
       this.mode_letter = 1 - this.mode_letter;
       this.$refs.camera.modeChange();
     },
+    consLearn: function (letter) {
+      const consInventory = [
+        {name: 'ㄱ', value: 0},
+        {name: 'ㄴ', value: 1},
+        {name: 'ㄷ', value: 2},
+        {name: 'ㄹ', value: 3},
+        {name: 'ㅁ', value: 4},
+        {name: 'ㅂ', value: 5},
+        {name: 'ㅅ', value: 6},
+        {name: 'ㅇ', value: 7},
+        {name: 'ㅈ', value: 8},
+        {name: 'ㅊ', value: 9},
+        {name: 'ㅋ', value: 10},
+        {name: 'ㅌ', value: 11},
+        {name: 'ㅍ', value: 12},
+        {name: 'ㅎ', value: 13},
+      ];
+      const consResult = consInventory.find( ({ name }) => name === letter ); //  손가락 인식 되었을 때 객체값
+      // console.log(this.selectAlphabet)
+      const Sum = this.consCompletedBox.reduce(function add(sum, currValue) {
+          return sum + currValue;
+        }, 0);
+      if(Sum === 14){
+        alert('축하드립니다!!')
+        setTimeout(() => {
+            this.$router.push({name:'LearnWordPage'});
+        }, 500);
+      }else{
+        for (let index = 0; index < consInventory.length; index++) {
+          const element = consInventory[index].name;
+          if(element === consResult.name && this.selectAlphabet === consResult.name){
+            if(this.consCompletedBox[consResult.value] === 0){
+              this.consCompletedBox[consResult.value]++; 
+            }
+            this.selectAlphabet = consInventory[index+1].name
+            break
+          }
+        }
+      }
+    },
+    vowLearn: function (letter) {
+      const vowInventory = [
+        {name: 'ㅏ', value: 0},
+        {name: 'ㅑ', value: 1},
+        {name: 'ㅓ', value: 2},
+        {name: 'ㅕ', value: 3},
+        {name: 'ㅗ', value: 4},
+        {name: 'ㅛ', value: 5},
+        {name: 'ㅜ', value: 6},
+        {name: 'ㅠ', value: 7},
+        {name: 'ㅡ', value: 8},
+        {name: 'ㅣ', value: 9},
+      ];
+      const vowResult = vowInventory.find( ({ name }) => name === letter ); //  손가락 인식 되었을 때 객체값
+      // console.log(this.selectAlphabet)
+      const Sum = this.consCompletedBox.reduce(function add(sum, currValue) {
+          return sum + currValue;
+        }, 0);
+      if(Sum === 10){
+        alert('축하드립니다!!')
+        setTimeout(() => {
+            this.$router.push({name:'LearnWordPage'});
+        }, 500);
+      }else{
+        for (let index = 0; index < vowInventory.length; index++) {
+          const element = vowInventory[index].name;
+          if(element === vowResult.name && this.selectAlphabet === vowResult.name){
+            if(this.consCompletedBox[vowResult.value] === 0){
+              this.consCompletedBox[vowResult.value]++; 
+            }
+            this.selectAlphabet = vowInventory[index+1].name
+            break
+          }
+        }
+      }
+    },
     input: function (letter) {
-      this.$refs.game.listener(letter);
+      if(this.mode_letter === 1){
+        this.consLearn(letter)
+      }else{
+        this.vowLearn(letter)
+      }
     },
     changePicture() {
       // this.no = (this.no)%(this.imgSrclist.length);
@@ -203,7 +287,7 @@ export default {
   font-family: "BinggraeSamanco-bold";
   font-size: 2.3rem;
   text-align: left;
-  margin-left: 6.5%;
+  margin-left: 15%;
 }
 
 .letter-btn {
@@ -219,10 +303,10 @@ export default {
 
 .hangman-row {
   display: flex;
-  width: 80%;
+  width: 70%;
   height: 50vh;
   margin: 5vh;
-  margin-left: 9%;
+  margin-left: 18%;
 }
 
 .game-container {
@@ -232,6 +316,7 @@ export default {
   margin-right: 5%;
   box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.733);
   border: solid 0.4vh #917052;
+  width: 65%;
 }
 
 .cardimg {
@@ -243,7 +328,7 @@ export default {
 .right-status-column {
   flex: 50%;
   border-radius: 20px;
-  /* margin: 2vh; */
+  margin: 0%;
 }
 
 .game-mode-cons {
@@ -283,7 +368,7 @@ export default {
   top: 25%;
   right: 16%;
   width: 30%;
-  height: 5%;
+  height: 7%;
   background-color: #f4f1eb;
   border-radius: 20px;
   box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.733);
@@ -295,7 +380,7 @@ export default {
 }
 
 .letter .selected-letter {
-  font-size: 1.5rem;
+  font-size: 2rem;
   color: #957457;
   font-family: "SDSamliphopangche_Basic";
   /* margin-left: 20%; */
@@ -305,7 +390,7 @@ export default {
 }
 
 .letter .selected-confidence {
-  font-size: 1.5rem;
+  font-size: 2rem;
   color: #b59e7a;
   font-family: "SDSamliphopangche_Basic";
   /* margin-right: 20%; */
