@@ -101,7 +101,7 @@
     </div>
     <div class="info-panel">
       <div class="name-panel">
-        <div>{{ cardMatching.nickname }} 님</div>
+        <div>{{ accounts.nickname }} 님</div>
       </div>
       <div class="info-color">
         <dir class="cardFont">Difficulty</dir>
