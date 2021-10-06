@@ -47,7 +47,7 @@
                   src="@/assets/trophy.png"
                   alt="trophy"
                   class="rank-img"
-                />43
+                />{{ cardMatching.rank }}
               </div>
             </span>
             <b-button class="mt-3 modal-restart-btn" block @click="$router.push({ name: 'CardflipMain'})">
@@ -62,7 +62,7 @@
                   src="@/assets/best-badge.png"
                   alt="best-badge"
                   class="best-score-img"
-                />2500
+                />{{ cardMatching.bestScore }}
               </div>
             </span>
             <b-button class="mt-3 modal-halloffame-btn" block href="/Rangking/RankingMain">
@@ -109,7 +109,7 @@
         <dir class="cardFont">Score</dir>
         <dir class="score">{{ score }}</dir>
         <dir class="cardFont">Best score</dir>
-        <dir class="score">2500</dir>
+        <dir class="score">{{ cardMatching.bestScore }}</dir>
         <dir class="cardFont">Time</dir>
         <div>
           <div id="check_btn" class="last-time" v-if="this.clock">

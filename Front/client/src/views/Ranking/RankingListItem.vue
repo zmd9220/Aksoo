@@ -32,8 +32,6 @@
         </div>
         <div class="line"></div>
     </div>
-    <div class="line"></div>
-  </div>
 </template>
 
 <script>
