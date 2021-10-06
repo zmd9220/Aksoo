@@ -30,7 +30,7 @@
       />
     </div>
     <div class="right-status-column">
-      <div class="nickname">{{ nickname }} 님</div>
+      <div class="nickname">{{ accounts.nickname }} 님</div>
       <div class="game-status">
         <div class="game-status-li li-start">
           <div>Life</div>
@@ -184,7 +184,7 @@ export default {
     gameBgm.play();
   },
   computed: {
-    ...mapState('userStore', ['acidRain'])
+    ...mapState('userStore', ['accounts', 'acidRain'])
   },
 };
 </script>

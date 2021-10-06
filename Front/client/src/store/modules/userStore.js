@@ -64,16 +64,21 @@ const userStore = {
       state.acidRain.bestScore = 0
       state.acidRain.rank = 0
     },
-    MODIFY_SCORE_RANK(state, data, selectGame) {
+    // mutations과 actions의 payload는 항상 데이터 하나의 객체로만 받음 - 필요하면 뭉쳐서 보내야함
+    MODIFY_SCORE_RANK(state, { payload, selectGame }) {
+    // MODIFY_SCORE_RANK(state, data) {
+      // console.log(data.selectGame)
+      // console.log(payload)
+      // console.log(selectGame)
       if (selectGame === 1) {
-        state.acidRain.rank = data.rank
-        state.acidRain.bestScore = data.score
+        state.acidRain.rank = payload.rank
+        state.acidRain.bestScore = payload.score
       } else if (selectGame === 2) {
-        state.cardMatching.rank = data.rank
-        state.cardMatching.bestScore = data.score
+        state.cardMatching.rank = payload.rank
+        state.cardMatching.bestScore = payload.score
       } else {
-        state.hangman.rank = data.rank
-        state.hangman.bestScore = data.score
+        state.hangman.rank = payload.rank
+        state.hangman.bestScore = payload.score
       }
     } 
   },
@@ -115,7 +120,7 @@ const userStore = {
     },
     setScore: function (context, data) {
       // axios로 점수 갱신
-      console.log(data)
+      // console.log(data)
       // console.log(score)
       axios({
         method: 'post', 
@@ -127,14 +132,19 @@ const userStore = {
           'Authorization': `Bearer ${localStorage.getItem('jwt')}`
         }
       }).then(res => {
-          console.log(res)
-          context.commit('MODIFY_SCORE_RANK', res.data, data.selectGame)
-          // this.rank = res.data.rank
-          // this.bestScore = res.data.score
-          }).catch(err => {
-          console.log(err)
-          console.log(err.response)
-          // alert("아이디나 비밀번호를 확인해주세요.")
+        // console.log(res)
+        // console.log(data.selectGame)
+
+        // *데이터 하나로 뭉쳐서 보내야함, 그래서 필요한 부분을 변수화 해서 보내야 됨*
+        var payload = res.data
+        var selectGame = data.selectGame
+        context.commit('MODIFY_SCORE_RANK', { payload, selectGame })
+        // context.commit('MODIFY_SCORE_RANK', payload)
+        // this.rank = res.data.rank
+        // this.bestScore = res.data.score
+        }).catch(err => {
+        console.log(err)
+        console.log(err.response)
       })
     }
   },
