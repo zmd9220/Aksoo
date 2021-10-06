@@ -4,8 +4,7 @@
       autoplay
       loop
       id="gameBgm"
-      src="@/assets/music/bgm/If_I_Had_a_Chicken.mp3"
-    ></audio>
+    ><source src="@/assets/music/bgm/fm-freemusic-inspiring-optimistic-upbeat-energetic-guitar-rhythm.mp3"></audio>
     <div class="background-img">
       <img src="@/assets/cloud.png" class="cloud" />
       <img src="@/assets/Learn/LearnStart/shape-2.svg" class="Shape-2" />
@@ -118,6 +117,25 @@ export default {
     Camera,
     Loading,
     Footer,
+  },
+  created: function () {
+    axios({
+      method: "GET",
+      url: "http://127.0.0.1:8000/learn/getWords/" + this.$route.params.select,
+    })
+      .then((res) => {
+        console.log(res);
+        console.log(res.data);
+        this.words = res.data;
+        if (this.select === "word") {
+          this.setAlphabet(this.words[0].word[0]);
+        } else {
+          this.setAlphabet(this.words[0].mean);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
   methods: {
     cameraData: function (payload1, payload2) {
@@ -236,24 +254,10 @@ export default {
         });
     },
   },
-  mounted: function () {
-    axios({
-      method: "GET",
-      url: "http://127.0.0.1:8000/learn/getWords/" + this.$route.params.select,
-    })
-      .then((res) => {
-        console.log(res);
-        console.log(res.data);
-        this.words = res.data;
-        if (this.select === "word") {
-          this.setAlphabet(this.words[0].word[0]);
-        } else {
-          this.setAlphabet(this.words[0].mean);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+ mounted() {
+    var gameBgm = document.getElementById("gameBgm");
+    gameBgm.volume = 0.3;
+    gameBgm.play();
   },
 };
 </script>

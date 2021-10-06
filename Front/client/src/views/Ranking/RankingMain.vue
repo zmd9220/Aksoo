@@ -1,15 +1,18 @@
 <template>
-  <div class="ranking-page-wrapper">
-    <!-- <audio autoplay id="gameStart" src="@/assets/music/ranking.mp3"></audio>x -->
+    <div class="ranking-page-wrapper">
+        <audio
+            autoplay
+            loop
+            id="gameBgm"
+            src="@/assets/music/bgm/happy-clappy-ukulele.mp3"
+        ></audio>
+        <img src="@/assets/Ranking/land2.png" alt="land" class="land-img">
+        <img src="@/assets/Ranking/cloud.png" alt="cloud" class="cloud-img">
+        <img src="@/assets/Ranking/cloud.png" alt="cloud" class="cloud-img-2">
 
     <div v-if="test1 == 0">
       {{ test1 }}
     </div>
-
-    <img src="@/assets/Ranking/land2.png" alt="land" class="land-img" />
-    <img src="@/assets/Ranking/cloud.png" alt="cloud" class="cloud-img" />
-    <img src="@/assets/Ranking/cloud.png" alt="cloud" class="cloud-img-2" />
-
     <img
       src="@/assets/Ranking/acidrain.png"
       v-if="what_game != 1"
@@ -447,6 +450,9 @@ export default {
   mounted() {
     // this.getRank();
     window.scrollTo(0, 0);
+    var gameBgm = document.getElementById("gameBgm");
+    gameBgm.volume = 0.3;
+    gameBgm.play();
   },
   destroyed() {
     this.$confetti.stop();

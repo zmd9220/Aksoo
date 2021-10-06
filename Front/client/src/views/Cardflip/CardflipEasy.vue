@@ -1,10 +1,9 @@
 <template>
   <div id="app" class="cardFlip">
-    <audio loop id="tictoc" src="@/assets/music/game/tictoc.wav"></audio>
     <audio
       loop
       id="gameBgm"
-      src="@/assets/music/bgm/Beat_Your_Competition.mp3"
+      src="@/assets/music/bgm/alexander-nakarada-silly-intro.mp3"
     ></audio>
     <audio
       loop
@@ -210,8 +209,8 @@ export default {
       // 카드 클릭하면 시간이 지나면서 게임 시작
       this.clockTick();
       this.timer = setInterval(this.clockTick, 1000);
-      var tictoc = document.getElementById("tictoc");
-      tictoc.play();
+      // var tictoc = document.getElementById("tictoc");
+      // tictoc.play();
     },
     resetGame() {
       // 다시 시작하기
@@ -226,14 +225,14 @@ export default {
       this.shuffleCards();
     },
     clockTick() {
-      var tictoc = document.getElementById("tictoc");
+      // var tictoc = document.getElementById("tictoc");
       var tictoctictoc = document.getElementById("tictoctictoc");
       var gameOver = document.getElementById("gameOver");
 
       this.totalTime.seconds--;
       if (this.totalTime.seconds < 10) {
         this.clock = true;
-        tictoc.pause();
+        // tictoc.pause();
         tictoctictoc.play();
       }
       // if (this.totalTime.seconds === 10) {

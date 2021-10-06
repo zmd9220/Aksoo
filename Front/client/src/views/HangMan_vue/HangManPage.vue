@@ -9,7 +9,7 @@
     <audio
       loop
       id="gameBgm"
-      src="@/assets/music/bgm/Jaunty_Gumption.mp3"
+      src="@/assets/music/bgm/Doh_De_Oh.mp3"
     ></audio>
 
     <div class="game-container">
