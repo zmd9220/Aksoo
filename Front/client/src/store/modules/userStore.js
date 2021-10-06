@@ -63,20 +63,31 @@ const userStore = {
       state.cardMatching.rank = 0
       state.acidRain.bestScore = 0
       state.acidRain.rank = 0
-    }
+    },
+    MODIFY_SCORE_RANK(state, data, selectGame) {
+      if (selectGame === 1) {
+        state.acidRain.rank = data.rank
+        state.acidRain.bestScore = data.score
+      } else if (selectGame === 2) {
+        state.cardMatching.rank = data.rank
+        state.cardMatching.bestScore = data.score
+      } else {
+        state.hangman.rank = data.rank
+        state.hangman.bestScore = data.score
+      }
+    } 
   },
   actions: {
     // 유저 로그인
     // credetials(유저 아이디, 패스워드를 담은 오브젝트)에 담아서 ADD_USER를 동작시킨다.
     loginUser: function (context, credentials) {
-
         context.commit('ADD_USER', credentials)
         // vuex에서 처리를 하려면 context를 통한 접근을 권장함 (데이터가 제대로 담김)
         // axios.defaults.headers.common['Authorization'] = `JWT ${res.data.token}`
         // axios.defaults.headers.common['Authorization'] = `JWT ${context.state.token}`
-        axios.defaults.headers.common['Authorization'] = `Bearer ${context.state.token}`
+        axios.defaults.headers.common['Authorization'] = `Bearer ${context.state.accessToken}`
         // 사실 vuex에서 로컬에 저장하기 때문에 밑의 setItem은 필요가 없지만 혹시 몰라 놔둠
-        // localStorage.setItem('jwt', res.data.access)
+        localStorage.setItem('jwt', context.state.accessToken)
     },
     loginUser2: function (context, credentials) {
       axios({
@@ -101,6 +112,30 @@ const userStore = {
       context.commit('DELETE_USER')
       delete axios.defaults.headers.common['Autorization']
       localStorage.removeItem('jwt')
+    },
+    setScore: function (context, data) {
+      // axios로 점수 갱신
+      console.log(data)
+      // console.log(score)
+      axios({
+        method: 'post', 
+        url: SERVER_URL + `/games/setScore/${data.selectGame}/`,
+        data: {
+          score: data.score,
+        },
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+        }
+      }).then(res => {
+          console.log(res)
+          context.commit('MODIFY_SCORE_RANK', res.data, data.selectGame)
+          // this.rank = res.data.rank
+          // this.bestScore = res.data.score
+          }).catch(err => {
+          console.log(err)
+          console.log(err.response)
+          // alert("아이디나 비밀번호를 확인해주세요.")
+      })
     }
   },
 }
