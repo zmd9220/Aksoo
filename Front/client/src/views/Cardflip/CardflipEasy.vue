@@ -110,7 +110,7 @@
         <dir class="cardFont">Score</dir>
         <dir class="score">{{ score }}</dir>
         <dir class="cardFont">Best score</dir>
-        <dir class="score">2500</dir>
+        <dir class="score">{{ bestScore }}</dir>
         <dir class="cardFont">Time</dir>
         <div>
           <div id="check_btn" class="last-time" v-if="this.clock">
@@ -126,6 +126,8 @@
 
 <script>
 import _ from "lodash";
+
+// const SERVER_URL = process.env.VUE_APP_SERVER_URL
 
 export default {
   name: "CardflipEasy",

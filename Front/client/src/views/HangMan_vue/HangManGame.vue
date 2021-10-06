@@ -36,7 +36,7 @@
                   src="@/assets/trophy.png"
                   alt="trophy"
                   class="rank-img"
-                />43
+                />{{ rank }}
               </div>
             </span>
             <b-button class="mt-3 modal-restart-btn" block @click="$router.push({ name: 'HangManMain'})">
@@ -51,7 +51,7 @@
                   src="@/assets/best-badge.png"
                   alt="best-badge"
                   class="best-score-img"
-                />2500
+                />{{ bestScore }}
               </div>
             </span>
             <b-button class="mt-3 modal-halloffame-btn" block href="/Rangking/RankingMain">
@@ -137,6 +137,7 @@
 <script>
 import axios from "axios";
 
+const SERVER_URL = process.env.VUE_APP_SERVER_URL
 export default {
   name: "HangManGame",
   data() {
@@ -190,6 +191,8 @@ export default {
       words3: [],
       usedLetters: [],
       score: 0,
+      bestScore: 0,
+      rank: 0,
       gameIsOver: false,
     };
   },
@@ -364,7 +367,23 @@ export default {
 
         var gameOver = document.getElementById("gameOver");
         gameOver.play();
-
+        axios({
+          method: 'post', 
+          url: SERVER_URL + '/games/setScore/3/',
+          data: {
+            score: this.score,
+          },
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+          }}).then(res => {
+            console.log(res)
+            this.rank = res.data.rank
+            this.bestScore = res.data.score
+            }).catch(err => {
+            console.log(err)
+            console.log(err.response)
+            // alert("아이디나 비밀번호를 확인해주세요.")
+          })
         // this.sleep(900);
         setTimeout(this.gameOver, 1000);
         // this.gameOver();
