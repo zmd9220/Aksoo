@@ -107,7 +107,7 @@ def user_detail(request, user_pk):
     if user.acidrain_set.filter(user=user.pk).exists():
         my_acidrain = get_object_or_404(AcidRain, user=user.pk)
         acid_rain_info = {
-            'rank': AcidRain.objects.filter(score__gt=my_cardmatching.score).count() + 1,
+            'rank': AcidRain.objects.filter(score__gt=my_acidrain.score).count() + 1,
             'score': my_acidrain.score,
         }
     else:
