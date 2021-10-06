@@ -3,7 +3,7 @@
     <audio
       loop
       id="gameBgm"
-      src="@/assets/music/bgm/About_That_Oldie.mp3"
+      src="@/assets/music/bgm/keys-of-moon-white-petals.mp3"
     ></audio>
     <audio
       autoplay
@@ -59,8 +59,13 @@
 export default {
   mounted() {
     var gameBgm = document.getElementById("gameBgm");
+<<<<<<< HEAD
     gameBgm.volume = 0.3;
     // gameBgm.play();
+=======
+    gameBgm.volume = 0.2;
+    gameBgm.play();
+>>>>>>> feature/FE/projectCss
   },
 };
 </script>

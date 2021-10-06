@@ -15,7 +15,9 @@
         <h2>지문자를 단어 맞추기 게임으로 익혀 보세요!</h2>
       </div>
       <div class="hangman-main-box">
-        <div class="hangman-thumbnail-box"></div>
+        <div class="hangman-thumbnail-box">
+          <img src="@/assets/hangman-cover.png" class="acidImg" />
+        </div>
         <div class="hangman-select-box">
           <div class="hangman-select-box-title">테마를 선택하세요</div>
           <div class="hangman-topic">
@@ -263,5 +265,12 @@ img.Shape-2 {
   left: 0%;
   top: 87.5%;
   height: 12.5%;
+}
+
+.acidImg {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  border-radius: 20px;
 }
 </style>

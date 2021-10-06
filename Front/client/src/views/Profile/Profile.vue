@@ -3,7 +3,7 @@
     <audio
       autoplay
       id="gameStart"
-      src="@/assets/music/pageMove/Jump High.mp3"
+      src="@/assets/music/bgm/the-cutest-bunny.mp3"
     ></audio>
     <div class="my-profile">
       <img :src='"@/assets/Profile/prf-" + profile_name[`${this.accounts.userId}`%7] +".png"' alt="profile_picture" class="profile-pic" />
@@ -40,7 +40,7 @@
         <h2>플레이기록</h2>
         <div class="game-recode">
           <img
-            src="@/assets/acidStart.png"
+            src="@/assets/acidrain-cover.png"
             alt="acidrain_picture"
             class="acidrain-pic"
           />
@@ -97,7 +97,7 @@
 
         <div class="game-recode">
           <img
-            src="@/assets/acidStart.png"
+            src="@/assets/cardflip-cover.png"
             alt="acidrain_picture"
             class="acidrain-pic"
           />
@@ -154,7 +154,7 @@
 
         <div class="game-recode">
           <img
-            src="@/assets/acidStart.png"
+            src="@/assets/hangman-cover.png"
             alt="acidrain_picture"
             class="acidrain-pic"
           />
