@@ -48,7 +48,7 @@
                   src="@/assets/trophy.png"
                   alt="trophy"
                   class="rank-img"
-                />43
+                />{{ cardMatching.rank }}
               </div>
             </span>
             <b-button class="mt-3 modal-restart-btn" block @click="$router.push({ name: 'CardflipMain'})">
@@ -63,7 +63,7 @@
                   src="@/assets/best-badge.png"
                   alt="best-badge"
                   class="best-score-img"
-                />2500
+                />{{ cardMatching.bestScore }}
               </div>
             </span>
             <b-button class="mt-3 modal-halloffame-btn" block href="/Rangking/RankingMain">
@@ -102,7 +102,7 @@
     </div>
     <div class="info-panel">
       <div class="name-panel">
-        <div>하태린 님</div>
+        <div>{{ accounts.nickname }} 님</div>
       </div>
       <div class="info-color">
         <dir class="cardFont">Difficulty</dir>
@@ -110,7 +110,7 @@
         <dir class="cardFont">Score</dir>
         <dir class="score">{{ score }}</dir>
         <dir class="cardFont">Best score</dir>
-        <dir class="score">{{ bestScore }}</dir>
+        <dir class="score">{{ cardMatching.bestScore }}</dir>
         <dir class="cardFont">Time</dir>
         <div>
           <div id="check_btn" class="last-time" v-if="this.clock">
@@ -126,7 +126,7 @@
 
 <script>
 import _ from "lodash";
-
+import { mapState } from 'vuex'
 // const SERVER_URL = process.env.VUE_APP_SERVER_URL
 
 export default {
@@ -239,6 +239,8 @@ export default {
       // if (this.totalTime.seconds === 10) {
       // }
       if (this.totalTime.seconds === 0) {
+
+
         clearInterval(this.timer);
         this.gameIsOver = true;
         tictoctictoc.pause();
@@ -303,6 +305,8 @@ export default {
     },
   },
   computed: {
+    ...mapState('userStore', ['accounts', 'cardMatching']),
+
     seconds() {
       if (this.totalTime.seconds < 10) {
         return `0${this.totalTime.seconds}`;
@@ -315,6 +319,17 @@ export default {
     gameBgm.volume = 0.2;
     gameBgm.play();
   },
+  watch: {
+    gameIsOver(newGameIsOver) {
+      if (newGameIsOver) {
+        // 데이터 처리하는 함수
+        // this.setScore(1, this.score)
+        // Vuex에 데이터를 보낼때는 오브젝트 형으로 보낼것을 권장 !!!
+        this.$store.dispatch('userStore/setScore', { selectGame: 2, score:this.score})
+        console.log('gameisOVER 작동')
+      }
+    }
+  }
 };
 </script>
 
