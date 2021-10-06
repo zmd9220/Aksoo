@@ -84,7 +84,7 @@
                   cursor: pointer
                 "
                 @click="
-                  $router.push({ name: 'RankingMain', params: { whatgame: 0 } })
+                  $router.push({ name: 'RankingMain', params: { whatgame: 1 } })
                 "
               >
                 명예의전당
@@ -141,7 +141,7 @@
                   cursor: pointer
                 "
                 @click="
-                  $router.push({ name: 'RankingMain', params: { whatgame: 1 } })
+                  $router.push({ name: 'RankingMain', params: { whatgame: 2 } })
                 "
               >
                 명예의전당
@@ -200,7 +200,7 @@
                   cursor: pointer
                 "
                 @click="
-                  $router.push({ name: 'RankingMain', params: { whatgame: 2 } })
+                  $router.push({ name: 'RankingMain', params: { whatgame: 3 } })
                 "
               >
                 명예의전당
