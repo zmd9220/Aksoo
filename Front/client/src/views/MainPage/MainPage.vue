@@ -60,7 +60,7 @@ export default {
   mounted() {
     var gameBgm = document.getElementById("gameBgm");
     gameBgm.volume = 0.3;
-    gameBgm.play();
+    // gameBgm.play();
   },
 };
 </script>
