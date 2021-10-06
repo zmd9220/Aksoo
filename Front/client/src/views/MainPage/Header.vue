@@ -206,7 +206,7 @@ export default {
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 70px;
+  height: 100px;
   /* margin: 0 0 54.188rem; */
   /* padding: 0.813rem 11.938rem 0.813rem 13.063rem; */
   object-fit: contain;

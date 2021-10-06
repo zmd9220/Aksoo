@@ -79,14 +79,6 @@
       </div>
       <div v-if="mode_letter" class="game-mode-cons" @click="modeChange">
         자음
-        <Progress
-          :transitionDuration="5"
-          :radius="15"
-          :strokeWidth="7"
-          :value="this.count"
-        >
-          <div class="content"></div>
-        </Progress>
         <!-- {{ count }} -->
       </div>
       <div v-else class="game-mode-vowel" @click="modeChange">
@@ -104,7 +96,7 @@
         <div class="selected-confidence">정확도 : {{ confidence }}</div>
       </div>
       <b-progress
-        height="3px"
+        height="7px"
         :value="count"
         :max="80"
         class="mb-3"
@@ -135,8 +127,8 @@
 import Camera from "@/components/Camera0.vue";
 import Loading from "@/components/Loading.vue";
 import HangManGame from "./HangManGame.vue";
-// import axios from 'axios';
-import Progress from "easy-circular-progress";
+// import axios from "axios";
+// import Progress from "easy-circular-progress";
 
 export default {
   data() {
@@ -160,7 +152,6 @@ export default {
     Camera,
     Loading,
     HangManGame,
-    Progress,
   },
   props: {
     topic: Object,
@@ -214,14 +205,32 @@ export default {
         return { display: "block" };
       }
     },
+    // bestScore: function () {
+    //   // 상품정보를 받아오는 axios
+    //   const localURL = "http://127.0.0.1:8000/games/setScore/3";
+    //   axios
+    //     .get(localURL)
+    //     .then((res) => {
+    //       // for (var key1 in res.data){
+    //       //   console.log(key1);
+    //       // }
+    //       console.log(res);
+    //       // res.data.forEach((element) => {
+    //       //   this.words.push(element.word);
+    //       // });
+    //     })
+    //     .then(() => {
+    //       //
+    //     })
+    //     .catch(() => {
+    //       // console.log(err)
+    //     });
+    // },
   },
   created: function () {
     this.life = this.diff.value;
     this.answer = false;
-
-    // var audio = document.getElementById("gameStart");
-
-    // audio.play();
+    // this.bestScore();
   },
   computed() {
     // this.count = this.$refs.camera.count/150;
@@ -318,8 +327,9 @@ export default {
   box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.733);
   font-family: "SDSamliphopangche_Basic";
   font-size: 2rem;
-  /* display: row;
-    justify-content: space-around; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 .hangman-row .right-status-column .game-status .game-status-li {
@@ -387,7 +397,7 @@ export default {
 
 .hangman-row .right-status-column .letter {
   width: 100%;
-  height: 7%;
+  height: 9%;
   background-color: #f4f1eb;
   margin-bottom: 1.5vh;
   border-radius: 20px;

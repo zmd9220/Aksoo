@@ -2,7 +2,7 @@
   <div id="app">
     <Header :isLogin="isLogin" @logout="logout" />
     <div id="nav">
-      <span v-if="isLogin">
+      <!-- <span v-if="isLogin">
         <router-link :to="{ name: 'TodoList' }">Todo List</router-link> |
         <router-link :to="{ name: 'CreateTodo' }">Create Todo</router-link> |
         <router-link @click.native="logout" to="#">Logout</router-link>
@@ -26,12 +26,7 @@
         <router-link :to="{ name: 'HangManMain' }">HangManMain</router-link> |
         <router-link :to="{ name: 'CardflipMain' }">CardflipMain</router-link> |
         <router-link :to="{ name: 'Halloffame' }">Halloffame</router-link> |
-
-        <!-- | <router-link :to="{ name: 'HangManGame' }">HangManGame</router-link>  -->
-        |
-        <!-- <router-link :to="{ name: 'HangManPage' }">HangManPage</router-link> | -->
-        <!-- <router-link :to="{ name: 'HangMan_vue' }">HangMan_vue</router-link> | -->
-      </span>
+      </span> -->
       <router-view @login="isLogin = true" />
     </div>
     <!-- <Footer /> -->

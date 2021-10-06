@@ -159,6 +159,7 @@ class signin(APIView):
                     'email': user.email,
                     'id': user.id,
                     'tier': user.tier.id,
+                    'nickname': user.nickname,
                 }, status=200)
             else:
                 return JsonResponse({

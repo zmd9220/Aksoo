@@ -74,40 +74,24 @@ export default {
         switch (this.detection.name) {
           case CustomGestures_vowel.AhGesture.name:
             if (this.detection.hand === 0) {
-              if (this.use_left_hand === 0) {
-                name = "ㅏ";
-              } else {
-                name = "ㅗ";
-              }
+              name = "ㅏ";
             } else {
-              if (this.use_left_hand === 0) {
-                name = "ㅗ";
-              } else {
-                name = "ㅏ";
-              }
+              name = "ㅗ";
             }
             break;
           case CustomGestures_vowel.YaGesture.name:
             if (this.detection.hand === 0) {
-              if (this.use_left_hand === 0) {
-                name = "ㅑ";
-              } else {
-                name = "ㅛ";
-              }
+              name = "ㅑ";
             } else {
-              if (this.use_left_hand === 0) {
-                name = "ㅛ";
-              } else {
-                name = "ㅑ";
-              }
+              name = "ㅛ";
             }
             break;
-          case CustomGestures_vowel.AeGesture.name:
-            name = "ㅐ";
-            break;
-          case CustomGestures_vowel.YaeGesture.name:
-            name = "ㅒ";
-            break;
+          // case CustomGestures_vowel.AeGesture.name:
+          //   name = "ㅐ";
+          //   break;
+          // case CustomGestures_vowel.YaeGesture.name:
+          //   name = "ㅒ";
+          //   break;
           case CustomGestures_vowel.IGesture.name:
             name = "ㅣ";
             break;
@@ -298,9 +282,10 @@ export default {
         } else {
           // console.log(this.count);
           this.count++;
-          if (this.count > 150) {
+          if (this.count > 45) {
             // console.log("단어입력");
             // console.log(this.last);
+            this.$emit("input", this.last)
             this.last = "*";
             this.count = 0;
           }

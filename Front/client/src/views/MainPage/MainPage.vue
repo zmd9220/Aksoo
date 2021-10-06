@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="overflow: hidden">
     <audio
       loop
       id="gameBgm"
@@ -60,7 +60,7 @@ export default {
   mounted() {
     var gameBgm = document.getElementById("gameBgm");
     gameBgm.volume = 0.3;
-    gameBgm.play();
+    // gameBgm.play();
   },
 };
 </script>
@@ -207,7 +207,7 @@ export default {
   top: 42.5%;
   left: 57.5%;
   z-index: 1;
-  width: 30%;
+  width: 25%;
   overflow: hidden;
   transition-duration: 10s;
   transition-property: transform;
@@ -267,10 +267,12 @@ export default {
   font-family: BinggraeSamanco;
   font-size: 4vh;
   z-index: 2;
+  padding: 0%;
 }
 
 .start-text {
   color: white;
   vertical-align: middle;
+  
 }
 </style>
