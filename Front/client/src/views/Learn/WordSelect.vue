@@ -16,9 +16,7 @@
       <div class="bt">
         <b-button class="goword" @click="setlevel('con')">자음</b-button>
         <b-button class="goword" @click="setlevel('vow')">모음</b-button>
-        <!-- <b-button class="goword" @click="setlevel('word')">단어</b-button> -->
-        <!-- <b-button class="gonext" @click="setlevel('bookmark')" >즐겨찾기</b-button> -->
-        <b-button class="goback" @click="handSelect()">&lt;- 이전</b-button>
+        <b-button class="goback" @click="learnStart()">&lt;- 이전</b-button>
         <b-button class="gonext" @click="goNextLevel()">다음 -></b-button>
       </div>
     </div>
@@ -41,14 +39,14 @@ export default {
   data: function () {
     return {
       level: "",
-      num: "",
+      num: "", // 1 이면 자음, 0 이면 모음
     };
   },
   methods: {
     setlevel: function (word) {
       var click = document.getElementById("click");
       click.play();
-      this.level = word;
+      this.level = word; // 1 이면 자음, 0 이면 모음
       if (this.level === "con") {
         this.num = 1;
       } else if (this.level === "vow") {
@@ -57,18 +55,17 @@ export default {
         this.num = 0;
       }
     },
-    handSelect: function () {
-      this.$router.push("/Select").catch(() => {});
+    learnStart: function () {
+      this.$router.push("/Start").catch(() => {});
     },
     goNextLevel: function () {
       if (this.level === "") {
         alert("단계를 선택해주세요");
       } else {
-        // this.$router.push("/Learn/Learning" + '_' + this.level).catch(() => {});
         this.$router
           .push({
             name: "Learning",
-            params: { select: this.level, mode_letter: this.num },
+            params: { select: this.level, mode_letter: this.num }, // 자음인지 모음인 값 넣어서 다음페이지로 보내기
           })
           .catch(() => {});
       }

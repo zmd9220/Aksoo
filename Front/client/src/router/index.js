@@ -10,7 +10,6 @@ import Footer from '@/views/MainPage/Footer'
 import MainPage from '@/views/MainPage/MainPage'
 import GamePage from '@/views/MainPage/GamePage'
 import LearnStartPage from '@/views/Learn/LearnStart'
-import LearnSelectPage from '@/views/Learn/HandSelect'
 import LearnWordPage from '@/views/Learn/WordSelect'
 import HangManMain from '@/views/HangMan_vue/HangManMain'
 import HangManGame from '@/views/HangMan_vue/HangManGame'
@@ -76,11 +75,6 @@ const routes = [
     path: '/Start',
     name: 'LearnStartPage',
     component: LearnStartPage,
-  },
-  {
-    path: '/Select',
-    name: 'LearnSelectPage',
-    component: LearnSelectPage,
   },
   {
     path: '/WordSelect',

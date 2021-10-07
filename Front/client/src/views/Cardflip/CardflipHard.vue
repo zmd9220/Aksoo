@@ -1,5 +1,6 @@
 <template>
   <div id="app" class="cardFlip">
+    <!-- BGM -->
     <audio
       loop
       id="gameBgm"
@@ -28,13 +29,6 @@
         hide-header
         no-close-on-backdrop
       >
-        <!-- <b-button
-          class="mt-3 modal-close-btn"
-          block
-          @click="$bvModal.hide('bv-modal-example')"
-        >
-          <span class="close-btn-txt">닫기</span></b-button
-        > -->
         <p class="game-over-text">GAME OVER</p>
         <div class="modal-cardFont">Score</div>
         <div class="modal-score">{{ score }}</div>
@@ -72,6 +66,7 @@
         </div>
       </b-modal>
     </div>
+    <!-- 카드 나오는 화면 -->
     <div class="game-board">
       <div
         v-for="(card, index) in gameCards"
@@ -99,6 +94,7 @@
         </div>
       </div>
     </div>
+    <!-- 플레이어 정보 및 점수 판 -->
     <div class="info-panel">
       <div class="name-panel">
         <div>{{ accounts.nickname }} 님</div>
@@ -135,7 +131,7 @@ export default {
       score: 0,
       cards1: [
         //자음
-        { letter: "ㄱ", isFlipped: false, isMatched: false, image1: "ㄱ.png" },
+        { letter: "ㄱ", isFlipped: false, isMatched: false, image1: "ㄱ.png" }, // letter 로 서로 같은 카드인지 확인
         { letter: "ㄴ", isFlipped: false, isMatched: false, image1: "ㄴ.png" },
         { letter: "ㄷ", isFlipped: false, isMatched: false, image1: "ㄷ.png" },
         { letter: "ㄹ", isFlipped: false, isMatched: false, image1: "ㄹ.png" },
@@ -150,15 +146,6 @@ export default {
         { letter: "ㅍ", isFlipped: false, isMatched: false, image1: "ㅍ.png" },
         { letter: "ㅎ", isFlipped: false, isMatched: false, image1: "ㅎ.png" },
         // 모음
-        // { letter: 'ㅏ', isFlipped: false, isMatched: false, image1: 'ㅏ.png' },
-        // { letter: 'ㅑ', isFlipped: false, isMatched: false, image1: 'ㅑ.png' },
-        // { letter: 'ㅓ', isFlipped: false, isMatched: false, image1: 'ㅓ.png' },
-        // { letter: 'ㅕ', isFlipped: false, isMatched: false, image1: 'ㅕ.png' },
-        // { letter: 'ㅗ', isFlipped: false, isMatched: false, image1: 'ㅗ.png' },
-        // { letter: 'ㅛ', isFlipped: false, isMatched: false, image1: 'ㅛ.png' },
-        // { letter: 'ㅜ', isFlipped: false, isMatched: false, image1: 'ㅜ.png' },
-        // { letter: 'ㅠ', isFlipped: false, isMatched: false, image1: 'ㅠ.png' },
-        // { letter: 'ㅡ', isFlipped: false, isMatched: false, image1: 'ㅡ.png' },
         { letter: "ㅣ", isFlipped: false, isMatched: false, image1: "ㅣ.png" },
       ],
       cards2: [
@@ -177,25 +164,16 @@ export default {
         { letter: "ㅍ", isFlipped: false, isMatched: false, image: "ㅍ.png" },
         { letter: "ㅎ", isFlipped: false, isMatched: false, image: "ㅎ.png" },
         // 모음
-        // { letter: 'ㅏ', isFlipped: false, isMatched: false, image: 'ㅏ.png' },
-        // { letter: 'ㅑ', isFlipped: false, isMatched: false, image: 'ㅑ.png' },
-        // { letter: 'ㅓ', isFlipped: false, isMatched: false, image: 'ㅓ.png' },
-        // { letter: 'ㅕ', isFlipped: false, isMatched: false, image: 'ㅕ.png' },
-        // { letter: 'ㅗ', isFlipped: false, isMatched: false, image: 'ㅗ.png' },
-        // { letter: 'ㅛ', isFlipped: false, isMatched: false, image: 'ㅛ.png' },
-        // { letter: 'ㅜ', isFlipped: false, isMatched: false, image: 'ㅜ.png' },
-        // { letter: 'ㅠ', isFlipped: false, isMatched: false, image: 'ㅠ.png' },
-        // { letter: 'ㅡ', isFlipped: false, isMatched: false, image: 'ㅡ.png' },
         { letter: "ㅣ", isFlipped: false, isMatched: false, image: "ㅣ.png" },
       ],
-      gameCards: [],
-      flippedCards: [],
+      gameCards: [], // 카드를 담는 변수
+      flippedCards: [], // 뒤집은 카드 넣어주는 변수
       totalMatches: 0,
       totalTime: {
         seconds: 60,
       },
       timer: null,
-      gameIsOver: false,
+      gameIsOver: false, // 게임이 끝났는지 알려주는 변수
       clock: false,
     };
   },
@@ -208,8 +186,6 @@ export default {
       // 카드 클릭하면 시간이 지나면서 게임 시작
       this.clockTick();
       this.timer = setInterval(this.clockTick, 1000);
-      var tictoc = document.getElementById("tictoc");
-      tictoc.play();
     },
     resetGame() {
       // 다시 시작하기
@@ -224,14 +200,12 @@ export default {
       this.shuffleCards();
     },
     clockTick() {
-      // var tictoc = document.getElementById("tictoc");
       var tictoctictoc = document.getElementById("tictoctictoc");
       var gameOver = document.getElementById("gameOver");
 
       this.totalTime.seconds--;
       if (this.totalTime.seconds < 10) {
         this.clock = true;
-        // tictoc.pause();
         tictoctictoc.play();
       }
 
@@ -247,7 +221,7 @@ export default {
       this.gameCards = [];
       let cards1 = _.cloneDeep(this.cards1);
       let cards2 = _.cloneDeep(this.cards2);
-      this.gameCards = _.shuffle(this.gameCards.concat(cards1, cards2));
+      this.gameCards = _.shuffle(this.gameCards.concat(cards1, cards2)); // 카드 배열 섞어주기
     },
     clickCard(card) {
       if (!this.timer) {
@@ -256,7 +230,7 @@ export default {
       var cardFilp = document.getElementById("cardFilp");
       cardFilp.volume = 0.8;
       cardFilp.play();
-      if (card.isMatched || card.isFlipped || this.flippedCards.length === 2)
+      if (card.isMatched || card.isFlipped || this.flippedCards.length === 2) // 카드 2장만 뒤집도록 제한
         return;
       if (!card.isFlipped) {
         card.isFlipped = true;
@@ -643,7 +617,6 @@ export default {
 .modal-restart-btn {
   width: 40%;
   height: 40%;
-  /* border: solid 0.5vh #76300b; */
   border: none;
   background-color: #fe6e27;
   box-shadow: 0rem 0.38vh 0.56rem 0 rgba(0, 0, 0, 0.3);
@@ -659,7 +632,6 @@ export default {
 .modal-halloffame-btn {
   width: 40%;
   height: 40%;
-  /* border: solid 0.5vh #76300b; */
   border: none;
   background-color: #68bbf7;
   box-shadow: 0rem 0.38vh 0.56rem 0 rgba(0, 0, 0, 0.3);
