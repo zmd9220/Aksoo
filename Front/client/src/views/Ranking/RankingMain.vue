@@ -1,6 +1,6 @@
 <template>
   <div class="ranking-page-wrapper">
-    <!-- <audio autoplay id="gameStart" src="@/assets/music/ranking.mp3"></audio>x -->
+    <!-- 오디오 (BGM) -->
       <audio
       autoplay
             loop
@@ -8,14 +8,15 @@
             src="@/assets/music/bgm/modify_happy_ukulele.mp3"
         ></audio>
 
-    <div v-if="test1 == 0">
-      {{ test1 }}
+    <div v-if="what == 0">
+      {{ what }}
     </div>
 
     <img src="@/assets/Ranking/land2.png" alt="land" class="land-img" />
     <img src="@/assets/Ranking/cloud.png" alt="cloud" class="cloud-img" />
     <img src="@/assets/Ranking/cloud.png" alt="cloud" class="cloud-img-2" />
 
+    <!-- 펫말 -->
     <img
       src="@/assets/Ranking/acidrain.png"
       v-if="what_game != 1"
@@ -58,21 +59,12 @@
       class="wordguess-img"
     />
 
-    <!-- <img src="@/assets/Ranking/podium1.png" alt="podium" class="podium-img"> -->
+    <!-- 단상 -->
     <img src="@/assets/Ranking/podium.png" alt="podium" class="podium-img">
         <div class="first-score" v-bind:style="[Rank[0].profile%7 == 1? {'top':'49%'}: {'top':'45%'}]">
             <div style="display:table-cell; vertical-align:bottom">
-                <!-- <div style="height:5vh;"> -->
-                    <!-- <div style="display: flex; height:100%; align-items: center; font-weight: bold; color: gray;">
-                        <img v-if="Rank[0].tier ==5" src="@/assets/Ranking/brz.png" alt="tier_picture" style="height:40%; margin-right:1vw;">
-                        <img v-if="Rank[0].tier ==4" src="@/assets/Ranking/slv.png" alt="tier_picture" style="height:40%; margin-right:1vw;">
-                        <img v-if="Rank[0].tier ==3" src="@/assets/Ranking/gld.png" alt="tier_picture" style="height:40%; margin-right:1vw;">
-                        <img v-if="Rank[0].tier ==2" src="@/assets/Ranking/pltn.png" alt="tier_picture" style="height:40%; margin-right:1vw;">
-                        <img v-if="Rank[0].tier ==1" src="@/assets/Ranking/dmd.png" alt="tier_picture" style="height:40%; margin-right:1vw;">
-                        {{Rank[0].tier}}
-                    </div> -->
+                
                     {{Rank[0].nickname}}
-                <!-- </div> -->
                 <img :src='"@/assets/Ranking/Animal/" + profile_name[Rank[0].profile%7] +".png"' alt="first" style="max-width:100%; max-height:100%;">
             </div>
         </div>
@@ -88,6 +80,7 @@
                 <img :src='"@/assets/Ranking/Animal/" + profile_name[Rank[2].profile%7] +".png"' alt="third" style="max-width:100%; max-height:100%">
             </div>
         </div>
+        <!-- Top 10 리스트 -->
     <div v-if="what_start === 0">
       <ranking-list class="ranking-list" :Rank="Rank" />
       <img src="@/assets/Learn/LearnStart/shape-2.svg" class="Shape-2" />
@@ -104,11 +97,7 @@
       <ranking-list class="ranking-list" :Rank="Rank1" />
       <img src="@/assets/Learn/LearnStart/shape-2.svg" class="Shape-2" />
     </div>
-    <!-- <ranking-list class="ranking-list" :Rank="Rank" />
-    <img src="@/assets/Learn/LearnStart/shape-2.svg" class="Shape-2" /> -->
 
-    <!-- <ranking-list class="ranking-list" :Rank="Rank" />
-    <img src="@/assets/Learn/LearnStart/shape-2.svg" class="Shape-2" /> -->
   </div>
 </template>
 <script>
@@ -117,7 +106,6 @@ import Vue from "vue";
 import VueConfetti from "vue-confetti";
 Vue.use(VueConfetti);
 import axios from "axios";
-// import { mapState } from "vuex";
 
 export default {
   name: "RankingMain",
@@ -136,100 +124,8 @@ export default {
       Rank1: [],
       Rank2: [],
       Rank3: [],
-      test1: 0,
-      test2: 0,
+      what: 0,
       Rank: [
-        // {
-        //   profile: 0,
-        //   rank: 0,
-        //   nickname: "",
-        //   tier: 0,
-        //   max_score: 0,
-        // },
-        // {
-        //   profile: 0,
-        //   rank: 0,
-        //   nickname: "",
-        //   tier: 0,
-        //   max_score: 0,
-        // },
-        // {
-        //   profile: 0,
-        //   rank: 0,
-        //   nickname: "",
-        //   tier: 0,
-        //   max_score: 0,
-        // },
-        // {
-        //   profile: 100,
-        //   rank: 1,
-        //   nickname: "펭수는행복해1",
-        //   tier: 1,
-        //   max_score: 1700,
-        // },
-        // {
-        //   profile: 101,
-        //   rank: 2,
-        //   nickname: "펭수는행복해2",
-        //   tier: 1,
-        //   max_score: 1600,
-        // },
-        // {
-        //   profile: 102,
-        //   rank: 3,
-        //   nickname: "펭수는행복해3",
-        //   tier: 1,
-        //   max_score: 1550,
-        // },
-        // {
-        //   profile: 103,
-        //   rank: 4,
-        //   nickname: "펭수는행복해4",
-        //   tier: 1,
-        //   max_score: 1500,
-        // },
-        // {
-        //   profile: 104,
-        //   rank: 5,
-        //   nickname: "펭수는행복해5",
-        //   tier: 2,
-        //   max_score: 1300,
-        // },
-        // {
-        //   profile: 105,
-        //   rank: 6,
-        //   nickname: "펭수는행복해6",
-        //   tier: 3,
-        //   max_score: 1200,
-        // },
-        // {
-        //   profile: 106,
-        //   rank: 7,
-        //   nickname: "펭수는행복해7",
-        //   tier: 4,
-        //   max_score: 1140,
-        // },
-        // {
-        //   profile: 107,
-        //   rank: 8,
-        //   nickname: "펭수는행복해8",
-        //   tier: 5,
-        //   max_score: 1120,
-        // },
-        // {
-        //   profile: 108,
-        //   rank: 9,
-        //   nickname: "펭수는행복해9",
-        //   tier: 5,
-        //   max_score: 1100,
-        // },
-        // {
-        //   profile: 109,
-        //   rank: 10,
-        //   nickname: "펭수는행복해10",
-        //   tier: 5,
-        //   max_score: 1050,
-        // },
       ],
     };
   },
@@ -245,26 +141,14 @@ export default {
         //   Authorization: "Bearer " + localStorage.getItem("jwt"),
         // },
       })
-        // .get(localURL)
+
         .then((res) => {
-          // for (var key1 in res.data){
-          //   console.log(key1);
-          // }
-          // this.Rank = res.data;
-          // console.log(res.data);
-          // console.log(res.data.response);
           this.test = res.data.response;
-          // const { data } = res;
           for (var key in this.test) {
-            // console.log(key);
-            // console.log(this.test[key].nickname);
             var profile = this.test[key].user;
-            // var rank = 0;
-            // rank = key;
             var nickname = this.test[key].nickname;
             var tier = this.test[key].tier;
             var max_score = this.test[key].score;
-            // Vue.set(this.Rank, profile, rank, nickname, tier, max_score);
             this.Rank1[key - 1] = {
               profile: profile,
               rank: parseInt(key),
@@ -275,7 +159,6 @@ export default {
           }
         })
         .catch(() => {
-          // console.log(err)
         });
     },
     getRank2: function () {
@@ -288,26 +171,13 @@ export default {
         //   Authorization: "Bearer " + localStorage.getItem("jwt"),
         // },
       })
-        // .get(localURL)
         .then((res) => {
-          // for (var key1 in res.data){
-          //   console.log(key1);
-          // }
-          // this.Rank = res.data;
-          // console.log(res.data);
-          // console.log(res.data.response);
           this.test = res.data.response;
-          // const { data } = res;
           for (var key in this.test) {
-            // console.log(key);
-            // console.log(this.test[key].nickname);
             var profile = this.test[key].user;
-            // var rank = 0;
-            // rank = key;
             var nickname = this.test[key].nickname;
             var tier = this.test[key].tier;
             var max_score = this.test[key].score;
-            // Vue.set(this.Rank, profile, rank, nickname, tier, max_score);
             this.Rank2[key - 1] = {
               profile: profile,
               rank: parseInt(key),
@@ -318,7 +188,6 @@ export default {
           }
         })
         .catch(() => {
-          // console.log(err)
         });
     },
     getRank3: async function () {
@@ -331,15 +200,11 @@ export default {
           url: localURL,
         });
         this.test = res.data.response;
-        // const { data } = res;
         for (var key in this.test) {
           var profile = this.test[key].user;
-          // var rank = 0;
-          // rank = key;
           var nickname = this.test[key].nickname;
           var tier = this.test[key].tier;
           var max_score = this.test[key].score;
-          // Vue.set(this.Rank, profile, rank, nickname, tier, max_score);
           this.Rank3[key - 1] = {
             profile: profile,
             rank: parseInt(key),
@@ -347,9 +212,8 @@ export default {
             tier: tier,
             max_score: max_score,
           };
-          this.test1 = this.what_game;
+          this.what = this.what_game;
         }
-        // console.log(this.Rank[0].profile);
       } catch (err) {
         console.log(err.response);
       }
@@ -364,15 +228,11 @@ export default {
           url: localURL,
         });
         this.test = res.data.response;
-        // const { data } = res;
         for (var key in this.test) {
           var profile = this.test[key].user;
-          // var rank = 0;
-          // rank = key;
           var nickname = this.test[key].nickname;
           var tier = this.test[key].tier;
           var max_score = this.test[key].score;
-          // Vue.set(this.Rank, profile, rank, nickname, tier, max_score);
           this.Rank[key - 1] = {
             profile: profile,
             rank: parseInt(key),
@@ -380,7 +240,7 @@ export default {
             tier: tier,
             max_score: max_score,
           };
-          this.test1 = this.what_game;
+          this.what = this.what_game;
         }
         // console.log(this.Rank[0].profile);
       } catch (err) {
@@ -388,11 +248,15 @@ export default {
       }
     },
   },
+
   created: function () {
+      // axios 데이터 가져오기 (단상)
     this.getRank();
+      // axios 데이터 가져오기 (리스트)
     this.getRank3();
     this.getRank2();
     this.getRank1();
+    // 위에서 떨어지는 효과
     if (this.whatgame != undefined) {
       this.what_game = this.whatgame;
     }
