@@ -2,19 +2,18 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Signup from '@/views/accounts/Signup'
 import Login from '@/views/accounts/Login'
-import AcidRainPage from '@/views/acid_rain/AcidRainPage'
-import AcidRainMain from '@/views/acid_rain/AcidRainMain'
-import AcidRainGame from '@/views/acid_rain/AcidRainGame'
+import AcidRainPage from '@/views/AcidRain/AcidRainPage'
+import AcidRainMain from '@/views/AcidRain/AcidRainMain'
+import AcidRainGame from '@/views/AcidRain/AcidRainGame'
 import Header from '@/views/MainPage/Header'
 import Footer from '@/views/MainPage/Footer'
 import MainPage from '@/views/MainPage/MainPage'
 import GamePage from '@/views/MainPage/GamePage'
 import LearnStartPage from '@/views/Learn/LearnStart'
-import LearnSelectPage from '@/views/Learn/HandSelect'
 import LearnWordPage from '@/views/Learn/WordSelect'
-import HangManMain from '@/views/HangMan_vue/HangManMain'
-import HangManGame from '@/views/HangMan_vue/HangManGame'
-import HangManPage from '@/views/HangMan_vue/HangManPage'
+import HangManMain from '@/views/HangMan/HangManMain'
+import HangManGame from '@/views/HangMan/HangManGame'
+import HangManPage from '@/views/HangMan/HangManPage'
 import Learning from '@/views/Learn/Learning'
 import CardflipHard from '@/views/Cardflip/CardflipHard'
 import CardflipMiddle from '@/views/Cardflip/CardflipMiddle'
@@ -47,18 +46,18 @@ const routes = [
     component: Login,
   },
   {
-    path: '/acid_rain/AcidRainPage',
+    path: '/AcidRain/AcidRainPage',
     name: 'AcidRainPage',
     component: AcidRainPage,
     props: true,
   },
   {
-    path: '/acid_rain/AcidRainMain',
+    path: '/AcidRain/AcidRainMain',
     name: 'AcidRainMain',
     component: AcidRainMain,
   },
   {
-    path: '/acid_rain/AcidRainGame',
+    path: '/AcidRain/AcidRainGame',
     name: 'AcidRainGame',
     component: AcidRainGame,
   },
@@ -78,11 +77,6 @@ const routes = [
     component: LearnStartPage,
   },
   {
-    path: '/Select',
-    name: 'LearnSelectPage',
-    component: LearnSelectPage,
-  },
-  {
     path: '/WordSelect',
     name: 'LearnWordPage',
     component: LearnWordPage,
@@ -94,17 +88,17 @@ const routes = [
     props: true,
   },
   {
-    path: '/HangMan_vue/HangManMain',
+    path: '/HangMan/HangManMain',
     name: 'HangManMain',
     component: HangManMain,
   },
   {
-    path: '/HangMan_vue/HangManGame',
+    path: '/HangMan/HangManGame',
     name: 'HangManGame',
     component: HangManGame,
   },
   {
-    path: '/HangMan_vue/HangManPage',
+    path: '/HangMan/HangManPage',
     name: 'HangManPage',
     component: HangManPage,
     props: true,

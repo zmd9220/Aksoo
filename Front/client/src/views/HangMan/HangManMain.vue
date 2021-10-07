@@ -1,5 +1,6 @@
 <template>
   <div class="main">
+    <!-- 효과음 -->
     <audio
       autoplay
       id="gameStart"
@@ -20,6 +21,7 @@
         </div>
         <div class="hangman-select-box">
           <div class="hangman-select-box-title">테마를 선택하세요</div>
+          <!-- 주제 선택창 -->
           <div class="hangman-topic">
             <select class="selectBox" v-model="topic">
               <option disabled selected style="text-align: center">주제</option>
@@ -33,6 +35,7 @@
               </option>
             </select>
           </div>
+          <!-- 난이도 선택창 -->
           <div class="hangman-diff">
             <select class="selectBox" v-model="diff">
               <option disabled selected style="text-align: center">
@@ -71,7 +74,7 @@ export default {
       topic: "주제",
       diff: "난이도",
       topic_options: [
-        { text: "FRUIT", value: 1 },
+        { text: "FRUIT", value: 1 }, // value를 설정하여 같이 넘겨줌으로서 주제선택 가능
         { text: "ANIMAL", value: 2 },
       ],
       diff_options: [
@@ -89,20 +92,17 @@ export default {
     gotoHangManPage() {
       var audio = document.getElementById("gameStart");
 
-      if (this.topic === "주제") {
+      if (this.topic === "주제") { // 미선택시 진행불가
         alert("주제를 선택해주세요");
       } else if (this.diff === "난이도") {
         alert("난이도를 선택해주세요");
-      } else {
+      } else { // 모든요소 선택시 게임 입장
         audio.play();
         this.$router.push({
           name: "HangManPage",
           params: { topic: this.topic, diff: this.diff },
         });
       }
-
-      // // 이름을 가지는 라우트
-      // router.push({ name: 'user', params: { userId: 123 }})
     },
   },
   updated: {},
@@ -115,20 +115,16 @@ export default {
   margin-top: 5vh;
   margin-bottom: 5vh;
 }
-
 .hangman-main .hangman-desc h1 {
   margin: 0 5vh 0 10vh;
   font-size: 3.75rem;
-  /* font-weight: bold; */
   font-family: BinggraeSamanco-Bold;
 }
-
 .hangman-main .hangman-desc h2 {
   font-family: GowunDodum-Regular;
   font-size: 1.125rem;
   margin: 3vh 5vh 0 0;
 }
-
 .hangman-main .hangman-main-box {
   display: flex;
   background-color: #f4f1eb;
@@ -138,7 +134,6 @@ export default {
   border-radius: 20px;
   box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.733);
 }
-
 .hangman-main .hangman-main-box .hangman-thumbnail-box {
   background-color: rgb(158, 157, 157);
   width: 50%;
@@ -154,17 +149,14 @@ export default {
   width: 30%;
   margin: auto;
 }
-
 .hangman-main .hangman-main-box .hangman-select-box .hangman-select-box-title {
   width: 100%;
   height: 20%;
-  /* background-color: #E5D2BD; */
   border-radius: 20px;
   font-family: "SDSamliphopangche_Basic";
   font-size: 2rem;
   color: #b59e7a;
 }
-
 .hangman-main .hangman-main-box .hangman-select-box .hangman-topic {
   width: 100%;
   height: 7vh;
@@ -181,7 +173,6 @@ export default {
   color: #957457;
   cursor: pointer;
 }
-
 .hangman-main .hangman-main-box .hangman-select-box .hangman-topic .selectBox {
   border: 0px;
   outline: none;
@@ -189,7 +180,6 @@ export default {
   color: #957457;
   width: 100%;
 }
-
 .hangman-main .hangman-main-box .hangman-select-box .hangman-diff {
   width: 100%;
   height: 7vh;
@@ -206,7 +196,6 @@ export default {
   color: #957457;
   cursor: pointer;
 }
-
 .hangman-main .hangman-main-box .hangman-select-box .hangman-diff .selectBox {
   border: 0px;
   outline: none;
@@ -214,7 +203,6 @@ export default {
   color: #957457;
   width: 100%;
 }
-
 .hangman-main .hangman-main-box .hangman-select-box .hangman-start-button {
   width: 100%;
   height: 7vh;
@@ -242,11 +230,6 @@ export default {
   background-color: #e5d2bd;
   color: #957457;
 }
-
-/* 이미지들 */
-/* .background-img {
-  height: 90%;
-} */
 .cloud {
   position: absolute;
   top: 25%;
@@ -257,7 +240,6 @@ export default {
   transition-duration: 7s;
   transition-property: transform;
 }
-
 img.Shape-2 {
   position: absolute;
   z-index: 0;
@@ -266,7 +248,6 @@ img.Shape-2 {
   top: 87.5%;
   height: 12.5%;
 }
-
 .acidImg {
   width: 100%;
   height: 100%;

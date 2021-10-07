@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- BGM -->
     <audio
     autoplay
       loop
@@ -10,6 +11,7 @@
       <img src="@/assets/cloud.png" class="cloud" />
       <img src="@/assets/Learn/LearnStart/shape-2.svg" class="Shape-2" />
     </div>
+    <!-- 자음/모음 navbar -->
     <div class="bar">
       <p class="letters" v-if="select === 'word'">
         <span>
@@ -48,29 +50,24 @@
         </span>
       </p>
     </div>
+    <!-- 자음/모음/ 이미지 -->
     <div class="hangman-row">
       <div class="game-container">
-        <!-- <b-button>즐겨찾기 추가 {{ selectAlphabet }}</b-button> -->
-        <!-- <img v-bind:src="require(`${imgSrclist[no]}`)" width="500rem"> -->
         <img
           class="cardimg"
           v-bind:src="require(`@/assets/Learn/Letters/${selectAlphabet}.png`)"
           width="500rem"
         />
-        <!-- <img v-bind:src=imgSrclist width="500rem"> -->
       </div>
 
       <!-- 카메라 -->
       <div class="right-status-column">
-        <!-- <div v-if="mode_letter" class="game-mode-cons" @click="modeChange">자음</div>
-        <div v-else class="game-mode-vowel" @click="modeChange">모음</div> -->
         <div class="letter">
           <div class="selected-letter">{{ letter }}</div>
           <div class="selected-confidence">정확도 : {{ confidence }}</div>
         </div>
         <div class="camera1">
           <template v-if="!modelLoaded">
-            <!-- <img src="./croc.png" style="width: 80px" />  -->
             <loading message="👋 Loading hand detection model..." />
           </template>
           <camera
@@ -100,8 +97,6 @@ export default {
   data: function () {
     return {
       select: this.$route.params.select,
-      // imgSrclist: ['./fingerspelling_kor_cons.jpg', './fingerspelling_kor_vowels_1.jpg'],
-      // imgSrclist: require('@/assets/letters/'+'ㄱ'+'.jpg'),
       no: 0,
       selectAlphabet: String,
       words: Object,
@@ -110,8 +105,8 @@ export default {
       confidence: "90%",
       modelLoaded: false,
       minimizeCamera: false,
-      consCompletedBox: [0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-      vowCompletedBox: [0,0,0,0,0,0,0,0,0,0],
+      consCompletedBox: [0,0,0,0,0,0,0,0,0,0,0,0,0,0], // 자음 동작 잘 했는지 확인
+      vowCompletedBox: [0,0,0,0,0,0,0,0,0,0], // 모음 동작 잘 했는지 확인
     };
   },
   components: {
@@ -121,7 +116,7 @@ export default {
   },
   created: function () {
     axios({
-      method: "GET",
+      method: "GET",  // DB에서 자음/모음 데이터 불러오기
       url: "http://127.0.0.1:8000/learn/getWords/" + this.$route.params.select,
     })
       .then((res) => {
@@ -147,7 +142,7 @@ export default {
       this.mode_letter = 1 - this.mode_letter;
       this.$refs.camera.modeChange();
     },
-    consLearn: function (letter) {
+    consLearn: function (letter) { // 자음 동작 바르게 인식시키면 다음 문자로 전환
       const consInventory = [
         {name: 'ㄱ', value: 0},
         {name: 'ㄴ', value: 1},
@@ -165,12 +160,11 @@ export default {
         {name: 'ㅎ', value: 13},
       ];
       const consResult = consInventory.find( ({ name }) => name === letter ); //  손가락 인식 되었을 때 객체값
-      // console.log(this.selectAlphabet)
       const Sum = this.consCompletedBox.reduce(function add(sum, currValue) {
           return sum + currValue;
         }, 0);
       if(Sum === 14){
-        alert('축하드립니다!!')
+        alert('축하드립니다!!') 
         setTimeout(() => {
             this.$router.push({name:'LearnWordPage'});
         }, 500);
@@ -187,7 +181,7 @@ export default {
         }
       }
     },
-    vowLearn: function (letter) {
+    vowLearn: function (letter) { // 모음 동작 바르게 인식시키면 다음 문자로 전환
       const vowInventory = [
         {name: 'ㅏ', value: 0},
         {name: 'ㅑ', value: 1},
@@ -223,36 +217,18 @@ export default {
         }
       }
     },
-    input: function (letter) {
+    input: function (letter) {  // 카메라 통해서 인식한 값
       if(this.mode_letter === 1){
         this.consLearn(letter)
       }else{
         this.vowLearn(letter)
       }
     },
-    changePicture() {
-      // this.no = (this.no)%(this.imgSrclist.length);
-    },
     goWordSelect() {
       this.$router.push("/wordSelect").catch(() => {});
     },
     setAlphabet(alphabet) {
       this.selectAlphabet = alphabet;
-    },
-    setBookmark(alphabet) {
-      axios({
-        method: "POST",
-        url: "http://127.0.0.1:8000/learn/setBookmark/",
-        data: {
-          alphabet: alphabet,
-        },
-      })
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
     },
   },
  mounted() {

@@ -8,7 +8,19 @@
 npm i --save fingerpose
 ```
 
+##### 사용 라이브러리 버전
 
+```js
+  "dependencies": {
+    "@tensorflow-models/handpose": "0.0.7",
+    "@tensorflow/tfjs": "^3.9.0",
+    "core-js": "^3.6.5",
+    "fingerpose": "0.0.2",
+    "vue": "^2.6.11",
+    "vue-router": "^3.5.2",
+    "vue-web-cam": "^1.9.0"
+  },
+```
 
 ### 관련 코드 설명
 
@@ -113,7 +125,7 @@ thumbsDownGesture.addCurl(fp.Finger.Pinky, fp.FingerCurl.FullCurl, 1.0);
 
 #### components/Camera.vue
 
-```
+```vue
 data() {
     return {
       ......
@@ -183,6 +195,124 @@ computed: {
             break;
         }
       }
+```
+
+```js
+  methods: {
+    async loadHandpose() {
+      // 핸드포즈 모델 불러오기
+      const model = await handpose.load();
+      await this.detect(model);
+
+      this.$emit("on-loaded");
+    },
+
+    async detect(model) {
+      const videoEl = this.$refs.webcam?.$el;
+
+      if (videoEl && videoEl.readyState === 4) {
+        // 웹캠을 통해 디텍션 하기
+        const hand = await model.estimateHands(videoEl);
+
+        if (hand.length > 0) {
+          let estimation = "";
+          if (this.mode === 0) {
+            estimation = GE_vowel.estimate(
+              hand[0].landmarks,
+              this.minConfidence
+            );
+          } else {
+            estimation = GE_cons.estimate(
+              hand[0].landmarks,
+              this.minConfidence
+            );
+          }
+
+          if (estimation.gestures.length > 0) {
+            // 신뢰도가 큰 제스쳐들을 가져와서 emit 발생시키기
+            const confidences = estimation.gestures.map((g) => g.confidence);
+            const largest = confidences.indexOf(Math.max(...confidences));
+
+            this.detection = estimation.gestures[largest];
+
+            GestureEventBus.$emit("on-detection", estimation.gestures[largest]);
+          }
+        }
+
+        // mesh 그리기
+        this.ctx.clearRect(0, 0, this.width, this.height);
+        drawHandMesh(hand, this.ctx);
+
+        const a = hand[0]; // hand landmark를 가져오기 위한 전체 dict
+        if (a !== undefined) {
+          const x_diff =
+            Math.abs(a.landmarks[5][0] - a.landmarks[9][0]) +
+            Math.abs(a.landmarks[9][0] - a.landmarks[13][0]) +
+            Math.abs(a.landmarks[13][0] - a.landmarks[17][0]);
+          const y_diff =
+            Math.abs(a.landmarks[5][1] - a.landmarks[9][1]) +
+            Math.abs(a.landmarks[9][1] - a.landmarks[13][1]) +
+            Math.abs(a.landmarks[13][1] - a.landmarks[17][1]);
+
+          if (a.landmarks[1][0] > a.landmarks[0][0]) {
+            this.detection.hand = 0;
+          } else {
+            this.detection.hand = 1;
+          }
+          if (x_diff > y_diff) {
+            this.detection.hand2 = 0;
+          } else {
+            this.detection.hand2 = 1;
+          }
+        }
+        if (this.last !== this.mostRecent.name) {
+          console.log("단어변화");
+          this.last = this.mostRecent.name;
+          this.count = 0;
+        } else {
+          console.log(this.count);
+          this.count++;
+          if (this.count > 150) {
+            console.log("단어입력");
+            console.log(this.last);
+            this.last = "*";
+            this.count = 0;
+          }
+        }
+        // 루프를 통해 계속 디텍션 하기.
+        requestAnimationFrame(() => this.detect(model));
+      }
+    },
+
+    onError() {
+      this.$emit("on-loaded");
+
+      this.showErrorDialog({
+        message: "Sorry, but we are not able to access your webcam.",
+      });
+    },
+
+    onNotsupported() {
+      this.$emit("on-loaded");
+
+      this.showErrorDialog({
+        message: "Sorry, but your browser does not appear to be supported.",
+        onConfirm: () => this.$router.go(-1),
+      });
+    },
+
+    onCameras(cameras) {
+      this.devices = cameras;
+    },
+
+    onCameraChange(deviceId) {
+      this.deviceId = deviceId;
+      this.camera = deviceId;
+    },
+    modeChange() {
+      this.mode = 1 - this.mode;
+    },
+  },
 ```
 
 

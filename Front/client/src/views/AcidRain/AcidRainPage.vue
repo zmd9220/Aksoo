@@ -1,27 +1,20 @@
 <template>
   <div class="acid">
+    <!-- 오디오 (정답, 오답, 버튼 클릭, BGM) -->
     <audio
       loop
       id="gameBgm"
       src="@/assets/music/bgm/Jaunty_Gumption.mp3"
     ></audio>
-    <!-- <audio
-      loop
-      id="gameBgm"
-      src="@/assets/music/bgm/Jaunty_Gumption.mp3"
-    ></audio> -->
     <audio id="gameOver" src="@/assets/music/gameover/gameover.mp3"></audio>
     <audio id="click" src="@/assets/music/answer/Correct 2.mp3"></audio>
-    <!-- <audio id="answer" src="@/assets/music/answer/Correct 1.mp3"></audio> -->
     <audio id="answer" src="@/assets/music/answer/pop.mp3"></audio>
     <audio
       id="wrongAnswer"
       src="@/assets/music/wrongAnswer/Error 2.mp3"
     ></audio>
-    <!-- <template v-if="!modelLoaded">
-      <loading message="👋 Loading hand detection model..." />
-    </template> -->
 
+    <!-- 게임 박스 -->
     <div class="game-container">
       <AcidRainGame
         ref="game"
@@ -34,6 +27,7 @@
         :letter="letter"
       />
     </div>
+    <!-- 점수 박스 -->
     <div class="right-status-column">
       <div class="nickname">{{ accounts.nickname }} 님</div>
       <div class="game-status">
@@ -70,17 +64,10 @@
         >
           <div class="content"></div>
         </Progress>
-        <!-- {{ count }} -->
       </div>
       <div v-else class="game-mode-vowel">
         {{ consonant }}
-        <!-- <Progress :transitionDuration="50" :radius="15" :strokeWidth="7" value="80"/> -->
-        <!-- <Progress :transitionDuration="10" :radius="15" :strokeWidth="7" :value="30">
-                    <div class="content"></div>
-                </Progress> -->
-        <!-- {{count}} -->
       </div>
-      <!-- <b-progress :value="count" :max="100" class="mb-3"></b-progress> -->
 
       <div class="letter">
         <div class="selected-letter">{{ letter }}</div>
@@ -94,11 +81,13 @@
         style="margin-bottom: 0 !important"
       >
       </b-progress>
+      <!-- 카메라 -->
       <div class="camera">
+        <!-- 로딩 -->
         <template v-if="!modelLoaded">
-          <!-- <img src="./croc.png" style="width: 80px" />  -->
           <loading message="👋 Loading hand detection model..." />
         </template>
+        <!-- 카메라 -->
         <camera
           v-show="modelLoaded && !minimizeCamera"
           @on-loaded="modelLoaded = true"
@@ -112,12 +101,10 @@
   </div>
 </template>
 
-
 <script>
 import { mapState } from 'vuex'
 import Camera from "@/components/Camera1.vue";
 import Loading from "@/components/Loading.vue";
-
 import AcidRainGame from "./AcidRainGame.vue";
 
 export default {
@@ -136,18 +123,12 @@ export default {
       life: 5,
       show: true,
       showend: true,
-      // consonant: "",
       modelLoaded: false,
       minimizeCamera: false,
-      test: "",
-      // mode: 0,
-      // per: 0,
       gameIsOver: false,
       letter: "",
       count: 0,
       confidence: "",
-      // clicked: false,
-      // clickedCon: false,
     };
   },
   props: {
@@ -156,22 +137,20 @@ export default {
   },
 
   methods: {
-    // testEmit(test) {
-    //   this.test = test;
-    // },
-    // testPer(per) {
-    //   this.per = per;
-    // },
+    // 카메라 데이터(인식된 글자, 인식된 퍼센트) 받아오기
     cameraData: function (payload1, payload2) {
       this.letter = payload1;
       this.confidence = payload2;
     },
+    // 입력 받은 글자 게임 전달
     input: function (letter) {
       this.$refs.game.listener(letter);
     },
+    // 생명 감소
     lifeLoss: function () {
       this.life--;
     },
+    // 보여지는 점수 변경
     scoreChange: function (payload) {
       this.score = this.score + payload;
       this.answer = true;
@@ -184,6 +163,7 @@ export default {
     this.endGame();
   },
   mounted: function () {
+    // 게임 BGM 소리 감소
     var gameBgm = document.getElementById("gameBgm");
     gameBgm.volume = 0.3;
     gameBgm.play();
@@ -197,9 +177,6 @@ export default {
 
 <style>
 .startImg {
-  /* width: 39.813rem;
-  height: 26rem;
-  margin: 0 6rem 0 0; */
   height: 80%;
   width: 100%;
   object-fit: cover;
@@ -210,125 +187,10 @@ export default {
   border-radius: 20px;
   margin: 2vh 2vh 0 2vh;
   box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.733);
-  /* background: linear-gradient(to top, #fff, #dee8f7); */
   position: relative;
   overflow: hidden;
 }
 
-/* #box {
-  background-color: #f4f1eb;
-  flex: 70%;
-  border-radius: 20px;
-  margin: 2vh 2vh 0 2vh;
-  box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.733);
-  background: linear-gradient(to top, #fff, #dee8f7);
-  position: relative;
-  overflow: hidden;
-} */
-
-#box > .ground {
-  /* background: url("@/assets/ground.png"); */
-  /* top: 100%; */
-  z-index: 2;
-  object-fit: contain;
-  width: 100%;
-  /* height: 37%; */
-  position: absolute;
-  bottom: 0px;
-  left: 0px;
-
-  /* margin: 44% 0 0 0; */
-}
-
-#box > .gosm {
-  /* background: url("@/assets/ground.png"); */
-  /* top: 100%; */
-  z-index: 3;
-  object-fit: contain;
-  /* width: 100%; */
-  height: 12%;
-  position: absolute;
-  bottom: 0px;
-  left: 0px;
-
-  animation-name: gosm;
-  animation-duration: 6s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  /* animation-direction: alternate; */
-  animation-fill-mode: backwards;
-  /* animation-delay: 3s; */
-
-  /* margin: 44% 0 0 0; */
-}
-@keyframes gosm {
-  0% {
-    left: 5%;
-    bottom: 5%;
-    opacity: 1;
-    /* transform: scaleX(-1); */
-  }
-  50% {
-    left: 80%;
-    bottom: 5%;
-    opacity: 1;
-    /* transform: scaleX(-1); */
-  }
-  50.1% {
-    opacity: 0;
-  }
-  100% {
-    left: 160%;
-    bottom: 5%;
-    opacity: 0;
-    /* transform: scaleX(-1); */
-  }
-}
-
-#box > .lgosm {
-  /* background: url("@/assets/ground.png"); */
-  /* top: 100%; */
-  z-index: 3;
-  object-fit: contain;
-  /* width: 100%; */
-  height: 12%;
-  position: absolute;
-  bottom: 0px;
-  left: 0px;
-
-  animation-name: lgosm;
-  animation-duration: 6s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  /* animation-direction: alternate; */
-  animation-fill-mode: backwards;
-  /* animation-delay: 3s; */
-
-  /* margin: 44% 0 0 0; */
-}
-@keyframes lgosm {
-  100% {
-    left: 5%;
-    bottom: 5%;
-    opacity: 1;
-    /* transform: scaleX(-1); */
-  }
-  50% {
-    left: 80%;
-    bottom: 5%;
-    opacity: 1;
-    /* transform: scaleX(-1); */
-  }
-  49.9% {
-    opacity: 0;
-  }
-  0% {
-    left: 160%;
-    bottom: 5%;
-    opacity: 0;
-    /* transform: scaleX(-1); */
-  }
-}
 
 .tree-ground {
   width: 100%;
@@ -354,7 +216,6 @@ export default {
 }
 
 .modal-content {
-  /* height: 100% !important; */
   border: 0px !important;
 }
 .modal-body {
@@ -362,15 +223,10 @@ export default {
 }
 .modal-dialog {
   max-width: 1000px !important;
-  /* position: absolute;
-  vertical-align: middle;
-  top: 40%; */
   width: 75% !important;
   height: 45%;
   top: 25%;
-  /* margin: 25% 22%; */
   padding: 1% 2% 1.3% 1%;
-  /* object-fit: contain; */
   border-radius: 1.31rem;
   box-shadow: 0rem 0.5rem 1rem 0.06rem rgba(0, 0, 0, 0.43);
   border: solid 0.06rem #a4a4a3;
@@ -410,7 +266,6 @@ export default {
   width: 100%;
   height: 100%;
   max-width: 100%;
-  /* margin: auto; */
 }
 
 .panel-body {
@@ -432,7 +287,6 @@ export default {
   display: flex;
   width: 100%;
   height: 90vh;
-  /* display: flex; */
 }
 
 .right-status-column {
@@ -590,14 +444,6 @@ export default {
   top: 50%;
   z-index: 80;
 }
-/* #restart {
-  float: center;
-  display: block;
-  text-align: center;
-  position: relative;
-  top: 50%;
-  z-index: 100;
-} */
 .game-result {
   height: 200px;
   margin-top: 5%;
@@ -610,8 +456,6 @@ export default {
   height: 50px;
   margin: 4% 0 3%;
   padding: 0.3% 35% 0.3%;
-  /* padding: 1.438rem 10.813rem 1.188rem; */
-  /* object-fit: contain; */
   border-radius: 2.56rem;
   box-shadow: 0rem 0.31rem 0.25rem 0rem rgba(0, 0, 0, 0.3);
   border: solid 0.19rem #957252;
@@ -645,8 +489,6 @@ export default {
   color: #e5d2bd !important;
   border: solid 0.19rem #e5d2bd !important;
 }
-
-/* game-over modal */
 
 .modal-close-btn {
   position: absolute;
@@ -795,7 +637,6 @@ export default {
 .modal-restart-btn {
   width: 40%;
   height: 40%;
-  /* border: solid 0.5vh #76300b; */
   border: none;
   background-color: #fe6e27;
   box-shadow: 0rem 0.38vh 0.56rem 0 rgba(0, 0, 0, 0.3);
@@ -806,7 +647,6 @@ export default {
 .modal-restart-btn {
   width: 40%;
   height: 40%;
-  /* border: solid 0.5vh #76300b; */
   border: none;
   background-color: #fe6e27;
   box-shadow: 0rem 0.38vh 0.56rem 0 rgba(0, 0, 0, 0.3);
@@ -822,7 +662,6 @@ export default {
 .modal-halloffame-btn {
   width: 40%;
   height: 40%;
-  /* border: solid 0.5vh #76300b; */
   border: none;
   background-color: #68bbf7;
   box-shadow: 0rem 0.38vh 0.56rem 0 rgba(0, 0, 0, 0.3);

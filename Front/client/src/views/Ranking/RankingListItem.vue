@@ -74,6 +74,7 @@ export default {
     ...mapState('userStore', ['accounts', 'accessToken'])
   },
   updated: function () {
+    // axios 데이터 가져오기
     axios ({
         method: 'get',
         url: SERVER_URL + '/accounts/follow/' + this.item.profile + '/',
