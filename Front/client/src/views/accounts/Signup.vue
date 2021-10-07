@@ -1,37 +1,24 @@
 <template>
   <div>
+    <!-- 게임 백그라운드 음악 -->
     <audio
       loop
       id="gameBgm"
       src="@/assets/music/bgm/Wavecont-Upbeat-Inspiring-Corporate-Full-Length.mp3"
     ></audio>
+    <!-- 게임 배경화면 -->
     <img src="@/assets/deco.png" class="decoImg" />
+    <!-- 게임 좌측 "회원가입" 문구 이미지 -->
     <div class="imgLeft">
       <img src="@/assets/signUp.png" class="signImg" />
     </div>
+    <!-- 우측 회원가입 창/영역 -->
     <div class="signMain" style="z-index: -2;">
       <div style="font-size: 1.5rem; text-align: left; margin-top: 5%; font-weight: bold;">CREATE ACOUNT</div>
-      <!-- <div class="googleLogin"> -->
-        <!-- <button type="button" class="googleBtn">
-          <img
-            src="@/assets/googleLogo.png"
-            alt=""
-            style="margin: 1%; width: 20%; height: 90%"
-          />
-          구글로 로그인</button
-        ><button type="button" class="googleBtn">
-          <img
-            src="@/assets/googleLogo.png"
-            alt=""
-            style="margin: 1%; width: 20%; height: 90%"
-          />
-          구글로 로그인
-        </button> -->
-      <!-- </div> -->
-      <!-- <div style="color: #868c93; text-decoration: underline">OR</div> -->
 
       <div class="group-field">
         <div class="input-group clearfix">
+          <!-- 이메일 입력  칸 -->
           <input
             id="email"
             name="email"
@@ -45,6 +32,7 @@
       </div>
       <div class="group-field">
         <div class="input-group">
+          <!-- 비밀번호 입력칸 -->
           <input
             type="password"
             id="password"
@@ -58,6 +46,7 @@
       </div>
       <div class="group-field">
         <div class="input-group">
+          <!-- 비밀번호 확인 입력칸 -->
           <input
             type="password"
             id="passwordConfirmation"
@@ -68,28 +57,10 @@
             style="display: block"
           />
         </div>
-          <!-- <a
-                        href=""
-                        class=""
-                        tabindex="-1"
-                        style="
-                          position: absolute;
-                          top: 50%;
-                          right: 6px;
-                          margin-top: -17px;
-                          padding: 4px 10px;
-                          background: transparent;
-                          border-radius: 2px;
-                          color: rgb(0, 0, 0);
-                          text-align: center;
-                          text-decoration: none;
-                          user-select: none;
-                        "
-                        ><i class="ico visible-eye-on"></i
-                      ></a> -->
       </div>
       <div class="group-field">
         <div class="input-group">
+          <!-- 닉네임 입력칸 -->
           <input
             type="text"
             id="nickname"
@@ -101,6 +72,7 @@
         </div>
       </div>
       <div>
+        <!-- 회원가입 버튼 -->
         <b-button
           class="button-normal larger"
           @click="signup(credentials)"
@@ -111,6 +83,7 @@
       </div>
 
       <div class="group-field">
+        <!-- 로그인으로의 router -->
         <div style="color: #858484; text-align: left; float: left">
           이미 계정이 있으신가요? &nbsp;
         </div>
@@ -129,6 +102,7 @@ export default {
   name: "Signup",
   data: function () {
     return {
+      // 회원가입에 받을 credential 데이터 정의
       credentials: {
         email: null,
         password: null,
@@ -137,15 +111,18 @@ export default {
       },
     };
   },
+  // 게임 화면 mount시 배경음악 재생
   mounted() {
     var gameBgm = document.getElementById("gameBgm");
     gameBgm.volume = 0.3;
     gameBgm.play();
   },
   methods: {
+    // 로그인 으로의 router 함수
     login: function () {
       this.$router.push("/accounts/login");
     },
+    // 회원가입 axios 요청 함수
     signup: function () {
       axios({
         method: "POST",
@@ -160,6 +137,7 @@ export default {
         // }
       })
         .then((res) => {
+          // 회원가입 완료 시 login으로 이동
           console.log(res);
           this.$router.push({ name: "Login" });
         })

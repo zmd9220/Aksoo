@@ -1,5 +1,6 @@
 <template>
   <div style="overflow: hidden">
+    <!-- 배경음악 -->
     <audio
       loop
       id="gameBgm"
@@ -10,6 +11,7 @@
       id="gameStart"
       src="@/assets/music/pageMove/Jump High.mp3"
     ></audio>
+    <!-- 배경 이미지 -->
     <div class="background-img">
       <img src="@/assets/shape-1.png" alt="yellowcloud1" class="shape-1" />
       <img src="@/assets/shape-2-main.png" alt="yellowcloud2" class="shape-2" />
@@ -30,6 +32,7 @@
       <img src="@/assets/croc.png" alt="croc" class="croc" />
     </div>
 
+    <!-- 환영글 -->
     <div class="welcomewords">
       <p>아직 준비가 되지 않은 당신 옆에</p>
       <p>악수가 함께 하겠습니다</p>
@@ -37,6 +40,7 @@
 
     <br />
 
+    <!-- 서비스 소개 -->
     <div class="servicewords">
       <p>수어의 첫 걸음은 지문자부터!</p>
       <p>
@@ -48,6 +52,7 @@
     <br />
 
     <div>
+      <!-- 학습하기로 이동 -->
       <b-button to="Start" class="start">
         <span class="start-text"> 시작하기 -> </span>
       </b-button>
@@ -57,6 +62,7 @@
 
 <script>
 export default {
+  // 페이지 입장 시 음악 재생
   mounted() {
     var gameBgm = document.getElementById("gameBgm");
     gameBgm.volume = 0.2;
@@ -71,8 +77,6 @@ export default {
   top: 10%;
   left: 0%;
   width: 40%;
-  /* margin: 2.313rem 80.688rem 15rem 0; */
-  /* padding: 28.875rem 29.938rem 6.375rem 8rem; */
   object-fit: fill;
   background-color: #fff3d9;
   z-index: -1;
@@ -83,8 +87,6 @@ export default {
   top: 40%;
   left: 65%;
   width: 30%;
-  /* margin: 2.313rem 80.688rem 15rem 0; */
-  /* padding: 28.875rem 29.938rem 6.375rem 8rem; */
   object-fit: fill;
   background-color: #fff3d9;
   z-index: -1;
@@ -216,7 +218,6 @@ export default {
   animation-duration: 10s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
-  /* animation-direction: alternate; */
   animation-fill-mode: backwards;
 }
 
