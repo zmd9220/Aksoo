@@ -59,7 +59,7 @@
                 />{{ cardMatching.bestScore }}
               </div>
             </span>
-            <b-button class="mt-3 modal-halloffame-btn" block href="/Rangking/RankingMain">
+            <b-button class="mt-3 modal-halloffame-btn" block @click="$router.push({ name: 'RankingMain', params: { whatgame: 2 } })">
               <span class="halloffame-btn-txt">명예의전당</span></b-button
             >
           </div>

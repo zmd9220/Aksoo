@@ -63,7 +63,7 @@
             <b-button
               class="mt-3 modal-halloffame-btn"
               block
-              href="/Rangking/RankingMain"
+              @click="$router.push({ name: 'RankingMain', params: { whatgame: 1 } })"
             >
               <span class="halloffame-btn-txt">명예의전당</span></b-button
             >
