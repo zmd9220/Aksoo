@@ -1,16 +1,20 @@
 <template>
   <div>
+    <!-- profile페이지 음악 -->
     <audio
       autoplay
       id="gameStart"
       src="@/assets/music/bgm/modify-cutest-bunny.mp3"
     ></audio>
+    <!-- 개인 프로필 -->
     <div class="my-profile">
+      <!-- 프로필사진, 프로필사진은 id값으로 결정된다. -->
       <img :src='"@/assets/Profile/prf-" + profile_name[`${this.accounts.userId}`%7] +".png"' alt="profile_picture" class="profile-pic" />
       <div class="">
         <div style="height: 2vh"></div>
         <h3>{{ this.accounts.nickname }}</h3>
         <div class="tier-wrapper">
+          <!-- tier그림변경을 위한 분기처리 -->
           <img v-if="this.accounts.tier == 5" src="@/assets/Ranking/brz.png" alt="tier-picture" class="tier-pic" style="width: 1.5rem; margin-right: 0.5rem"/>
           <img v-if="this.accounts.tier == 4" src="@/assets/Ranking/slv.png" alt="tier-picture" class="tier-pic" style="width: 1.5rem; margin-right: 0.5rem"/>
           <img v-if="this.accounts.tier == 3" src="@/assets/Ranking/gld.png" alt="tier-picture" class="tier-pic" style="width: 1.5rem; margin-right: 0.5rem"/>
@@ -32,9 +36,10 @@
             <h5>누적 점수</h5>
           </div>
         </div>
-        <!-- <div class="edit-button" style="cursor: pointer">EDIT</div> -->
       </div>
     </div>
+    <!-- 플레이기록 -->
+    <!-- 산성비 -->
     <div class="recode-wrapper">
       <div class="play-record">
         <h2>플레이기록</h2>
@@ -74,7 +79,8 @@
               "
             >
               <div style="height: 1.8vh"></div>
-              <div class="play-button" @click="gotoAcidrain" style="cursor: pointer">PLAY</div>
+              <div class="play-button" @click="$router.push({ name: 'AcidRainMain' });" style="cursor: pointer">PLAY</div>
+              <!-- 라우터에 어떤게임인지를 담아 그 게임의 랭킹보여주기 -->
               <div
                 style="
                   text-align: end;
@@ -94,7 +100,7 @@
         </div>
 
         <div class="line"></div>
-
+        <!-- 카드 뒤집기 -->
         <div class="game-recode">
           <img
             src="@/assets/cardflip-cover.png"
@@ -131,7 +137,8 @@
               "
             >
               <div style="height: 1.8vh"></div>
-              <div class="play-button" @click="gotoCardfilp" style="cursor: pointer">PLAY</div>
+              <div class="play-button" @click="$router.push({ name: 'CardflipMain' });" style="cursor: pointer">PLAY</div>
+              <!-- 라우터에 어떤게임인지를 담아 그 게임의 랭킹보여주기 -->
               <div
                 style="
                   text-align: end;
@@ -151,7 +158,7 @@
         </div>
 
         <div class="line"></div>
-
+        <!-- 단어맞추기 -->
         <div class="game-recode">
           <img
             src="@/assets/hangman-cover.png"
@@ -190,7 +197,8 @@
               "
             >
               <div style="height: 1.8vh"></div>
-              <div class="play-button" @click="gotoHangman" style="cursor: pointer">PLAY</div>
+              <div class="play-button" @click="$router.push({ name: 'HangManMain' });" style="cursor: pointer">PLAY</div>
+              <!-- 라우터에 어떤게임인지를 담아 그 게임의 랭킹보여주기 -->
               <div
                 style="
                   text-align: end;
@@ -211,6 +219,7 @@
 
         <div class="line"></div>
       </div>
+      <!-- 친구목록 -->
       <div class="friends-list">
         <div style="display: flex">
           <h2 style="margin-top: 1.3vh">친구 목록</h2>
@@ -220,6 +229,7 @@
         </div>
         <div class="friend-profile-list"> 
           <div class="friend-profile" v-for="item in userData.userDetail.followData.followingData" :key="item">
+            <!-- 프로필사진, 프로필사진은 id값으로 결정된다. -->
             <img
               :src='"@/assets/Profile/prf-" + profile_name[item.id%7] +".png"'
               alt="profile_picture"
@@ -236,13 +246,8 @@
                 "
               >
                 <div style="display: flex">
-                  <!-- <img
-                    src="@/assets/dot-gr.png"
-                    alt="tier-picture"
-                    class="tier-pic"
-                    style="margin-right: 0.5rem"
-                  /> -->
                   <div style="display: flex; align-items:center">
+                    <!-- tier그림변경을 위한 분기처리 -->
                     <img v-if="item.tier == 5" src="@/assets/Ranking/brz.png" alt="tier-picture" class="tier-pic" style="width: 2vw; height:70%; margin-right: 0.5rem"/>
                     <img v-if="item.tier == 4" src="@/assets/Ranking/slv.png" alt="tier-picture" class="tier-pic" style="width: 2vw; height:70%; margin-right: 0.5rem"/>
                     <img v-if="item.tier == 3" src="@/assets/Ranking/gld.png" alt="tier-picture" class="tier-pic" style="width: 2vw; height:70%; margin-right: 0.5rem"/>
@@ -287,27 +292,27 @@ export default {
   data() {
     return {
       userData: null,
-      tier_num_to_str: [0, 'Diamond', 'Platinum', 'Gold', 'Silver', 'Bronze'],
-      profile_name: ['bird', 'cml', 'croc', 'ele', 'gsm', 'hippo', 'shark'],
+      tier_num_to_str: [0, 'Diamond', 'Platinum', 'Gold', 'Silver', 'Bronze'], //티어 string으로 변경용 데이터
+      profile_name: ['bird', 'cml', 'croc', 'ele', 'gsm', 'hippo', 'shark'], // id num값을 프로필 동물에 대응하기 위한 데이터
       profile: 3,
       nickname: "비비디바비디부",
       tier: 2,
-      friend_num: 8,
+      friend_num: 8, // 친구목록 숫자
       max_rank: "10",
       sum_score: "4400",
-      acid_rain: {
+      acid_rain: {  //산성비
         rank: 10,
         max_score: 1500,
       },
-      flip_card: {
+      flip_card: {  //카드뒤집기
         rank: 11,
         max_score: 1300,
       },
-      word_guess: {
+      word_guess: {  //단어맞추기
         rank: 13,
         max_score: 1600,
       },
-      friend_recode: {
+      friend_recode: {  //친구
         profile: 5,
         username: "김펭수",
         tier:4,
@@ -316,16 +321,7 @@ export default {
     };
   },
   methods: {
-    gotoAcidrain() {
-      this.$router.push({ name: "AcidRainMain" });
-    },
-    gotoCardfilp() {
-      this.$router.push({ name: "CardflipMain" });
-    },
-    gotoHangman() {
-      this.$router.push({ name: "HangManMain" });
-    },
-    MaxRankPoint() {
+    MaxRankPoint() { // 누적점수계산 함수
       var ranks = [this.acid_rain.rank, this.flip_card.rank, this.word_guess.rank]
       var null_rank_count = ranks.filter(x => x==0).length
       var filtered = ranks.filter(x => x!=0)
@@ -335,11 +331,10 @@ export default {
       } else {
         this.max_rank = Math.min.apply(Math, filtered)
       }
-      // this.max_rank = Math.min.apply(Math, [this.acid_rain.rank, this.flip_card.rank, this.word_guess.rank]);
 
       this.sum_score = this.acid_rain.max_score + this.flip_card.max_score + this.word_guess.max_score
     },
-    deletefollow(id) {
+    deletefollow(id) { //친구삭제기능
       axios ({
         method: 'post',
         url: SERVER_URL + '/accounts/follow/' + id + '/',
@@ -354,10 +349,10 @@ export default {
       })
     }
   },
-  computed: {
+  computed: { // 계정에관한정보를 computed에 등록하여 갱신때마다 바로 확인가능하게한다.
     ...mapState('userStore', ['accounts', 'accessToken'])
   },
-  mounted: function () {
+  mounted: function () { //프로필페이지에 쓰이는 데이터 axios요청
     axios ({
         method: 'get',
         url: SERVER_URL + '/accounts/' + this.accounts.userId,
@@ -526,7 +521,6 @@ h2 {
   font-weight: bold;
 }
 .recode-wrapper .friends-list .friend-profile-list .friend-profile h5 {
-  /* margin-top: 1.5vh; */
   font-size: 2vh;
 }
 .delete-button {

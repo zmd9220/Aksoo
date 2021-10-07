@@ -12,9 +12,9 @@ import GamePage from '@/views/MainPage/GamePage'
 import LearnStartPage from '@/views/Learn/LearnStart'
 import LearnSelectPage from '@/views/Learn/HandSelect'
 import LearnWordPage from '@/views/Learn/WordSelect'
-import HangManMain from '@/views/HangMan_vue/HangManMain'
-import HangManGame from '@/views/HangMan_vue/HangManGame'
-import HangManPage from '@/views/HangMan_vue/HangManPage'
+import HangManMain from '@/views/HangMan/HangManMain'
+import HangManGame from '@/views/HangMan/HangManGame'
+import HangManPage from '@/views/HangMan/HangManPage'
 import Learning from '@/views/Learn/Learning'
 import CardflipHard from '@/views/Cardflip/CardflipHard'
 import CardflipMiddle from '@/views/Cardflip/CardflipMiddle'
@@ -94,17 +94,17 @@ const routes = [
     props: true,
   },
   {
-    path: '/HangMan_vue/HangManMain',
+    path: '/HangMan/HangManMain',
     name: 'HangManMain',
     component: HangManMain,
   },
   {
-    path: '/HangMan_vue/HangManGame',
+    path: '/HangMan/HangManGame',
     name: 'HangManGame',
     component: HangManGame,
   },
   {
-    path: '/HangMan_vue/HangManPage',
+    path: '/HangMan/HangManPage',
     name: 'HangManPage',
     component: HangManPage,
     props: true,

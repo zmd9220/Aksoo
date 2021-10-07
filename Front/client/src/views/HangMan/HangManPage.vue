@@ -1,17 +1,18 @@
 <template>
   <div class="hangman-row">
+    <!-- 효과음 -->
     <audio
       autoplay
       id="gameStart"
       src="@/assets/music/pageMove/Jump High.mp3"
     ></audio>
-
+    <!-- 게임 bgm -->
     <audio
       loop
       id="gameBgm"
       src="@/assets/music/bgm/Doh_De_Oh.mp3"
     ></audio>
-
+    <!-- 게임 화면 -->
     <div class="game-container">
       <HangManGame
         ref="game"
@@ -22,7 +23,6 @@
         :diff="diff"
       />
       <img class="ground" src="@/assets/WordGuess/land-new.png" />
-      <!-- <img class="wolf" src="@/assets/WordGuess/wolf-1.png" /> -->
       <img
         class="wolf"
         v-if="answer == true"
@@ -39,8 +39,6 @@
         v-else-if="life == 0"
         src="@/assets/WordGuess/wolf3.png"
       />
-
-      <!-- <img v-bind:class="{}" src="@/assets/WordGuess/bird.png" /> -->
       <img class="cage" src="@/assets/cage.png" v-bind:style="cage(life)" />
       <div>
         <img
@@ -50,7 +48,7 @@
         />
       </div>
     </div>
-
+    <!-- 게임 상태창 -->
     <div class="right-status-column">
       <div class="nickname">{{ accounts.nickname }} 님</div>
       <div class="game-status">
@@ -58,7 +56,7 @@
           <div>Life</div>
           <div>
             <span v-for="idx in life" :key="idx">
-              <img src="./heart.png" style="width: 40px" />
+              <img src="@/assets/heart.png" style="width: 40px" />
             </span>
           </div>
         </div>
@@ -79,22 +77,15 @@
       </div>
       <div v-if="mode_letter" class="game-mode-cons" @click="modeChange">
         자음
-        <!-- {{ count }} -->
       </div>
       <div v-else class="game-mode-vowel" @click="modeChange">
         모음
-        <!-- <Progress :transitionDuration="50" :radius="15" :strokeWidth="7" value="80"/> -->
-        <!-- <Progress :transitionDuration="10" :radius="15" :strokeWidth="7" :value="30">
-                    <div class="content"></div>
-                </Progress> -->
-        <!-- {{count}} -->
       </div>
-      <!-- <b-progress :value="count" :max="100" class="mb-3"></b-progress> -->
-
       <div class="letter">
         <div class="selected-letter">{{ letter }}</div>
         <div class="selected-confidence">정확도 : {{ confidence }}</div>
       </div>
+      <!-- 입력 프로그래스 바 -->
       <b-progress
         height="7px"
         :value="count"
@@ -103,9 +94,10 @@
         style="margin-bottom: 0 !important"
       >
       </b-progress>
+      <!-- 카메라 -->
       <div class="camera">
+        <!-- 로딩처리 -->
         <template v-if="!modelLoaded">
-          <!-- <img src="./croc.png" style="width: 80px" />  -->
           <loading message="👋 Loading hand detection model..." />
         </template>
         <camera
@@ -127,8 +119,6 @@
 import Camera from "@/components/Camera0.vue";
 import Loading from "@/components/Loading.vue";
 import HangManGame from "./HangManGame.vue";
-// import axios from "axios";
-// import Progress from "easy-circular-progress";
 import { mapState } from 'vuex'
 
 export default {
@@ -159,31 +149,31 @@ export default {
     diff: Object,
   },
   methods: {
-    cameraData: function (payload1, payload2) {
+    cameraData: function (payload1, payload2) { // 카메라 데이터
       this.letter = payload1;
       this.confidence = payload2;
     },
-    modeChange: function () {
+    modeChange: function () { //자음모드, 모음모드 처리 함수
       this.mode_letter = 1 - this.mode_letter;
       this.$refs.camera.modeChange();
     },
-    input: function (letter) {
+    input: function (letter) { // 입력값 처리
       this.$refs.game.listener(letter);
     },
-    count1: function (cnt) {
+    count1: function (cnt) { // 입력하는데 걸리는 시간
       this.count = (cnt / 100) * 100;
     },
-    lifeLoss: function () {
+    lifeLoss: function () { // 라이프 처리
       this.life--;
     },
-    scoreChange: function (payload) {
+    scoreChange: function (payload) { // 점수변경
       this.score = this.score + payload;
       this.answer = true;
     },
-    answers: function (answer) {
+    answers: function (answer) { // 정답
       this.answer = answer;
     },
-    info: function (life) {
+    info: function (life) { // 라이프에따른 bird css
       if (life == 5) {
         return {
           bottom: "30%",
@@ -201,46 +191,20 @@ export default {
         return { bottom: "11%", left: "40%" };
       }
     },
-    cage: function (life) {
+    cage: function (life) { // 라이프 0일시 새장 css
       if (life == 0) {
         return { display: "block" };
       }
     },
-    // bestScore: function () {
-    //   // 상품정보를 받아오는 axios
-    //   const localURL = "http://127.0.0.1:8000/games/setScore/3";
-    //   axios
-    //     .get(localURL)
-    //     .then((res) => {
-    //       // for (var key1 in res.data){
-    //       //   console.log(key1);
-    //       // }
-    //       console.log(res);
-    //       // res.data.forEach((element) => {
-    //       //   this.words.push(element.word);
-    //       // });
-    //     })
-    //     .then(() => {
-    //       //
-    //     })
-    //     .catch(() => {
-    //       // console.log(err)
-    //     });
-    // },
   },
-  created: function () {
+  created: function () { // 게임 초기 셋팅
     this.life = this.diff.value;
     this.answer = false;
-    // this.bestScore();
   },
-  // computed() {
-  //   // this.count = this.$refs.camera.count/150;
-  //   // console.log(this.$refs.camera.count/150)
-  // },
-  computed: {
+  computed: { // 유저정보 처리
     ...mapState('userStore', ['accounts', 'hangman'])
   },
-  mounted() {
+  mounted() { // bgm 볼륨조절
     var gameBgm = document.getElementById("gameBgm");
     gameBgm.volume = 0.3;
     gameBgm.play();
@@ -253,10 +217,7 @@ export default {
   display: flex;
   width: 100%;
   height: 90vh;
-  /* height: 50%; */
-  /* margin: 5vh; */
 }
-
 .hangman-row .game-container {
   background-color: #f4f1eb;
   flex: 70%;
@@ -267,40 +228,28 @@ export default {
   position: relative;
   overflow: hidden;
 }
-
 .hangman-row .game-container .ground {
   z-index: 2;
-
   width: 110%;
-  /* height: 37%; */
   position: absolute;
   bottom: -20px;
   left: 0px;
-
-  /* margin: 44% 0 0 0; */
 }
-
 .hangman-row .game-container .wolf {
   z-index: 3;
-
   width: 55%;
-  /* height: 37%; */
   position: absolute;
   bottom: -3%;
   left: 2%;
 }
-
 .hangman-row .game-container .bird {
   z-index: 3;
-
   width: 10%;
-  /* height: 37%; */
   position: absolute;
   bottom: 30%;
   left: 88%;
   display: block;
 }
-
 .hangman-row .right-status-column {
   flex: 30%;
   border-radius: 20px;
@@ -321,7 +270,6 @@ export default {
   justify-content: center;
   align-items: center;
 }
-
 .hangman-row .right-status-column .game-status {
   width: 100%;
   height: 25%;
@@ -335,21 +283,18 @@ export default {
   flex-direction: column;
   justify-content: space-around;
 }
-
 .hangman-row .right-status-column .game-status .game-status-li {
   display: flex;
   justify-content: space-between;
   margin-left: 2rem;
   margin-right: 2rem;
 }
-
 .hangman-row .right-status-column .game-status .li-start {
   margin-top: 1rem;
 }
 .hangman-row .right-status-column .game-status .li-end {
   margin-bottom: 1rem;
 }
-
 .hangman-row .right-status-column .game-status-box {
   width: 10rem;
   height: 2.5rem;
@@ -358,7 +303,6 @@ export default {
   border-radius: 20px;
   border: 3px solid #957457;
   font-family: "SDSamliphopangche_Basic";
-  /* font-size: 1rem; */
   color: #957457;
   display: flex;
   justify-content: center;
@@ -366,7 +310,6 @@ export default {
   line-height: 2.5rem;
   text-align: center;
 }
-
 .hangman-row .right-status-column .game-mode-cons {
   width: 100%;
   height: 10%;
@@ -382,7 +325,6 @@ export default {
   justify-content: center;
   align-items: center;
 }
-
 .hangman-row .right-status-column .game-mode-vowel {
   width: 100%;
   height: 10%;
@@ -398,7 +340,6 @@ export default {
   justify-content: center;
   align-items: center;
 }
-
 .hangman-row .right-status-column .letter {
   width: 100%;
   height: 9%;
@@ -409,27 +350,22 @@ export default {
   display: flex;
   justify-content: space-around;
 }
-
 .hangman-row .right-status-column .letter .selected-letter {
   font-size: 1.5rem;
   color: #957457;
   font-family: "SDSamliphopangche_Basic";
-  /* margin-left: 20%; */
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
 .hangman-row .right-status-column .letter .selected-confidence {
   font-size: 1.5rem;
   color: #b59e7a;
   font-family: "SDSamliphopangche_Basic";
-  /* margin-right: 20%; */
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
 .hangman-row .right-status-column .camera {
   width: 100%;
   height: 41%;
@@ -441,16 +377,12 @@ export default {
   padding-left: 0;
   box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.733);
 }
-
 .percent {
   display: none !important;
 }
-
 .cage {
   z-index: 5;
-
   width: 20%;
-  /* height: 37%; */
   position: absolute;
   bottom: 80%;
   left: 35%;
@@ -458,11 +390,8 @@ export default {
   animation-name: cage;
   animation-duration: 1s;
   animation-timing-function: linear;
-  /* animation-iteration-count: infinite; */
-  /* animation-direction: alternate; */
   animation-fill-mode: forwards;
 }
-
 @keyframes cage {
   100% {
     bottom: 8%;
