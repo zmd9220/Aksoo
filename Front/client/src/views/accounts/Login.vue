@@ -1,513 +1,285 @@
 <template>
   <div>
-    <div id="__next">
-      <div class="Toastify"></div>
-      <div>
-        <div class="account-wrapper">
-          <div class="wrap_inner clearfix">
-            <div class="wrap-form">
-              <div>
-                <div>
-                  <form autocomplete="on">
-                    <div class="group-field">
-                      <div class="input-group clearfix">
-                        <input
-                          id="email"
-                          name="email"
-                          placeholder="이메일"
-                          type="text"
-                          inputmode="email"
-                          class=""
-                          value=""
-                        />
-                      </div>
-                    </div>
-                    <div class="group-field">
-                      <div class="input-group clearfix">
-                        <div style="position: relative; width: 100%">
-                          <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            class=""
-                            placeholder="비밀번호"
-                            value=""
-                            style="width: 100%; display: block"
-                          /><input
-                            type="text"
-                            id="_password"
-                            name=""
-                            class=""
-                            placeholder="비밀번호"
-                            value=""
-                            style="width: 100%; display: none"
-                          />
-                          <!-- <a
-                            href=""
-                            class=""
-                            tabindex="-1"
-                            style="
-                              position: absolute;
-                              top: 50%;
-                              right: 6px;
-                              margin-top: -17px;
-                              padding: 4px 10px;
-                              background: transparent;
-                              border-radius: 2px;
-                              color: rgb(0, 0, 0);
-                              text-align: center;
-                              text-decoration: none;
-                              user-select: none;
-                            "
-                          >
-                             <i class="ico visible-eye-on"></i> 
-                          </a> -->
-                        </div>
-                      </div>
-                    </div>
-                    <!-- <div class="captcha-hidden">
-                      <div id="captchabox">
-                        <div>
-                          <div style="width: 304px; height: 78px">
-                            <div>
-                              <iframe
-                                title="reCAPTCHA"
-                                src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6LczfhEaAAAAADMzOyaKuemSP4SdWRem1bFQ5ltn&amp;co=aHR0cHM6Ly9hY2NvdW50cy5tYWxhbmdtYWxhbmcuY29tOjQ0Mw..&amp;hl=ko&amp;type=image&amp;v=wxAi4AKLXL2kBAvXqI4XLSWS&amp;theme=light&amp;size=normal&amp;badge=bottomright&amp;cb=l9xf4ydb2tgk"
-                                width="304"
-                                height="78"
-                                role="presentation"
-                                name="a-8c08ugao5wv"
-                                frameborder="0"
-                                scrolling="no"
-                                sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox"
-                              ></iframe>
-                            </div>
-                            <textarea
-                              id="g-recaptcha-response"
-                              name="g-recaptcha-response"
-                              class="g-recaptcha-response"
-                              style="
-                                width: 250px;
-                                height: 40px;
-                                border: 1px solid rgb(193, 193, 193);
-                                margin: 10px 25px;
-                                padding: 0px;
-                                resize: none;
-                                display: none;
-                              "
-                            ></textarea>
-                          </div>
-                          <iframe style="display: none"></iframe>
-                        </div>
-                      </div>
-                    </div> -->
-                    <div class="group-field">
-                      <div class="input-group mb10 mt10">
-                        <button
-                          class="button-normal larger wp100"
-                          type="submit"
-                        >
-                          로그인
-                        </button>
-                      </div>
-                    </div>
-                    <div class="group-field">
-                      <div class="input-group checks">
-                        <input id="save" type="checkbox" /><label for="save"
-                          ><small>로그인 유지</small></label
-                        >
-                      </div>
-                    </div>
-                    <div class="group-field">
-                      <div class="input-group hr-line" style="display: block">
-                        <!-- <a class="gray-link p-left">비밀번호 찾기</a> -->
-                        <a class="primary-link p-right" @click="Singup"
-                          >회원가입</a
-                        >
-                      </div>
-                    </div>
-                  </form>
-                </div>
-                <!-- <div class="group-field mt20">
-                  <div class="o-auth-login">
-                    <button
-                      type="button"
-                      class="o-auth-button depth-1 type-google"
-                    >
-                      <span>Google 계정으로 로그인</span></button
-                    ><button
-                      type="button"
-                      class="o-auth-button depth-1 type-facebook"
-                    >
-                      <span>Facebook 계정으로 로그인</span></button
-                    ><button
-                      type="button"
-                      class="o-auth-button depth-1 type-more-list"
-                    >
-                      <span>다른 계정으로 로그인</span>
-                    </button>
-                    <div hidden="" class="o-auth-wrapper">
-                      <button
-                        type="button"
-                        class="o-auth-button depth-2 type-edu"
-                      >
-                        <span>경기도교육청(MS) 계정으로 로그인</span></button
-                      ><button
-                        type="button"
-                        class="o-auth-button depth-2 type-gne"
-                      >
-                        <span>교육청 통합(웨일) 계정으로 로그인</span></button
-                      ><button
-                        type="button"
-                        class="o-auth-button depth-2 type-keries"
-                      >
-                        <span>온라인 교과서 선도학교로 로그인</span></button
-                      ><button
-                        type="button"
-                        class="o-auth-button depth-2 type-naver"
-                      >
-                        <span>Naver 계정으로 로그인</span></button
-                      ><button
-                        type="button"
-                        class="o-auth-button depth-2 type-dropbox"
-                      >
-                        <span>Dropbox 계정으로 로그인</span></button
-                      ><button
-                        type="button"
-                        class="o-auth-button depth-2 type-classting"
-                      >
-                        <span>Classting 계정으로 로그인</span></button
-                      ><button
-                        type="button"
-                        class="o-auth-button depth-2 type-apple"
-                      >
-                        <span>Apple로 로그인</span>
-                      </button>
-                    </div>
-                  </div>
-                </div> -->
-              </div>
-            </div>
-          </div>
+    <!-- 배경 음악  -->
+    <audio
+      loop
+      id="gameBgm"
+      src="@/assets/music/bgm/Wavecont-Upbeat-Inspiring-Corporate-Full-Length.mp3"
+    ></audio>
+    <!-- 배경 사진 -->
+    <img src="@/assets/gosm-login.png" class="gosm-login" />
+    <img src="@/assets/shark-login.png" class="shark-login" />
+    <img src="@/assets/deco-login.png" class="decoImg-login" />
+    <!-- 왼쪽 배경 "로그인" -->
+    <div class="imgLeft">
+      <img src="@/assets/login.png" class="loginImg" />
+    </div>
+    <!-- 로그인 기능 화면 영역 -->
+    <div class="signMain">
+      <div style="font-size: 1.5rem; text-align: left; margin-top: 5%; font-weight: bold;">
+        Sign In
+      </div>
+      <!-- 구글 로그인을 구현하려 하였지만 시간 부족 -->
+      <div class="googleLogin">
+        <!-- <button type="button" class="googleBtn">
+          <img
+            src="@/assets/googleLogo.png"
+            alt=""
+            style="margin: 1%; width: 20%; height: 90%"
+          />
+          구글로 로그인</button
+        ><button type="button" class="googleBtn">
+          <img
+            src="@/assets/googleLogo.png"
+            alt=""
+            style="margin: 1%; width: 20%; height: 90%"
+          />
+          구글로 로그인
+        </button> -->
+      </div>
+      <!-- 이메일/비밀번호 입력칸 -->
+      <div class="group-field">
+        <div class="input-group clearfix">
+          <!-- 이메일 입력칸 -->
+          <input
+            id="email"
+            name="email"
+            type="text"
+            inputmode="email"
+            class=""
+            v-model="credentials.email"
+            placeholder="Email Address"
+          />
         </div>
       </div>
-    </div>
-    <!-- <script id="__NEXT_DATA__" type="application/json">
-      {
-        "dataManager": "[]",
-        "props": {
-          "initialI18nStore": {},
-          "initialLanguage": null,
-          "pageProps": {
-            "query": { "redirect": "https://typing.malangmalang.com/" },
-            "redirect": "https://typing.malangmalang.com/",
-            "namespacesRequired": ["common"]
-          }
-        },
-        "page": "/sign/in",
-        "query": { "redirect": "https://typing.malangmalang.com/" },
-        "buildId": "6ry_Xj1EGzJhWNum3QZDc",
-        "dynamicBuildId": false,
-        "runtimeConfig": {
-          "DOMAIN": ".malangmalang.com",
-          "DEV_PAGE": false,
-          "URL": {
-            "API": "https://api.malangmalang.com/space",
-            "OAUTH": "/accounts/oauth2",
-            "AUTH": "https://api.malangmalang.com/accounts/v1",
-            "MALANG_HOME": "https://www.malangmalang.com",
-            "MALANG_API": "https://api.malangmalang.com/common/v1",
-            "SPACE_HOME": "https://space.malangmalang.com",
-            "ACCOUNT_HOME": "https://accounts.malangmalang.com",
-            "EDU_ACCOUNT_HOME": "https://edu-accounts.malangmalang.com",
-            "EDU_SPACE_HOME": "https://edu.malangmalang.com"
-          },
-          "NAVER_ID": "SYh7sL78hKQsZYOus_LQ",
-          "WHALE_ID": "JD5mrJigmx3zQZOaHgvp"
-        }
-      }
-    </script> -->
+      <div class="group-field">
+        <div class="input-group">
+          <!-- 비밀번호 입력칸 -->
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class=""
+            v-model="credentials.password"
+            style="display: block"
+            placeholder="Password"
+          /><input
+            type="text"
+            id="_password"
+            name=""
+            class=""
+            placeholder=""
+            value=""
+            style="display: none"
+          />
+        </div>
+      </div>
+      <div>
+        <!-- 로그인 버튼 -->
+        <b-button class="button-normal larger" @click="login(credentials)" variant="primary">
+          로그인
+        </b-button>
+      </div>
 
-    <div
-      style="
-        background-color: rgb(255, 255, 255);
-        border: 1px solid rgb(204, 204, 204);
-        box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 3px;
-        position: absolute;
-        transition: visibility 0s linear 0.3s, opacity 0.3s linear 0s;
-        opacity: 0;
-        visibility: hidden;
-        z-index: 2000000000;
-        left: 0px;
-        top: -10000px;
-      "
-    >
-      <div
-        style="
-          width: 100%;
-          height: 100%;
-          position: fixed;
-          top: 0px;
-          left: 0px;
-          z-index: 2000000000;
-          background-color: rgb(255, 255, 255);
-          opacity: 0.05;
-        "
-      ></div>
-      <div
-        class="g-recaptcha-bubble-arrow"
-        style="
-          border: 11px solid transparent;
-          width: 0px;
-          height: 0px;
-          position: absolute;
-          pointer-events: none;
-          margin-top: -11px;
-          z-index: 2000000000;
-        "
-      ></div>
-      <div
-        class="g-recaptcha-bubble-arrow"
-        style="
-          border: 10px solid transparent;
-          width: 0px;
-          height: 0px;
-          position: absolute;
-          pointer-events: none;
-          margin-top: -10px;
-          z-index: 2000000000;
-        "
-      ></div>
-      <!-- <div style="z-index: 2000000000; position: relative">
-        <iframe
-          title="reCAPTCHA 보안문자"
-          src="https://www.google.com/recaptcha/api2/bframe?hl=ko&amp;v=wxAi4AKLXL2kBAvXqI4XLSWS&amp;k=6LczfhEaAAAAADMzOyaKuemSP4SdWRem1bFQ5ltn&amp;cb=67d8nkqure5l"
-          name="c-8c08ugao5wv"
-          frameborder="0"
-          scrolling="no"
-          sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox"
-          style="width: 100%; height: 100%"
-        ></iframe>
-      </div> -->
+      <!-- 회원가입으로의 router -->
+      <div class="group-field">
+        <div style="color: #858484; text-align: left; float: left">계정이 없으신가요?</div>
+        <a
+          href="signup"
+          style="color: #4285f4; float: left; text-decoration: none; margin-left: 1%;"
+        >
+          회원가입</a
+        >
+      </div>
     </div>
-    <!-- <h1>Login</h1>
-    <div>
-      <label for="username">사용자 이름: </label>
-      <input type="text" id="username" v-model="credentials.username" />
-    </div>
-    <div>
-      <label for="password">비밀번호: </label>
-      <input type="password" id="password" v-model="credentials.password" />
-    </div>
-    <button @click="login">로그인</button> -->
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 import axios from "axios";
 
-// const SERVER_URL = process.env.VUE_APP_SERVER_URL
+const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
-  name: "Login",
+  name: "Signup",
   data: function () {
     return {
+      // 입력받을 credential (이메일, 비밀번호) 정의
       credentials: {
-        username: null,
-        passwords: null,
+        email: null,
+        password: null,
       },
     };
   },
+  // 화면이 켜졌을 때 음악이 나오도록
+  mounted() {
+    var gameBgm = document.getElementById("gameBgm");
+    gameBgm.volume = 0.3;
+    gameBgm.play();
+  },
   methods: {
-    Singup: function () {
-      this.$router.push("/accounts/signup");
-    },
+    // 로그인
     login: function () {
       axios({
         method: "post",
-        url: "http://127.0.0.1:8000/accounts/api-token-auth/",
+        url: SERVER_URL + "/accounts/signin/",
         data: this.credentials,
       })
-        .then((res) => {
+        .then((res) => { // 로그인 기능 구현 및 토큰 추가
           console.log(res);
-          localStorage.setItem("jwt", res.data.token);
+          this.$store.dispatch("userStore/loginUser", res.data);
           this.$emit("login");
-          this.$router.push({ name: "TodoList" });
+          this.isLogin = true;
+          this.$router.push({ name: "MainPage" });
+          // test 용
+          // this.$store.dispatch('userStore/loginUser', {email: "test2@gma.com", password: "test1"})
         })
         .catch((err) => {
           console.log(err);
+          alert("아이디나 비밀번호를 확인해주세요.");
         });
     },
+  },
+  computed: { // vuex store에서 유저 정보, 토큰 받아오기
+    ...mapState("userStore", ["accounts"]),
   },
 };
 </script>
 
 <style>
-.account-wrapper .wrap_inner {
-  width: inherit;
-  padding: 0 12.5px 12.5px 12.5px;
-}
-
-.account-wrapper {
-  padding-top: 50px;
-}
-
-.account-wrapper {
+.imgLeft {
+  display: flex;
+  z-index: -2;
+  width: 49%;
+  height: 90%;
   position: absolute;
-  display: table;
+  background-image: linear-gradient(to right, #fff, #fdf9e8);
+}
+.decoImg-login {
+  left: 0px;
+  top: 6%;
+  object-fit: contain;
+  margin: 3% 2%;
+  width: 50%;
+  height: 70%;
+  z-index: 3;
+  position: absolute;
+}
+.gosm-login {
+  position: absolute;
+  z-index: 2;
+  width: 15%;
+  left: 2.5%;
+  top: 65%;
+}
+.shark-login {
+  position: absolute;
+  z-index: 2;
+  width: 15%;
+  left: 35%;
+  top: 20%;
+}
+.loginImg {
+  object-fit: contain;
+  margin: 37.5% 10%;
+  z-index: 4;
+  width: 80%;
+  height: 23%;
+  position: absolute;
+}
+.signMain {
+  display: flex;
+  z-index: -1;
+  width: 55%;
+  height: 95%;
+  right: 25px;
+  top: 5%;
+  position: absolute;
+  border-radius: 7.63rem;
+  background-color: #fff;
+  padding: 3% 6%;
+  flex-direction: column;
+  float: center;
+}
+.googleLogin {
+  width: 100%;
+  height: 20%;
+  font-size: 2vh;
+}
+.googleBtn {
+  font-size: 90%;
+  width: 28%;
+  height: 35%;
+  padding: 1%;
+  margin: 8%;
+  background-color: #fff;
+  border-radius: 0.75rem;
+  box-shadow: 0rem 0.19rem 0.38rem 0rem rgba(0, 0, 0, 0.4);
+  border: solid 0.13rem #8c8c8c;
+}
+.input-group {
   width: 100%;
   height: 100%;
+  padding: 3% 10%;
+  border: 0px;
+  margin: 1%;
+  /* text-align: left; */
+  /* border-bottom: 2px; */
+}
+#email {
+  width: 90%;
+  height: 100%;
+  border: 0;
+  border-bottom: 3px solid #868c93;
+  margin: 2%;
+}
+#password {
+  width: 90%;
+  height: 100%;
+  border: 0;
+  border-bottom: 3px solid #868c93;
+  margin: 2%;
+}
+#nickname {
+  width: 90%;
+  height: 100%;
+  border: 0;
+  border-bottom: 3px solid #868c93;
+  margin: 2%;
 }
 
-.account-wrapper .wrap_inner {
-  margin: 0px auto;
-  color: #555;
-  white-space: normal;
-  word-wrap: break-word;
+.button-normal {
+  margin: 5% 0 15% 0 !important;
+  font-size: 110%;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  width: 20%;
+  height: 4 0%;
+  border-radius: 0.75rem;
+  box-shadow: 0rem 0.19rem 0.38rem 0rem rgba(0, 0, 0, 0.4);
+  color: white;
 }
 
-.account-wrapper .wrap-form {
-  min-width: 280px;
-  padding-left: 10px;
-  padding-right: 10px;
-}
-.account-wrapper .wrap-form {
-  max-width: 400px;
-}
-.account-wrapper .wrap_inner .group-field .input-group {
-  padding-left: 0px !important;
-}
-
-.account-wrapper input[type="text"],
-.account-wrapper input[type="password"],
-.account-wrapper input[type="tel"],
-.account-wrapper input[type="date"],
-.account-wrapper input[type="email"] {
-  box-sizing: border-box;
-  display: block;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 100px;
-  line-height: 25px;
-  color: #555;
-  border: 2px solid #d5d5d5;
-  padding: 0 12.5px;
-  height: 40px;
-  font-size: 1.14286em;
-  appearance: none;
-  -webkit-appearance: none;
-}
-
-.account-wrapper input {
-  font-family: inherit;
-}
-
-.account-wrapper input {
-  vertical-align: middle;
-  box-sizing: border-box;
+.account-wrapper .wrap_inner .group-field {
+  position: relative !important;
 }
 
 .account-wrapper .wrap-form .group-field {
-  position: relative;
-  margin-bottom: 8.33333px !important;
+  text-align: left;
+  left: 0px;
+  min-height: 20.5px;
+  margin-bottom: 10px;
+  display: table;
+  width: 100px;
 }
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+.account-wrapper .mt10,
+.account-wrapper .validation-check,
+.account-wrapper .wrap-form .group-field .input-group .option-element,
+.account-wrapper .wrap-form .group-field .input-group button {
+  margin-top: 10px !important;
 }
-
-.account-wrapper * {
-  font-size: 13px;
-  -webkit-text-size-adjust: none;
-}
-
-.account-wrapper .button-normal.larger {
-  padding: 8.5px 50px;
-  font-size: 1.14286em;
-  font-weight: bold;
-  line-height: 1.4em;
-}
-
-.account-wrapper .wrap_inner {
-  margin: auto;
-  display: table-cell;
-  vertical-align: middle;
-  padding-top: 15px;
-  padding-bottom: 15px;
-}
-
-.account-wrapper .button-normal {
-  border-radius: 100px;
-  padding: 8.33333px 25px;
-  border: 2px solid #5c49a7;
-  font-size: 1.14286em;
-  line-height: 1em;
-  color: #fff;
-  background-color: #5c49a7;
-  text-decoration: none;
-  min-height: 30px;
-  white-space: nowrap;
-}
-
-.account-wrapper .checks input[type="checkbox"] + label {
-  display: inline-flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-  box-sizing: border-box;
-  min-height: 24px;
-  padding-left: 24px;
-  line-height: 1.4em;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-}
-
-.account-wrapper a.gray-link:link {
-  color: #666;
-  border-bottom: 1px solid #666;
-  padding-bottom: 1px;
-  line-height: 1.2em;
-  font-size: 1em;
-}
-
-.account-wrapper .wrap-form {
-  margin: 0px auto;
-  position: relative;
-}
-.account-wrapper .p-right,
-.account-wrapper .wrap-form .group-field .input-group .type-bordered {
-  float: right !important;
-  display: inline-block;
-}
-
-.account-wrapper a.primary-link:link,
-.account-wrapper a.link:link {
-  color: #666;
-  border-bottom: 1px solid #666;
-  padding-bottom: 1px;
-  line-height: 1.2em;
-}
-
-.account-wrapper .hr-line {
-  border-top: 1px solid #b1b1b1;
-  padding-top: 12.5px;
-  width: 100%;
-}
-
-.account-wrapper .button-normal {
-  vertical-align: middle;
-  cursor: pointer;
-  transition: background 250ms ease-in-out, border 250ms ease-in-out,
-    transform 150ms ease;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  text-decoration: none;
-}
-
 .account-wrapper .wp100,
 .account-wrapper
   .wrap-form
@@ -517,24 +289,7 @@ export default {
   button {
   width: 100% !important;
 }
-
-.o-auth-button.depth-1 {
-  border-radius: 5px;
-  border-color: #b6b6b6;
-  font-size: 16px;
-  font-weight: 700;
-}
-
-.account-wrapper .wrap-form .group-field .input-group {
-  text-align: left;
-  height: inherit;
-}
-
-.input-group {
-  position: relative;
-  /* display: inline-flex; */
-  flex-wrap: wrap;
-  align-items: stretch;
-  width: 100%;
+.account-wrapper .wrap-form .group-field .input-group-label + .input-group {
+  display: block;
 }
 </style>

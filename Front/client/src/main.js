@@ -10,11 +10,15 @@ Vue.use(IconsPlugin)
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import store from './store'
 
 Vue.config.productionTip = false
 
+export const GestureEventBus = new Vue();
+
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount('#app')
 

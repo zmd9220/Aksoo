@@ -1,37 +1,13 @@
 <template>
   <div id="app">
-    <Header />
+    <!-- 헤더 바 (로그인 여부에 따라 표기 다르게) -->
+    <Header :isLogin="isLogin" @logout="logout" />
     <div id="nav">
-      <span v-if="isLogin">
-        <router-link :to="{ name: 'TodoList' }">Todo List</router-link> |
-        <router-link :to="{ name: 'CreateTodo' }">Create Todo</router-link> |
-        <router-link @click.native="logout" to="#">Logout</router-link>
-      </span>
-      <span v-else>
-        <router-link :to="{ name: 'Signup' }">Signup</router-link> |
-        <router-link :to="{ name: 'Login' }">Login</router-link> |
-        <router-link :to="{ name: 'Acid_rain' }">Acid_rain</router-link> |
-        <router-link :to="{ name: 'HangMan' }">HangMan</router-link> |
-        <router-link :to="{ name: 'MainPage' }">MainPage</router-link> |
-        <router-link :to="{ name: 'LearnStartPage' }"
-          >LearnStartPage</router-link
-        >
-        |
-        <router-link :to="{ name: 'LearnSelectPage' }"
-          >LeanSelectPage</router-link
-        >
-        |
-        <router-link :to="{ name: 'LearnWordPage' }">LeanWordPage</router-link>
-        |
-        <router-link :to="{ name: 'Learning_cons' }">Learning_cons</router-link> |
-        <router-link :to="{ name: 'Learning_vows' }">Learning_vows</router-link> |
-        <router-link :to="{ name: 'Learning_words' }">Learning_words</router-link> |
-        <router-link :to="{ name: 'HangMan_vue' }">HangMan_vue</router-link> |
-      </span>
       <router-view @login="isLogin = true" />
     </div>
   </div>
 </template>
+
 
 <script>
 import Header from "./views/MainPage/Header.vue";
@@ -43,17 +19,20 @@ export default {
   },
   data: function () {
     return {
+      // 로그인 여부
       isLogin: false,
     };
   },
   methods: {
+    // 로그아웃 기능
     logout: function () {
       this.isLogin = false;
       localStorage.removeItem("jwt");
       this.$router.push({ name: "Login" });
     },
   },
-  created: function () {
+  mounted: function () {
+    // 토큰 존재 시 로그인으로 판단
     const token = localStorage.getItem("jwt");
     if (token) {
       this.isLogin = true;
@@ -62,9 +41,9 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Avenir, Helvetica, Arial, sans-serif, BinggraeSamanco-Bold;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -74,8 +53,37 @@ export default {
   background-size: cover;
 }
 
-#nav {
-  padding: 30px;
+/* 폰트 설치 */
+@font-face {
+  font-family: "BinggraeSamanco-Bold";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/BinggraeSamanco-Bold.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "BinggraeSamanco";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/BinggraeSamanco.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "GowunDodum-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunDodum-Regular.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SDSamliphopangche_Basic";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Basic.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
 
 #nav a {

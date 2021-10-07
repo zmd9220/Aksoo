@@ -1,21 +1,26 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import TodoList from '@/views/todos/TodoList'
-import CreateTodo from '@/views/todos/CreateTodo'
 import Signup from '@/views/accounts/Signup'
 import Login from '@/views/accounts/Login'
-import Acid_rain from '@/views/acid_rain/acid_rain'
+import AcidRainPage from '@/views/AcidRain/AcidRainPage'
+import AcidRainMain from '@/views/AcidRain/AcidRainMain'
+import AcidRainGame from '@/views/AcidRain/AcidRainGame'
 import Header from '@/views/MainPage/Header'
+import Footer from '@/views/MainPage/Footer'
 import MainPage from '@/views/MainPage/MainPage'
+import GamePage from '@/views/MainPage/GamePage'
 import LearnStartPage from '@/views/Learn/LearnStart'
-import LearnSelectPage from '@/views/Learn/HandSelect'
 import LearnWordPage from '@/views/Learn/WordSelect'
-import Learning_cons from '@/views/Learn/Learning_cons'
-import Learning_vows from '@/views/Learn/Learning_vows'
-import Learning_words from '@/views/Learn/Learning_words'
-
-import HangMan from '@/views/HangMan/HangMan'
-import HangMan_vue from '@/views/HangMan_vue/HangMan_vue'
+import HangManMain from '@/views/HangMan/HangManMain'
+import HangManGame from '@/views/HangMan/HangManGame'
+import HangManPage from '@/views/HangMan/HangManPage'
+import Learning from '@/views/Learn/Learning'
+import CardflipHard from '@/views/Cardflip/CardflipHard'
+import CardflipMiddle from '@/views/Cardflip/CardflipMiddle'
+import CardflipEasy from '@/views/Cardflip/CardflipEasy'
+import CardflipMain from '@/views/Cardflip/CardflipMain'
+import Profile from '@/views/Profile/Profile'
+import RankingMain from '@/views/Ranking/RankingMain'
 
 Vue.use(VueRouter)
 
@@ -26,14 +31,9 @@ const routes = [
     component: MainPage,
   },
   {
-    path: '/todos',
-    name: 'TodoList',
-    component: TodoList,
-  },
-  {
-    path: '/todos/create',
-    name: 'CreateTodo',
-    component: CreateTodo,
+    path: '/GamePage/',
+    name: 'GamePage',
+    component: GamePage,
   },
   {
     path: '/accounts/signup',
@@ -46,9 +46,20 @@ const routes = [
     component: Login,
   },
   {
-    path: '/acid_rain/acid_rain',
-    name: 'Acid_rain',
-    component: Acid_rain,
+    path: '/AcidRain/AcidRainPage',
+    name: 'AcidRainPage',
+    component: AcidRainPage,
+    props: true,
+  },
+  {
+    path: '/AcidRain/AcidRainMain',
+    name: 'AcidRainMain',
+    component: AcidRainMain,
+  },
+  {
+    path: '/AcidRain/AcidRainGame',
+    name: 'AcidRainGame',
+    component: AcidRainGame,
   },
   {
     path: '/MainPage/Header',
@@ -56,14 +67,14 @@ const routes = [
     component: Header,
   },
   {
+    path: '/MainPage/Footer',
+    name: 'Footer',
+    component: Footer,
+  },
+  {
     path: '/Start',
     name: 'LearnStartPage',
     component: LearnStartPage,
-  },
-  {
-    path: '/Select',
-    name: 'LearnSelectPage',
-    component: LearnSelectPage,
   },
   {
     path: '/WordSelect',
@@ -71,29 +82,57 @@ const routes = [
     component: LearnWordPage,
   },
   {
-    path: '/Learn/Learning_cons',
-    name: 'Learning_cons',
-    component: Learning_cons,
+    path: '/Learn/Learning/:select',
+    name: 'Learning',
+    component: Learning,
+    props: true,
   },
   {
-    path: '/Learn/Learning_vows',
-    name: 'Learning_vows',
-    component: Learning_vows,
+    path: '/HangMan/HangManMain',
+    name: 'HangManMain',
+    component: HangManMain,
   },
   {
-    path: '/Learn/Learning_words',
-    name: 'Learning_words',
-    component: Learning_words,
+    path: '/HangMan/HangManGame',
+    name: 'HangManGame',
+    component: HangManGame,
   },
   {
-    path: '/HangMan/HangMan',
-    name: 'HangMan',
-    component: HangMan,
+    path: '/HangMan/HangManPage',
+    name: 'HangManPage',
+    component: HangManPage,
+    props: true,
   },
   {
-    path: '/HangMan_vue/HangMan_vue',
-    name: 'HangMan_vue',
-    component: HangMan_vue,
+    path: '/Cardflip/CardflipHard',
+    name: 'CardflipHard',
+    component: CardflipHard,
+  },
+  {
+    path: '/Cardflip/CardflipMiddle',
+    name: 'CardflipMiddle',
+    component: CardflipMiddle,
+  },
+  {
+    path: '/Cardflip/CardflipEasy',
+    name: 'CardflipEasy',
+    component: CardflipEasy,
+  },
+  {
+    path: '/Cardflip/CardflipMain',
+    name: 'CardflipMain',
+    component: CardflipMain,
+  },
+  {
+    path: '/Profile/Profile',
+    name: 'Profile',
+    component: Profile,
+  },
+  {
+    path: '/Rangking/RankingMain',
+    name: 'RankingMain',
+    component: RankingMain,
+    props: true,
   },
 ]
 

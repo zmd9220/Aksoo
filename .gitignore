@@ -9,8 +9,10 @@ package-lock.json
 
 ### Front  ##############
 /Front/**/*.env
+/Front/**/*.env.local
 /Front/node_modules
 /Front/.vscode
+/Front/**/dist
 
 ### VisualStudioCode ###
 .vscode/*
@@ -61,6 +63,8 @@ test/
 
 # Django
 /Back/**/venv
+/Back/**/__pycache__
+/Back/**/db.sqlite3
 
 
 ### AI  #################
