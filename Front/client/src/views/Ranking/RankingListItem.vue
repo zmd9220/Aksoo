@@ -1,5 +1,9 @@
 <template>
     <div class="ranking-list-item-wrapper">
+      <div v-if="what == 100">
+      {{ what }}
+    </div>
+
         <div class="ranking-list-item">
             <div class="rank" style="width:3%">
                 {{item.rank}}.
@@ -47,6 +51,7 @@ export default {
         tier_num_to_str:[0, 'Diamond', 'Platinum', 'Gold', 'Silver', 'Bronze'],
         profile_name: ['bird', 'cml', 'croc', 'ele', 'gsm', 'hippo', 'shark'],
         isFollow: false,
+        what: 0,
     }
   },
   props: {
@@ -54,20 +59,37 @@ export default {
     Rank: Array,
   },
   methods: {
-      follow(id) {
-        axios ({
-        method: 'post',
-        url: SERVER_URL + '/accounts/follow/' + id + '/',
-        headers: {
-          "Authorization": `Bearer ${this.accessToken}`
-        },
-      }).then((res) => {
-        console.log(res)
-        console.log(this.Rank)
-        window.location.reload()
-      }).catch(err => {
-        console.log(err)
-      }) 
+      // follow(id) {
+      //   axios ({
+      //   method: 'post',
+      //   url: SERVER_URL + '/accounts/follow/' + id + '/',
+      //   headers: {
+      //     "Authorization": `Bearer ${this.accessToken}`
+      //   },
+      // }).then((res) => {
+      //   console.log(res)
+      //   // console.log(this.Rank)    
+      //   console.log(this.isFollow) 
+      //   this.what = 1;
+      //   window.location.reload()      
+      // }).catch(err => {
+      //   console.log(err)
+      // }) 
+      // }
+      follow: async function(id) {
+        try {
+          await axios ({
+          method: 'post',
+          url: SERVER_URL + '/accounts/follow/' + id + '/',
+          headers: {
+            "Authorization": `Bearer ${this.accessToken}`
+          },
+        })
+        this.what = Math.random();
+        // window.location.reload()
+        } catch (err) {
+        console.log(err.response);
+        }
       }
   },
   computed: {
@@ -88,6 +110,20 @@ export default {
         console.log(err)
       }) 
   },
+  created: function () {
+    axios ({
+        method: 'get',
+        url: SERVER_URL + '/accounts/follow/' + this.item.profile + '/',
+        headers: {
+          "Authorization": `Bearer ${this.accessToken}`
+        },
+      }).then((res) => {
+        console.log(res.data.isFollow)
+        this.isFollow = res.data.isFollow
+      }).catch(err => {
+        console.log(err)
+      }) 
+  }
 };
 </script>
 <style scoped>
