@@ -1,39 +1,91 @@
 <template>
   <div>
-    <div class="background-img">     
-      <img src="@/assets/Learn/LearnStart/rd-g.png" srcset="@/assets/Learn/LearnStart/rd-g@2x.png 2x, @/assets/Learn/LearnStart/rd-g@3x.png 3x" class="rd-g">
-      <img src="@/assets/Learn/LearnStart/yl-d.png" srcset="@/assets/Learn/LearnStart/yl-d@2x.png 2x, @/assets/Learn/LearnStart/yl-d@3x.png 3x" class="yl-d">
-      <img src="@/assets/Learn/LearnStart/yl-f.png" srcset="@/assets/Learn/LearnStart/yl-f@2x.png 2x, @/assets/Learn/LearnStart/yl-f@3x.png 3x" class="yl-f">
-      <img src="@/assets/Learn/LearnStart/rd-t.png" srcset="@/assets/Learn/LearnStart/rd-t@2x.png 2x, @/assets/Learn/LearnStart/rd-t@3x.png 3x" class="rd-t">
-      <img src="@/assets/Learn/LearnStart/bl.png" srcset="@/assets/Learn/LearnStart/bl@2x.png 2x, @/assets/Learn/LearnStart/bl@3x.png 3x" class="bl">
-      <img src="@/assets/Learn/LearnStart/gr.png" srcset="@/assets/Learn/LearnStart/gr@2x.png 2x, @/assets/Learn/LearnStart/gr@3x.png 3x" class="gr">
-      <img src="@/assets/Learn/LearnStart/shape-2.svg" class="Shape-2">
-      <img src="@/assets/layer-2.png" class="layer-2">
-      <img src="@/assets/camel-ele.png" class="camel-ele">
+    <audio
+      autoplay
+      id="gameStart"
+      src="@/assets/music/pageMove/Jump High.mp3"
+    ></audio>
+    <div class="background-img">
+      <img
+        src="@/assets/Learn/LearnStart/rd-g.png"
+        srcset="
+          @/assets/Learn/LearnStart/rd-g@2x.png 2x,
+          @/assets/Learn/LearnStart/rd-g@3x.png 3x
+        "
+        class="rd-g"
+      />
+      <img
+        src="@/assets/Learn/LearnStart/yl-d.png"
+        srcset="
+          @/assets/Learn/LearnStart/yl-d@2x.png 2x,
+          @/assets/Learn/LearnStart/yl-d@3x.png 3x
+        "
+        class="yl-d"
+      />
+      <img
+        src="@/assets/Learn/LearnStart/yl-f.png"
+        srcset="
+          @/assets/Learn/LearnStart/yl-f@2x.png 2x,
+          @/assets/Learn/LearnStart/yl-f@3x.png 3x
+        "
+        class="yl-f"
+      />
+      <img
+        src="@/assets/Learn/LearnStart/rd-t.png"
+        srcset="
+          @/assets/Learn/LearnStart/rd-t@2x.png 2x,
+          @/assets/Learn/LearnStart/rd-t@3x.png 3x
+        "
+        class="rd-t"
+      />
+      <img
+        src="@/assets/Learn/LearnStart/bl.png"
+        srcset="
+          @/assets/Learn/LearnStart/bl@2x.png 2x,
+          @/assets/Learn/LearnStart/bl@3x.png 3x
+        "
+        class="bl"
+      />
+      <img
+        src="@/assets/Learn/LearnStart/gr.png"
+        srcset="
+          @/assets/Learn/LearnStart/gr@2x.png 2x,
+          @/assets/Learn/LearnStart/gr@3x.png 3x
+        "
+        class="gr"
+      />
+      <img src="@/assets/Learn/LearnStart/shape-2.svg" class="Shape-2" />
+      <img src="@/assets/layer-2.png" class="layer-2" />
+      <img src="@/assets/camel-ele.png" class="camel-ele" />
     </div>
     <div class="main">
       <div class="title">
-        <p>학습하기</p> 
+        <p>학습하기</p>
       </div>
-      <br>
+      <br />
       <div class="main-text">
-        <p>수어의 첫 걸음은 지문자부터!</p> 
-        <p>지문자를 처음 접하는 사용자도 누구나 쉽고 재미있게 익힐 수 있습니다.</p> 
-        <p>자음연습, 모음연습, 단어연습을 통해서 단계별로 실력을 향상시켜보세요</p> 
+        <p>수어의 첫 걸음은 지문자부터!</p>
+        <p>
+          지문자를 처음 접하는 사용자도 누구나 쉽고 재미있게 익힐 수 있습니다.
+        </p>
+        <p>
+          자음연습, 모음연습, 단어연습을 통해서 단계별로 실력을 향상시켜보세요
+        </p>
       </div>
       <div>
         <button class="start" @click="handSelect">
-          <span class="start-text">
-            시작하기 ->
-          </span>
-          </button>
+          <span class="start-text"> 시작하기 -> </span>
+        </button>
       </div>
     </div>
+    <Footer />
   </div>
 </template>
 
 
 <script>
+import Footer from "@/views/MainPage/Footer.vue";
+
 export default {
   name: "LearnStartPage",
   methods: {
@@ -41,12 +93,14 @@ export default {
       this.$router.push("/WordSelect").catch(() => {});
     },
   },
+  components: {
+    Footer,
+  },
 };
 </script>
 
 
 <style scoped>
-
 .title {
   position: absolute;
   width: 40vw;
@@ -99,7 +153,7 @@ img.Shape-2 {
   left: 0%;
   top: 87.5%;
   height: 12.5%;
-  }
+}
 
 .camel-ele {
   position: absolute;
@@ -113,8 +167,8 @@ img.Shape-2 {
 }
 
 .camel-ele:hover {
-  transform: rotate(30deg);
-  -webkit-transform: rotate(30deg);
+  transform: rotate(13deg);
+  -webkit-transform: rotate(13deg);
 }
 
 .rd-g {

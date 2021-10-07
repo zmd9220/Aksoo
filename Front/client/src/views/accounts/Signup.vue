@@ -1,229 +1,93 @@
 <template>
   <div>
+    <!-- 게임 백그라운드 음악 -->
+    <audio
+      loop
+      id="gameBgm"
+      src="@/assets/music/bgm/Wavecont-Upbeat-Inspiring-Corporate-Full-Length.mp3"
+    ></audio>
+    <!-- 게임 배경화면 -->
     <img src="@/assets/deco.png" class="decoImg" />
+    <!-- 게임 좌측 "회원가입" 문구 이미지 -->
     <div class="imgLeft">
       <img src="@/assets/signUp.png" class="signImg" />
     </div>
-    <div class="signMain">
-      <div style="font-size: 1.5rem; text-align: left">CREATE ACOUNT</div>
-      <div class="googleLogin">
-        <button type="button" class="googleBtn">
-          <img
-            src="@/assets/googleLogo.png"
-            alt=""
-            style="margin: 1%; width: 20%; height: 80%; margin-right: 5%"
-          />
-          구글로 로그인</button
-        ><button type="button" class="googleBtn">
-          <img
-            src="@/assets/googleLogo.png"
-            alt=""
-            style="margin: 1%; width: 20%; height: 80%; margin-right: 5%"
-          />
-          구글로 로그인
-        </button>
-      </div>
-      <div style="color: #868c93; text-decoration: underline">OR</div>
+    <!-- 우측 회원가입 창/영역 -->
+    <div class="signMain" style="z-index: -2;">
+      <div style="font-size: 1.5rem; text-align: left; margin-top: 5%; font-weight: bold;">CREATE ACOUNT</div>
 
       <div class="group-field">
         <div class="input-group clearfix">
+          <!-- 이메일 입력  칸 -->
           <input
             id="email"
             name="email"
             type="text"
             inputmode="email"
             class=""
-            value=""
+            v-model="credentials.email"
             placeholder="Email Address"
           />
         </div>
       </div>
       <div class="group-field">
         <div class="input-group">
+          <!-- 비밀번호 입력칸 -->
           <input
             type="password"
             id="password"
             name="password"
             class=""
-            value=""
+            v-model="credentials.password"
             style="display: block"
             placeholder="Password"
-          /><input
-            type="text"
-            id="_password"
-            name=""
-            class=""
-            placeholder=""
-            value=""
-            style="display: none"
           />
-          <!-- <a
-                        href=""
-                        class=""
-                        tabindex="-1"
-                        style="
-                          position: absolute;
-                          top: 50%;
-                          right: 6px;
-                          margin-top: -17px;
-                          padding: 4px 10px;
-                          background: transparent;
-                          border-radius: 2px;
-                          color: rgb(0, 0, 0);
-                          text-align: center;
-                          text-decoration: none;
-                          user-select: none;
-                        "
-                        ><i class="ico visible-eye-on"></i
-                      ></a> -->
-                    </div>
-                    <ul class="validation-check">
-                      <li>
-                        <i class="ico check-small disabled"></i>영문, 숫자,
-                        특수문자 2개 이상 조합
-                      </li>
-                      <li><i class="ico check-small disabled"></i>6~16자리</li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="group-field">
-                  <div class="input-group-label">
-                    <label for="" class="mendantory">비밀번호 확인</label>
-                  </div>
-                  <div class="input-group">
-                    <div style="position: relative">
-                      <input
-                        type="password"
-                        id="passwordConfirm"
-                        name="passwordConfirm"
-                        class=""
-                        placeholder=""
-                        value=""
-                        style="width: 100%; display: block"
-                      /><input
-                        type="text"
-                        id="_passwordConfirm"
-                        name=""
-                        class=""
-                        placeholder=""
-                        value=""
-                        style="width: 100%; display: none"
-                      /><a
-                        href=""
-                        class=""
-                        tabindex="-1"
-                        style="
-                          position: absolute;
-                          top: 50%;
-                          right: 6px;
-                          margin-top: -17px;
-                          padding: 4px 10px;
-                          background: transparent;
-                          border-radius: 2px;
-                          color: rgb(0, 0, 0);
-                          text-align: center;
-                          text-decoration: none;
-                          user-select: none;
-                        "
-                        ><i class="ico visible-eye-on"></i
-                      ></a>
-                    </div>
-                  </div>
-                </div>
-                <div class="group-field">
-                  <div class="input-group-label">
-                    <label for="">닉네임</label>
-                  </div>
-                  <div class="input-group">
-                    <input
-                      type="text"
-                      id="nickname"
-                      name="nickname"
-                      placeholder="실명은 사용하지 않는 것이 좋습니다. "
-                      value=""
-                    />
-                  </div>
-                </div>
-                <!-- <div class="group-field">
-                  <div class="input-group-label">
-                    <label for="">성별</label>
-                  </div>
-                  <div class="input-group">
-                    <div class="input-group clearfix">
-                      <fieldset>
-                        <input
-                          name="gender"
-                          id="M"
-                          type="radio"
-                          class="radio-button"
-                          form="[object Object]"
-                          value="M"
-                        /><label for="M">남자</label
-                        ><input
-                          name="gender"
-                          id="F"
-                          type="radio"
-                          class="radio-button"
-                          form="[object Object]"
-                          value="F"
-                        /><label for="F">여자</label>
-                      </fieldset>
-                    </div>
-                  </div>
-                </div>
-                <div class="group-field">
-                  <div class="input-group-label">
-                    <label for="" class="mendantory">생년월일</label>
-                  </div>
-                  <div class="input-group">
-                    <input
-                      id="birthday"
-                      name="birthday"
-                      placeholder="yyyy/mm/dd"
-                      autocomplete="on"
-                      type="text"
-                      class=""
-                      value=""
-                    />
-                  </div>
-                </div> -->
-                <div class="group-field">
-                  <div class="input-group checks">
-                    <input id="checkOver14" type="checkbox" /><label
-                      for="checkOver14"
-                      ><small
-                        >본인이 만 14세 이상임을 확인합니다.(필수)</small
-                      ></label
-                    >
-                  </div>
-                </div>
-                <div class="group-field">
-                  <div class="input-group button-group" style="display: block">
-                    <div>
-                      <button
-                        type="submit"
-                        class="button-normal larger disabled"
-                        disabled=""
-                        @click="login"
-                      >
-                        회원가입
-                      </button>
-                    </div>
-                    <div>
-                      <button
-                        class="button-normal color-gray larger"
-                        type="button"
-                        @click="login"
-                      >
-                        취소
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </fieldset>
-          </form>
         </div>
+      </div>
+      <div class="group-field">
+        <div class="input-group">
+          <!-- 비밀번호 확인 입력칸 -->
+          <input
+            type="password"
+            id="passwordConfirmation"
+            name="passwordConfirmation"
+            class=""
+            placeholder="Password Confirmation"
+            v-model="credentials.passwordConfirmation"
+            style="display: block"
+          />
+        </div>
+      </div>
+      <div class="group-field">
+        <div class="input-group">
+          <!-- 닉네임 입력칸 -->
+          <input
+            type="text"
+            id="nickname"
+            name="nickname"
+            placeholder="Nickname "
+            v-model="credentials.nickname"
+            style="display: block"
+          />
+        </div>
+      </div>
+      <div>
+        <!-- 회원가입 버튼 -->
+        <b-button
+          class="button-normal larger"
+          @click="signup(credentials)"
+          variant="primary"
+        >
+          회원가입
+        </b-button>
+      </div>
+
+      <div class="group-field">
+        <!-- 로그인으로의 router -->
+        <div style="color: #858484; text-align: left; float: left">
+          이미 계정이 있으신가요? &nbsp;
+        </div>
+        <a href="login" style="color: #4285f4; float: left; text-decoration: none;">로그인</a>
       </div>
     </div>
   </div>
@@ -232,35 +96,55 @@
 <script>
 import axios from "axios";
 
-// const SERVER_URL = process.env.VUE_APP_SERVER_URL
+const SERVER_URL = process.env.VUE_APP_SERVER_URL
 
 export default {
   name: "Signup",
   data: function () {
     return {
+      // 회원가입에 받을 credential 데이터 정의
       credentials: {
-        username: null,
+        email: null,
         password: null,
         passwordConfirmation: null,
+        nickname: null,
       },
     };
   },
+  // 게임 화면 mount시 배경음악 재생
+  mounted() {
+    var gameBgm = document.getElementById("gameBgm");
+    gameBgm.volume = 0.3;
+    gameBgm.play();
+  },
   methods: {
+    // 로그인 으로의 router 함수
     login: function () {
       this.$router.push("/accounts/login");
     },
+    // 회원가입 axios 요청 함수
     signup: function () {
       axios({
-        method: "post",
-        url: "http://127.0.0.1:8000/accounts/signup/",
+        method: "POST",
+        url: SERVER_URL + "/accounts/signup/",
         data: this.credentials,
+        // test 용
+        // data: {
+        //   email: 'test3@gmail.com',
+        //   password: 'pass1',
+        //   passwordConfirmation: 'pass1',
+        //   nickname: 'hi',
+        // }
       })
         .then((res) => {
+          // 회원가입 완료 시 login으로 이동
           console.log(res);
           this.$router.push({ name: "Login" });
         })
         .catch((err) => {
           console.log(err);
+          console.log(err.data)
+          alert("입력을 확인해주세요.")
         });
     },
   },
@@ -270,7 +154,7 @@ export default {
 <style>
 .imgLeft {
   display: flex;
-  z-index: 1;
+  z-index: -3;
   width: 49%;
   height: 90%;
   position: absolute;
@@ -279,23 +163,25 @@ export default {
 .decoImg {
   position: absolute;
   left: 0px;
+  top: 3%;
   object-fit: contain;
-  margin: 2.5% 4%;
+  margin: 3% 2%;
   width: 50%;
   height: 75%;
-  z-index: 3;
+  z-index: -1;
+  position: absolute;
 }
 .signImg {
   object-fit: contain;
-  margin: 37.5% 10%;
-  z-index: 4;
+  margin: 37.5% 6%;
+  z-index: -1;
   width: 80%;
   height: 23%;
   position: absolute;
 }
 .signMain {
   display: flex;
-  z-index: 2;
+  z-index: -2;
   width: 55%;
   height: 90%;
   right: 0px;
@@ -309,6 +195,7 @@ export default {
 .googleLogin {
   width: 100%;
   height: 20%;
+  font-size: 2vh;
 }
 .googleBtn {
   font-size: 90%;
@@ -344,6 +231,13 @@ export default {
   border-bottom: 3px solid #868c93;
   margin: 2%;
 }
+#passwordConfirmation {
+  width: 90%;
+  height: 100%;
+  border: 0;
+  border-bottom: 3px solid #868c93;
+  margin: 2%;
+}
 #nickname {
   width: 90%;
   height: 100%;
@@ -353,7 +247,7 @@ export default {
 }
 
 .button-normal {
-  margin: 5% 0 10% 0;
+  margin: 5% 0 5% 0 !important;
   font-size: 110%;
   font-weight: normal;
   font-stretch: normal;
