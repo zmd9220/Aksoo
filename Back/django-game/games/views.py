@@ -123,8 +123,10 @@ def set_score(request, select_game):
         tier = get_object_or_404(TierCode, id=3)
     elif 2000 > user.total_score >= 1500:
         tier = get_object_or_404(TierCode, id=2)
-    else:
+    elif user.total_score >= 2000:
         tier = get_object_or_404(TierCode, id=1)
+    else:
+        tier = get_object_or_404(TierCode, id=5)
     user_serializer = UserSerializer(user, data=model_to_dict(user))
     if user_serializer.is_valid(raise_exception=True):
         user_serializer.save(tier=tier)

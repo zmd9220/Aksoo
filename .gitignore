@@ -12,6 +12,7 @@ package-lock.json
 /Front/**/*.env.local
 /Front/node_modules
 /Front/.vscode
+/Front/**/dist
 
 ### VisualStudioCode ###
 .vscode/*
