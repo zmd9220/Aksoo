@@ -5,14 +5,16 @@
       id="gameBgm"
       src="@/assets/music/bgm/Wavecont-Upbeat-Inspiring-Corporate-Full-Length.mp3"
     ></audio>
-    <img src="@/assets/gosm-login.png" class="gosm-login">
-    <img src="@/assets/shark-login.png" class="shark-login">
+    <img src="@/assets/gosm-login.png" class="gosm-login" />
+    <img src="@/assets/shark-login.png" class="shark-login" />
     <img src="@/assets/deco-login.png" class="decoImg-login" />
     <div class="imgLeft">
       <img src="@/assets/login.png" class="loginImg" />
     </div>
     <div class="signMain">
-      <div style="font-size: 1.5rem; text-align: left; margin-top: 5%; font-weight: bold;">Sign In</div>
+      <div style="font-size: 1.5rem; text-align: left; margin-top: 5%; font-weight: bold;">
+        Sign In
+      </div>
       <div class="googleLogin">
         <!-- <button type="button" class="googleBtn">
           <img
@@ -97,30 +99,29 @@
         </div>
       </div> -->
       <div>
-        <b-button
-          class="button-normal larger"
-          @click="login(credentials)"
-          variant="primary"
-        >
+        <b-button class="button-normal larger" @click="login(credentials)" variant="primary">
           로그인
         </b-button>
       </div>
 
       <div class="group-field">
-        <div style="color: #858484; text-align: left; float: left">
-          계정이 없으신가요?  
-        </div>
-        <a href="signup" style="color: #4285f4; float: left; text-decoration: none; margin-left: 1%;"> 회원가입</a>
+        <div style="color: #858484; text-align: left; float: left">계정이 없으신가요?</div>
+        <a
+          href="signup"
+          style="color: #4285f4; float: left; text-decoration: none; margin-left: 1%;"
+        >
+          회원가입</a
+        >
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import {mapState} from 'vuex'
-import axios from "axios"
+import { mapState } from "vuex";
+import axios from "axios";
 
-const SERVER_URL = process.env.VUE_APP_SERVER_URL
+const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
   name: "Signup",
@@ -141,26 +142,28 @@ export default {
     // 로그인
     login: function () {
       axios({
-        method: 'post', 
-        url: SERVER_URL + '/accounts/signin/',
+        method: "post",
+        url: SERVER_URL + "/accounts/signin/",
         data: this.credentials,
-      }).then(res => {
-          console.log(res)
-          this.$store.dispatch('userStore/loginUser', res.data)
-          this.$emit('login')
+      })
+        .then((res) => {
+          console.log(res);
+          this.$store.dispatch("userStore/loginUser", res.data);
+          this.$emit("login");
           this.isLogin = true;
           // localStorage.setItem('jwt', res.data.token)
-          this.$router.push({ name: 'MainPage' })
+          this.$router.push({ name: "MainPage" });
           // test 용
           // this.$store.dispatch('userStore/loginUser', {email: "test2@gma.com", password: "test1"})
-        }).catch(err => {
-          console.log(err)
-          alert("아이디나 비밀번호를 확인해주세요.")
         })
+        .catch((err) => {
+          console.log(err);
+          alert("아이디나 비밀번호를 확인해주세요.");
+        });
     },
   },
   computed: {
-    ...mapState('userStore', ['accounts'])
+    ...mapState("userStore", ["accounts"]),
   },
 };
 </script>
