@@ -1,11 +1,5 @@
 <template>
   <div>
-    <!-- <audio
-      autoplay
-      loop
-      id="gameBgm"
-      src="@/assets/music/bgm/If_I_Had_a_Chicken.mp3"
-    ></audio> -->
     <audio
       autoplay
       id="gameStart"
