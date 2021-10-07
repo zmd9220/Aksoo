@@ -2,9 +2,9 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Signup from '@/views/accounts/Signup'
 import Login from '@/views/accounts/Login'
-import AcidRainPage from '@/views/acid_rain/AcidRainPage'
-import AcidRainMain from '@/views/acid_rain/AcidRainMain'
-import AcidRainGame from '@/views/acid_rain/AcidRainGame'
+import AcidRainPage from '@/views/AcidRain/AcidRainPage'
+import AcidRainMain from '@/views/AcidRain/AcidRainMain'
+import AcidRainGame from '@/views/AcidRain/AcidRainGame'
 import Header from '@/views/MainPage/Header'
 import Footer from '@/views/MainPage/Footer'
 import MainPage from '@/views/MainPage/MainPage'
@@ -46,18 +46,18 @@ const routes = [
     component: Login,
   },
   {
-    path: '/acid_rain/AcidRainPage',
+    path: '/AcidRain/AcidRainPage',
     name: 'AcidRainPage',
     component: AcidRainPage,
     props: true,
   },
   {
-    path: '/acid_rain/AcidRainMain',
+    path: '/AcidRain/AcidRainMain',
     name: 'AcidRainMain',
     component: AcidRainMain,
   },
   {
-    path: '/acid_rain/AcidRainGame',
+    path: '/AcidRain/AcidRainGame',
     name: 'AcidRainGame',
     component: AcidRainGame,
   },

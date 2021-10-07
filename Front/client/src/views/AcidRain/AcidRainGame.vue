@@ -1,6 +1,6 @@
 <template>
   <div id="box">
-    <!-- <audio id="answer" src="@/assets/music/answer/Correct 1.mp3"></audio> -->
+    <!-- 오디오 (정답, 오답, 게임오버) -->
     <audio id="answer" src="@/assets/music/answer/pop.mp3"></audio>
     <audio
       id="wrongAnswer"
@@ -8,6 +8,7 @@
     ></audio>
     <audio id="gameOver" src="@/assets/music/gameover/gameover.mp3"></audio>
 
+    <!-- 게임 오버 모달 -->
     <div v-if="gameIsOver">
       <b-modal
         v-model="showend"
@@ -71,27 +72,25 @@
       </b-modal>
     </div>
 
-    <!-- <div id="box"> -->
-    <!-- <img class="ground" src="@/assets/ground.png" /> -->
+    <!-- 게임 배경 이미지 -->
     <img class="gosm" src="@/assets/right.gif" />
     <img class="lgosm" src="@/assets/left.gif" />
     <img class="ground" src="@/assets/tree-ground.png" />
 
     <span id="menu" class="menu"> </span>
 
-    <!-- <img src="./background.gif" class="bg" style="object-fit: fill" /> -->
-    <!-- </div> -->
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+
+// 상자 생성 속도, 상자 이동 속도
 var placeLetterInterval = 1000;
 var placeLetterTimer, moveLettersTimer;
-
 var aiLetterTimer;
-// var startButton, resetButton;
-var box, score;
+
+var box;
 
 export default {
   name: "AcidRainGame",
@@ -101,11 +100,8 @@ export default {
       life: 5,
       show: true,
       showend: true,
-      // consonant: "",
       modelLoaded: false,
       minimizeCamera: false,
-      // test: "",
-      // mode: 0,
       per: 0,
       gameIsOver: false,
       count: 0,
@@ -115,38 +111,28 @@ export default {
     consonant: Object,
     mode: Object,
     letter: Object,
-    // test: Object,
   },
   created() {
-    // this.endGame();
-    // this.life = this.diff.value;
-
+    // 카메라 켜지는 시간 고려해서 5초후 시작
     setTimeout(this.startGame, 5000);
-    // this.startGame();
+    // 글 이동 시작
     this.placeLetter();
     this.moveLetters();
   },
   mounted() {
-    // document.addEventListener("DOMContentLoaded", this.doTest);
-    // message = document.getElementById("message");
     box = document.getElementById("box");
-    // score = document.getElementById("score");
-    // hart = this.hart;
   },
   methods: {
+    // 문자 생성
     placeLetter: function () {
-      // 12593 ~ 12643
-      // var Con = 12593 + Math.floor(Math.random() * 50);
+      // 자음 / 모음 구별
       var Con;
       if (this.consonant === "자음") {
-        // console.log(1);
         Con = 12593 + Math.floor(Math.random() * 29);
       } else {
         Con = 12623 + Math.floor(Math.random() * 20);
       }
-      // for (let i = 12593; i < 12644; i++) {
-      //   console.log(i + " : " + consonant[i]);
-      // }
+      // 제외
       var consonant = [
         12595, 12597, 12598, 12602, 12603, 12604, 12605, 12606, 12607, 12608,
         12612, 12594, 12600, 12611, 12614, 12617, 12632, 12633, 12634, 12637,
@@ -157,144 +143,108 @@ export default {
           return;
         }
       }
+      // 떨어지는 단어 속도 증가
       this.count = this.count + 0.4;
-      var letters = String.fromCharCode(Con); // ㄾ ㅘ ㅢ
-      // console.log(letter + " " + Con);
 
-      // 한글
-      // var letter = String.fromCharCode(12593 + Math.floor(Math.random() * 50)); // ㄾ ㅘ ㅢ
-      // 영어
-      // var letter = String.fromCharCode(97 + Math.floor(Math.random() * 26));
+      // 단어 생성
+      var letters = String.fromCharCode(Con); 
+
       var newLetter = document.createElement("div");
       newLetter.id = "quiz";
       newLetter.innerHTML = letters;
       newLetter.className = letters;
 
-      // newLetter.style.right = Math.random() * 300 + "px";
-      // newLetter.style.top = 1000 - (Math.random() * 500) + "px";
-      // newLetter.style.left = 100 + Math.random() * 700 + "px";
-
+      // 단어 위치 랜덤 생성
       newLetter.style.left = 5 + Math.random() * 80 + "%";
       newLetter.style.bottom = 400 + Math.random() * 500 + "px";
 
       box.appendChild(newLetter);
     },
-
+    // 글자 이동
     moveLetters: function () {
       var boxes = document.querySelectorAll("#box > div");
       var wrongAnswer = document.getElementById("wrongAnswer");
       var gameOver = document.getElementById("gameOver");
 
       for (var i = 0; i < boxes.length; i++) {
+        // 글자 이동
         boxes[i].style.bottom = parseInt(boxes[i].style.bottom) - 8 - this.count+ "px";
+        // 글자 바닥 도착
         if (parseInt(boxes[i].style.bottom) <= 100) {
+          // 틀린 소리
           wrongAnswer.play();
+          // 상자 제거
           boxes[i].remove();
-          // this.hart = parseInt(this.hart) - 1;
+          // 생명 -1
           this.$emit("lifeLoss");
           this.life = this.life - 1;
-          // this.decreaseLetterSpeed(hart);
+          // 죽었을 경우
           if (this.life == 0) {
-            // this.toggleText();
-
-            // 데이터 처리하는 함수
-            // this.setScore(1, this.score)
+            
             // Vuex에 데이터를 보낼때는 오브젝트 형으로 보낼것을 권장 !!!
             this.$store.dispatch('userStore/setScore', { selectGame: 1, score:this.score})
-
+            // 게임 오버 효과음
             gameOver.play();
+            // 게임 오버 모달
             this.gameIsOver = true;
             this.endGame();
           }
         }
       }
     },
-
+    // 게임 종료
     endGame: function () {
-      // this.togglerestart();
+      // 글자 생성, 이동, 사용자 입력 정지
       clearInterval(moveLettersTimer);
       clearInterval(placeLetterTimer);
       clearInterval(aiLetterTimer);
-
-      // document.removeEventListener("keydown", this.keyboardInput);
-      // message.classList.remove("hidden");
-
-      // resetButton.classList.remove("disabled");
     },
-
-    decreaseLetterSpeed: function (score) {
-      if (parseInt(score.innerHTML) % 20 === 0) {
-        clearInterval(placeLetterTimer);
-        placeLetterInterval = placeLetterInterval * 1.1;
-        placeLetterTimer = setInterval(this.placeLetter, placeLetterInterval);
-      }
-    },
-
+    // 리셋
     resetGame: function () {
-      // this.togglerestart();
-
+      // 게임 오버 모달 숨기기
       this.gameIsOver = false;
-      // this.resetText();
-
-      // message.classList.add("hidden"); // add
-      // resetButton.classList.add("disabled");
-      // score.innerHTML = 0;
+      // 점수, 생명 리셋
       this.score = 0;
       this.life = 5;
-      // console.log(1);
-
+      // 나와 있는 모든 글자 제거
       var boxes = document.querySelectorAll("#quiz");
       for (var i = 0; i < boxes.length; i++) {
         boxes[i].remove();
       }
-      // console.log(2);
-      // console.log(1);
-      this.endGame();
-      // console.log(3);
-      this.startGame();
-      // console.log(3);
-    },
 
+      this.endGame();
+    },
+    // 지문자 입력 받기
     aiLetter: function () {
       var boxes = document.getElementsByClassName(this.letter);
-      // console.log(this.letter);
-
+      // 입력 받은 글자와 같을경우
       if (boxes[0]) {
+        // 정답 효과음
         var answer = document.getElementById("answer");
         answer.play();
+        // 글자 제거
         boxes[0].remove();
-        // score.innerHTML = parseInt(score.innerHTML) + 1;
-        // this.score += 10;
+        // 점수 증가
         this.score += 10;
         this.$emit("scoreChange", 10);
-        this.decreaseLetterSpeed(score);
       }
-      // else {
-      //   score.innerHTML = parseInt(score.innerHTML) - 1;
-      // }
     },
-
+    // 게임 시작
     startGame: function () {
-      console.log("start");
-      // this.togglestart();
-      // this.resetText();
       this.life = 5;
-
+      // 글자 생성 시작
       placeLetterTimer = setInterval(this.placeLetter, placeLetterInterval);
-      // placeLetterTimer = setInterval(this.placeLetter, placeLetterInterval);
+      // 글자 이동 시작
       moveLettersTimer = setInterval(this.moveLetters, 100);
+      // 입력 시작
       aiLetterTimer = setInterval(this.aiLetter, 10);
-
-      // document.addEventListener("keydown", this.keyboardInput);
-      // this.keyboardInput();
-
-      // startButton.classList.add("disabled");
     },
   },
   computed: {
     ...mapState('userStore', ['acidRain'])
   },
   destroyed() {
+    // 다른 페이지 이동 시 종료 안되는 현상 해결
     this.endGame();
   },
 };

@@ -1,11 +1,13 @@
 <template>
   <div class="main">
+    <!-- 오디오 (버튼 클릭, BGM) -->
     <audio
       autoplay
       id="gameStart"
       src="@/assets/music/pageMove/Jump High.mp3"
     ></audio>
     <audio id="click" src="@/assets/music/answer/Correct 2.mp3"></audio>
+
     <div class="background-img">
       <img src="@/assets/cloud.png" class="cloud" />
       <img src="@/assets/Learn/LearnStart/shape-2.svg" class="Shape-2" />
@@ -65,18 +67,22 @@ export default {
   name: "HangManMain",
   components: {},
   methods: {
+    // 버튼 클릭 효과음
     click() {
       var click = document.getElementById("click");
       click.play();
     },
+    // 자음 선택
     con() {
-      this.consonant = "자음"; // mode 1
+      this.consonant = "자음"; 
       this.mode = 1;
     },
+    // 모음 선택
     col() {
-      this.consonant = "모음"; // mode 0
+      this.consonant = "모음"; 
       this.mode = 0;
     },
+    // 선택된 자모음을 산성비 게임으로 전달
     gotoAcidRain() {
       if (this.consonant === "자모음") {
         alert("자-모음을 선택해주세요");
@@ -86,12 +92,8 @@ export default {
           params: { consonant: this.consonant, mode: this.mode },
         });
       }
-
-      // // 이름을 가지는 라우트
-      // router.push({ name: 'user', params: { userId: 123 }})
     },
   },
-  updated: {},
 };
 </script>
 
@@ -144,7 +146,6 @@ export default {
 .hangman-main .hangman-main-box .hangman-select-box .hangman-select-box-title {
   width: 100%;
   height: 20%;
-  /* background-color: #E5D2BD; */
   border-radius: 20px;
   font-family: "SDSamliphopangche_Basic";
   font-size: 2rem;
@@ -223,10 +224,6 @@ export default {
   color: #957457;
 }
 
-/* 이미지들 */
-/* .background-img {
-  height: 90%;
-} */
 .cloud {
   position: absolute;
   top: 25%;
