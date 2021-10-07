@@ -92,6 +92,7 @@ import Camera from "@/components/CameraLearn.vue";
 import Loading from "@/components/Loading.vue";
 import Footer from "@/views/MainPage/Footer.vue";
 
+const SERVER_URL = process.env.VUE_APP_SERVER_URL
 
 export default {
   data: function () {
@@ -116,8 +117,8 @@ export default {
   },
   created: function () {
     axios({
-      method: "GET",  // DB에서 자음/모음 데이터 불러오기
-      url: "http://127.0.0.1:8000/learn/getWords/" + this.$route.params.select,
+      method: "GET",
+      url: SERVER_URL + "/learn/getWords/" + this.$route.params.select,
     })
       .then((res) => {
         console.log(res);

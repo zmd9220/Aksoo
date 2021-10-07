@@ -107,6 +107,8 @@ import VueConfetti from "vue-confetti";
 Vue.use(VueConfetti);
 import axios from "axios";
 
+const SERVER_URL = process.env.VUE_APP_SERVER_URL
+
 export default {
   name: "RankingMain",
   components: {
@@ -133,7 +135,7 @@ export default {
   methods: {
     getRank1: function () {
       // 상품정보를 받아오는 axios
-      const localURL = "http://127.0.0.1:8000/games/ranking/1";
+      const localURL = SERVER_URL + "/games/ranking/1";
       axios({
         method: "get",
         url: localURL,
@@ -163,7 +165,7 @@ export default {
     },
     getRank2: function () {
       // 상품정보를 받아오는 axios
-      const localURL = "http://127.0.0.1:8000/games/ranking/2";
+      const localURL = SERVER_URL + "/games/ranking/2";
       axios({
         method: "get",
         url: localURL,
@@ -194,7 +196,7 @@ export default {
       try {
         // 상품정보를 받아오는 axios
         const localURL =
-          "http://127.0.0.1:8000/games/ranking/" + this.what_game;
+          SERVER_URL + "/games/ranking/" + this.what_game;
         const res = await axios({
           method: "get",
           url: localURL,
@@ -222,7 +224,7 @@ export default {
       try {
         // 상품정보를 받아오는 axios
         const localURL =
-          "http://127.0.0.1:8000/games/ranking/" + this.what_game;
+          SERVER_URL + "/games/ranking/" + this.what_game;
         const res = await axios({
           method: "get",
           url: localURL,

@@ -115,6 +115,8 @@
 import axios from "axios";
 import { mapState } from 'vuex'
 
+const SERVER_URL = process.env.VUE_APP_SERVER_URL
+
 export default {
   name: "HangManGame",
   data() {
@@ -320,7 +322,7 @@ export default {
     getWords: function () {
       // 단어를 받아오는 axios
       const localURL =
-        "http://127.0.0.1:8000/games/hangman/" + this.topic.value;
+        SERVER_URL + "/games/hangman/" + this.topic.value;
       axios
         .get(localURL)
         .then((res) => {
