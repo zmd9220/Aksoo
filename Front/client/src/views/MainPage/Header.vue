@@ -1,13 +1,16 @@
 <template>
   <div>
+    <!-- 헤더바 템플릿 -->
     <b-navbar variant="transparent" class="navbar-aksoo">
       <b-navbar-nav text-black font-weight="bold">
         <b-navbar-brand class="logo">
+          <!-- 로고에 대한 router 설정 -->
           <router-link to="/">
             <img src="@/assets/logo-pic.png" alt="logo" class="logo-pic" />
             <img src="@/assets/logo-kor.png" alt="logo-kor" class="logo-kor" />
           </router-link>
         </b-navbar-brand>
+        <!-- 서비스 설정 (홈, 학습, 게임, 명예의 전당) -->
         <b-nav-item href="/"><span class="home">Home</span></b-nav-item>
         <b-nav-item href="/Start/" :isLogin="isLogin" @logout="logout"
           ><span class="learn">학습하기</span></b-nav-item
@@ -28,6 +31,7 @@
 
         <!-- Navbar dropdowns -->
         <div class="login">
+          <!-- 로그인 시 표시되는 프로필 -->
           <span v-if="isLogin">
             <img
               v-b-toggle.collapse-1
@@ -53,6 +57,7 @@
             </b-collapse>
           </span>
 
+          <!-- 로그아웃 상태일 시 로그인 버튼 활성화 -->
           <span v-else>
             <b-button class="login-btn" href="/accounts/login">로그인</b-button>
           </span>
@@ -63,7 +68,6 @@
 </template>
 
 <script>
-// import isLogin from "./views/App.vue"
 import {mapState} from 'vuex'
 
 
@@ -79,17 +83,17 @@ export default {
     }
   },
   methods: {
+    // 로그아웃 기능
     logout: function () {
       this.$emit("logout");
-      // this.isLogin = false;
-      // localStorage.removeItem("jwt");
-      // this.$router.push({ name: "Login" });
     },
   },
   updated: function () {
+    // 로그인 여부 확인
     console.log(this.$parent.isLogin);
   },
   computed: {
+    // vuex store에서 계정 정보 받기
     ...mapState('userStore', ['accounts'])
   },
 };
@@ -131,11 +135,6 @@ export default {
   text-align: center;
   color: #000;
 }
-
-/* .home:hover {
-  background-color: black;
-  color: #fff;
-} */
 
 .learn {
   position: absolute;
@@ -204,14 +203,11 @@ export default {
 }
 
 .navbar-aksoo {
-  /* display: flex; */
   position: relative;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 100px;
-  /* margin: 0 0 54.188rem; */
-  /* padding: 0.813rem 11.938rem 0.813rem 13.063rem; */
   object-fit: contain;
   background-color: #fff;
 }
@@ -233,8 +229,6 @@ export default {
   top: 1.688rem;
   height: 43px;
   width: 140px;
-  /* margin: 0.8rem 0 0 18rem; */
-  /* padding: 0.563rem 3.438rem 0.938rem 3.375rem; */
   object-fit: contain;
   background-color: #ffe7dd;
   color: #f5785d;
@@ -290,8 +284,6 @@ export default {
   left: 80%;
   top: 1.688rem;
   height: 43px;
-  /* margin: 0.8rem 0 0 24.313rem;
-  padding: 0.563rem 3.438rem 0.938rem 3.375rem; */
   object-fit: contain;
   background-color: #ffe7dd;
   border-color: #f5785d;

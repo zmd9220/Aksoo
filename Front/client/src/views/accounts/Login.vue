@@ -1,20 +1,25 @@
 <template>
   <div>
+    <!-- 배경 음악  -->
     <audio
       loop
       id="gameBgm"
       src="@/assets/music/bgm/Wavecont-Upbeat-Inspiring-Corporate-Full-Length.mp3"
     ></audio>
+    <!-- 배경 사진 -->
     <img src="@/assets/gosm-login.png" class="gosm-login" />
     <img src="@/assets/shark-login.png" class="shark-login" />
     <img src="@/assets/deco-login.png" class="decoImg-login" />
+    <!-- 왼쪽 배경 "로그인" -->
     <div class="imgLeft">
       <img src="@/assets/login.png" class="loginImg" />
     </div>
+    <!-- 로그인 기능 화면 영역 -->
     <div class="signMain">
       <div style="font-size: 1.5rem; text-align: left; margin-top: 5%; font-weight: bold;">
         Sign In
       </div>
+      <!-- 구글 로그인을 구현하려 하였지만 시간 부족 -->
       <div class="googleLogin">
         <!-- <button type="button" class="googleBtn">
           <img
@@ -32,10 +37,10 @@
           구글로 로그인
         </button> -->
       </div>
-      <!-- <div style="color: #868c93; text-decoration: underline">OR</div> -->
-
+      <!-- 이메일/비밀번호 입력칸 -->
       <div class="group-field">
         <div class="input-group clearfix">
+          <!-- 이메일 입력칸 -->
           <input
             id="email"
             name="email"
@@ -49,6 +54,7 @@
       </div>
       <div class="group-field">
         <div class="input-group">
+          비밀번호 입력칸
           <input
             type="password"
             id="password"
@@ -66,44 +72,16 @@
             value=""
             style="display: none"
           />
-          <!-- <a
-                        href=""
-                        class=""
-                        tabindex="-1"
-                        style="
-                          position: absolute;
-                          top: 50%;
-                          right: 6px;
-                          margin-top: -17px;
-                          padding: 4px 10px;
-                          background: transparent;
-                          border-radius: 2px;
-                          color: rgb(0, 0, 0);
-                          text-align: center;
-                          text-decoration: none;
-                          user-select: none;
-                        "
-                        ><i class="ico visible-eye-on"></i
-                      ></a> -->
         </div>
       </div>
-      <!-- <div class="group-field">
-        <div class="input-group">
-          <input
-            type="text"
-            id="nickname"
-            name="nickname"
-            placeholder="Nickname "
-            value=""
-          />
-        </div>
-      </div> -->
       <div>
+        <!-- 로그인 버튼 -->
         <b-button class="button-normal larger" @click="login(credentials)" variant="primary">
           로그인
         </b-button>
       </div>
 
+      <!-- 회원가입으로의 router -->
       <div class="group-field">
         <div style="color: #858484; text-align: left; float: left">계정이 없으신가요?</div>
         <a
@@ -127,12 +105,14 @@ export default {
   name: "Signup",
   data: function () {
     return {
+      // 입력받을 credential (이메일, 비밀번호) 정의
       credentials: {
         email: null,
         password: null,
       },
     };
   },
+  // 화면이 켜졌을 때 음악이 나오도록
   mounted() {
     var gameBgm = document.getElementById("gameBgm");
     gameBgm.volume = 0.3;
@@ -146,12 +126,11 @@ export default {
         url: SERVER_URL + "/accounts/signin/",
         data: this.credentials,
       })
-        .then((res) => {
+        .then((res) => { // 로그인 기능 구현 및 토큰 추가
           console.log(res);
           this.$store.dispatch("userStore/loginUser", res.data);
           this.$emit("login");
           this.isLogin = true;
-          // localStorage.setItem('jwt', res.data.token)
           this.$router.push({ name: "MainPage" });
           // test 용
           // this.$store.dispatch('userStore/loginUser', {email: "test2@gma.com", password: "test1"})
@@ -162,7 +141,7 @@ export default {
         });
     },
   },
-  computed: {
+  computed: { // vuex store에서 유저 정보, 토큰 받아오기
     ...mapState("userStore", ["accounts"]),
   },
 };
@@ -280,7 +259,6 @@ export default {
   height: 4 0%;
   border-radius: 0.75rem;
   box-shadow: 0rem 0.19rem 0.38rem 0rem rgba(0, 0, 0, 0.4);
-  /* color: #3a80f3; */
   color: white;
 }
 

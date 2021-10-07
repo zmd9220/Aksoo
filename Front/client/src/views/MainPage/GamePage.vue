@@ -1,10 +1,12 @@
 <template>
   <div class="main">
+    <!-- 배경음악 -->
     <audio
       autoplay
       id="gameStart"
       src="@/assets/music/pageMove/Jump High.mp3"
     ></audio>
+    <!-- 게임하기 화면 구성하기 -->
     <div class="contents">
       <div class="title">
         <h1 class="title-text">게임하기 </h1>
@@ -90,6 +92,7 @@
         </div>
       </div>
     </div>
+    <!-- 배경 화면 이미지 -->
     <img src="@/assets/grass.png" alt="grass" class="grass" />
     <img src="@/assets/gosm.png" alt="gosm" class="gosm" />
     <Footer />
@@ -105,6 +108,7 @@ export default {
     Footer,
   },
   methods: {
+    // 각 게임으로의 router 함수 정의
     gotoAcidrain() {
       this.$router.push({ name: "AcidRainMain" });
     },
@@ -119,11 +123,6 @@ export default {
 </script>
 
 <style scoped>
-/* .contents {
-  position: relative;
-  top: 15%;
-} */
-
 .title {
   display: flex;
   margin-top: 5vh;
@@ -143,7 +142,6 @@ export default {
 }
 
 .mgi_thum img[data-v-3adcea5a] {
-  /* position: absolute; */
   top: 0;
   left: 0;
   width: 100%;
@@ -220,8 +218,6 @@ export default {
 }
 
 .btn-position {
-  /* position: absolute; */
-  /* bottom: 26%; */
   width: 100%;
 }
 

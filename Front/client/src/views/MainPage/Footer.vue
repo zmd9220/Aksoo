@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- footer에 연락 정보, 이미지 출처 정보 표기 -->
     <span class="image-source">지문자 이미지 출처: 
       <a href="https://slowalk.com/" class="copyright-link">'슬로워크'</a> 
     </span>
@@ -11,6 +12,7 @@
 export default {
   name: "Footer",
   props: {
+    // 로그인에 대한 정보 전달
     isLogin: Boolean,
   },
 };
