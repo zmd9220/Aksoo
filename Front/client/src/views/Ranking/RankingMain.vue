@@ -19,42 +19,42 @@
     <!-- 펫말 -->
     <img
       src="@/assets/Ranking/acidrain.png"
-      v-if="what_game != 1"
-      @click="[(what_game = 1), (what_start = 1), getRank()]"
+      v-if="whatgame != 1"
+      @click="[(whatgame = 1), (what_start = 1), getRank()]"
       alt="acidrain"
       class="acidrain-img"
     />
     <img
       src="@/assets/Ranking/acidrain_selected.png"
-      v-if="what_game == 1"
+      v-if="whatgame == 1"
       alt="acidrain"
       class="acidrain-img"
     />
 
     <img
       src="@/assets/Ranking/cardflip.png"
-      v-if="what_game != 2"
-      @click="[(what_game = 2), (what_start = 1), getRank()]"
+      v-if="whatgame != 2"
+      @click="[(whatgame = 2), (what_start = 1), getRank()]"
       alt="cardflip"
       class="cardflip-img"
     />
     <img
       src="@/assets/Ranking/cardflip_selected.png"
-      v-if="what_game == 2"
+      v-if="whatgame == 2"
       alt="cardflip"
       class="cardflip-img"
     />
 
     <img
       src="@/assets/Ranking/wordguess.png"
-      v-if="what_game != 3"
-      @click="[(what_game = 3), (what_start = 1), getRank()]"
+      v-if="whatgame != 3"
+      @click="[(whatgame = 3), (what_start = 1), getRank()]"
       alt="wordguess"
       class="wordguess-img"
     />
     <img
       src="@/assets/Ranking/wordguess_selected.png"
-      v-if="what_game == 3"
+      v-if="whatgame == 3"
       alt="wordguess"
       class="wordguess-img"
     />
@@ -85,11 +85,11 @@
       <ranking-list class="ranking-list" :Rank="Rank" />
       <img src="@/assets/Learn/LearnStart/shape-2.svg" class="Shape-2" />
     </div>
-    <div v-else-if="what_game === 3">
+    <div v-else-if="whatgame === 3">
       <ranking-list class="ranking-list" :Rank="Rank3" />
       <img src="@/assets/Learn/LearnStart/shape-2.svg" class="Shape-2" />
     </div>
-    <div v-else-if="what_game === 2">
+    <div v-else-if="whatgame === 2">
       <ranking-list class="ranking-list" :Rank="Rank2" />
       <img src="@/assets/Learn/LearnStart/shape-2.svg" class="Shape-2" />
     </div>
@@ -120,7 +120,7 @@ export default {
   data() {
     return {
       what_start: 0,
-      what_game: 3,
+      // whatgame: 3,
       profile_name: ["bird", "cml", "croc", "ele", "gsm", "hippo", "shark"],
       test: [],
       Rank1: [],
@@ -196,7 +196,7 @@ export default {
       try {
         // 상품정보를 받아오는 axios
         const localURL =
-          SERVER_URL + "/games/ranking/" + this.what_game;
+          SERVER_URL + "/games/ranking/3";
         const res = await axios({
           method: "get",
           url: localURL,
@@ -214,7 +214,7 @@ export default {
             tier: tier,
             max_score: max_score,
           };
-          this.what = this.what_game;
+          this.what = this.whatgame;
         }
       } catch (err) {
         console.log(err.response);
@@ -224,7 +224,7 @@ export default {
       try {
         // 상품정보를 받아오는 axios
         const localURL =
-          SERVER_URL + "/games/ranking/" + this.what_game;
+          SERVER_URL + "/games/ranking/" + this.whatgame;
         const res = await axios({
           method: "get",
           url: localURL,
@@ -242,7 +242,7 @@ export default {
             tier: tier,
             max_score: max_score,
           };
-          this.what = this.what_game;
+          this.what = Math.random();
         }
         // console.log(this.Rank[0].profile);
       } catch (err) {
@@ -259,9 +259,6 @@ export default {
     this.getRank2();
     this.getRank1();
     // 위에서 떨어지는 효과
-    if (this.whatgame != undefined) {
-      this.what_game = this.whatgame;
-    }
     this.$confetti.start();
     this.$confetti.update({
       particles: [

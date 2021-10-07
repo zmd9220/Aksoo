@@ -18,8 +18,10 @@
         <b-nav-item 
           ><span
             class="halloffame"
-            @click="$router.push({ name: 'RankingMain' })"
-            :isLogin="isLogin" @logout="logout"
+            @click="
+                  $router.push({ name: 'RankingMain', params: { whatgame: 1 } })
+                "
+            :isLogin="isLogin" @logout="logout" 
             >명예의전당</span
           ></b-nav-item
         >
@@ -73,6 +75,7 @@ export default {
   data() {
     return {
       profile_name: ['bird', 'cml', 'croc', 'ele', 'gsm', 'hippo', 'shark'],
+      whatgame:1,
     }
   },
   methods: {
