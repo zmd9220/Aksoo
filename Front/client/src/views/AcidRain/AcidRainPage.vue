@@ -165,7 +165,7 @@ export default {
   mounted: function () {
     // 게임 BGM 소리 감소
     var gameBgm = document.getElementById("gameBgm");
-    gameBgm.volume = 0.3;
+    gameBgm.volume = 0.1;
     gameBgm.play();
   },
   computed: {

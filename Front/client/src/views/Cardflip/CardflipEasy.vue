@@ -210,7 +210,7 @@ export default {
         this.startGame();
       }
       var cardFilp = document.getElementById("cardFilp");
-      cardFilp.volume = 0.8;
+      cardFilp.volume = 0.1;
       cardFilp.play();
       if (card.isMatched || card.isFlipped || this.flippedCards.length === 2) // 카드 2장만 뒤집도록 제한
         return;
@@ -263,7 +263,7 @@ export default {
   },
   mounted() {
     var gameBgm = document.getElementById("gameBgm");
-    gameBgm.volume = 0.2;
+    gameBgm.volume = 0.3;
     gameBgm.play();
   },
   watch: {

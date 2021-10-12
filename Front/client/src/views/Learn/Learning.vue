@@ -5,9 +5,10 @@
     autoplay
       loop
       id="gameBgm"
-      src="@/assets/music/bgm/modify_optimistic-upbeat-energetic.mp3"
+      src="@/assets/music/bgm/modify_optimistic-upbeat.mp3"
     ></audio>
     <div class="background-img">
+      <audio id="answer" src="@/assets/music/answer/pop.mp3"></audio>
       <img src="@/assets/cloud.png" class="cloud" />
       <img src="@/assets/Learn/LearnStart/shape-2.svg" class="Shape-2" />
     </div>
@@ -175,6 +176,8 @@ export default {
           if(element === consResult.name && this.selectAlphabet === consResult.name){
             if(this.consCompletedBox[consResult.value] === 0){
               this.consCompletedBox[consResult.value]++; 
+              var answer = document.getElementById("answer");
+              answer.play();
             }
             this.selectAlphabet = consInventory[index+1].name
             break
@@ -211,6 +214,8 @@ export default {
           if(element === vowResult.name && this.selectAlphabet === vowResult.name){
             if(this.consCompletedBox[vowResult.value] === 0){
               this.consCompletedBox[vowResult.value]++; 
+              var answer = document.getElementById("answer");
+              answer.play();
             }
             this.selectAlphabet = vowInventory[index+1].name
             break
