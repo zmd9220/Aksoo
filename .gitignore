@@ -65,7 +65,7 @@ test/
 /Back/**/venv
 /Back/**/__pycache__
 /Back/**/db.sqlite3
-
+/Back/**/my_settings.py
 
 ### AI  #################
 /AI/**/*.env
