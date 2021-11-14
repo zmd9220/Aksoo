@@ -1,3 +1,4 @@
+# Aksoo(악수 프로젝트)
 
 </br>
 
@@ -10,6 +11,8 @@
 ## 💾 DB modeling
 
 </br>
+
+![image-20211114212428729](README.assets/image-20211114212428729.png)
 
 </br>
 
@@ -50,7 +53,14 @@
 
 ### 👾 Machine Learning
 
-</br>
+#### 프레임워크
+
+- TensorFlow.js - 3.9.0
+
+#### 라이브러리(모델)
+
+- [fingerpose](https://github.com/andypotato/fingerpose#readme) - 0.0.2
+- [tensorflow-models/handpose](https://github.com/tensorflow/tfjs-models#readme) - 0.0.7
 
 </br>
 
@@ -90,13 +100,13 @@ python -m venv venv
 source venv/Scripts/activate
 ```
 
-##### 4) 다음과 같이 입력하여 필요한 package를 다운받는다.
+##### 4) (처음 실행시에만) 다음과 같이 입력하여 필요한 package를 현재 가상환경에서 설치한다.
 
 ```bash
 pip install -r requirements.txt
 ```
 
-##### 5) 장고 서버를 킨다.
+##### 5) Django 서버를 킨다.
 
 ```bash
 python manage.py runserver
@@ -116,19 +126,17 @@ VUE_APP_SERVER_URL = http://127.0.0.1:8000
 
 ##### 3) Front/client/ 경로에서 터미널창을 킨다.
 
-##### 4) 다음과 같이 package를 설치한다.
+##### 4) (처음 실행시에만) 다음과 같이 package를 설치한다.
 
 ```bash
 npm install
 ```
 
-##### 5) 다음과 같이 서버를 킨다.
+##### 5) 다음과 같이 클라이언트를 로컬 환경에서 실행한다.
 
 ```bash
 npm run serve
 ```
-
-
 
 </br>
 
